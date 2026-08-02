@@ -1,0 +1,10 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "customManagers:githubActionsVersions"],
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "rangeStrategy": "bump",
+    "minimumReleaseAge": "2 days",
+    "minimumReleaseAgeBehaviour": "timestamp-optional"
+}
