@@ -62,9 +62,10 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@payloadcms/translations": "^3.87.0",
-    "@payloadcms/ui": "^3.87.0",
-    "payload": "^3.87.0"
+    "@payloadcms/translations": "^3",
+    "@payloadcms/ui": "^3",
+    "next": "^16",
+    "payload": "^3"
   },
   "overrides": {
     "zod-validation-error": "^5.0.0"
