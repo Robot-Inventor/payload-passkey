@@ -15,8 +15,10 @@ const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOpti
                 return result;
             }
 
-            const isTotpVerificationRequest =
-                normalizePathname(args.headers.get("x-pathname")) === normalizePathname("/api/verify-totp");
+            const normalizedPathname = normalizePathname(args.headers.get("x-pathname"));
+            const isTotpInternalRequest =
+                normalizedPathname === normalizePathname("/api/setup-totp") ||
+                normalizedPathname === normalizePathname("/api/verify-totp");
 
             return {
                 ...result,
@@ -24,7 +26,7 @@ const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOpti
                     ...result.user,
                     // Preserve compatibility with payload-totp by setting the passkey authentication `_strategy` to `totp`
                     // If this logic changes, update `./payloadSessionBridge.ts` as well
-                    _strategy: isTotpVerificationRequest ? strategy.name : "totp"
+                    _strategy: isTotpInternalRequest ? strategy.name : "totp"
                 }
             };
         }
