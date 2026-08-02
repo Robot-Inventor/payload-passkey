@@ -126,7 +126,7 @@ npm run payload migrate
 
 ## Options
 
-For all available options and their descriptions, see the JSDoc for the arguments of `payloadPasskey()`.
+For all available options and their descriptions, see the documentation for [PayloadPasskeyOptions](./docs/api/type-aliases/PayloadPasskeyOptions.md).
 
 ## Acknowledgements
 
