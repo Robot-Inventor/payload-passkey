@@ -49,7 +49,7 @@ const payloadSessionBridge = (payload: BasePayload): BetterAuthPlugin =>
                     }
 
                     // Allow TOTP authentication when TOTP is configured, or password authentication when it is not
-                    const hasTotp = user?.["hasTotp"];
+                    const hasTotp = user?.["hasTotp"] as boolean | null | undefined;
                     const hasValidAuthenticationStrategy =
                         // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
                         // Ref: ./passkeyAsTotpStrategy.ts
