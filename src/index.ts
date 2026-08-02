@@ -4,9 +4,9 @@ import type { PasskeyOptions, PasskeyPlugin, PasskeyPluginOptions } from "./type
 import { afterChange, afterLogin, afterLogout } from "./config/hooks.js";
 import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins.js";
 import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields.js";
+import { findFieldsByName, rewriteBetterAuthUserRelationships } from "./config/userRelationships.js";
 import { betterAuthStrategy } from "@delmaredigital/payload-better-auth";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy.js";
-import { rewriteBetterAuthUserRelationships } from "./config/userRelationships.js";
 import { translations } from "./i18n";
 
 const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
@@ -105,9 +105,7 @@ const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
 
                 const requiredFields = [emailVerifiedField, imageField, passkeyManagementField] as const;
                 for (const field of requiredFields) {
-                    const existingField = collection.fields.find(
-                        ($field) => "name" in $field && $field.name === field.name
-                    );
+                    const [existingField] = findFieldsByName(collection.fields, field.name);
 
                     if (existingField?.type && existingField.type !== field.type) {
                         throw new Error(

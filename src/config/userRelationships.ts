@@ -9,11 +9,11 @@ const findFieldsByName = (fields: Field[], name: string): Field[] => {
             matchingFields.push(field);
         }
 
-        if (field.type === "row" || field.type === "collapsible") {
+        if (field.type === "row" || field.type === "collapsible" || (field.type === "group" && !("name" in field))) {
             matchingFields.push(...findFieldsByName(field.fields, name));
         } else if (field.type === "tabs") {
             for (const tab of field.tabs) {
-                if (!("name" in tab) || !tab.name) {
+                if (!("name" in tab)) {
                     matchingFields.push(...findFieldsByName(tab.fields, name));
                 }
             }
@@ -59,4 +59,4 @@ const rewriteBetterAuthUserRelationships = (config: Config, userCollection: Coll
     }
 };
 
-export { rewriteBetterAuthUserRelationships };
+export { findFieldsByName, rewriteBetterAuthUserRelationships };
