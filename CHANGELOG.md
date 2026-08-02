@@ -1,5 +1,21 @@
 # payload-passkey
 
+## 0.3.0
+
+### Minor Changes
+
+- [#31](https://github.com/Robot-Inventor/payload-passkey/pull/31) [`dd83127`](https://github.com/Robot-Inventor/payload-passkey/commit/dd83127432648f0bf7ea6adfc70a985947ccfd8a) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: export `PayloadPasskeyPlugin` and `PayloadPasskeyOptions`
+
+### Patch Changes
+
+- [#29](https://github.com/Robot-Inventor/payload-passkey/pull/29) [`6a2819a`](https://github.com/Robot-Inventor/payload-passkey/commit/6a2819a09f5d8ad62ef0c2bbce496e46cbe97ea4) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - docs: add screenshots
+
+- [#32](https://github.com/Robot-Inventor/payload-passkey/pull/32) [`bb45267`](https://github.com/Robot-Inventor/payload-passkey/commit/bb4526712d856655a77d567b75a1d7b2e27568e5) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - docs: document option details
+
+- [#30](https://github.com/Robot-Inventor/payload-passkey/pull/30) [`1b1fb27`](https://github.com/Robot-Inventor/payload-passkey/commit/1b1fb27e56cd109904cfab9440a00ad4e1dd37c3) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: protect `emailVerified` field
+
+- [#27](https://github.com/Robot-Inventor/payload-passkey/pull/27) [`a39ef09`](https://github.com/Robot-Inventor/payload-passkey/commit/a39ef095c22eebb437c15091d42d61a51937b871) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: reject invalid session duration configuration
+
 ## 0.2.0
 
 ### Minor Changes
