@@ -5,6 +5,13 @@
         "enabled": true
     },
     "rangeStrategy": "bump",
+    "packageRules": [
+        {
+            "description": "Keep peer dependency ranges broad",
+            "matchDepTypes": ["peerDependencies"],
+            "rangeStrategy": "widen"
+        }
+    ],
     "minimumReleaseAge": "2 days",
     "minimumReleaseAgeBehaviour": "timestamp-optional"
 }
