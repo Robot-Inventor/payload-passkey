@@ -1,6 +1,6 @@
 {
   "name": "payload-passkey",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Add passkey support to Payload CMS.",
   "keywords": [
     "payloadcms",
@@ -20,7 +20,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -31,7 +33,9 @@
       "types": "./dist/components/index.d.ts"
     }
   },
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
