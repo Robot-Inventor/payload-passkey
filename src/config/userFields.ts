@@ -20,7 +20,7 @@ const passkeyManagementField = {
     label: "Passkey",
     admin: {
         components: {
-            Field: "payload-passkey/components#PasskeyManagementField"
+            Field: "payload-passkey/components/PasskeyManagementField#PasskeyManagementField"
         }
     }
 } as const satisfies Field;
