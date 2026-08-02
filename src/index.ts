@@ -145,7 +145,7 @@ const passkeyPlugin: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
             origin
         } as const satisfies PasskeyOptions;
 
-        // Payload CMSは各プラグインの実行前にプラグイン配列を確定させてしまうため、依存プラグインの処理を直接実行する必要がある
+        // Payload CMS finalizes the plugin array before running the plugins, so the dependent plugin's processing must be executed directly
         const configWithAuthCollections = await betterAuthCollectionsPlugin({ modelName, passkeyOptions })(
             passkeyPluginConfig
         );

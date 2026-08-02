@@ -3,8 +3,8 @@
 
 /**
  * @file
- * このファイルは@delmaredigital/payload-better-authの`PasskeysManagementClient.tsx`を参考に実装
- * ライセンス：https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/LICENSE
+ * This file is based on the `PasskeysManagementClient.tsx` implementation from the `@delmaredigital/payload-better-auth` package
+ * License: https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/LICENSE
  * Ref: https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/src/components/management/PasskeysManagementClient.tsx
  */
 
