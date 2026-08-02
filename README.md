@@ -4,6 +4,10 @@ This plugin adds passkey support to [Payload CMS](https://github.com/payloadcms/
 
 Although it is a wrapper around [@delmaredigital/payload-better-auth](https://github.com/delmaredigital/payload-better-auth/), this plugin focuses specifically on passkeys. It preserves Payload's default login screen and uses Payload's UI components to match Payload's design language.
 
+![Screenshot of the login screen with a passkey login button](./docs/screenshots/login-screen.png)
+
+![Screenshot of the account management screen with passkey management functionality](./docs/screenshots/passkey-management-screen.png)
+
 ## Features
 
 - Adds a passkey login button to Payload's login screen
