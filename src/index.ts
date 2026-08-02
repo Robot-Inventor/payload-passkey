@@ -9,7 +9,7 @@ import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy.js";
 import { rewriteBetterAuthUserRelationships } from "./config/userRelationships.js";
 import { translations } from "./i18n";
 
-const passkeyPlugin: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
+const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
     slug: "plugin-payload-passkey",
     order: 10,
     // eslint-disable-next-line max-lines-per-function
@@ -165,4 +165,4 @@ const passkeyPlugin: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
     }
 });
 
-export { passkeyPlugin };
+export { payloadPasskey };
