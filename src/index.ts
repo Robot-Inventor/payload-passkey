@@ -42,11 +42,11 @@ const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
                     ...config.admin?.components,
                     providers: [
                         ...(config.admin?.components?.providers ?? []),
-                        "payload-passkey/components#BetterAuthSessionRefreshProvider"
+                        "payload-passkey/components/BetterAuthSessionRefreshProvider#BetterAuthSessionRefreshProvider"
                     ],
                     afterLogin: [
                         ...(config.admin?.components?.afterLogin ?? []),
-                        "payload-passkey/components#PasskeyLoginButton"
+                        "payload-passkey/components/PasskeyLoginButton#PasskeyLoginButton"
                     ]
                 }
             },
