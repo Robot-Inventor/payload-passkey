@@ -1,6 +1,6 @@
 import { type CollectionConfig, type Config, definePlugin } from "payload";
 import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations.js";
-import type { PasskeyOptions, PayloadPasskeyPlugin, PayloadPasskeyOptions } from "./types.js";
+import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types.js";
 import { afterChange, afterLogin, afterLogout } from "./config/hooks.js";
 import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins.js";
 import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields.js";
