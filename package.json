@@ -29,8 +29,8 @@
       "types": "./dist/index.d.ts"
     },
     "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
+      "import": "./dist/components.js",
+      "types": "./dist/components.d.ts"
     }
   },
   "sideEffects": [
