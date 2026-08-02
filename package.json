@@ -62,7 +62,7 @@
     "@changesets/cli": "^2.31.1",
     "@robot-inventor/eslint-config": "^13.0.2",
     "@robot-inventor/tsconfig-base": "^7.1.0",
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.2.18",
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/rollup-plugin": "^1.5.4",
     "eslint": "^10.8.0",
