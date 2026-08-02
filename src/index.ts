@@ -5,8 +5,8 @@ import { afterChange, afterLogin, afterLogout } from "./config/hooks.js";
 import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins.js";
 import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields.js";
 import { findFieldsByName, rewriteBetterAuthUserRelationships } from "./config/userRelationships.js";
-import { betterAuthStrategy } from "@delmaredigital/payload-better-auth";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy.js";
+import { payloadAuthStrategy } from "./auth/payloadAuthStrategy.js";
 import { translations } from "./i18n";
 
 const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
@@ -79,7 +79,7 @@ const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
                     collection.auth = {
                         tokenExpiration: sessionSeconds,
                         strategies: [
-                            (enableTotpCompatibility ? passkeyAsTotpStrategy : betterAuthStrategy)({
+                            (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
                                 usersCollection: collection.slug
                             })
                         ]
@@ -89,7 +89,7 @@ const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
                     collection.auth.strategies = [
                         ...(collection.auth.strategies ?? []),
                         ...[
-                            (enableTotpCompatibility ? passkeyAsTotpStrategy : betterAuthStrategy)({
+                            (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
                                 usersCollection: collection.slug
                             })
                         ]
