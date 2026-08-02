@@ -2,8 +2,13 @@ import type { CollectionSlug, Plugin } from "payload";
 import type { PasskeyOptions as $PasskeyOptions } from "@better-auth/passkey";
 import type { BetterAuthAdvancedOptions } from "better-auth";
 
+type BetterAuthUserCollectionSlug<TModelName extends string> = (TModelName extends `${string}s`
+    ? TModelName
+    : `${TModelName}s`) &
+    CollectionSlug;
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type PasskeyOptions = {
+type PayloadPasskeyOptions<TModelName extends string = string> = {
     /**
      * The WebAuthn relying party ID used to scope passkeys to this website.
      * This is normally the hostname from `baseURL`, without a protocol, port, or path.
@@ -23,14 +28,6 @@ type PasskeyOptions = {
      * @default The request's `Origin` header
      */
     origin?: $PasskeyOptions["origin"];
-};
-
-type BetterAuthUserCollectionSlug<TModelName extends string> = (TModelName extends `${string}s`
-    ? TModelName
-    : `${TModelName}s`) &
-    CollectionSlug;
-
-type PasskeyPluginOptions<TModelName extends string = string> = {
     /**
      * The maximum lifetime of a Payload and Better Auth session, in seconds.
      * This value is also used as the Payload user's `auth.tokenExpiration`, so that
@@ -92,8 +89,10 @@ type PasskeyPluginOptions<TModelName extends string = string> = {
      * If you are using PostgreSQL with default ID generation, set this to "serial".
      */
     generateId: NonNullable<BetterAuthAdvancedOptions["database"]>["generateId"];
-} & PasskeyOptions;
+};
 
-type PasskeyPlugin = <TModelName extends string>(options: PasskeyPluginOptions<TModelName>) => Plugin;
+type PasskeyOptions = Pick<PayloadPasskeyOptions, "rpID" | "rpName" | "origin">;
 
-export type { PasskeyOptions, PasskeyPluginOptions, PasskeyPlugin };
+type PayloadPasskeyPlugin = <TModelName extends string>(options: PayloadPasskeyOptions<TModelName>) => Plugin;
+
+export type { PayloadPasskeyOptions, PasskeyOptions, PayloadPasskeyPlugin };

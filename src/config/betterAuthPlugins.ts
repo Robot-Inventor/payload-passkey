@@ -1,4 +1,4 @@
-import type { PasskeyOptions, PasskeyPluginOptions } from "../types.js";
+import type { PasskeyOptions, PayloadPasskeyOptions } from "../types.js";
 import { betterAuthCollections, createBetterAuthPlugin, payloadAdapter } from "@delmaredigital/payload-better-auth";
 import type { Plugin } from "payload";
 import { betterAuth } from "better-auth";
@@ -10,7 +10,7 @@ type DeepRequired<T> = T extends Record<string, unknown> ? { [K in keyof T]-?: D
 const betterAuthCollectionsPlugin = ({
     modelName,
     passkeyOptions
-}: DeepRequired<Pick<PasskeyPluginOptions, "modelName">> & {
+}: DeepRequired<Pick<PayloadPasskeyOptions, "modelName">> & {
     passkeyOptions: PasskeyOptions;
 }): Plugin =>
     betterAuthCollections({
@@ -25,13 +25,13 @@ const betterAuthCollectionsPlugin = ({
 
 type BetterAuthPluginOptions = DeepRequired<
     Pick<
-        PasskeyPluginOptions,
+        PayloadPasskeyOptions,
         "sessionSeconds" | "modelName" | "userCollection" | "baseURL" | "secret" | "trustedOrigins"
     >
 > & {
     sessionUpdateSeconds: number;
     passkeyOptions: PasskeyOptions;
-    generateId: PasskeyPluginOptions["generateId"];
+    generateId: PayloadPasskeyOptions["generateId"];
 };
 
 const betterAuthPlugin = ({

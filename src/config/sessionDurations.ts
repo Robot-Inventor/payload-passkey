@@ -1,12 +1,12 @@
 import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants.js";
-import type { PasskeyPluginOptions } from "../types.js";
+import type { PayloadPasskeyOptions } from "../types.js";
 
 const PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS = 7200;
 
 const calculateSessionDurations = ({
     sessionSeconds: $sessionSeconds,
     sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds
-}: Pick<PasskeyPluginOptions, "sessionSeconds" | "sessionRefreshBufferSeconds">): Record<
+}: Pick<PayloadPasskeyOptions, "sessionSeconds" | "sessionRefreshBufferSeconds">): Record<
     "sessionSeconds" | "sessionUpdateSeconds",
     number
 > => {
