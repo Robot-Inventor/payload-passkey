@@ -26,10 +26,10 @@
         "typescript": "^6.0.3",
       },
       "peerDependencies": {
-        "@payloadcms/translations": "^3",
-        "@payloadcms/ui": "^3",
+        "@payloadcms/translations": "^3.86.0",
+        "@payloadcms/ui": "^3.86.0",
         "next": "^16",
-        "payload": "^3",
+        "payload": "^3.86.0",
       },
     },
   },
