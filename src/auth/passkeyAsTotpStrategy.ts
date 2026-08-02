@@ -22,8 +22,8 @@ const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOpti
                 ...result,
                 user: {
                     ...result.user,
-                    // パスキー認証の`_strategy`を`totp`に設定することでpayload-totpとの互換性を維持する
-                    // ここの処理を変更する場合は`./payloadSessionBridge.ts`も変更する
+                    // Preserve compatibility with payload-totp by setting the passkey authentication `_strategy` to `totp`
+                    // If this logic changes, update `./payloadSessionBridge.ts` as well
                     _strategy: isTotpVerificationRequest ? strategy.name : "totp"
                 }
             };

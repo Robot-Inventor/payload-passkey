@@ -35,7 +35,7 @@ const payloadSessionBridge = (payload: BasePayload): BetterAuthPlugin =>
                         headers
                     });
 
-                    // 型キャストしないと`_strategy`プロパティにアクセスできない
+                    // The type assertion is required to access the `_strategy` property
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
                     const user = result.user as AuthStrategyResult["user"];
                     // eslint-disable-next-line no-underscore-dangle
@@ -48,10 +48,10 @@ const payloadSessionBridge = (payload: BasePayload): BetterAuthPlugin =>
                         });
                     }
 
-                    // TOTPが設定済みの場合はTOTP、未設定の場合はパスワードで認証された場合に許可する
+                    // Allow TOTP authentication when TOTP is configured, or password authentication when it is not
                     const hasTotp = user?.["hasTotp"];
                     const hasValidAuthenticationStrategy =
-                        // `enableTotpCompatibility: true`の場合、TOTPが未設定でもパスキーでログインすると`totp`になる
+                        // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
                         // Ref: ./passkeyAsTotpStrategy.ts
                         authenticationStrategy === "totp" ||
                         (!hasTotp && ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
