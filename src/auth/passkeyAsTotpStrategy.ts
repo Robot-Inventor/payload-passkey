@@ -1,8 +1,8 @@
 import { type BetterAuthStrategyOptions, betterAuthStrategy } from "@delmaredigital/payload-better-auth";
 import type { AuthStrategy } from "payload";
 
-const normalizePathname = (pathname: string | null): string | undefined =>
-    pathname?.replace(/^\//u, "").replace(/\/$/u, "");
+const normalizePathname = <T extends string | null>(pathname: T): T extends string ? string : undefined =>
+    pathname?.replace(/^\/+|\/+$/gu, "") as T extends string ? string : undefined;
 
 const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOptions): AuthStrategy => {
     const strategy = betterAuthStrategy(betterAuthStrategyOptions);
@@ -16,9 +16,10 @@ const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOpti
             }
 
             const normalizedPathname = normalizePathname(args.headers.get("x-pathname"));
+            const normalizedApiRoute = normalizePathname(args.payload.config.routes.api);
             const isTotpInternalRequest =
-                normalizedPathname === normalizePathname("/api/setup-totp") ||
-                normalizedPathname === normalizePathname("/api/verify-totp");
+                normalizedPathname === normalizePathname(`${normalizedApiRoute}/setup-totp`) ||
+                normalizedPathname === normalizePathname(`${normalizedApiRoute}/verify-totp`);
 
             return {
                 ...result,

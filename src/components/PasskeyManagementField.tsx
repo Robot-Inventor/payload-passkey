@@ -4,6 +4,7 @@ import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/p
 import { type ReactNode, useEffect, useState } from "react";
 import { useAuth, useDocumentInfo, useTranslation } from "@payloadcms/ui";
 import { PasskeysManagementClient } from "./PasskeyManagementClient";
+import { betterAuthClient } from "../auth/client";
 import { containerStyles } from "./PasskeyManagementField.css";
 import { mergeClassNames } from "../utils/mergeClassNames";
 
@@ -57,17 +58,13 @@ const PasskeyManagementField = (): ReactNode => {
             setStatus("loading");
 
             try {
-                const response = await fetch("/api/auth/payload-session-bridge", {
+                const { error } = await betterAuthClient.$fetch("/payload-session-bridge", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: "{}",
-                    credentials: "include"
+                    body: {}
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Session bridge failed: ${String(response.status)}`);
+                if (error) {
+                    throw new Error(`Session bridge failed: ${String(error.status)}`);
                 }
 
                 if (!cancelled) {
