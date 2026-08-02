@@ -23,22 +23,28 @@ const betterAuthCollectionsPlugin = ({
         skipCollections: ["user"]
     });
 
+type BetterAuthPluginOptions = DeepRequired<
+    Pick<
+        PasskeyPluginOptions,
+        "sessionSeconds" | "modelName" | "userCollection" | "baseURL" | "secret" | "trustedOrigins"
+    >
+> & {
+    sessionUpdateSeconds: number;
+    passkeyOptions: PasskeyOptions;
+    generateId: PasskeyPluginOptions["generateId"];
+};
+
 const betterAuthPlugin = ({
     passkeyOptions,
     sessionSeconds,
     sessionUpdateSeconds,
     modelName,
+    userCollection,
     baseURL,
     secret,
     trustedOrigins,
     generateId
-}: DeepRequired<
-    Pick<PasskeyPluginOptions, "sessionSeconds" | "modelName" | "baseURL" | "secret" | "trustedOrigins">
-> & {
-    sessionUpdateSeconds: number;
-    passkeyOptions: PasskeyOptions;
-    generateId: PasskeyPluginOptions["generateId"];
-}): Plugin => {
+}: BetterAuthPluginOptions): Plugin => {
     const betterAuthOptions = generateBetterAuthOptions(passkeyOptions);
 
     return createBetterAuthPlugin({
@@ -66,7 +72,7 @@ const betterAuthPlugin = ({
                 baseURL,
                 secret,
                 trustedOrigins,
-                plugins: [...(betterAuthOptions.plugins ?? []), payloadSessionBridge(payload)]
+                plugins: [...(betterAuthOptions.plugins ?? []), payloadSessionBridge(payload, userCollection)]
             })
     });
 };

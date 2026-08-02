@@ -160,6 +160,7 @@ const payloadPasskey: PasskeyPlugin = definePlugin<PasskeyPluginOptions>({
             secret,
             trustedOrigins,
             modelName,
+            userCollection,
             generateId
         })(configWithAuthCollections);
     }

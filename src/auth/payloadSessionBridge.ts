@@ -1,10 +1,10 @@
 import { APIError, createAuthEndpoint, getSessionFromCtx } from "better-auth/api";
-import type { AuthStrategyResult, BasePayload } from "payload";
+import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
 import { setSessionCookie } from "better-auth/cookies";
 
 // eslint-disable-next-line max-lines-per-function
-const payloadSessionBridge = (payload: BasePayload): BetterAuthPlugin =>
+const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSlug): BetterAuthPlugin =>
     ({
         id: "payload-session-bridge",
         endpoints: {
@@ -38,18 +38,19 @@ const payloadSessionBridge = (payload: BasePayload): BetterAuthPlugin =>
                     // The type assertion is required to access the `_strategy` property
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
                     const user = result.user as AuthStrategyResult["user"];
-                    // eslint-disable-next-line no-underscore-dangle
-                    const authenticationStrategy = user?._strategy;
-                    const payloadUserID = user?.id;
 
-                    if (typeof payloadUserID === "undefined") {
+                    if (user?.collection !== userCollection) {
                         throw new APIError("UNAUTHORIZED", {
                             message: "A valid Payload local session is required"
                         });
                     }
 
+                    // eslint-disable-next-line no-underscore-dangle
+                    const authenticationStrategy = user._strategy;
+                    const payloadUserID = user.id;
+
                     // Allow TOTP authentication when TOTP is configured, or password authentication when it is not
-                    const hasTotp = user?.["hasTotp"] as boolean | null | undefined;
+                    const hasTotp = user["hasTotp"] as boolean | null | undefined;
                     const hasValidAuthenticationStrategy =
                         // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
                         // Ref: ./passkeyAsTotpStrategy.ts
