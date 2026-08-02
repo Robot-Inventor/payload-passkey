@@ -5,7 +5,11 @@ const emailVerifiedField = {
     type: "checkbox",
     required: true,
     defaultValue: false,
-    hidden: true
+    hidden: true,
+    access: {
+        create: () => false,
+        update: () => false
+    }
 } as const satisfies Field;
 
 const imageField = {
