@@ -64,7 +64,7 @@
   "peerDependencies": {
     "@payloadcms/translations": "^3",
     "@payloadcms/ui": "^3",
-    "next": "^16",
+    "next": "^16.2.12",
     "payload": "^3"
   },
   "overrides": {
