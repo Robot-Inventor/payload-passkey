@@ -11,14 +11,24 @@ const calculateSessionDurations = ({
     number
 > => {
     const sessionSeconds = $sessionSeconds ?? PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS;
-    const sessionUpdateSeconds =
-        // eslint-disable-next-line no-magic-numbers
-        sessionSeconds - ($sessionRefreshBufferSeconds ?? AUTH_SESSION_POLL_INTERVAL_SECONDS * 2);
-
     // eslint-disable-next-line no-magic-numbers
-    if (sessionUpdateSeconds <= 0) {
-        throw new Error(`[payload-passkey] \`sessionSeconds\` must be greater than \`sessionRefreshBufferSeconds\`.`);
+    const sessionRefreshBufferSeconds = $sessionRefreshBufferSeconds ?? AUTH_SESSION_POLL_INTERVAL_SECONDS * 2;
+
+    if (
+        !Number.isInteger(sessionSeconds) ||
+        // eslint-disable-next-line no-magic-numbers
+        sessionSeconds <= 0 ||
+        !Number.isInteger(sessionRefreshBufferSeconds) ||
+        // eslint-disable-next-line no-magic-numbers
+        sessionRefreshBufferSeconds < 0 ||
+        sessionRefreshBufferSeconds >= sessionSeconds
+    ) {
+        throw new Error(
+            "[payload-passkey] `sessionSeconds` must be a positive integer and `sessionRefreshBufferSeconds` must be a non-negative integer less than `sessionSeconds`."
+        );
     }
+
+    const sessionUpdateSeconds = sessionSeconds - sessionRefreshBufferSeconds;
 
     if (AUTH_SESSION_POLL_INTERVAL_SECONDS >= sessionUpdateSeconds) {
         throw new Error(

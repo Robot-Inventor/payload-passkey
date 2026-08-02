@@ -35,13 +35,15 @@ type PasskeyPluginOptions<TModelName extends string = string> = {
      * The maximum lifetime of a Payload and Better Auth session, in seconds.
      * This value is also used as the Payload user's `auth.tokenExpiration`, so that
      * collection setting must match this option when it is configured explicitly.
+     * This must be a positive integer.
      * @default 7200 (2 hours)
      */
     sessionSeconds?: number | undefined;
     /**
      * The amount of time, in seconds, reserved at the end of a session's lifetime for
-     * refreshing it. A larger value refreshes sessions earlier. It must be smaller than
-     * `sessionSeconds`, and the resulting refresh interval must be longer than 60 seconds.
+     * refreshing it. A larger value refreshes sessions earlier. This must be a non-negative
+     * integer smaller than `sessionSeconds`, and the resulting refresh interval must be longer
+     * than 60 seconds.
      * @default 120 (2 minutes)
      */
     sessionRefreshBufferSeconds?: number | undefined;
