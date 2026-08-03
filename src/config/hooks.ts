@@ -12,8 +12,9 @@ const afterChange: CollectionAfterChangeHook<UserWithTotpSecret> = async ({ doc,
 
     const hasJustEnabledTotp = !previousDoc.totpSecret && doc.totpSecret;
     const hasReenabledTotp = previousDoc.totpSecret && doc.totpSecret && previousDoc.totpSecret !== doc.totpSecret;
+    const hasDisabledTotp = previousDoc.totpSecret && !doc.totpSecret;
 
-    if (!hasJustEnabledTotp && !hasReenabledTotp) return doc;
+    if (!hasJustEnabledTotp && !hasReenabledTotp && !hasDisabledTotp) return doc;
 
     await revokeBetterAuthSessions(req, doc.id);
     return doc;
