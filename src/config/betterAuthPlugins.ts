@@ -1,5 +1,6 @@
 import type { PasskeyOptions, PayloadPasskeyOptions } from "../types.js";
 import { betterAuthCollections, createBetterAuthPlugin, payloadAdapter } from "@delmaredigital/payload-better-auth";
+import { PASSKEY_FRESH_AGE_SECONDS } from "../constants.js";
 import type { Plugin } from "payload";
 import { betterAuth } from "better-auth";
 import { generateBetterAuthOptions } from "../auth/betterAuthOptions.js";
@@ -57,7 +58,8 @@ const betterAuthPlugin = ({
                 ...betterAuthOptions,
                 session: {
                     expiresIn: sessionSeconds,
-                    updateAge: sessionUpdateSeconds
+                    updateAge: sessionUpdateSeconds,
+                    freshAge: PASSKEY_FRESH_AGE_SECONDS
                 },
                 user: {
                     modelName

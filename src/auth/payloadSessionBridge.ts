@@ -1,7 +1,25 @@
-import { APIError, createAuthEndpoint, getSessionFromCtx } from "better-auth/api";
+import { APIError, createAuthEndpoint, freshSessionMiddleware, getSessionFromCtx } from "better-auth/api";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
+import { PASSKEY_FRESH_AGE_SECONDS } from "../constants.js";
 import { setSessionCookie } from "better-auth/cookies";
+
+type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
+    _sid?: string;
+};
+
+const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
+    // eslint-disable-next-line no-underscore-dangle
+    const sessionID = user._sid;
+    const createdAt = user.sessions?.find(({ id }) => id === sessionID)?.createdAt;
+
+    if (!createdAt) return false;
+
+    const age = Date.now() - new Date(createdAt).getTime();
+
+    // eslint-disable-next-line no-magic-numbers
+    return age >= 0 && age < PASSKEY_FRESH_AGE_SECONDS * 1000;
+};
 
 // eslint-disable-next-line max-lines-per-function
 const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSlug): BetterAuthPlugin =>
@@ -35,9 +53,8 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                         headers
                     });
 
-                    // The type assertion is required to access the `_strategy` property
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-                    const user = result.user as AuthStrategyResult["user"];
+                    const user = result.user as PayloadSessionUser | null;
 
                     if (user?.collection !== userCollection) {
                         throw new APIError("UNAUTHORIZED", {
@@ -77,6 +94,13 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                         });
                     }
 
+                    if (!isFreshPayloadSession(user)) {
+                        throw new APIError("FORBIDDEN", {
+                            code: "STEP_UP_REQUIRED",
+                            message: "Recent authentication is required"
+                        });
+                    }
+
                     const betterAuthUser = await ctx.context.internalAdapter.findUserById(String(payloadUserID));
 
                     if (!betterAuthUser) {
@@ -98,7 +122,15 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                     });
                 }
             )
+        },
+        hooks: {
+            before: [
+                {
+                    matcher: ({ path }) => path === "/passkey/delete-passkey",
+                    handler: freshSessionMiddleware
+                }
+            ]
         }
     }) as const satisfies BetterAuthPlugin;
 
-export { payloadSessionBridge };
+export { isFreshPayloadSession, payloadSessionBridge };
