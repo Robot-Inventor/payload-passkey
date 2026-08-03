@@ -163,7 +163,7 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
         hooks: {
             before: [
                 {
-                    matcher: ({ path }) => path === "/passkey/delete-passkey",
+                    matcher: ({ path }) => path === "/passkey/delete-passkey" || path === "/passkey/update-passkey",
                     handler: freshSessionMiddleware
                 }
             ]
