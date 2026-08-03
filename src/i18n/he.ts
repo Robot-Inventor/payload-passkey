@@ -36,11 +36,6 @@ const he = {
             ownPasskeysOnly: "ניתן לנהל רק את מפתחות הגישה שלך.",
             preparingManagement: "מכין את ניהול מפתחות הגישה...",
             failedToManage: "לא ניתן להתחיל את ניהול מפתחות הגישה. יש להתחבר שוב."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ההתנתקות נכשלה: {{message}}",
-            failedToLogout: "ההתנתקות נכשלה.",
-            logout: "התנתקות"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const nl = {
             ownPasskeysOnly: "Je kunt alleen je eigen passkeys beheren.",
             preparingManagement: "Passkeybeheer voorbereiden...",
             failedToManage: "Kan passkeybeheer niet starten. Meld je opnieuw aan."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Afmelden mislukt: {{message}}",
-            failedToLogout: "Afmelden mislukt.",
-            logout: "Afmelden"
         }
     }
 } as const satisfies CustomTranslationsObject;

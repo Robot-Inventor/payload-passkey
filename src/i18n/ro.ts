@@ -36,11 +36,6 @@ const ro = {
             ownPasskeysOnly: "Puteți gestiona doar propriile chei de acces.",
             preparingManagement: "Se pregătește gestionarea cheilor de acces...",
             failedToManage: "Gestionarea cheilor de acces nu a putut fi pornită. Conectați-vă din nou."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Deconectarea a eșuat: {{message}}",
-            failedToLogout: "Deconectarea a eșuat.",
-            logout: "Deconectare"
         }
     }
 } as const satisfies CustomTranslationsObject;

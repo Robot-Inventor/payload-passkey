@@ -36,11 +36,6 @@ const rsLatin = {
             ownPasskeysOnly: "Možete da upravljate samo sopstvenim ključevima za pristup.",
             preparingManagement: "Priprema se upravljanje ključevima za pristup...",
             failedToManage: "Upravljanje ključevima za pristup nije moguće pokrenuti. Prijavite se ponovo."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odjavljivanje nije uspelo: {{message}}",
-            failedToLogout: "Odjavljivanje nije uspelo.",
-            logout: "Odjavite se"
         }
     }
 } as const satisfies CustomTranslationsObject;

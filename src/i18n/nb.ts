@@ -36,11 +36,6 @@ const nb = {
             ownPasskeysOnly: "Du kan bare administrere dine egne passnøkler.",
             preparingManagement: "Forbereder passnøkkeladministrasjon...",
             failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg på på nytt."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Kunne ikke logge av: {{message}}",
-            failedToLogout: "Kunne ikke logge av.",
-            logout: "Logg av"
         }
     }
 } as const satisfies CustomTranslationsObject;

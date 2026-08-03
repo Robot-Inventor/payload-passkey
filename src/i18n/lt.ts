@@ -36,11 +36,6 @@ const lt = {
             ownPasskeysOnly: "Galite tvarkyti tik savo prieigos raktus.",
             preparingManagement: "Ruošiamas prieigos raktų tvarkymas...",
             failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite dar kartą."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Nepavyko atsijungti: {{message}}",
-            failedToLogout: "Nepavyko atsijungti.",
-            logout: "Atsijungti"
         }
     }
 } as const satisfies CustomTranslationsObject;

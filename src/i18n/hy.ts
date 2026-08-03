@@ -36,11 +36,6 @@ const hy = {
             ownPasskeysOnly: "Դուք կարող եք կառավարել միայն ձեր մուտքի բանալիները։",
             preparingManagement: "Մուտքի բանալիների կառավարումը նախապատրաստվում է...",
             failedToManage: "Չհաջողվեց սկսել մուտքի բանալիների կառավարումը։ Նորից մուտք գործեք։"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Չհաջողվեց դուրս գալ՝ {{message}}",
-            failedToLogout: "Չհաջողվեց դուրս գալ։",
-            logout: "Դուրս գալ"
         }
     }
 } as const satisfies CustomTranslationsObject;

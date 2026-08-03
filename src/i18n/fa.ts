@@ -36,11 +36,6 @@ const fa = {
             ownPasskeysOnly: "فقط می‌توانید کلیدهای دسترسی خودتان را مدیریت کنید.",
             preparingManagement: "در حال آماده‌سازی مدیریت کلید دسترسی...",
             failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "خروج ناموفق بود: {{message}}",
-            failedToLogout: "خروج ناموفق بود.",
-            logout: "خروج"
         }
     }
 } as const satisfies CustomTranslationsObject;

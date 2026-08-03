@@ -36,11 +36,6 @@ const it = {
             ownPasskeysOnly: "Puoi gestire solo le tue passkey.",
             preparingManagement: "Preparazione della gestione delle passkey...",
             failedToManage: "Impossibile avviare la gestione delle passkey. Accedi di nuovo."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Disconnessione non riuscita: {{message}}",
-            failedToLogout: "Disconnessione non riuscita.",
-            logout: "Disconnetti"
         }
     }
 } as const satisfies CustomTranslationsObject;

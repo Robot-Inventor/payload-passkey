@@ -38,11 +38,6 @@ interface CustomTranslationsObject {
             preparingManagement: string;
             failedToManage: string;
         };
-        logoutButton: {
-            failedToLogoutWithMessage: string;
-            failedToLogout: string;
-            logout: string;
-        };
     };
 }
 

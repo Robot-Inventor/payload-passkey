@@ -36,11 +36,6 @@ const hu = {
             ownPasskeysOnly: "Csak a saját hozzáférési kulcsait kezelheti.",
             preparingManagement: "A hozzáférési kulcsok kezelése előkészítés alatt...",
             failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Nem sikerült kijelentkezni: {{message}}",
-            failedToLogout: "Nem sikerült kijelentkezni.",
-            logout: "Kijelentkezés"
         }
     }
 } as const satisfies CustomTranslationsObject;

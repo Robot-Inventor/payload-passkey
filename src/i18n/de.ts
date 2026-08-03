@@ -36,11 +36,6 @@ const de = {
             ownPasskeysOnly: "Du kannst nur deine eigenen Passkeys verwalten.",
             preparingManagement: "Passkey-Verwaltung wird vorbereitet...",
             failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich erneut an."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Abmeldung fehlgeschlagen: {{message}}",
-            failedToLogout: "Abmeldung fehlgeschlagen.",
-            logout: "Abmelden"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const et = {
             ownPasskeysOnly: "Saad hallata ainult enda pääsuvõtmeid.",
             preparingManagement: "Pääsuvõtmete haldust valmistatakse ette...",
             failedToManage: "Pääsuvõtmete haldust ei saanud käivitada. Logi uuesti sisse."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Väljalogimine nurjus: {{message}}",
-            failedToLogout: "Väljalogimine nurjus.",
-            logout: "Logi välja"
         }
     }
 } as const satisfies CustomTranslationsObject;

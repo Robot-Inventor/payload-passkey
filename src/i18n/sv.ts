@@ -36,11 +36,6 @@ const sv = {
             ownPasskeysOnly: "Du kan bara hantera dina egna åtkomstnycklar.",
             preparingManagement: "Förbereder hantering av åtkomstnycklar...",
             failedToManage: "Det gick inte att starta hanteringen av åtkomstnycklar. Logga in igen."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Det gick inte att logga ut: {{message}}",
-            failedToLogout: "Det gick inte att logga ut.",
-            logout: "Logga ut"
         }
     }
 } as const satisfies CustomTranslationsObject;

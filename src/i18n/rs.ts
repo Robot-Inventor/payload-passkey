@@ -36,11 +36,6 @@ const rs = {
             ownPasskeysOnly: "Можете да управљате само сопственим кључевима за приступ.",
             preparingManagement: "Припрема се управљање кључевима за приступ...",
             failedToManage: "Није могуће покренути управљање кључевима за приступ. Пријавите се поново."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Одјављивање није успело: {{message}}",
-            failedToLogout: "Одјављивање није успело.",
-            logout: "Одјавите се"
         }
     }
 } as const satisfies CustomTranslationsObject;

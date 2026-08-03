@@ -36,11 +36,6 @@ const fr = {
             ownPasskeysOnly: "Vous pouvez uniquement gérer vos propres clés d’accès.",
             preparingManagement: "Préparation de la gestion des clés d’accès...",
             failedToManage: "Impossible de démarrer la gestion des clés d’accès. Veuillez vous reconnecter."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Échec de la déconnexion : {{message}}",
-            failedToLogout: "Échec de la déconnexion.",
-            logout: "Se déconnecter"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const hr = {
             ownPasskeysOnly: "Možete upravljati samo vlastitim pristupnim ključevima.",
             preparingManagement: "Priprema se upravljanje pristupnim ključevima...",
             failedToManage: "Upravljanje pristupnim ključevima nije moguće pokrenuti. Ponovno se prijavite."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odjava nije uspjela: {{message}}",
-            failedToLogout: "Odjava nije uspjela.",
-            logout: "Odjava"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const id = {
             ownPasskeysOnly: "Anda hanya dapat mengelola kunci sandi milik Anda sendiri.",
             preparingManagement: "Menyiapkan pengelolaan kunci sandi...",
             failedToManage: "Tidak dapat memulai pengelolaan kunci sandi. Silakan masuk lagi."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Gagal keluar: {{message}}",
-            failedToLogout: "Gagal keluar.",
-            logout: "Keluar"
         }
     }
 } as const satisfies CustomTranslationsObject;

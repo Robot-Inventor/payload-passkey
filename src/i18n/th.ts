@@ -36,11 +36,6 @@ const th = {
             ownPasskeysOnly: "คุณจัดการได้เฉพาะพาสคีย์ของคุณเองเท่านั้น",
             preparingManagement: "กำลังเตรียมการจัดการพาสคีย์...",
             failedToManage: "เริ่มการจัดการพาสคีย์ไม่ได้ โปรดเข้าสู่ระบบอีกครั้ง"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ออกจากระบบไม่สำเร็จ: {{message}}",
-            failedToLogout: "ออกจากระบบไม่สำเร็จ",
-            logout: "ออกจากระบบ"
         }
     }
 } as const satisfies CustomTranslationsObject;

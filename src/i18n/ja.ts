@@ -36,11 +36,6 @@ const ja = {
             ownPasskeysOnly: "自分自身のパスキーのみ管理できます。",
             preparingManagement: "パスキー管理を準備しています…",
             failedToManage: "パスキー管理を開始できませんでした。再ログインしてください。"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ログアウトに失敗しました：{{message}}",
-            failedToLogout: "ログアウトに失敗しました。",
-            logout: "ログアウト"
         }
     }
 } as const satisfies CustomTranslationsObject;

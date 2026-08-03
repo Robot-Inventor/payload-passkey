@@ -36,11 +36,6 @@ const tr = {
             ownPasskeysOnly: "Yalnızca kendi geçiş anahtarlarınızı yönetebilirsiniz.",
             preparingManagement: "Geçiş anahtarı yönetimi hazırlanıyor...",
             failedToManage: "Geçiş anahtarı yönetimi başlatılamadı. Lütfen yeniden oturum açın."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Oturum kapatılamadı: {{message}}",
-            failedToLogout: "Oturum kapatılamadı.",
-            logout: "Oturumu kapat"
         }
     }
 } as const satisfies CustomTranslationsObject;

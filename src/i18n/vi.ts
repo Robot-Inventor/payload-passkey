@@ -36,11 +36,6 @@ const vi = {
             ownPasskeysOnly: "Bạn chỉ có thể quản lý passkey của chính mình.",
             preparingManagement: "Đang chuẩn bị quản lý passkey...",
             failedToManage: "Không thể bắt đầu quản lý passkey. Vui lòng đăng nhập lại."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Không thể đăng xuất: {{message}}",
-            failedToLogout: "Không thể đăng xuất.",
-            logout: "Đăng xuất"
         }
     }
 } as const satisfies CustomTranslationsObject;

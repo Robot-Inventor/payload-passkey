@@ -36,11 +36,6 @@ const ru = {
             ownPasskeysOnly: "Вы можете управлять только своими ключами доступа.",
             preparingManagement: "Подготовка управления ключами доступа...",
             failedToManage: "Не удалось начать управление ключами доступа. Войдите снова."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Не удалось выйти: {{message}}",
-            failedToLogout: "Не удалось выйти.",
-            logout: "Выйти"
         }
     }
 } as const satisfies CustomTranslationsObject;
