@@ -36,11 +36,6 @@ const ca = {
             ownPasskeysOnly: "Només pots gestionar les teves pròpies claus d'accés.",
             preparingManagement: "S'està preparant la gestió de les claus d'accés...",
             failedToManage: "No s'ha pogut iniciar la gestió de les claus d'accés. Torna a iniciar la sessió."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "No s'ha pogut tancar la sessió: {{message}}",
-            failedToLogout: "No s'ha pogut tancar la sessió.",
-            logout: "Tanca la sessió"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const my = {
             ownPasskeysOnly: "မိမိ၏ Passkey များကိုသာ စီမံနိုင်ပါသည်။",
             preparingManagement: "Passkey စီမံခန့်ခွဲမှုကို ပြင်ဆင်နေသည်...",
             failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ ထပ်မံ လော့ဂ်အင်ဝင်ပါ။"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "အကောင့်မှထွက်ရန် မအောင်မြင်ပါ: {{message}}",
-            failedToLogout: "အကောင့်မှထွက်ရန် မအောင်မြင်ပါ။",
-            logout: "အကောင့်မှထွက်ရန်"
         }
     }
 } as const satisfies CustomTranslationsObject;

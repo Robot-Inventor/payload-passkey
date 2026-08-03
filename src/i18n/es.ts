@@ -36,11 +36,6 @@ const es = {
             ownPasskeysOnly: "Solo puedes administrar tus propias claves de acceso.",
             preparingManagement: "Preparando la administración de claves de acceso...",
             failedToManage: "No se ha podido iniciar la administración de claves de acceso. Vuelve a iniciar sesión."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "No se ha podido cerrar la sesión: {{message}}",
-            failedToLogout: "No se ha podido cerrar la sesión.",
-            logout: "Cerrar sesión"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const pt = {
             ownPasskeysOnly: "Só pode gerir as suas próprias chaves de acesso.",
             preparingManagement: "A preparar a gestão das chaves de acesso...",
             failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Inicie sessão novamente."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Não foi possível terminar sessão: {{message}}",
-            failedToLogout: "Não foi possível terminar sessão.",
-            logout: "Terminar sessão"
         }
     }
 } as const satisfies CustomTranslationsObject;

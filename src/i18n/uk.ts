@@ -36,11 +36,6 @@ const uk = {
             ownPasskeysOnly: "Ви можете керувати лише власними ключами доступу.",
             preparingManagement: "Підготовка керування ключами доступу...",
             failedToManage: "Не вдалося почати керування ключами доступу. Увійдіть знову."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Не вдалося вийти: {{message}}",
-            failedToLogout: "Не вдалося вийти.",
-            logout: "Вийти"
         }
     }
 } as const satisfies CustomTranslationsObject;

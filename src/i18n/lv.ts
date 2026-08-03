@@ -36,11 +36,6 @@ const lv = {
             ownPasskeysOnly: "Varat pārvaldīt tikai savas piekļuves atslēgas.",
             preparingManagement: "Notiek piekļuves atslēgu pārvaldības sagatavošana...",
             failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pierakstieties vēlreiz."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Neizdevās izrakstīties: {{message}}",
-            failedToLogout: "Neizdevās izrakstīties.",
-            logout: "Izrakstīties"
         }
     }
 } as const satisfies CustomTranslationsObject;

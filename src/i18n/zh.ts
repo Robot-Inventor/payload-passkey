@@ -36,11 +36,6 @@ const zh = {
             ownPasskeysOnly: "你只能管理自己的通行密钥。",
             preparingManagement: "正在准备通行密钥管理...",
             failedToManage: "无法开始通行密钥管理。请重新登录。"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "无法注销：{{message}}",
-            failedToLogout: "无法注销。",
-            logout: "注销"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -36,11 +36,6 @@ const ar = {
             ownPasskeysOnly: "يمكنك إدارة مفاتيح المرور الخاصة بك فقط.",
             preparingManagement: "جارٍ تجهيز إدارة مفاتيح المرور...",
             failedToManage: "تعذّر بدء إدارة مفاتيح المرور. يُرجى تسجيل الدخول مرة أخرى."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "تعذّر تسجيل الخروج: {{message}}",
-            failedToLogout: "تعذّر تسجيل الخروج.",
-            logout: "تسجيل الخروج"
         }
     }
 } as const satisfies CustomTranslationsObject;

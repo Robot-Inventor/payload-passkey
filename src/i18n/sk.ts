@@ -36,11 +36,6 @@ const sk = {
             ownPasskeysOnly: "Spravovať môžete iba vlastné prístupové kľúče.",
             preparingManagement: "Pripravuje sa správa prístupových kľúčov...",
             failedToManage: "Správu prístupových kľúčov sa nepodarilo spustiť. Znova sa prihláste."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odhlásenie zlyhalo: {{message}}",
-            failedToLogout: "Odhlásenie zlyhalo.",
-            logout: "Odhlásiť sa"
         }
     }
 } as const satisfies CustomTranslationsObject;

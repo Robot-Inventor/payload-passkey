@@ -36,11 +36,6 @@ const bg = {
             ownPasskeysOnly: "Можете да управлявате само собствените си ключове за достъп.",
             preparingManagement: "Подготвя се управлението на ключовете за достъп...",
             failedToManage: "Управлението на ключовете за достъп не можа да започне. Влезте отново."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Излизането не бе успешно: {{message}}",
-            failedToLogout: "Излизането не бе успешно.",
-            logout: "Изход"
         }
     }
 } as const satisfies CustomTranslationsObject;

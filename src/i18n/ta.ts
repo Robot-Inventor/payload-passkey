@@ -36,11 +36,6 @@ const ta = {
             ownPasskeysOnly: "உங்கள் சொந்த பாஸ்கிகளை மட்டுமே நிர்வகிக்க முடியும்.",
             preparingManagement: "பாஸ்கீ நிர்வாகம் தயாராகிறது...",
             failedToManage: "பாஸ்கீ நிர்வாகத்தைத் தொடங்க முடியவில்லை. மீண்டும் உள்நுழையவும்."
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "வெளியேற முடியவில்லை: {{message}}",
-            failedToLogout: "வெளியேற முடியவில்லை.",
-            logout: "வெளியேறு"
         }
     }
 } as const satisfies CustomTranslationsObject;
