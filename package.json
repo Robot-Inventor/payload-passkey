@@ -59,13 +59,18 @@
     "better-auth": "^1.6.25"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.1",
     "@robot-inventor/eslint-config": "^13.0.2",
     "@robot-inventor/tsconfig-base": "^7.1.0",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
     "@types/react": "^19.2.18",
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/rollup-plugin": "^1.5.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.8.0",
     "jiti": "^2.7.0",
     "knip": "^6.31.0",
@@ -81,7 +86,8 @@
     "@payloadcms/translations": ">=3.69.0 <4",
     "@payloadcms/ui": ">=3.69.0 <4",
     "next": "^16",
-    "payload": ">=3.69.0 <4"
+    "payload": ">=3.69.0 <4",
+    "react": ">=19"
   },
   "overrides": {
     "zod-validation-error": "^5.0.0"
