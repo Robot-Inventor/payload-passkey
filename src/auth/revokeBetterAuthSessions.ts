@@ -1,4 +1,4 @@
-import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants.js";
+import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants";
 import type { PayloadRequest } from "payload";
 
 const revokeBetterAuthSessions = async (req: PayloadRequest, userId: number | string): Promise<void> => {

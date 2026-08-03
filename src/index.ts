@@ -1,12 +1,12 @@
 import { type CollectionConfig, type Config, definePlugin } from "payload";
-import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations.js";
-import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types.js";
-import { afterChange, afterLogin, afterLogout } from "./config/hooks.js";
-import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins.js";
-import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields.js";
-import { findFieldsByName, rewriteBetterAuthUserRelationships } from "./config/userRelationships.js";
-import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy.js";
-import { payloadAuthStrategy } from "./auth/payloadAuthStrategy.js";
+import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations";
+import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types";
+import { afterChange, afterLogin, afterLogout } from "./config/hooks";
+import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins";
+import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields";
+import { findFieldsByName, rewriteBetterAuthUserRelationships } from "./config/userRelationships";
+import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy";
+import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
 import { translations } from "./i18n";
 
 const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>({

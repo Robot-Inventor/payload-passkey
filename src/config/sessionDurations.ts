@@ -1,5 +1,5 @@
-import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants.js";
-import type { PayloadPasskeyOptions } from "../types.js";
+import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants";
+import type { PayloadPasskeyOptions } from "../types";
 
 const PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS = 7200;
 

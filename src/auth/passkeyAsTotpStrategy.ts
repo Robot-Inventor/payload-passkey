@@ -1,6 +1,6 @@
 import type { AuthStrategy } from "payload";
 import type { BetterAuthStrategyOptions } from "@delmaredigital/payload-better-auth";
-import { payloadAuthStrategy } from "./payloadAuthStrategy.js";
+import { payloadAuthStrategy } from "./payloadAuthStrategy";
 
 const normalizePathname = <T extends string | null>(pathname: T): T extends string ? string : undefined =>
     pathname?.replace(/^\/+|\/+$/gu, "") as T extends string ? string : undefined;
