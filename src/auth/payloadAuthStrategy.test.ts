@@ -1,4 +1,4 @@
-import type { AuthStrategy, AuthStrategyFunctionArgs, AuthStrategyResult } from "payload";
+import type { AuthStrategyFunctionArgs, AuthStrategyResult } from "payload";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const underlyingAuthenticate = vi.hoisted(() => vi.fn());

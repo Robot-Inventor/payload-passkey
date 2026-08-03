@@ -1,4 +1,4 @@
-import { type Mock, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 
 const bridgeMocks = vi.hoisted(() => ({
