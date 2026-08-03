@@ -35,7 +35,9 @@ const de = {
             passkey: "Passkey",
             ownPasskeysOnly: "Du kannst nur deine eigenen Passkeys verwalten.",
             preparingManagement: "Passkey-Verwaltung wird vorbereitet...",
-            failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich erneut an."
+            failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich wieder an.",
+            reauthenticationRequired: "Melde dich wieder an, um Passkeys zu verwalten.",
+            reauthenticate: "Wieder anmelden"
         }
     }
 } as const satisfies CustomTranslationsObject;

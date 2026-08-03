@@ -29,10 +29,10 @@
         "typescript": "^6.0.3",
       },
       "peerDependencies": {
-        "@payloadcms/translations": "^3",
-        "@payloadcms/ui": "^3",
+        "@payloadcms/translations": ">=3.69.0 <4",
+        "@payloadcms/ui": ">=3.69.0 <4",
         "next": "^16",
-        "payload": "^3",
+        "payload": ">=3.69.0 <4",
       },
     },
   },

@@ -35,7 +35,9 @@ const nb = {
             passkey: "Passnøkkel",
             ownPasskeysOnly: "Du kan bare administrere dine egne passnøkler.",
             preparingManagement: "Forbereder passnøkkeladministrasjon...",
-            failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg på på nytt."
+            failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg inn igjen.",
+            reauthenticationRequired: "Logg inn igjen for å administrere passnøkler.",
+            reauthenticate: "Logg inn igjen"
         }
     }
 } as const satisfies CustomTranslationsObject;

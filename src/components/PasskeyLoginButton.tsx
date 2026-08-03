@@ -3,19 +3,20 @@
 import { Button, toast, useAuth, useConfig, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/passkeyCustomTranslations";
 import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LockIcon } from "@payloadcms/ui/icons/Lock";
 import type { ReactNode } from "react";
 import { betterAuthClient } from "../auth/client";
-import { useRouter } from "next/navigation";
+import { getSafeRedirect } from "payload/shared";
 
 const PasskeyLoginButton = (): ReactNode => {
     const { config } = useConfig();
     const { fetchFullUser } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
     // eslint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
-    const adminRoute = config.routes.admin;
     const handleClick = async (): Promise<void> => {
         try {
             const result = await betterAuthClient.signIn.passkey();
@@ -24,7 +25,12 @@ const PasskeyLoginButton = (): ReactNode => {
                 toast.error(errorMessage);
             } else {
                 await fetchFullUser();
-                router.push(adminRoute);
+                router.push(
+                    getSafeRedirect({
+                        fallbackTo: config.routes.admin,
+                        redirectTo: searchParams.get("redirect") ?? ""
+                    })
+                );
             }
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {

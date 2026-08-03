@@ -35,7 +35,9 @@ const th = {
             passkey: "พาสคีย์",
             ownPasskeysOnly: "คุณจัดการได้เฉพาะพาสคีย์ของคุณเองเท่านั้น",
             preparingManagement: "กำลังเตรียมการจัดการพาสคีย์...",
-            failedToManage: "เริ่มการจัดการพาสคีย์ไม่ได้ โปรดเข้าสู่ระบบอีกครั้ง"
+            failedToManage: "เริ่มการจัดการพาสคีย์ไม่ได้ โปรดเข้าสู่ระบบอีกครั้ง",
+            reauthenticationRequired: "โปรดเข้าสู่ระบบอีกครั้งเพื่อจัดการพาสคีย์",
+            reauthenticate: "เข้าสู่ระบบอีกครั้ง"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -35,7 +35,9 @@ const hy = {
             passkey: "Մուտքի բանալի",
             ownPasskeysOnly: "Դուք կարող եք կառավարել միայն ձեր մուտքի բանալիները։",
             preparingManagement: "Մուտքի բանալիների կառավարումը նախապատրաստվում է...",
-            failedToManage: "Չհաջողվեց սկսել մուտքի բանալիների կառավարումը։ Նորից մուտք գործեք։"
+            failedToManage: "Չհաջողվեց սկսել մուտքի բանալիների կառավարումը։ Կրկին մուտք գործեք։",
+            reauthenticationRequired: "Մուտքի բանալիները կառավարելու համար կրկին մուտք գործեք։",
+            reauthenticate: "Կրկին մուտք գործել"
         }
     }
 } as const satisfies CustomTranslationsObject;

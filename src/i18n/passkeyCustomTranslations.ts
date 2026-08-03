@@ -37,6 +37,8 @@ interface CustomTranslationsObject {
             ownPasskeysOnly: string;
             preparingManagement: string;
             failedToManage: string;
+            reauthenticationRequired: string;
+            reauthenticate: string;
         };
     };
 }

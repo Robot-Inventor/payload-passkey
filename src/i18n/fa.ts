@@ -35,7 +35,9 @@ const fa = {
             passkey: "کلید دسترسی",
             ownPasskeysOnly: "فقط می‌توانید کلیدهای دسترسی خودتان را مدیریت کنید.",
             preparingManagement: "در حال آماده‌سازی مدیریت کلید دسترسی...",
-            failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید."
+            failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید.",
+            reauthenticationRequired: "برای مدیریت کلیدهای دسترسی، دوباره وارد شوید.",
+            reauthenticate: "دوباره وارد شوید"
         }
     }
 } as const satisfies CustomTranslationsObject;

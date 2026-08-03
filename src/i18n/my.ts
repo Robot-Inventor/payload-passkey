@@ -35,7 +35,9 @@ const my = {
             passkey: "Passkey",
             ownPasskeysOnly: "မိမိ၏ Passkey များကိုသာ စီမံနိုင်ပါသည်။",
             preparingManagement: "Passkey စီမံခန့်ခွဲမှုကို ပြင်ဆင်နေသည်...",
-            failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ ထပ်မံ လော့ဂ်အင်ဝင်ပါ။"
+            failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ အကောင့်ထဲ ပြန်ဝင်မည်။",
+            reauthenticationRequired: "Passkey များကို စီမံရန် အကောင့်ထဲ ပြန်ဝင်မည်။",
+            reauthenticate: "အကောင့်ထဲ ပြန်ဝင်မည်။"
         }
     }
 } as const satisfies CustomTranslationsObject;

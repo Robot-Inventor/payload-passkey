@@ -35,7 +35,9 @@ const vi = {
             passkey: "Passkey",
             ownPasskeysOnly: "Bạn chỉ có thể quản lý passkey của chính mình.",
             preparingManagement: "Đang chuẩn bị quản lý passkey...",
-            failedToManage: "Không thể bắt đầu quản lý passkey. Vui lòng đăng nhập lại."
+            failedToManage: "Không thể bắt đầu quản lý passkey. Vui lòng đăng nhập lại.",
+            reauthenticationRequired: "Vui lòng đăng nhập lại để quản lý passkey.",
+            reauthenticate: "Đăng nhập lại"
         }
     }
 } as const satisfies CustomTranslationsObject;

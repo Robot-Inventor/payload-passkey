@@ -35,7 +35,9 @@ const pt = {
             passkey: "Chave de acesso",
             ownPasskeysOnly: "Só pode gerir as suas próprias chaves de acesso.",
             preparingManagement: "A preparar a gestão das chaves de acesso...",
-            failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Inicie sessão novamente."
+            failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Faça login novamente.",
+            reauthenticationRequired: "Faça login novamente para gerir as chaves de acesso.",
+            reauthenticate: "Fazer login novamente"
         }
     }
 } as const satisfies CustomTranslationsObject;

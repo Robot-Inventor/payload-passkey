@@ -35,7 +35,9 @@ const sv = {
             passkey: "Åtkomstnyckel",
             ownPasskeysOnly: "Du kan bara hantera dina egna åtkomstnycklar.",
             preparingManagement: "Förbereder hantering av åtkomstnycklar...",
-            failedToManage: "Det gick inte att starta hanteringen av åtkomstnycklar. Logga in igen."
+            failedToManage: "Det gick inte att starta hanteringen av åtkomstnycklar. Logga in igen.",
+            reauthenticationRequired: "Logga in igen för att hantera åtkomstnycklar.",
+            reauthenticate: "Logga in igen"
         }
     }
 } as const satisfies CustomTranslationsObject;

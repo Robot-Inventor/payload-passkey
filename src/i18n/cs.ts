@@ -35,7 +35,9 @@ const cs = {
             passkey: "Přístupový klíč",
             ownPasskeysOnly: "Spravovat můžete pouze vlastní přístupové klíče.",
             preparingManagement: "Připravuje se správa přístupových klíčů...",
-            failedToManage: "Správu přístupových klíčů se nepodařilo spustit. Přihlaste se znovu."
+            failedToManage: "Správu přístupových klíčů se nepodařilo spustit. Přihlaste se znovu.",
+            reauthenticationRequired: "Chcete-li spravovat přístupové klíče, přihlaste se znovu.",
+            reauthenticate: "Znovu se přihlásit"
         }
     }
 } as const satisfies CustomTranslationsObject;

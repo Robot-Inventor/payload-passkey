@@ -35,7 +35,9 @@ const it = {
             passkey: "Passkey",
             ownPasskeysOnly: "Puoi gestire solo le tue passkey.",
             preparingManagement: "Preparazione della gestione delle passkey...",
-            failedToManage: "Impossibile avviare la gestione delle passkey. Accedi di nuovo."
+            failedToManage: "Impossibile avviare la gestione delle passkey. Vai al Log in.",
+            reauthenticationRequired: "Vai al Log in per gestire le passkey.",
+            reauthenticate: "Vai al Log in"
         }
     }
 } as const satisfies CustomTranslationsObject;

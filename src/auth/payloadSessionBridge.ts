@@ -1,7 +1,44 @@
-import { APIError, createAuthEndpoint, getSessionFromCtx } from "better-auth/api";
+import { APIError, createAuthEndpoint, freshSessionMiddleware, getSessionFromCtx } from "better-auth/api";
+import { AUTH_ERROR_CODES, PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
 import { setSessionCookie } from "better-auth/cookies";
+
+type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
+    _sid?: string;
+};
+
+const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
+    // eslint-disable-next-line no-underscore-dangle
+    const sessionID = user._sid;
+    const createdAt = user.sessions?.find(({ id }) => id === sessionID)?.createdAt;
+
+    if (!createdAt) return false;
+
+    const age = Date.now() - new Date(createdAt).getTime();
+
+    // eslint-disable-next-line no-magic-numbers
+    return age >= 0 && age < PASSKEY_FRESH_AGE_SECONDS * 1000;
+};
+
+const getFreshUntil = (createdAt: Date): number =>
+    // eslint-disable-next-line no-magic-numbers
+    createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * 1000;
+
+const isFreshSession = (createdAt: Date): boolean => {
+    const createdAtTime = createdAt.getTime();
+    const freshUntil = getFreshUntil(createdAt);
+    const now = Date.now();
+
+    return now >= createdAtTime && now < freshUntil;
+};
+
+const throwStepUpRequired = (): never => {
+    throw new APIError("FORBIDDEN", {
+        code: AUTH_ERROR_CODES.STEP_UP_REQUIRED,
+        message: "Recent authentication is required"
+    });
+};
 
 // eslint-disable-next-line max-lines-per-function
 const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSlug): BetterAuthPlugin =>
@@ -35,9 +72,8 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                         headers
                     });
 
-                    // The type assertion is required to access the `_strategy` property
                     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-                    const user = result.user as AuthStrategyResult["user"];
+                    const user = result.user as PayloadSessionUser | null;
 
                     if (user?.collection !== userCollection) {
                         throw new APIError("UNAUTHORIZED", {
@@ -71,14 +107,24 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                             });
                         }
 
+                        if (!isFreshSession(existingSession.session.createdAt)) {
+                            throwStepUpRequired();
+                        }
+
+                        const freshUntil = getFreshUntil(existingSession.session.createdAt);
+
                         return ctx.json({
                             success: true,
-                            created: false
+                            created: false,
+                            freshUntil
                         });
                     }
 
-                    const betterAuthUser = await ctx.context.internalAdapter.findUserById(String(payloadUserID));
+                    if (!isFreshPayloadSession(user)) {
+                        throwStepUpRequired();
+                    }
 
+                    const betterAuthUser = await ctx.context.internalAdapter.findUserById(String(payloadUserID));
                     if (!betterAuthUser) {
                         throw new APIError("UNAUTHORIZED", {
                             message: "User was not found"
@@ -86,6 +132,7 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                     }
 
                     const session = await ctx.context.internalAdapter.createSession(String(payloadUserID));
+                    const freshUntil = getFreshUntil(session.createdAt);
 
                     await setSessionCookie(ctx, {
                         session,
@@ -94,10 +141,19 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
 
                     return ctx.json({
                         success: true,
-                        created: true
+                        created: true,
+                        freshUntil
                     });
                 }
             )
+        },
+        hooks: {
+            before: [
+                {
+                    matcher: ({ path }) => path === "/passkey/delete-passkey",
+                    handler: freshSessionMiddleware
+                }
+            ]
         }
     }) as const satisfies BetterAuthPlugin;
 
