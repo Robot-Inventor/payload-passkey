@@ -14,7 +14,7 @@ Although it is a wrapper around [@delmaredigital/payload-better-auth](https://gi
 - Adds passkey management functionality to the account management screen
 - Supports automatic token refresh when enabled in the Payload configuration
 - Supports use alongside [Payload TOTP](https://github.com/GeorgeHulpoi/payload-totp)
-- i18n support (beta)
+- i18n support
 
 Depending on the user's setup, they can log in using one of the following methods:
 
