@@ -36,7 +36,8 @@ const da = {
             ownPasskeysOnly: "Du kan kun administrere dine egne adgangsnøgler.",
             preparingManagement: "Forbereder administration af adgangsnøgler...",
             failedToManage: "Administration af adgangsnøgler kunne ikke startes. Log på igen.",
-            reauthenticationRequired: "Af hensyn til din egen sikkerhed skal du logge på igen for at administrere adgangsnøgler.",
+            reauthenticationRequired:
+                "Af hensyn til din egen sikkerhed skal du logge på igen for at administrere adgangsnøgler.",
             reauthenticate: "Log på igen"
         }
     }

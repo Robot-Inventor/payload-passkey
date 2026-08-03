@@ -36,7 +36,8 @@ const ca = {
             ownPasskeysOnly: "Només pots gestionar les teves pròpies claus d'accés.",
             preparingManagement: "S'està preparant la gestió de les claus d'accés...",
             failedToManage: "No s'ha pogut iniciar la gestió de les claus d'accés. Torna a iniciar sessió.",
-            reauthenticationRequired: "Per la teva pròpia seguretat, torna a iniciar sessió per gestionar les claus d’accés.",
+            reauthenticationRequired:
+                "Per la teva pròpia seguretat, torna a iniciar sessió per gestionar les claus d’accés.",
             reauthenticate: "Tornar a iniciar sessió"
         }
     }

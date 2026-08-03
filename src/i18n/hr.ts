@@ -36,7 +36,8 @@ const hr = {
             ownPasskeysOnly: "Možete upravljati samo vlastitim pristupnim ključevima.",
             preparingManagement: "Priprema se upravljanje pristupnim ključevima...",
             failedToManage: "Upravljanje pristupnim ključevima nije moguće pokrenuti. Ponovno se prijavite.",
-            reauthenticationRequired: "Zbog vlastite sigurnosti ponovno se prijavite za upravljanje pristupnim ključevima.",
+            reauthenticationRequired:
+                "Zbog vlastite sigurnosti ponovno se prijavite za upravljanje pristupnim ključevima.",
             reauthenticate: "Ponovno se prijavite"
         }
     }

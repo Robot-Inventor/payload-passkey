@@ -36,7 +36,8 @@ const ro = {
             ownPasskeysOnly: "Puteți gestiona doar propriile chei de acces.",
             preparingManagement: "Se pregătește gestionarea cheilor de acces...",
             failedToManage: "Gestionarea cheilor de acces nu a putut fi pornită. Autentificați-vă din nou.",
-            reauthenticationRequired: "Pentru propria dvs. securitate, autentificați-vă din nou pentru a gestiona cheile de acces.",
+            reauthenticationRequired:
+                "Pentru propria dvs. securitate, autentificați-vă din nou pentru a gestiona cheile de acces.",
             reauthenticate: "Autentificați-vă din nou"
         }
     }

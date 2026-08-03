@@ -36,7 +36,8 @@ const hu = {
             ownPasskeysOnly: "Csak a saját hozzáférési kulcsait kezelheti.",
             preparingManagement: "A hozzáférési kulcsok kezelése előkészítés alatt...",
             failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra.",
-            reauthenticationRequired: "Saját biztonsága érdekében jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
+            reauthenticationRequired:
+                "Saját biztonsága érdekében jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
             reauthenticate: "Jelentkezzen be újra"
         }
     }

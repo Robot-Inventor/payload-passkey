@@ -36,7 +36,8 @@ const es = {
             ownPasskeysOnly: "Solo puedes administrar tus propias claves de acceso.",
             preparingManagement: "Preparando la administración de claves de acceso...",
             failedToManage: "No se ha podido iniciar la administración de claves de acceso. Vuelve a iniciar sesión.",
-            reauthenticationRequired: "Por tu seguridad, vuelve a iniciar sesión para administrar las claves de acceso.",
+            reauthenticationRequired:
+                "Por tu seguridad, vuelve a iniciar sesión para administrar las claves de acceso.",
             reauthenticate: "Volver a iniciar sesión"
         }
     }

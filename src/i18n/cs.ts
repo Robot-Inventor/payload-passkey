@@ -36,7 +36,8 @@ const cs = {
             ownPasskeysOnly: "Spravovat můžete pouze vlastní přístupové klíče.",
             preparingManagement: "Připravuje se správa přístupových klíčů...",
             failedToManage: "Správu přístupových klíčů se nepodařilo spustit. Přihlaste se znovu.",
-            reauthenticationRequired: "Z bezpečnostních důvodů se znovu přihlaste, abyste mohli spravovat přístupové klíče.",
+            reauthenticationRequired:
+                "Z bezpečnostních důvodů se znovu přihlaste, abyste mohli spravovat přístupové klíče.",
             reauthenticate: "Znovu se přihlásit"
         }
     }

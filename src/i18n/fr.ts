@@ -36,7 +36,8 @@ const fr = {
             ownPasskeysOnly: "Vous pouvez uniquement gérer vos propres clés d’accès.",
             preparingManagement: "Préparation de la gestion des clés d’accès...",
             failedToManage: "Impossible de démarrer la gestion des clés d’accès. Veuillez vous reconnecter.",
-            reauthenticationRequired: "Pour votre propre sécurité, veuillez vous reconnecter pour gérer les clés d’accès.",
+            reauthenticationRequired:
+                "Pour votre propre sécurité, veuillez vous reconnecter pour gérer les clés d’accès.",
             reauthenticate: "Se reconnecter"
         }
     }

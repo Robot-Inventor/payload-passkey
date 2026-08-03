@@ -36,7 +36,8 @@ const az = {
             ownPasskeysOnly: "Yalnız öz keçid açarlarınızı idarə edə bilərsiniz.",
             preparingManagement: "Keçid açarlarının idarə edilməsi hazırlanır...",
             failedToManage: "Keçid açarlarının idarə edilməsinə başlamaq mümkün olmadı. Yenidən daxil olun.",
-            reauthenticationRequired: "Təhlükəsizliyiniz üçün keçid açarlarını idarə etmək məqsədilə yenidən daxil olun.",
+            reauthenticationRequired:
+                "Təhlükəsizliyiniz üçün keçid açarlarını idarə etmək məqsədilə yenidən daxil olun.",
             reauthenticate: "Yenidən daxil ol"
         }
     }
