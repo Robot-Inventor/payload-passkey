@@ -10,11 +10,7 @@
 
 import { Button, ConfirmationModal, TextInput, toast, useModal, useTranslation } from "@payloadcms/ui";
 import { type ChangeEvent, type ReactNode, useEffect, useState } from "react";
-import type {
-    CustomTFunction,
-    CustomTranslationsKeys,
-    CustomTranslationsObject
-} from "../i18n/passkeyCustomTranslations";
+import type { CustomTFunction, CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type Passkey, getAuthenticatorName } from "@better-auth/passkey";
 import {
     passkeyItemDateStyles,
