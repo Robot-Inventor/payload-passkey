@@ -1,4 +1,4 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const my = {
     passkeyPlugin: {
