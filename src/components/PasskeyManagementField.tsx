@@ -1,9 +1,9 @@
 "use client";
 
+import { AUTH_ERROR_CODES, PAYLOAD_SESSION_BRIDGE_PATH } from "../constants";
 import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
-import { AUTH_ERROR_CODES } from "../constants";
 import { PasskeysManagementClient } from "./PasskeyManagementClient";
 import { betterAuthClient } from "../auth/client";
 import { containerStyles } from "./PasskeyManagementField.css";
@@ -84,7 +84,7 @@ const isStepUpRequired = (error: unknown): boolean =>
     typeof error === "object" && error !== null && "code" in error && error.code === AUTH_ERROR_CODES.STEP_UP_REQUIRED;
 
 const createBridgeSession = async (): Promise<number | false> => {
-    const { data, error } = await betterAuthClient.$fetch<BridgeResponse>("/payload-session-bridge", {
+    const { data, error } = await betterAuthClient.$fetch<BridgeResponse>(PAYLOAD_SESSION_BRIDGE_PATH, {
         method: "POST",
         body: {}
     });

@@ -1,5 +1,11 @@
 import { APIError, createAuthEndpoint, freshSessionMiddleware, getSessionFromCtx } from "better-auth/api";
-import { AUTH_ERROR_CODES, PASSKEY_FRESH_AGE_SECONDS } from "../constants";
+import {
+    AUTH_ERROR_CODES,
+    PASSKEY_FRESH_AGE_SECONDS,
+    PAYLOAD_SESSION_BRIDGE_PATH,
+    PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_MAX_REQUESTS,
+    PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_WINDOW_SECONDS
+} from "../constants";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
 import { setSessionCookie } from "better-auth/cookies";
@@ -44,9 +50,16 @@ const throwStepUpRequired = (): never => {
 const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSlug): BetterAuthPlugin =>
     ({
         id: "payload-session-bridge",
+        rateLimit: [
+            {
+                pathMatcher: (path) => path === PAYLOAD_SESSION_BRIDGE_PATH,
+                window: PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_WINDOW_SECONDS,
+                max: PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_MAX_REQUESTS
+            }
+        ],
         endpoints: {
             createSessionFromPayload: createAuthEndpoint(
-                "/payload-session-bridge",
+                PAYLOAD_SESSION_BRIDGE_PATH,
                 {
                     method: "POST",
                     requireHeaders: true
