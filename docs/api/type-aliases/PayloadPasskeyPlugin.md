@@ -1,4 +1,4 @@
-[**payload-passkey v0.3.0**](../README.md)
+[**payload-passkey v1.0.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **PayloadPasskeyPlugin** = \<`TModelName`\>(`options`) => `Plugin`
 
-Defined in: [types.ts:96](https://github.com/Robot-Inventor/payload-passkey/blob/bb4526712d856655a77d567b75a1d7b2e27568e5/src/types.ts#L96)
+Defined in: [types.ts:96](https://github.com/Robot-Inventor/payload-passkey/blob/51439d28ccf9e3f6225bf453d277bd1553fd6bea/src/types.ts#L96)
 
 ## Type Parameters
 

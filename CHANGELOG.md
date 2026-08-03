@@ -1,5 +1,37 @@
 # payload-passkey
 
+## 1.0.0
+
+### Major Changes
+
+- [#53](https://github.com/Robot-Inventor/payload-passkey/pull/53) [`51439d2`](https://github.com/Robot-Inventor/payload-passkey/commit/51439d28ccf9e3f6225bf453d277bd1553fd6bea) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: v1.0.0
+
+### Minor Changes
+
+- [#43](https://github.com/Robot-Inventor/payload-passkey/pull/43) [`59d20b3`](https://github.com/Robot-Inventor/payload-passkey/commit/59d20b3e94693829ae98a29cd2e3c769d829269e) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: show a toast notification on logout
+
+- [#41](https://github.com/Robot-Inventor/payload-passkey/pull/41) [`81310c2`](https://github.com/Robot-Inventor/payload-passkey/commit/81310c2114db9b660e88146f33a660c92af3b07a) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: improve UI wording
+
+- [#44](https://github.com/Robot-Inventor/payload-passkey/pull/44) [`c15c8b9`](https://github.com/Robot-Inventor/payload-passkey/commit/c15c8b98a4aae845011adf5b18eb9aeef1dd8bbf) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: add rate limiting to Payload Session Bridge
+
+- [#46](https://github.com/Robot-Inventor/payload-passkey/pull/46) [`f76ff10`](https://github.com/Robot-Inventor/payload-passkey/commit/f76ff10577f4015dea953c9c16ef3e6c114982b9) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: require a fresh session even when updating an existing passkey
+
+- [#45](https://github.com/Robot-Inventor/payload-passkey/pull/45) [`a513c9c`](https://github.com/Robot-Inventor/payload-passkey/commit/a513c9c3de9bd56c79cc6460f1e926ab56e8f695) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: revoke sessions when TOTP is disabled
+
+- [#38](https://github.com/Robot-Inventor/payload-passkey/pull/38) [`21eb648`](https://github.com/Robot-Inventor/payload-passkey/commit/21eb648159575f20b23110deb442cedc070f8a1d) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: require fresh sessions for passkey management
+
+- [#36](https://github.com/Robot-Inventor/payload-passkey/pull/36) [`3b967b1`](https://github.com/Robot-Inventor/payload-passkey/commit/3b967b168aa794c71ef6924c191d92f994e34f3b) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: expand language support
+
+- [#49](https://github.com/Robot-Inventor/payload-passkey/pull/49) [`6246c18`](https://github.com/Robot-Inventor/payload-passkey/commit/6246c1840dee9bb8508221df7c042e8166359a7a) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: respect translation customization
+
+### Patch Changes
+
+- [#39](https://github.com/Robot-Inventor/payload-passkey/pull/39) [`694d9ac`](https://github.com/Robot-Inventor/payload-passkey/commit/694d9ac1b9ef5d7e652da4ab22821167b9ceb57e) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - refactor: remove obsolete old translation data
+
+- [#47](https://github.com/Robot-Inventor/payload-passkey/pull/47) [`106d07c`](https://github.com/Robot-Inventor/payload-passkey/commit/106d07cbd14ea02b3ba04832a0deddeb19685bc4) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: warn if `emailVerified` already exists
+
+- [#50](https://github.com/Robot-Inventor/payload-passkey/pull/50) [`377d2e2`](https://github.com/Robot-Inventor/payload-passkey/commit/377d2e254f0178a47d34d4a413996f801fe6a18d) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: precompile React components with React Compiler
+
 ## 0.3.0
 
 ### Minor Changes
