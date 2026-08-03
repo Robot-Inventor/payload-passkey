@@ -1,3 +1,5 @@
 {
-    "extends": "@robot-inventor/tsconfig-base/next.json"
+    "extends": "@robot-inventor/tsconfig-base/next.json",
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
 }

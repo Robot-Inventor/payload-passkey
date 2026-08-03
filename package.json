@@ -47,6 +47,7 @@
   "scripts": {
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
+    "test": "vitest run",
     "lint": "tsc --noEmit && knip && eslint \"./src/**/*.{ts,tsx}\"",
     "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs/api --cleanOutputDir --excludePrivate --includeVersion --readme none ./src/index.ts",
     "build": "tsdown",
@@ -63,19 +64,22 @@
     "@changesets/cli": "^2.31.1",
     "@robot-inventor/eslint-config": "^13.0.2",
     "@robot-inventor/tsconfig-base": "^7.1.0",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.18",
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/rollup-plugin": "^1.5.4",
     "eslint": "^10.8.0",
     "jiti": "^2.7.0",
     "knip": "^6.31.0",
+    "linkedom": "^0.18.13",
     "prettier": "^3.9.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tsdown": "^0.22.14",
     "typedoc": "^0.28.20",
     "typedoc-plugin-markdown": "^4.12.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@payloadcms/translations": ">=3.69.0 <4",
