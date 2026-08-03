@@ -3,30 +3,30 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations";
 const nb = {
     passkeyPlugin: {
         loginButton: {
-            or: "eller",
-            failedToLogin: "Kunne ikke logge på med en passnøkkel.",
+            or: "Eller",
+            failedToLogin: "Kunne ikke logge inn med en passnøkkel.",
             notAllowed: "Passnøkkeloperasjonen ble avbrutt eller er ikke tillatt.",
-            loginWithPasskey: "Logg på med en passnøkkel"
+            loginWithPasskey: "Logg inn med en passnøkkel"
         },
         managementClient: {
             failedToLoad: "Kunne ikke laste inn passnøkler.",
             failedToRegister: "Kunne ikke registrere passnøkkelen.",
             successfullyRegistered: "Passnøkkelen ble registrert.",
-            notAllowed: "Registreringen av passnøkkelen ble avbrutt eller er ikke tillatt.",
+            notAllowed: "Passnøkkeloperasjonen ble avbrutt eller er ikke tillatt.",
             alreadyRegistered: "Denne passnøkkelen er allerede registrert.",
             confirmDelete: {
-                heading: "Vil du slette denne passnøkkelen?",
-                body: "Du er i ferd med å slette passnøkkelen «{{name}}». Denne handlingen kan ikke angres."
+                heading: "Bekreft sletting",
+                body: "Du er i ferd med å slette passnøkkel {{name}}. Er du sikker?"
             },
             failedToDelete: "Kunne ikke slette passnøkkelen.",
             successfullyDeleted: "Passnøkkelen ble slettet.",
-            addPasskey: "Legg til en passnøkkel",
+            addPasskey: "Legg til passnøkkel",
             passkeyName: "Navn (valgfritt)",
             register: "Registrer",
             registering: "Registrerer...",
             cancel: "Avbryt",
             unknownAuthenticator: "Ukjent godkjenner",
-            createdAt: "Opprettet: ",
+            createdAt: "Opprettet:",
             delete: "Slett",
             deleting: "Sletter...",
             notFound: "Fant ingen registrerte passnøkler."
@@ -36,7 +36,7 @@ const nb = {
             ownPasskeysOnly: "Du kan bare administrere dine egne passnøkler.",
             preparingManagement: "Forbereder passnøkkeladministrasjon...",
             failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg inn igjen.",
-            reauthenticationRequired: "Logg inn igjen for å administrere passnøkler.",
+            reauthenticationRequired: "For din egen sikkerhet, logg inn igjen for å administrere passnøkler.",
             reauthenticate: "Logg inn igjen"
         }
     }

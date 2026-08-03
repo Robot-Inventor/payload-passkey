@@ -3,7 +3,7 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations";
 const sk = {
     passkeyPlugin: {
         loginButton: {
-            or: "alebo",
+            or: "Alebo",
             failedToLogin: "Prihlásenie pomocou prístupového kľúča zlyhalo.",
             notAllowed: "Operácia s prístupovým kľúčom bola zrušená alebo nie je povolená.",
             loginWithPasskey: "Prihlásiť sa pomocou prístupového kľúča"
@@ -12,23 +12,23 @@ const sk = {
             failedToLoad: "Prístupové kľúče sa nepodarilo načítať.",
             failedToRegister: "Prístupový kľúč sa nepodarilo zaregistrovať.",
             successfullyRegistered: "Prístupový kľúč bol úspešne zaregistrovaný.",
-            notAllowed: "Registrácia prístupového kľúča bola zrušená alebo nie je povolená.",
+            notAllowed: "Operácia s prístupovým kľúčom bola zrušená alebo nie je povolená.",
             alreadyRegistered: "Tento prístupový kľúč je už zaregistrovaný.",
             confirmDelete: {
-                heading: "Odstrániť tento prístupový kľúč?",
-                body: "Chystáte sa odstrániť prístupový kľúč „{{name}}“. Túto akciu nemožno vrátiť späť."
+                heading: "Potvrdiť odstránenie",
+                body: "Chystáte sa odstrániť prístupový kľúč {{name}}. Ste si istí?"
             },
             failedToDelete: "Prístupový kľúč sa nepodarilo odstrániť.",
             successfullyDeleted: "Prístupový kľúč bol úspešne odstránený.",
             addPasskey: "Pridať prístupový kľúč",
-            passkeyName: "Názov (voliteľné)",
+            passkeyName: "Meno (voliteľné)",
             register: "Registrovať",
             registering: "Registruje sa...",
             cancel: "Zrušiť",
             unknownAuthenticator: "Neznámy autentifikátor",
-            createdAt: "Vytvorené: ",
+            createdAt: "Vytvorené v:",
             delete: "Odstrániť",
-            deleting: "Odstraňuje sa...",
+            deleting: "Odstraňovanie...",
             notFound: "Nenašli sa žiadne zaregistrované prístupové kľúče."
         },
         managementField: {
@@ -36,7 +36,8 @@ const sk = {
             ownPasskeysOnly: "Spravovať môžete iba vlastné prístupové kľúče.",
             preparingManagement: "Pripravuje sa správa prístupových kľúčov...",
             failedToManage: "Správu prístupových kľúčov sa nepodarilo spustiť. Znovu sa prihláste.",
-            reauthenticationRequired: "Ak chcete spravovať prístupové kľúče, znovu sa prihláste.",
+            reauthenticationRequired:
+                "Z bezpečnostných dôvodov sa znovu prihláste, aby ste mohli spravovať prístupové kľúče.",
             reauthenticate: "Znovu sa prihlásiť"
         }
     }

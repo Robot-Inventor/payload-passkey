@@ -3,32 +3,32 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations";
 const it = {
     passkeyPlugin: {
         loginButton: {
-            or: "oppure",
+            or: "Oppure",
             failedToLogin: "Accesso con una passkey non riuscito.",
             notAllowed: "L'operazione della passkey è stata annullata o non è consentita.",
-            loginWithPasskey: "Accedi con una passkey"
+            loginWithPasskey: "Login con una passkey"
         },
         managementClient: {
             failedToLoad: "Caricamento delle passkey non riuscito.",
             failedToRegister: "Registrazione della passkey non riuscita.",
             successfullyRegistered: "Passkey registrata correttamente.",
-            notAllowed: "La registrazione della passkey è stata annullata o non è consentita.",
+            notAllowed: "L'operazione della passkey è stata annullata o non è consentita.",
             alreadyRegistered: "Questa passkey è già registrata.",
             confirmDelete: {
-                heading: "Eliminare questa passkey?",
-                body: "Stai per eliminare la passkey «{{name}}». Questa azione non può essere annullata."
+                heading: "Conferma l'eliminazione",
+                body: "Stai per eliminare passkey {{name}}. Sei sicuro?"
             },
             failedToDelete: "Eliminazione della passkey non riuscita.",
             successfullyDeleted: "Passkey eliminata correttamente.",
-            addPasskey: "Aggiungi una passkey",
+            addPasskey: "Aggiungi Passkey",
             passkeyName: "Nome (facoltativo)",
             register: "Registra",
             registering: "Registrazione...",
-            cancel: "Annulla",
+            cancel: "Cancella",
             unknownAuthenticator: "Autenticatore sconosciuto",
-            createdAt: "Creata: ",
+            createdAt: "Creato il:",
             delete: "Elimina",
-            deleting: "Eliminazione...",
+            deleting: "Sto eliminando...",
             notFound: "Nessuna passkey registrata trovata."
         },
         managementField: {
@@ -36,7 +36,7 @@ const it = {
             ownPasskeysOnly: "Puoi gestire solo le tue passkey.",
             preparingManagement: "Preparazione della gestione delle passkey...",
             failedToManage: "Impossibile avviare la gestione delle passkey. Vai al Log in.",
-            reauthenticationRequired: "Vai al Log in per gestire le passkey.",
+            reauthenticationRequired: "Per la tua sicurezza, vai al Log in per gestire le passkey.",
             reauthenticate: "Vai al Log in"
         }
     }

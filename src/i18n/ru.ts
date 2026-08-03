@@ -3,7 +3,7 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations";
 const ru = {
     passkeyPlugin: {
         loginButton: {
-            or: "или",
+            or: "Или же",
             failedToLogin: "Не удалось войти с помощью ключа доступа.",
             notAllowed: "Операция с ключом доступа отменена или не разрешена.",
             loginWithPasskey: "Войти с помощью ключа доступа"
@@ -12,11 +12,11 @@ const ru = {
             failedToLoad: "Не удалось загрузить ключи доступа.",
             failedToRegister: "Не удалось зарегистрировать ключ доступа.",
             successfullyRegistered: "Ключ доступа успешно зарегистрирован.",
-            notAllowed: "Регистрация ключа доступа отменена или не разрешена.",
+            notAllowed: "Операция с ключом доступа отменена или не разрешена.",
             alreadyRegistered: "Этот ключ доступа уже зарегистрирован.",
             confirmDelete: {
-                heading: "Удалить этот ключ доступа?",
-                body: "Вы собираетесь удалить ключ доступа «{{name}}». Это действие нельзя отменить."
+                heading: "Подтвердить удаление",
+                body: "Вы собираетесь удалить ключ доступа {{name}}. Вы уверены?"
             },
             failedToDelete: "Не удалось удалить ключ доступа.",
             successfullyDeleted: "Ключ доступа успешно удален.",
@@ -26,7 +26,7 @@ const ru = {
             registering: "Регистрация...",
             cancel: "Отмена",
             unknownAuthenticator: "Неизвестный аутентификатор",
-            createdAt: "Создан: ",
+            createdAt: "Дата создания:",
             delete: "Удалить",
             deleting: "Удаление...",
             notFound: "Зарегистрированные ключи доступа не найдены."
@@ -36,7 +36,7 @@ const ru = {
             ownPasskeysOnly: "Вы можете управлять только своими ключами доступа.",
             preparingManagement: "Подготовка управления ключами доступа...",
             failedToManage: "Не удалось начать управление ключами доступа. Войдите снова.",
-            reauthenticationRequired: "Войдите снова, чтобы управлять ключами доступа.",
+            reauthenticationRequired: "В целях вашей безопасности войдите снова, чтобы управлять ключами доступа.",
             reauthenticate: "Войти снова"
         }
     }

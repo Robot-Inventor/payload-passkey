@@ -208,7 +208,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                         <div key={passkeyItem.id} className={passkeyItemStyles}>
                             <div>{formatPasskeyName(passkeyItem)}</div>
                             <p className={mergeClassNames("field-description", passkeyItemDateStyles)}>
-                                {t("passkeyPlugin:managementClient:createdAt")}
+                                {t("passkeyPlugin:managementClient:createdAt")}{" "}
                                 <time dateTime={passkeyItem.createdAt.toISOString()} suppressHydrationWarning>
                                     {dateFormatter.format(passkeyItem.createdAt)}
                                 </time>
