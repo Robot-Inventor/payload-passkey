@@ -37,7 +37,7 @@ const cs = {
             preparingManagement: "Připravuje se správa přístupových klíčů...",
             failedToManage: "Správu přístupových klíčů se nepodařilo spustit. Přihlaste se znovu.",
             reauthenticationRequired: "Chcete-li spravovat přístupové klíče, přihlaste se znovu.",
-            reauthenticate: "Přihlásit se znovu"
+            reauthenticate: "Znovu se přihlásit"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Odhlášení se nezdařilo: {{message}}",

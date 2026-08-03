@@ -35,9 +35,9 @@ const id = {
             passkey: "Kunci sandi",
             ownPasskeysOnly: "Anda hanya dapat mengelola kunci sandi milik Anda sendiri.",
             preparingManagement: "Menyiapkan pengelolaan kunci sandi...",
-            failedToManage: "Tidak dapat memulai pengelolaan kunci sandi. Silakan masuk lagi.",
-            reauthenticationRequired: "Silakan masuk lagi untuk mengelola kunci sandi.",
-            reauthenticate: "Masuk lagi"
+            failedToManage: "Tidak dapat memulai pengelolaan kunci sandi. Silakan masuk kembali.",
+            reauthenticationRequired: "Silakan masuk kembali untuk mengelola kunci sandi.",
+            reauthenticate: "Masuk kembali"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Gagal keluar: {{message}}",

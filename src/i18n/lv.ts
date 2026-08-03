@@ -35,9 +35,9 @@ const lv = {
             passkey: "Piekļuves atslēga",
             ownPasskeysOnly: "Varat pārvaldīt tikai savas piekļuves atslēgas.",
             preparingManagement: "Notiek piekļuves atslēgu pārvaldības sagatavošana...",
-            failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pierakstieties vēlreiz.",
-            reauthenticationRequired: "Lai pārvaldītu piekļuves atslēgas, pierakstieties vēlreiz.",
-            reauthenticate: "Pierakstīties vēlreiz"
+            failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pieslēdzieties atkārtoti.",
+            reauthenticationRequired: "Lai pārvaldītu piekļuves atslēgas, pieslēdzieties atkārtoti.",
+            reauthenticate: "Pieslēgties atkārtoti"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Neizdevās izrakstīties: {{message}}",

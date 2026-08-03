@@ -37,7 +37,7 @@ const rsLatin = {
             preparingManagement: "Priprema se upravljanje ključevima za pristup...",
             failedToManage: "Upravljanje ključevima za pristup nije moguće pokrenuti. Prijavite se ponovo.",
             reauthenticationRequired: "Prijavite se ponovo da biste upravljali ključevima za pristup.",
-            reauthenticate: "Prijavite se ponovo"
+            reauthenticate: "Ponovna prijava"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Odjavljivanje nije uspelo: {{message}}",

@@ -37,7 +37,7 @@ const hu = {
             preparingManagement: "A hozzáférési kulcsok kezelése előkészítés alatt...",
             failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra.",
             reauthenticationRequired: "Jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
-            reauthenticate: "Bejelentkezés újra"
+            reauthenticate: "Jelentkezzen be újra"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Nem sikerült kijelentkezni: {{message}}",

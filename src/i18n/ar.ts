@@ -35,9 +35,9 @@ const ar = {
             passkey: "مفتاح مرور",
             ownPasskeysOnly: "يمكنك إدارة مفاتيح المرور الخاصة بك فقط.",
             preparingManagement: "جارٍ تجهيز إدارة مفاتيح المرور...",
-            failedToManage: "تعذّر بدء إدارة مفاتيح المرور. يُرجى تسجيل الدخول مرة أخرى.",
-            reauthenticationRequired: "يُرجى تسجيل الدخول مرة أخرى لإدارة مفاتيح المرور.",
-            reauthenticate: "تسجيل الدخول مرة أخرى"
+            failedToManage: "تعذّر بدء إدارة مفاتيح المرور. يُرجى تسجيل الدّخول من جديد.",
+            reauthenticationRequired: "يُرجى تسجيل الدّخول من جديد لإدارة مفاتيح المرور.",
+            reauthenticate: "تسجيل الدّخول من جديد"
         },
         logoutButton: {
             failedToLogoutWithMessage: "تعذّر تسجيل الخروج: {{message}}",

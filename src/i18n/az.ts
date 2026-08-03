@@ -37,7 +37,7 @@ const az = {
             preparingManagement: "Keçid açarlarının idarə edilməsi hazırlanır...",
             failedToManage: "Keçid açarlarının idarə edilməsinə başlamaq mümkün olmadı. Yenidən daxil olun.",
             reauthenticationRequired: "Keçid açarlarını idarə etmək üçün yenidən daxil olun.",
-            reauthenticate: "Yenidən daxil olun"
+            reauthenticate: "Yenidən daxil ol"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Çıxış etmək mümkün olmadı: {{message}}",

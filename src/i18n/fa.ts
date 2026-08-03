@@ -37,7 +37,7 @@ const fa = {
             preparingManagement: "در حال آماده‌سازی مدیریت کلید دسترسی...",
             failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید.",
             reauthenticationRequired: "برای مدیریت کلیدهای دسترسی، دوباره وارد شوید.",
-            reauthenticate: "ورود دوباره"
+            reauthenticate: "دوباره وارد شوید"
         },
         logoutButton: {
             failedToLogoutWithMessage: "خروج ناموفق بود: {{message}}",

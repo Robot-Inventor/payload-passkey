@@ -35,9 +35,9 @@ const tr = {
             passkey: "Geçiş anahtarı",
             ownPasskeysOnly: "Yalnızca kendi geçiş anahtarlarınızı yönetebilirsiniz.",
             preparingManagement: "Geçiş anahtarı yönetimi hazırlanıyor...",
-            failedToManage: "Geçiş anahtarı yönetimi başlatılamadı. Lütfen yeniden oturum açın.",
-            reauthenticationRequired: "Geçiş anahtarlarını yönetmek için yeniden oturum açın.",
-            reauthenticate: "Yeniden oturum aç"
+            failedToManage: "Geçiş anahtarı yönetimi başlatılamadı. Lütfen tekrar giriş yapın.",
+            reauthenticationRequired: "Geçiş anahtarlarını yönetmek için tekrar giriş yapın.",
+            reauthenticate: "Tekrar giriş yapın"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Oturum kapatılamadı: {{message}}",

@@ -35,9 +35,9 @@ const ca = {
             passkey: "Clau d'accés",
             ownPasskeysOnly: "Només pots gestionar les teves pròpies claus d'accés.",
             preparingManagement: "S'està preparant la gestió de les claus d'accés...",
-            failedToManage: "No s'ha pogut iniciar la gestió de les claus d'accés. Torna a iniciar la sessió.",
-            reauthenticationRequired: "Torna a iniciar la sessió per gestionar les claus d'accés.",
-            reauthenticate: "Torna a iniciar la sessió"
+            failedToManage: "No s'ha pogut iniciar la gestió de les claus d'accés. Torna a iniciar sessió.",
+            reauthenticationRequired: "Torna a iniciar sessió per gestionar les claus d'accés.",
+            reauthenticate: "Tornar a iniciar sessió"
         },
         logoutButton: {
             failedToLogoutWithMessage: "No s'ha pogut tancar la sessió: {{message}}",

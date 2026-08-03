@@ -37,7 +37,7 @@ const bg = {
             preparingManagement: "Подготвя се управлението на ключовете за достъп...",
             failedToManage: "Управлението на ключовете за достъп не можа да започне. Влезте отново.",
             reauthenticationRequired: "Моля, влезте отново, за да управлявате ключовете за достъп.",
-            reauthenticate: "Влезте отново"
+            reauthenticate: "Влез обратно"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Излизането не бе успешно: {{message}}",

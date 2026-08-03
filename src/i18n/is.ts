@@ -37,7 +37,7 @@ const is = {
             preparingManagement: "Undirbý stjórnun aðgangslykla...",
             failedToManage: "Ekki tókst að hefja stjórnun aðgangslykla. Skráðu þig inn aftur.",
             reauthenticationRequired: "Skráðu þig inn aftur til að stjórna aðgangslykklum.",
-            reauthenticate: "Skrá inn aftur"
+            reauthenticate: "Innskrá aftur"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Ekki tókst að skrá út: {{message}}",

@@ -37,7 +37,7 @@ const he = {
             preparingManagement: "מכין את ניהול מפתחות הגישה...",
             failedToManage: "לא ניתן להתחיל את ניהול מפתחות הגישה. יש להתחבר שוב.",
             reauthenticationRequired: "יש להתחבר שוב כדי לנהל מפתחות גישה.",
-            reauthenticate: "התחבר שוב"
+            reauthenticate: "התחברות מחדש"
         },
         logoutButton: {
             failedToLogoutWithMessage: "ההתנתקות נכשלה: {{message}}",

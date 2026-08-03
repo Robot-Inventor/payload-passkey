@@ -37,7 +37,7 @@ const rs = {
             preparingManagement: "Припрема се управљање кључевима за приступ...",
             failedToManage: "Није могуће покренути управљање кључевима за приступ. Пријавите се поново.",
             reauthenticationRequired: "Пријавите се поново да бисте управљали кључевима за приступ.",
-            reauthenticate: "Пријавите се поново"
+            reauthenticate: "Поновна пријава"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Одјављивање није успело: {{message}}",

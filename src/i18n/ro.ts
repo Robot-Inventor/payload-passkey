@@ -35,9 +35,9 @@ const ro = {
             passkey: "Cheie de acces",
             ownPasskeysOnly: "Puteți gestiona doar propriile chei de acces.",
             preparingManagement: "Se pregătește gestionarea cheilor de acces...",
-            failedToManage: "Gestionarea cheilor de acces nu a putut fi pornită. Conectați-vă din nou.",
-            reauthenticationRequired: "Conectați-vă din nou pentru a gestiona cheile de acces.",
-            reauthenticate: "Conectați-vă din nou"
+            failedToManage: "Gestionarea cheilor de acces nu a putut fi pornită. Autentificați-vă din nou.",
+            reauthenticationRequired: "Autentificați-vă din nou pentru a gestiona cheile de acces.",
+            reauthenticate: "Autentificați-vă din nou"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Deconectarea a eșuat: {{message}}",

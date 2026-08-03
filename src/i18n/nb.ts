@@ -35,9 +35,9 @@ const nb = {
             passkey: "Passnøkkel",
             ownPasskeysOnly: "Du kan bare administrere dine egne passnøkler.",
             preparingManagement: "Forbereder passnøkkeladministrasjon...",
-            failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg på på nytt.",
-            reauthenticationRequired: "Logg på igjen for å administrere passnøkler.",
-            reauthenticate: "Logg på igjen"
+            failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg inn igjen.",
+            reauthenticationRequired: "Logg inn igjen for å administrere passnøkler.",
+            reauthenticate: "Logg inn igjen"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Kunne ikke logge av: {{message}}",
