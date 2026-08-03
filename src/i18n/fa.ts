@@ -12,11 +12,11 @@ const fa = {
             failedToLoad: "بارگیری کلیدهای دسترسی ناموفق بود.",
             failedToRegister: "ثبت کلید دسترسی ناموفق بود.",
             successfullyRegistered: "کلید دسترسی با موفقیت ثبت شد.",
-            notAllowed: "ثبت کلید دسترسی لغو شد یا مجاز نیست.",
+            notAllowed: "عملیات کلید دسترسی لغو شد یا مجاز نیست.",
             alreadyRegistered: "این کلید دسترسی قبلاً ثبت شده است.",
             confirmDelete: {
-                heading: "این کلید دسترسی حذف شود؟",
-                body: "در حال حذف کلید دسترسی «{{name}}» هستید. این کار قابل بازگشت نیست."
+                heading: "تأیید حذف",
+                body: 'آیا از حذف کلید دسترسی "{{name}}" مطمئن هستید؟'
             },
             failedToDelete: "حذف کلید دسترسی ناموفق بود.",
             successfullyDeleted: "کلید دسترسی با موفقیت حذف شد.",
@@ -24,9 +24,9 @@ const fa = {
             passkeyName: "نام (اختیاری)",
             register: "ثبت",
             registering: "در حال ثبت...",
-            cancel: "لغو",
+            cancel: "انصراف",
             unknownAuthenticator: "احرازکننده ناشناخته",
-            createdAt: "ایجادشده در: ",
+            createdAt: "تاریخ ایجاد:",
             delete: "حذف",
             deleting: "در حال حذف...",
             notFound: "کلید دسترسی ثبت‌شده‌ای پیدا نشد."
@@ -36,7 +36,7 @@ const fa = {
             ownPasskeysOnly: "فقط می‌توانید کلیدهای دسترسی خودتان را مدیریت کنید.",
             preparingManagement: "در حال آماده‌سازی مدیریت کلید دسترسی...",
             failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید.",
-            reauthenticationRequired: "برای مدیریت کلیدهای دسترسی، دوباره وارد شوید.",
+            reauthenticationRequired: "برای امنیت، لطفاً برای مدیریت کلیدهای دسترسی دوباره وارد شوید.",
             reauthenticate: "دوباره وارد شوید"
         }
     }

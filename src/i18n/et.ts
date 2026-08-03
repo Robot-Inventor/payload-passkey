@@ -3,7 +3,7 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
 const et = {
     passkeyPlugin: {
         loginButton: {
-            or: "või",
+            or: "Või",
             failedToLogin: "Sisselogimine pääsuvõtmega nurjus.",
             notAllowed: "Pääsuvõtme toiming tühistati või pole lubatud.",
             loginWithPasskey: "Logi sisse pääsuvõtmega"
@@ -12,11 +12,11 @@ const et = {
             failedToLoad: "Pääsuvõtmeid ei saanud laadida.",
             failedToRegister: "Pääsuvõtit ei saanud registreerida.",
             successfullyRegistered: "Pääsuvõti registreeriti edukalt.",
-            notAllowed: "Pääsuvõtme registreerimine tühistati või pole lubatud.",
+            notAllowed: "Pääsuvõtme toiming tühistati või pole lubatud.",
             alreadyRegistered: "See pääsuvõti on juba registreeritud.",
             confirmDelete: {
-                heading: "Kas kustutada see pääsuvõti?",
-                body: "Oled kustutamas pääsuvõtit „{{name}}“. Seda toimingut ei saa tagasi võtta."
+                heading: "Kinnita kustutamine",
+                body: "Olete kustutamas pääsuvõti {{name}}. Olete kindel?"
             },
             failedToDelete: "Pääsuvõtit ei saanud kustutada.",
             successfullyDeleted: "Pääsuvõti kustutati edukalt.",
@@ -24,9 +24,9 @@ const et = {
             passkeyName: "Nimi (valikuline)",
             register: "Registreeri",
             registering: "Registreerimine...",
-            cancel: "Loobu",
+            cancel: "Tühista",
             unknownAuthenticator: "Tundmatu autentija",
-            createdAt: "Loodud: ",
+            createdAt: "Loomisaeg:",
             delete: "Kustuta",
             deleting: "Kustutamine...",
             notFound: "Registreeritud pääsuvõtmeid ei leitud."
@@ -36,7 +36,7 @@ const et = {
             ownPasskeysOnly: "Saad hallata ainult enda pääsuvõtmeid.",
             preparingManagement: "Pääsuvõtmete haldust valmistatakse ette...",
             failedToManage: "Pääsuvõtmete haldust ei saanud käivitada. Logi uuesti sisse.",
-            reauthenticationRequired: "Logige pääsuvõtmete haldamiseks uuesti sisse.",
+            reauthenticationRequired: "Teie turvalisuse huvides logige pääsuvõtmete haldamiseks uuesti sisse.",
             reauthenticate: "Logi uuesti sisse"
         }
     }

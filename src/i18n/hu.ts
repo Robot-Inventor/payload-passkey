@@ -3,7 +3,7 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
 const hu = {
     passkeyPlugin: {
         loginButton: {
-            or: "vagy",
+            or: "Vagy",
             failedToLogin: "Nem sikerült bejelentkezni hozzáférési kulccsal.",
             notAllowed: "A hozzáférési kulcs műveletét megszakították, vagy az nem engedélyezett.",
             loginWithPasskey: "Bejelentkezés hozzáférési kulccsal"
@@ -12,11 +12,11 @@ const hu = {
             failedToLoad: "Nem sikerült betölteni a hozzáférési kulcsokat.",
             failedToRegister: "Nem sikerült regisztrálni a hozzáférési kulcsot.",
             successfullyRegistered: "A hozzáférési kulcs regisztrálása sikerült.",
-            notAllowed: "A hozzáférési kulcs regisztrációját megszakították, vagy az nem engedélyezett.",
+            notAllowed: "A hozzáférési kulcs műveletét megszakították, vagy az nem engedélyezett.",
             alreadyRegistered: "Ez a hozzáférési kulcs már regisztrálva van.",
             confirmDelete: {
-                heading: "Törli ezt a hozzáférési kulcsot?",
-                body: "A(z) „{{name}}” hozzáférési kulcs törlésére készül. Ez a művelet nem vonható vissza."
+                heading: "Törlés megerősítése",
+                body: "A hozzáférési kulcs {{name}} törlésére készül. Biztos benne?"
             },
             failedToDelete: "Nem sikerült törölni a hozzáférési kulcsot.",
             successfullyDeleted: "A hozzáférési kulcs törlése sikerült.",
@@ -24,9 +24,9 @@ const hu = {
             passkeyName: "Név (nem kötelező)",
             register: "Regisztrálás",
             registering: "Regisztrálás...",
-            cancel: "Mégse",
+            cancel: "Mégsem",
             unknownAuthenticator: "Ismeretlen hitelesítő",
-            createdAt: "Létrehozva: ",
+            createdAt: "Létrehozva:",
             delete: "Törlés",
             deleting: "Törlés...",
             notFound: "Nem találhatók regisztrált hozzáférési kulcsok."
@@ -36,7 +36,7 @@ const hu = {
             ownPasskeysOnly: "Csak a saját hozzáférési kulcsait kezelheti.",
             preparingManagement: "A hozzáférési kulcsok kezelése előkészítés alatt...",
             failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra.",
-            reauthenticationRequired: "Jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
+            reauthenticationRequired: "Saját biztonsága érdekében jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
             reauthenticate: "Jelentkezzen be újra"
         }
     }

@@ -12,23 +12,23 @@ const ar = {
             failedToLoad: "تعذّر تحميل مفاتيح المرور.",
             failedToRegister: "تعذّر تسجيل مفتاح المرور.",
             successfullyRegistered: "تم تسجيل مفتاح المرور بنجاح.",
-            notAllowed: "تم إلغاء عملية تسجيل مفتاح المرور أو لم يُسمح بها.",
+            notAllowed: "تم إلغاء عملية مفتاح المرور أو لم يُسمح بها.",
             alreadyRegistered: "مفتاح المرور هذا مسجّل بالفعل.",
             confirmDelete: {
-                heading: "حذف مفتاح المرور هذا؟",
-                body: "أنت على وشك حذف مفتاح المرور «{{name}}». لا يمكن التراجع عن هذا الإجراء."
+                heading: "تأكيد الحذف",
+                body: "أنت على وشك حذف مفتاح مرور {{name}}. هل أنت متأكّد؟"
             },
             failedToDelete: "تعذّر حذف مفتاح المرور.",
             successfullyDeleted: "تم حذف مفتاح المرور بنجاح.",
-            addPasskey: "إضافة مفتاح مرور",
-            passkeyName: "الاسم (اختياري)",
+            addPasskey: "أضف مفتاح مرور",
+            passkeyName: "اسم (اختياري)",
             register: "تسجيل",
             registering: "جارٍ التسجيل...",
             cancel: "إلغاء",
             unknownAuthenticator: "موثِّق غير معروف",
-            createdAt: "تاريخ الإنشاء: ",
+            createdAt: "تمّ الإنشاء في:",
             delete: "حذف",
-            deleting: "جارٍ الحذف...",
+            deleting: "يتمّ الحذف...",
             notFound: "لم يتم العثور على مفاتيح مرور مسجّلة."
         },
         managementField: {
@@ -36,7 +36,7 @@ const ar = {
             ownPasskeysOnly: "يمكنك إدارة مفاتيح المرور الخاصة بك فقط.",
             preparingManagement: "جارٍ تجهيز إدارة مفاتيح المرور...",
             failedToManage: "تعذّر بدء إدارة مفاتيح المرور. يُرجى تسجيل الدّخول من جديد.",
-            reauthenticationRequired: "يُرجى تسجيل الدّخول من جديد لإدارة مفاتيح المرور.",
+            reauthenticationRequired: "من أجل أمنك، يُرجى تسجيل الدّخول من جديد لإدارة مفاتيح المرور.",
             reauthenticate: "تسجيل الدّخول من جديد"
         }
     }

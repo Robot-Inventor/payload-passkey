@@ -12,11 +12,11 @@ const pl = {
             failedToLoad: "Nie udało się załadować kluczy dostępu.",
             failedToRegister: "Nie udało się zarejestrować klucza dostępu.",
             successfullyRegistered: "Klucz dostępu został zarejestrowany.",
-            notAllowed: "Rejestrowanie klucza dostępu zostało anulowane lub jest niedozwolone.",
+            notAllowed: "Operacja klucza dostępu została anulowana lub jest niedozwolona.",
             alreadyRegistered: "Ten klucz dostępu jest już zarejestrowany.",
             confirmDelete: {
-                heading: "Usunąć ten klucz dostępu?",
-                body: "Za chwilę usuniesz klucz dostępu „{{name}}”. Tej czynności nie można cofnąć."
+                heading: "Potwierdź usunięcie",
+                body: "Zamierzasz usunąć klucz dostępu {{name}}. Jesteś pewien?"
             },
             failedToDelete: "Nie udało się usunąć klucza dostępu.",
             successfullyDeleted: "Klucz dostępu został usunięty.",
@@ -26,7 +26,7 @@ const pl = {
             registering: "Rejestrowanie...",
             cancel: "Anuluj",
             unknownAuthenticator: "Nieznany uwierzytelniacz",
-            createdAt: "Utworzono: ",
+            createdAt: "Data utworzenia:",
             delete: "Usuń",
             deleting: "Usuwanie...",
             notFound: "Nie znaleziono zarejestrowanych kluczy dostępu."
@@ -36,7 +36,7 @@ const pl = {
             ownPasskeysOnly: "Możesz zarządzać tylko własnymi kluczami dostępu.",
             preparingManagement: "Przygotowywanie zarządzania kluczami dostępu...",
             failedToManage: "Nie można rozpocząć zarządzania kluczami dostępu. Zaloguj się ponownie.",
-            reauthenticationRequired: "Zaloguj się ponownie, aby zarządzać kluczami dostępu.",
+            reauthenticationRequired: "Dla własnego bezpieczeństwa zaloguj się ponownie, aby zarządzać kluczami dostępu.",
             reauthenticate: "Zaloguj się ponownie"
         }
     }

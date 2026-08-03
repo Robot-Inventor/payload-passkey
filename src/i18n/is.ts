@@ -3,7 +3,7 @@ import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
 const is = {
     passkeyPlugin: {
         loginButton: {
-            or: "eða",
+            or: "Eða",
             failedToLogin: "Ekki tókst að skrá inn með aðgangslykli.",
             notAllowed: "Aðgerð aðgangslykils var hætt við eða er ekki leyfð.",
             loginWithPasskey: "Skrá inn með aðgangslykli"
@@ -12,21 +12,21 @@ const is = {
             failedToLoad: "Ekki tókst að hlaða aðgangslyklum.",
             failedToRegister: "Ekki tókst að skrá aðgangslykil.",
             successfullyRegistered: "Aðgangslykill var skráður.",
-            notAllowed: "Skráningu aðgangslykils var hætt við eða hún er ekki leyfð.",
+            notAllowed: "Aðgerð aðgangslykils var hætt við eða er ekki leyfð.",
             alreadyRegistered: "Þessi aðgangslykill er þegar skráður.",
             confirmDelete: {
-                heading: "Eyða þessum aðgangslykli?",
-                body: "Þú ert að fara að eyða aðgangslyklinum „{{name}}“. Ekki er hægt að afturkalla þessa aðgerð."
+                heading: "Staðfesta eyðingu",
+                body: "Þú ert að fara að eyða Aðgangslykill {{name}}. Ertu viss?"
             },
             failedToDelete: "Ekki tókst að eyða aðgangslykli.",
             successfullyDeleted: "Aðgangslykill var eytt.",
-            addPasskey: "Bæta við aðgangslykli",
-            passkeyName: "Heiti (valfrjálst)",
+            addPasskey: "Bæta við Aðgangslykill",
+            passkeyName: "Nafn (valfrjálst)",
             register: "Skrá",
             registering: "Skrái...",
             cancel: "Hætta við",
             unknownAuthenticator: "Óþekkt auðkenningartæki",
-            createdAt: "Stofnað: ",
+            createdAt: "Nýskráð:",
             delete: "Eyða",
             deleting: "Eyði...",
             notFound: "Engir skráðir aðgangslyklar fundust."
@@ -36,7 +36,7 @@ const is = {
             ownPasskeysOnly: "Þú getur aðeins stjórnað þínum eigin aðgangslyklum.",
             preparingManagement: "Undirbý stjórnun aðgangslykla...",
             failedToManage: "Ekki tókst að hefja stjórnun aðgangslykla. Skráðu þig inn aftur.",
-            reauthenticationRequired: "Skráðu þig inn aftur til að stjórna aðgangslykklum.",
+            reauthenticationRequired: "Til öryggis skaltu skrá þig inn aftur til að stjórna aðgangslykklum.",
             reauthenticate: "Innskrá aftur"
         }
     }
