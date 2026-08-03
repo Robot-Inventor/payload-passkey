@@ -1,5 +1,5 @@
 import type { CollectionConfig, CollectionSlug, Config, Field } from "payload";
-import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants.js";
+import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants";
 
 const findFieldsByName = (fields: Field[], name: string): Field[] => {
     const matchingFields: Field[] = [];

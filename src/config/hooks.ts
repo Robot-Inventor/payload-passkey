@@ -1,6 +1,6 @@
 import type { CollectionAfterChangeHook, CollectionAfterLoginHook, CollectionAfterLogoutHook } from "payload";
 import type { PayloadWithAuth } from "@delmaredigital/payload-better-auth";
-import { revokeBetterAuthSessions } from "../auth/revokeBetterAuthSessions.js";
+import { revokeBetterAuthSessions } from "../auth/revokeBetterAuthSessions";
 
 interface UserWithTotpSecret {
     id: number | string;
