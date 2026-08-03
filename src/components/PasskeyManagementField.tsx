@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
+import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
 import { AUTH_ERROR_CODES } from "../constants";
@@ -48,11 +48,16 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const handleReauthenticate = async (): Promise<void> => {
-        await logOut();
+        try {
+            await logOut();
 
-        const returnTo = `${location.pathname}${window.location.search}#${PASSKEY_MANAGEMENT_ID}`;
-        const loginPath = `${config.admin.routes.login}?redirect=${encodeURIComponent(returnTo)}` as `/${string}`;
-        router.push(formatAdminURL({ adminRoute: config.routes.admin, path: loginPath }));
+            const returnTo = `${location.pathname}${window.location.search}#${PASSKEY_MANAGEMENT_ID}`;
+            const loginPath = `${config.admin.routes.login}?redirect=${encodeURIComponent(returnTo)}` as `/${string}`;
+            router.push(formatAdminURL({ adminRoute: config.routes.admin, path: loginPath }));
+            toast.success(t("authentication:loggedOutSuccessfully"));
+        } catch {
+            toast.error(t("error:logoutFailed"));
+        }
     };
 
     return (
