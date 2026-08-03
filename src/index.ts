@@ -130,7 +130,15 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                         );
                     }
 
-                    if (!existingField) {
+                    if (existingField) {
+                        if (field.name === emailVerifiedField.name) {
+                            // Field access functions can depend on request context and cannot be verified during config setup.
+                            // eslint-disable-next-line no-console
+                            console.warn(
+                                `[payload-passkey] The \`${collection.slug}\` collection already defines the \`${field.name}\` field. Its \`access.create\` and \`access.update\` settings must always return \`false\` to protect the email verification state.`
+                            );
+                        }
+                    } else {
                         collection.fields.push(field);
                     }
                 }
