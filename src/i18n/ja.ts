@@ -20,7 +20,7 @@ const ja = {
             },
             failedToDelete: "パスキーの削除に失敗しました。",
             successfullyDeleted: "パスキーの削除に成功しました。",
-            addPasskey: "パスキー を追加",
+            addPasskey: "パスキーを追加",
             passkeyName: "名前（省略可）",
             register: "登録",
             registering: "登録中...",
@@ -28,7 +28,7 @@ const ja = {
             unknownAuthenticator: "不明な認証アプリ",
             createdAt: "作成日：",
             delete: "削除",
-            deleting: "削除しています...",
+            deleting: "削除中...",
             notFound: "登録されたパスキーが見つかりませんでした。"
         },
         managementField: {
