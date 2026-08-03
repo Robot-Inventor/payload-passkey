@@ -38,11 +38,6 @@ const fa = {
             failedToManage: "شروع مدیریت کلید دسترسی ممکن نبود. دوباره وارد شوید.",
             reauthenticationRequired: "برای مدیریت کلیدهای دسترسی، دوباره وارد شوید.",
             reauthenticate: "دوباره وارد شوید"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "خروج ناموفق بود: {{message}}",
-            failedToLogout: "خروج ناموفق بود.",
-            logout: "خروج"
         }
     }
 } as const satisfies CustomTranslationsObject;

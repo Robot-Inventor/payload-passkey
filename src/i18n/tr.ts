@@ -38,11 +38,6 @@ const tr = {
             failedToManage: "Geçiş anahtarı yönetimi başlatılamadı. Lütfen tekrar giriş yapın.",
             reauthenticationRequired: "Geçiş anahtarlarını yönetmek için tekrar giriş yapın.",
             reauthenticate: "Tekrar giriş yapın"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Oturum kapatılamadı: {{message}}",
-            failedToLogout: "Oturum kapatılamadı.",
-            logout: "Oturumu kapat"
         }
     }
 } as const satisfies CustomTranslationsObject;

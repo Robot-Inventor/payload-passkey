@@ -38,11 +38,6 @@ const bg = {
             failedToManage: "Управлението на ключовете за достъп не можа да започне. Влезте отново.",
             reauthenticationRequired: "Моля, влезте отново, за да управлявате ключовете за достъп.",
             reauthenticate: "Влез обратно"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Излизането не бе успешно: {{message}}",
-            failedToLogout: "Излизането не бе успешно.",
-            logout: "Изход"
         }
     }
 } as const satisfies CustomTranslationsObject;

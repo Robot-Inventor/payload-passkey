@@ -38,11 +38,6 @@ const sv = {
             failedToManage: "Det gick inte att starta hanteringen av åtkomstnycklar. Logga in igen.",
             reauthenticationRequired: "Logga in igen för att hantera åtkomstnycklar.",
             reauthenticate: "Logga in igen"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Det gick inte att logga ut: {{message}}",
-            failedToLogout: "Det gick inte att logga ut.",
-            logout: "Logga ut"
         }
     }
 } as const satisfies CustomTranslationsObject;

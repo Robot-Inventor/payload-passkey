@@ -38,11 +38,6 @@ const ro = {
             failedToManage: "Gestionarea cheilor de acces nu a putut fi pornită. Autentificați-vă din nou.",
             reauthenticationRequired: "Autentificați-vă din nou pentru a gestiona cheile de acces.",
             reauthenticate: "Autentificați-vă din nou"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Deconectarea a eșuat: {{message}}",
-            failedToLogout: "Deconectarea a eșuat.",
-            logout: "Deconectare"
         }
     }
 } as const satisfies CustomTranslationsObject;

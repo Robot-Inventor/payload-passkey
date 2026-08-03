@@ -38,11 +38,6 @@ const es = {
             failedToManage: "No se ha podido iniciar la administración de claves de acceso. Vuelve a iniciar sesión.",
             reauthenticationRequired: "Vuelve a iniciar sesión para administrar las claves de acceso.",
             reauthenticate: "Volver a iniciar sesión"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "No se ha podido cerrar la sesión: {{message}}",
-            failedToLogout: "No se ha podido cerrar la sesión.",
-            logout: "Cerrar sesión"
         }
     }
 } as const satisfies CustomTranslationsObject;

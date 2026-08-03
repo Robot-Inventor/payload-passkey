@@ -38,11 +38,6 @@ const zh = {
             failedToManage: "无法开始通行密钥管理。请重新登入。",
             reauthenticationRequired: "请重新登入以管理通行密钥。",
             reauthenticate: "重新登入"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "无法注销：{{message}}",
-            failedToLogout: "无法注销。",
-            logout: "注销"
         }
     }
 } as const satisfies CustomTranslationsObject;

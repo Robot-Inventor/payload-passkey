@@ -38,11 +38,6 @@ const cs = {
             failedToManage: "Správu přístupových klíčů se nepodařilo spustit. Přihlaste se znovu.",
             reauthenticationRequired: "Chcete-li spravovat přístupové klíče, přihlaste se znovu.",
             reauthenticate: "Znovu se přihlásit"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odhlášení se nezdařilo: {{message}}",
-            failedToLogout: "Odhlášení se nezdařilo.",
-            logout: "Odhlásit se"
         }
     }
 } as const satisfies CustomTranslationsObject;

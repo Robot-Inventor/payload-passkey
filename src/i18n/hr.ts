@@ -38,11 +38,6 @@ const hr = {
             failedToManage: "Upravljanje pristupnim ključevima nije moguće pokrenuti. Ponovno se prijavite.",
             reauthenticationRequired: "Ponovno se prijavite za upravljanje pristupnim ključevima.",
             reauthenticate: "Ponovno se prijavite"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odjava nije uspjela: {{message}}",
-            failedToLogout: "Odjava nije uspjela.",
-            logout: "Odjava"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -38,11 +38,6 @@ const rsLatin = {
             failedToManage: "Upravljanje ključevima za pristup nije moguće pokrenuti. Prijavite se ponovo.",
             reauthenticationRequired: "Prijavite se ponovo da biste upravljali ključevima za pristup.",
             reauthenticate: "Ponovna prijava"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odjavljivanje nije uspelo: {{message}}",
-            failedToLogout: "Odjavljivanje nije uspelo.",
-            logout: "Odjavite se"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -38,11 +38,6 @@ const hy = {
             failedToManage: "Չհաջողվեց սկսել մուտքի բանալիների կառավարումը։ Կրկին մուտք գործեք։",
             reauthenticationRequired: "Մուտքի բանալիները կառավարելու համար կրկին մուտք գործեք։",
             reauthenticate: "Կրկին մուտք գործել"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Չհաջողվեց դուրս գալ՝ {{message}}",
-            failedToLogout: "Չհաջողվեց դուրս գալ։",
-            logout: "Դուրս գալ"
         }
     }
 } as const satisfies CustomTranslationsObject;

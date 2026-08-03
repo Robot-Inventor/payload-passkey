@@ -38,11 +38,6 @@ const id = {
             failedToManage: "Tidak dapat memulai pengelolaan kunci sandi. Silakan masuk kembali.",
             reauthenticationRequired: "Silakan masuk kembali untuk mengelola kunci sandi.",
             reauthenticate: "Masuk kembali"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Gagal keluar: {{message}}",
-            failedToLogout: "Gagal keluar.",
-            logout: "Keluar"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -38,11 +38,6 @@ const it = {
             failedToManage: "Impossibile avviare la gestione delle passkey. Vai al Log in.",
             reauthenticationRequired: "Vai al Log in per gestire le passkey.",
             reauthenticate: "Vai al Log in"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Disconnessione non riuscita: {{message}}",
-            failedToLogout: "Disconnessione non riuscita.",
-            logout: "Disconnetti"
         }
     }
 } as const satisfies CustomTranslationsObject;

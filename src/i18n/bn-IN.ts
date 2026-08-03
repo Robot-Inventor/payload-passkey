@@ -38,11 +38,6 @@ const bnIn = {
             failedToManage: "পাসকি পরিচালনা শুরু করা যায়নি। আবার লগইন করুন।",
             reauthenticationRequired: "পাসকি পরিচালনা করতে আবার লগইন করুন।",
             reauthenticate: "আবার লগইন করুন"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "লগ আউট করা যায়নি: {{message}}",
-            failedToLogout: "লগ আউট করা যায়নি।",
-            logout: "লগ আউট"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -38,11 +38,6 @@ const my = {
             failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ အကောင့်ထဲ ပြန်ဝင်မည်။",
             reauthenticationRequired: "Passkey များကို စီမံရန် အကောင့်ထဲ ပြန်ဝင်မည်။",
             reauthenticate: "အကောင့်ထဲ ပြန်ဝင်မည်။"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "အကောင့်မှထွက်ရန် မအောင်မြင်ပါ: {{message}}",
-            failedToLogout: "အကောင့်မှထွက်ရန် မအောင်မြင်ပါ။",
-            logout: "အကောင့်မှထွက်ရန်"
         }
     }
 } as const satisfies CustomTranslationsObject;

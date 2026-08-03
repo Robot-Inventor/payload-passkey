@@ -38,11 +38,6 @@ const lt = {
             failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite vėl.",
             reauthenticationRequired: "Norėdami tvarkyti prieigos raktus, prisijunkite vėl.",
             reauthenticate: "Prisijunkite vėl"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Nepavyko atsijungti: {{message}}",
-            failedToLogout: "Nepavyko atsijungti.",
-            logout: "Atsijungti"
         }
     }
 } as const satisfies CustomTranslationsObject;

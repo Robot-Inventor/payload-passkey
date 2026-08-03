@@ -38,11 +38,6 @@ const en = {
             failedToManage: "Could not start passkey management. Please login again.",
             reauthenticationRequired: "Please login again to manage passkeys.",
             reauthenticate: "Login again"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Failed to log out: {{message}}",
-            failedToLogout: "Failed to log out.",
-            logout: "Log out"
         }
     }
 } as const satisfies CustomTranslationsObject;

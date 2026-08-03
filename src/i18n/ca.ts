@@ -38,11 +38,6 @@ const ca = {
             failedToManage: "No s'ha pogut iniciar la gestió de les claus d'accés. Torna a iniciar sessió.",
             reauthenticationRequired: "Torna a iniciar sessió per gestionar les claus d'accés.",
             reauthenticate: "Tornar a iniciar sessió"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "No s'ha pogut tancar la sessió: {{message}}",
-            failedToLogout: "No s'ha pogut tancar la sessió.",
-            logout: "Tanca la sessió"
         }
     }
 } as const satisfies CustomTranslationsObject;

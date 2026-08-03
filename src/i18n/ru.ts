@@ -38,11 +38,6 @@ const ru = {
             failedToManage: "Не удалось начать управление ключами доступа. Войдите снова.",
             reauthenticationRequired: "Войдите снова, чтобы управлять ключами доступа.",
             reauthenticate: "Войти снова"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Не удалось выйти: {{message}}",
-            failedToLogout: "Не удалось выйти.",
-            logout: "Выйти"
         }
     }
 } as const satisfies CustomTranslationsObject;

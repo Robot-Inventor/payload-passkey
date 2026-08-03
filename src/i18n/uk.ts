@@ -38,11 +38,6 @@ const uk = {
             failedToManage: "Не вдалося почати керування ключами доступу. Увійдіть знову.",
             reauthenticationRequired: "Увійдіть знову, щоб керувати ключами доступу.",
             reauthenticate: "Увійти знову"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Не вдалося вийти: {{message}}",
-            failedToLogout: "Не вдалося вийти.",
-            logout: "Вийти"
         }
     }
 } as const satisfies CustomTranslationsObject;

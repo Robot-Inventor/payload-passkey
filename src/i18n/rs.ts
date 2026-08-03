@@ -38,11 +38,6 @@ const rs = {
             failedToManage: "Није могуће покренути управљање кључевима за приступ. Пријавите се поново.",
             reauthenticationRequired: "Пријавите се поново да бисте управљали кључевима за приступ.",
             reauthenticate: "Поновна пријава"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Одјављивање није успело: {{message}}",
-            failedToLogout: "Одјављивање није успело.",
-            logout: "Одјавите се"
         }
     }
 } as const satisfies CustomTranslationsObject;

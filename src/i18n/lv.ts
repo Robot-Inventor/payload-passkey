@@ -38,11 +38,6 @@ const lv = {
             failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pieslēdzieties atkārtoti.",
             reauthenticationRequired: "Lai pārvaldītu piekļuves atslēgas, pieslēdzieties atkārtoti.",
             reauthenticate: "Pieslēgties atkārtoti"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Neizdevās izrakstīties: {{message}}",
-            failedToLogout: "Neizdevās izrakstīties.",
-            logout: "Izrakstīties"
         }
     }
 } as const satisfies CustomTranslationsObject;

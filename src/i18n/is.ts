@@ -38,11 +38,6 @@ const is = {
             failedToManage: "Ekki tókst að hefja stjórnun aðgangslykla. Skráðu þig inn aftur.",
             reauthenticationRequired: "Skráðu þig inn aftur til að stjórna aðgangslykklum.",
             reauthenticate: "Innskrá aftur"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Ekki tókst að skrá út: {{message}}",
-            failedToLogout: "Ekki tókst að skrá út.",
-            logout: "Skrá út"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -40,11 +40,6 @@ interface CustomTranslationsObject {
             reauthenticationRequired: string;
             reauthenticate: string;
         };
-        logoutButton: {
-            failedToLogoutWithMessage: string;
-            failedToLogout: string;
-            logout: string;
-        };
     };
 }
 

@@ -38,11 +38,6 @@ const ko = {
             failedToManage: "패스키 관리를 시작할 수 없습니다. 다시 로그인하세요.",
             reauthenticationRequired: "패스키를 관리하려면 다시 로그인하세요.",
             reauthenticate: "다시 로그인"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "로그아웃하지 못했습니다: {{message}}",
-            failedToLogout: "로그아웃하지 못했습니다.",
-            logout: "로그아웃"
         }
     }
 } as const satisfies CustomTranslationsObject;

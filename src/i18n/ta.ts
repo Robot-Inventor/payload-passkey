@@ -38,11 +38,6 @@ const ta = {
             failedToManage: "பாஸ்கீ நிர்வாகத்தைத் தொடங்க முடியவில்லை. மீண்டும் உள்நுழையவும்.",
             reauthenticationRequired: "பாஸ்கீகளை நிர்வகிக்க மீண்டும் உள்நுழையவும்.",
             reauthenticate: "மீண்டும் உள்நுழைக"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "வெளியேற முடியவில்லை: {{message}}",
-            failedToLogout: "வெளியேற முடியவில்லை.",
-            logout: "வெளியேறு"
         }
     }
 } as const satisfies CustomTranslationsObject;

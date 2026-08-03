@@ -38,11 +38,6 @@ const ja = {
             failedToManage: "パスキー管理を開始できませんでした。再ログインしてください。",
             reauthenticationRequired: "パスキーを管理するには、セキュリティ保護のため再ログインしてください。",
             reauthenticate: "再ログイン"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ログアウトに失敗しました：{{message}}",
-            failedToLogout: "ログアウトに失敗しました。",
-            logout: "ログアウト"
         }
     }
 } as const satisfies CustomTranslationsObject;

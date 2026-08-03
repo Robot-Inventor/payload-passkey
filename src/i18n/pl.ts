@@ -38,11 +38,6 @@ const pl = {
             failedToManage: "Nie można rozpocząć zarządzania kluczami dostępu. Zaloguj się ponownie.",
             reauthenticationRequired: "Zaloguj się ponownie, aby zarządzać kluczami dostępu.",
             reauthenticate: "Zaloguj się ponownie"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Wylogowanie nie powiodło się: {{message}}",
-            failedToLogout: "Wylogowanie nie powiodło się.",
-            logout: "Wyloguj się"
         }
     }
 } as const satisfies CustomTranslationsObject;

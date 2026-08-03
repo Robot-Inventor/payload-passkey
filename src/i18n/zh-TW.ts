@@ -38,11 +38,6 @@ const zhTw = {
             failedToManage: "無法開始通行密鑰管理。請重新登入。",
             reauthenticationRequired: "請重新登入以管理通行密鑰。",
             reauthenticate: "重新登入"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "無法登出：{{message}}",
-            failedToLogout: "無法登出。",
-            logout: "登出"
         }
     }
 } as const satisfies CustomTranslationsObject;

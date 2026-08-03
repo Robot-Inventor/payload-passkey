@@ -38,11 +38,6 @@ const fr = {
             failedToManage: "Impossible de démarrer la gestion des clés d’accès. Veuillez vous reconnecter.",
             reauthenticationRequired: "Veuillez vous reconnecter pour gérer les clés d’accès.",
             reauthenticate: "Se reconnecter"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Échec de la déconnexion : {{message}}",
-            failedToLogout: "Échec de la déconnexion.",
-            logout: "Se déconnecter"
         }
     }
 } as const satisfies CustomTranslationsObject;

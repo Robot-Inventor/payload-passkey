@@ -38,11 +38,6 @@ const az = {
             failedToManage: "Keçid açarlarının idarə edilməsinə başlamaq mümkün olmadı. Yenidən daxil olun.",
             reauthenticationRequired: "Keçid açarlarını idarə etmək üçün yenidən daxil olun.",
             reauthenticate: "Yenidən daxil ol"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Çıxış etmək mümkün olmadı: {{message}}",
-            failedToLogout: "Çıxış etmək mümkün olmadı.",
-            logout: "Çıxış edin"
         }
     }
 } as const satisfies CustomTranslationsObject;

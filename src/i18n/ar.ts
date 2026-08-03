@@ -38,11 +38,6 @@ const ar = {
             failedToManage: "تعذّر بدء إدارة مفاتيح المرور. يُرجى تسجيل الدّخول من جديد.",
             reauthenticationRequired: "يُرجى تسجيل الدّخول من جديد لإدارة مفاتيح المرور.",
             reauthenticate: "تسجيل الدّخول من جديد"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "تعذّر تسجيل الخروج: {{message}}",
-            failedToLogout: "تعذّر تسجيل الخروج.",
-            logout: "تسجيل الخروج"
         }
     }
 } as const satisfies CustomTranslationsObject;

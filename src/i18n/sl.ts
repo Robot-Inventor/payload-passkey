@@ -38,11 +38,6 @@ const sl = {
             failedToManage: "Upravljanja ključev za dostop ni bilo mogoče začeti. Ponovno se prijavite.",
             reauthenticationRequired: "Za upravljanje ključev za dostop se ponovno prijavite.",
             reauthenticate: "Ponovno se prijavi"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odjava ni uspela: {{message}}",
-            failedToLogout: "Odjava ni uspela.",
-            logout: "Odjava"
         }
     }
 } as const satisfies CustomTranslationsObject;

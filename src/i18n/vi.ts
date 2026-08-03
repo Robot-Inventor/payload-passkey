@@ -38,11 +38,6 @@ const vi = {
             failedToManage: "Không thể bắt đầu quản lý passkey. Vui lòng đăng nhập lại.",
             reauthenticationRequired: "Vui lòng đăng nhập lại để quản lý passkey.",
             reauthenticate: "Đăng nhập lại"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Không thể đăng xuất: {{message}}",
-            failedToLogout: "Không thể đăng xuất.",
-            logout: "Đăng xuất"
         }
     }
 } as const satisfies CustomTranslationsObject;

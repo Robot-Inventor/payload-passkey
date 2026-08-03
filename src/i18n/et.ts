@@ -38,11 +38,6 @@ const et = {
             failedToManage: "Pääsuvõtmete haldust ei saanud käivitada. Logi uuesti sisse.",
             reauthenticationRequired: "Logige pääsuvõtmete haldamiseks uuesti sisse.",
             reauthenticate: "Logi uuesti sisse"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Väljalogimine nurjus: {{message}}",
-            failedToLogout: "Väljalogimine nurjus.",
-            logout: "Logi välja"
         }
     }
 } as const satisfies CustomTranslationsObject;

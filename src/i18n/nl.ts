@@ -38,11 +38,6 @@ const nl = {
             failedToManage: "Kan passkeybeheer niet starten. Log opnieuw in.",
             reauthenticationRequired: "Log opnieuw in om passkeys te beheren.",
             reauthenticate: "Opnieuw inloggen"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Afmelden mislukt: {{message}}",
-            failedToLogout: "Afmelden mislukt.",
-            logout: "Afmelden"
         }
     }
 } as const satisfies CustomTranslationsObject;

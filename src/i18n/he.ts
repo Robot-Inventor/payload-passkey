@@ -38,11 +38,6 @@ const he = {
             failedToManage: "לא ניתן להתחיל את ניהול מפתחות הגישה. יש להתחבר שוב.",
             reauthenticationRequired: "יש להתחבר שוב כדי לנהל מפתחות גישה.",
             reauthenticate: "התחברות מחדש"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ההתנתקות נכשלה: {{message}}",
-            failedToLogout: "ההתנתקות נכשלה.",
-            logout: "התנתקות"
         }
     }
 } as const satisfies CustomTranslationsObject;

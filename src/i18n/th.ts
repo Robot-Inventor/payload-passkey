@@ -38,11 +38,6 @@ const th = {
             failedToManage: "เริ่มการจัดการพาสคีย์ไม่ได้ โปรดเข้าสู่ระบบอีกครั้ง",
             reauthenticationRequired: "โปรดเข้าสู่ระบบอีกครั้งเพื่อจัดการพาสคีย์",
             reauthenticate: "เข้าสู่ระบบอีกครั้ง"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "ออกจากระบบไม่สำเร็จ: {{message}}",
-            failedToLogout: "ออกจากระบบไม่สำเร็จ",
-            logout: "ออกจากระบบ"
         }
     }
 } as const satisfies CustomTranslationsObject;

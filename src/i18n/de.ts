@@ -38,11 +38,6 @@ const de = {
             failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich wieder an.",
             reauthenticationRequired: "Melde dich wieder an, um Passkeys zu verwalten.",
             reauthenticate: "Wieder anmelden"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Abmeldung fehlgeschlagen: {{message}}",
-            failedToLogout: "Abmeldung fehlgeschlagen.",
-            logout: "Abmelden"
         }
     }
 } as const satisfies CustomTranslationsObject;

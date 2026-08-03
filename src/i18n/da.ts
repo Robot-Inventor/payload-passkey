@@ -38,11 +38,6 @@ const da = {
             failedToManage: "Administration af adgangsnøgler kunne ikke startes. Log på igen.",
             reauthenticationRequired: "Log på igen for at administrere adgangsnøgler.",
             reauthenticate: "Log på igen"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Kunne ikke logge af: {{message}}",
-            failedToLogout: "Kunne ikke logge af.",
-            logout: "Log af"
         }
     }
 } as const satisfies CustomTranslationsObject;

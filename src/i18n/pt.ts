@@ -38,11 +38,6 @@ const pt = {
             failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Faça login novamente.",
             reauthenticationRequired: "Faça login novamente para gerir as chaves de acesso.",
             reauthenticate: "Fazer login novamente"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Não foi possível terminar sessão: {{message}}",
-            failedToLogout: "Não foi possível terminar sessão.",
-            logout: "Terminar sessão"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -38,11 +38,6 @@ const hu = {
             failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra.",
             reauthenticationRequired: "Jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
             reauthenticate: "Jelentkezzen be újra"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Nem sikerült kijelentkezni: {{message}}",
-            failedToLogout: "Nem sikerült kijelentkezni.",
-            logout: "Kijelentkezés"
         }
     }
 } as const satisfies CustomTranslationsObject;

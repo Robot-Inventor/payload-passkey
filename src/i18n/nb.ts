@@ -38,11 +38,6 @@ const nb = {
             failedToManage: "Kunne ikke starte passnøkkeladministrasjon. Logg inn igjen.",
             reauthenticationRequired: "Logg inn igjen for å administrere passnøkler.",
             reauthenticate: "Logg inn igjen"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Kunne ikke logge av: {{message}}",
-            failedToLogout: "Kunne ikke logge av.",
-            logout: "Logg av"
         }
     }
 } as const satisfies CustomTranslationsObject;

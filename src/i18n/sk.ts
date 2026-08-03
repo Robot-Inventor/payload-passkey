@@ -38,11 +38,6 @@ const sk = {
             failedToManage: "Správu prístupových kľúčov sa nepodarilo spustiť. Znovu sa prihláste.",
             reauthenticationRequired: "Ak chcete spravovať prístupové kľúče, znovu sa prihláste.",
             reauthenticate: "Znovu sa prihlásiť"
-        },
-        logoutButton: {
-            failedToLogoutWithMessage: "Odhlásenie zlyhalo: {{message}}",
-            failedToLogout: "Odhlásenie zlyhalo.",
-            logout: "Odhlásiť sa"
         }
     }
 } as const satisfies CustomTranslationsObject;
