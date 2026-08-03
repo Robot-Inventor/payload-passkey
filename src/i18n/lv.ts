@@ -35,7 +35,9 @@ const lv = {
             passkey: "Piekļuves atslēga",
             ownPasskeysOnly: "Varat pārvaldīt tikai savas piekļuves atslēgas.",
             preparingManagement: "Notiek piekļuves atslēgu pārvaldības sagatavošana...",
-            failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pierakstieties vēlreiz."
+            failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pieslēdzieties atkārtoti.",
+            reauthenticationRequired: "Lai pārvaldītu piekļuves atslēgas, pieslēdzieties atkārtoti.",
+            reauthenticate: "Pieslēgties atkārtoti"
         }
     }
 } as const satisfies CustomTranslationsObject;

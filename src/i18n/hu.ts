@@ -35,7 +35,9 @@ const hu = {
             passkey: "Hozzáférési kulcs",
             ownPasskeysOnly: "Csak a saját hozzáférési kulcsait kezelheti.",
             preparingManagement: "A hozzáférési kulcsok kezelése előkészítés alatt...",
-            failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra."
+            failedToManage: "Nem sikerült elindítani a hozzáférési kulcsok kezelését. Jelentkezzen be újra.",
+            reauthenticationRequired: "Jelentkezzen be újra a hozzáférési kulcsok kezeléséhez.",
+            reauthenticate: "Jelentkezzen be újra"
         }
     }
 } as const satisfies CustomTranslationsObject;

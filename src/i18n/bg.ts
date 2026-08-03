@@ -35,7 +35,9 @@ const bg = {
             passkey: "Ключ за достъп",
             ownPasskeysOnly: "Можете да управлявате само собствените си ключове за достъп.",
             preparingManagement: "Подготвя се управлението на ключовете за достъп...",
-            failedToManage: "Управлението на ключовете за достъп не можа да започне. Влезте отново."
+            failedToManage: "Управлението на ключовете за достъп не можа да започне. Влезте отново.",
+            reauthenticationRequired: "Моля, влезте отново, за да управлявате ключовете за достъп.",
+            reauthenticate: "Влез обратно"
         }
     }
 } as const satisfies CustomTranslationsObject;

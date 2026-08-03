@@ -35,7 +35,9 @@ const en = {
             passkey: "Passkey",
             ownPasskeysOnly: "You can only manage your own passkeys.",
             preparingManagement: "Preparing passkey management...",
-            failedToManage: "Could not start passkey management. Please login again."
+            failedToManage: "Could not start passkey management. Please login again.",
+            reauthenticationRequired: "Please login again to manage passkeys.",
+            reauthenticate: "Login again"
         }
     }
 } as const satisfies CustomTranslationsObject;

@@ -35,7 +35,9 @@ const hr = {
             passkey: "Pristupni ključ",
             ownPasskeysOnly: "Možete upravljati samo vlastitim pristupnim ključevima.",
             preparingManagement: "Priprema se upravljanje pristupnim ključevima...",
-            failedToManage: "Upravljanje pristupnim ključevima nije moguće pokrenuti. Ponovno se prijavite."
+            failedToManage: "Upravljanje pristupnim ključevima nije moguće pokrenuti. Ponovno se prijavite.",
+            reauthenticationRequired: "Ponovno se prijavite za upravljanje pristupnim ključevima.",
+            reauthenticate: "Ponovno se prijavite"
         }
     }
 } as const satisfies CustomTranslationsObject;

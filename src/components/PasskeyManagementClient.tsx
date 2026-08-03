@@ -23,9 +23,22 @@ import {
     registerButtonContainerStyles,
     registerFormStyles
 } from "./PasskeyManagementClient.css";
+import { AUTH_ERROR_CODES } from "../constants";
 import { PlusIcon } from "@payloadcms/ui/icons/Plus";
 import { betterAuthClient } from "../auth/client";
 import { mergeClassNames } from "../utils/mergeClassNames";
+
+interface PasskeysManagementClientProps {
+    onStepUpRequired: () => void;
+}
+
+const isStepUpRequired = (error: unknown): boolean =>
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    ([AUTH_ERROR_CODES.SESSION_NOT_FRESH, AUTH_ERROR_CODES.STEP_UP_REQUIRED] as string[]).includes(
+        error.code as string
+    );
 
 const fetchPasskeys = async (
     onSuccess: (passkeyItems: Passkey[]) => void,
@@ -56,7 +69,7 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 // eslint-disable-next-line max-lines-per-function, max-lines-per-function
-const PasskeysManagementClient = (): ReactNode => {
+const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClientProps): ReactNode => {
     const modalSlug = "confirm-delete-passkey";
 
     const [passkeys, setPasskeys] = useState<Passkey[]>([]);
@@ -82,6 +95,11 @@ const PasskeysManagementClient = (): ReactNode => {
             });
 
             if (result.error) {
+                if (isStepUpRequired(result.error)) {
+                    onStepUpRequired();
+                    return;
+                }
+
                 toast.error(result.error.message ?? t("passkeyPlugin:managementClient:failedToRegister"));
             } else {
                 toast.success(t("passkeyPlugin:managementClient:successfullyRegistered"));
@@ -109,6 +127,11 @@ const PasskeysManagementClient = (): ReactNode => {
             const result = await betterAuthClient.passkey.deletePasskey({ id: passkeyId });
 
             if (result.error) {
+                if (isStepUpRequired(result.error)) {
+                    onStepUpRequired();
+                    return;
+                }
+
                 toast.error(result.error.message ?? t("passkeyPlugin:managementClient:failedToDelete"));
             } else {
                 setPasskeys((prev) => prev.filter((item) => item.id !== passkeyId));

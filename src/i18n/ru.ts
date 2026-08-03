@@ -35,7 +35,9 @@ const ru = {
             passkey: "Ключ доступа",
             ownPasskeysOnly: "Вы можете управлять только своими ключами доступа.",
             preparingManagement: "Подготовка управления ключами доступа...",
-            failedToManage: "Не удалось начать управление ключами доступа. Войдите снова."
+            failedToManage: "Не удалось начать управление ключами доступа. Войдите снова.",
+            reauthenticationRequired: "Войдите снова, чтобы управлять ключами доступа.",
+            reauthenticate: "Войти снова"
         }
     }
 } as const satisfies CustomTranslationsObject;

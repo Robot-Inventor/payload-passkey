@@ -35,7 +35,9 @@ const lt = {
             passkey: "Prieigos raktas",
             ownPasskeysOnly: "Galite tvarkyti tik savo prieigos raktus.",
             preparingManagement: "Ruošiamas prieigos raktų tvarkymas...",
-            failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite dar kartą."
+            failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite vėl.",
+            reauthenticationRequired: "Norėdami tvarkyti prieigos raktus, prisijunkite vėl.",
+            reauthenticate: "Prisijunkite vėl"
         }
     }
 } as const satisfies CustomTranslationsObject;

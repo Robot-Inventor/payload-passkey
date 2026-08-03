@@ -72,6 +72,12 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                     );
                 }
 
+                if (typeof collection.auth === "object" && collection.auth.useSessions === false) {
+                    throw new Error(
+                        `[payload-passkey] \`auth.useSessions\` must be enabled in the \`${collection.slug}\` collection.`
+                    );
+                }
+
                 const configuredTokenExpiration =
                     // eslint-disable-next-line no-undefined
                     typeof collection.auth === "object" ? collection.auth.tokenExpiration : undefined;

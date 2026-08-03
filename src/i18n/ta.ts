@@ -35,7 +35,9 @@ const ta = {
             passkey: "பாஸ்கீ",
             ownPasskeysOnly: "உங்கள் சொந்த பாஸ்கிகளை மட்டுமே நிர்வகிக்க முடியும்.",
             preparingManagement: "பாஸ்கீ நிர்வாகம் தயாராகிறது...",
-            failedToManage: "பாஸ்கீ நிர்வாகத்தைத் தொடங்க முடியவில்லை. மீண்டும் உள்நுழையவும்."
+            failedToManage: "பாஸ்கீ நிர்வாகத்தைத் தொடங்க முடியவில்லை. மீண்டும் உள்நுழையவும்.",
+            reauthenticationRequired: "பாஸ்கீகளை நிர்வகிக்க மீண்டும் உள்நுழையவும்.",
+            reauthenticate: "மீண்டும் உள்நுழைக"
         }
     }
 } as const satisfies CustomTranslationsObject;

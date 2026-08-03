@@ -35,7 +35,9 @@ const rsLatin = {
             passkey: "Ključ za pristup",
             ownPasskeysOnly: "Možete da upravljate samo sopstvenim ključevima za pristup.",
             preparingManagement: "Priprema se upravljanje ključevima za pristup...",
-            failedToManage: "Upravljanje ključevima za pristup nije moguće pokrenuti. Prijavite se ponovo."
+            failedToManage: "Upravljanje ključevima za pristup nije moguće pokrenuti. Prijavite se ponovo.",
+            reauthenticationRequired: "Prijavite se ponovo da biste upravljali ključevima za pristup.",
+            reauthenticate: "Ponovna prijava"
         }
     }
 } as const satisfies CustomTranslationsObject;

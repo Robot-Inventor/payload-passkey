@@ -35,7 +35,9 @@ const rs = {
             passkey: "Кључ за приступ",
             ownPasskeysOnly: "Можете да управљате само сопственим кључевима за приступ.",
             preparingManagement: "Припрема се управљање кључевима за приступ...",
-            failedToManage: "Није могуће покренути управљање кључевима за приступ. Пријавите се поново."
+            failedToManage: "Није могуће покренути управљање кључевима за приступ. Пријавите се поново.",
+            reauthenticationRequired: "Пријавите се поново да бисте управљали кључевима за приступ.",
+            reauthenticate: "Поновна пријава"
         }
     }
 } as const satisfies CustomTranslationsObject;

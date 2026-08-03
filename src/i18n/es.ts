@@ -35,7 +35,9 @@ const es = {
             passkey: "Clave de acceso",
             ownPasskeysOnly: "Solo puedes administrar tus propias claves de acceso.",
             preparingManagement: "Preparando la administración de claves de acceso...",
-            failedToManage: "No se ha podido iniciar la administración de claves de acceso. Vuelve a iniciar sesión."
+            failedToManage: "No se ha podido iniciar la administración de claves de acceso. Vuelve a iniciar sesión.",
+            reauthenticationRequired: "Vuelve a iniciar sesión para administrar las claves de acceso.",
+            reauthenticate: "Volver a iniciar sesión"
         }
     }
 } as const satisfies CustomTranslationsObject;

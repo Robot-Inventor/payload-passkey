@@ -35,7 +35,9 @@ const nl = {
             passkey: "Passkey",
             ownPasskeysOnly: "Je kunt alleen je eigen passkeys beheren.",
             preparingManagement: "Passkeybeheer voorbereiden...",
-            failedToManage: "Kan passkeybeheer niet starten. Meld je opnieuw aan."
+            failedToManage: "Kan passkeybeheer niet starten. Log opnieuw in.",
+            reauthenticationRequired: "Log opnieuw in om passkeys te beheren.",
+            reauthenticate: "Opnieuw inloggen"
         }
     }
 } as const satisfies CustomTranslationsObject;
