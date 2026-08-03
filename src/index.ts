@@ -1,4 +1,4 @@
-import { type CollectionConfig, type Config, definePlugin } from "payload";
+import { type CollectionConfig, type Config, deepMergeSimple, definePlugin } from "payload";
 import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations";
 import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types";
 import { afterChange, afterLogin, afterLogout } from "./config/hooks";
@@ -34,15 +34,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         });
 
         const configuredTranslations = config.i18n?.translations as Record<string, Record<string, unknown>> | undefined;
-        const translationOverrides = Object.fromEntries(
-            Object.entries(translations).map(([language, translation]) => [
-                language,
-                {
-                    ...configuredTranslations?.[language],
-                    ...translation
-                }
-            ])
-        );
+        const translationOverrides = deepMergeSimple(translations, configuredTranslations ?? {});
 
         const passkeyPluginConfig = {
             ...config,
@@ -148,10 +140,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
 
             i18n: {
                 ...config.i18n,
-                translations: {
-                    ...config.i18n?.translations,
-                    ...translationOverrides
-                }
+                translations: translationOverrides
             }
         } as const satisfies Config;
 
