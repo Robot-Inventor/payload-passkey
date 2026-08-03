@@ -35,7 +35,9 @@ const da = {
             passkey: "Adgangsnøgle",
             ownPasskeysOnly: "Du kan kun administrere dine egne adgangsnøgler.",
             preparingManagement: "Forbereder administration af adgangsnøgler...",
-            failedToManage: "Administration af adgangsnøgler kunne ikke startes. Log på igen."
+            failedToManage: "Administration af adgangsnøgler kunne ikke startes. Log på igen.",
+            reauthenticationRequired: "Log på igen for at administrere adgangsnøgler.",
+            reauthenticate: "Log på igen"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Kunne ikke logge af: {{message}}",

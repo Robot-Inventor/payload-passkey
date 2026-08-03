@@ -35,7 +35,9 @@ const en = {
             passkey: "Passkey",
             ownPasskeysOnly: "You can only manage your own passkeys.",
             preparingManagement: "Preparing passkey management...",
-            failedToManage: "Could not start passkey management. Please login again."
+            failedToManage: "Could not start passkey management. Please login again.",
+            reauthenticationRequired: "Please log in again to manage passkeys.",
+            reauthenticate: "Log in again"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Failed to log out: {{message}}",

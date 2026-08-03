@@ -35,7 +35,9 @@ const lt = {
             passkey: "Prieigos raktas",
             ownPasskeysOnly: "Galite tvarkyti tik savo prieigos raktus.",
             preparingManagement: "Ruošiamas prieigos raktų tvarkymas...",
-            failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite dar kartą."
+            failedToManage: "Nepavyko pradėti tvarkyti prieigos raktų. Prisijunkite dar kartą.",
+            reauthenticationRequired: "Norėdami tvarkyti prieigos raktus, prisijunkite dar kartą.",
+            reauthenticate: "Prisijungti dar kartą"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Nepavyko atsijungti: {{message}}",

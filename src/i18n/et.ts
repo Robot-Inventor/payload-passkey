@@ -35,7 +35,9 @@ const et = {
             passkey: "Pääsuvõti",
             ownPasskeysOnly: "Saad hallata ainult enda pääsuvõtmeid.",
             preparingManagement: "Pääsuvõtmete haldust valmistatakse ette...",
-            failedToManage: "Pääsuvõtmete haldust ei saanud käivitada. Logi uuesti sisse."
+            failedToManage: "Pääsuvõtmete haldust ei saanud käivitada. Logi uuesti sisse.",
+            reauthenticationRequired: "Logige pääsuvõtmete haldamiseks uuesti sisse.",
+            reauthenticate: "Logi uuesti sisse"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Väljalogimine nurjus: {{message}}",

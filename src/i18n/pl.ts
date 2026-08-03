@@ -35,7 +35,9 @@ const pl = {
             passkey: "Klucz dostępu",
             ownPasskeysOnly: "Możesz zarządzać tylko własnymi kluczami dostępu.",
             preparingManagement: "Przygotowywanie zarządzania kluczami dostępu...",
-            failedToManage: "Nie można rozpocząć zarządzania kluczami dostępu. Zaloguj się ponownie."
+            failedToManage: "Nie można rozpocząć zarządzania kluczami dostępu. Zaloguj się ponownie.",
+            reauthenticationRequired: "Zaloguj się ponownie, aby zarządzać kluczami dostępu.",
+            reauthenticate: "Zaloguj się ponownie"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Wylogowanie nie powiodło się: {{message}}",

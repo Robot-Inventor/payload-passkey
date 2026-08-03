@@ -35,7 +35,9 @@ const my = {
             passkey: "Passkey",
             ownPasskeysOnly: "မိမိ၏ Passkey များကိုသာ စီမံနိုင်ပါသည်။",
             preparingManagement: "Passkey စီမံခန့်ခွဲမှုကို ပြင်ဆင်နေသည်...",
-            failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ ထပ်မံ လော့ဂ်အင်ဝင်ပါ။"
+            failedToManage: "Passkey စီမံခန့်ခွဲမှုကို စတင်၍ မရပါ။ ထပ်မံ လော့ဂ်အင်ဝင်ပါ။",
+            reauthenticationRequired: "Passkey များကို စီမံရန် ထပ်မံ လော့ဂ်အင်ဝင်ပါ။",
+            reauthenticate: "ထပ်မံ လော့ဂ်အင်ဝင်ရန်"
         },
         logoutButton: {
             failedToLogoutWithMessage: "အကောင့်မှထွက်ရန် မအောင်မြင်ပါ: {{message}}",

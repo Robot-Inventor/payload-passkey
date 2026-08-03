@@ -35,7 +35,9 @@ const pt = {
             passkey: "Chave de acesso",
             ownPasskeysOnly: "Só pode gerir as suas próprias chaves de acesso.",
             preparingManagement: "A preparar a gestão das chaves de acesso...",
-            failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Inicie sessão novamente."
+            failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Inicie sessão novamente.",
+            reauthenticationRequired: "Inicie sessão novamente para gerir as chaves de acesso.",
+            reauthenticate: "Iniciar sessão novamente"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Não foi possível terminar sessão: {{message}}",

@@ -35,7 +35,9 @@ const bnBd = {
             passkey: "পাসকি",
             ownPasskeysOnly: "আপনি শুধু নিজের পাসকিগুলো পরিচালনা করতে পারবেন।",
             preparingManagement: "পাসকি পরিচালনা প্রস্তুত করা হচ্ছে...",
-            failedToManage: "পাসকি পরিচালনা শুরু করা যায়নি। আবার লগ ইন করুন।"
+            failedToManage: "পাসকি পরিচালনা শুরু করা যায়নি। আবার লগ ইন করুন।",
+            reauthenticationRequired: "পাসকি পরিচালনা করতে আবার লগ ইন করুন।",
+            reauthenticate: "আবার লগ ইন করুন"
         },
         logoutButton: {
             failedToLogoutWithMessage: "লগ আউট করা যায়নি: {{message}}",

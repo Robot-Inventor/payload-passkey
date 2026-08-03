@@ -35,7 +35,9 @@ const sk = {
             passkey: "Prístupový kľúč",
             ownPasskeysOnly: "Spravovať môžete iba vlastné prístupové kľúče.",
             preparingManagement: "Pripravuje sa správa prístupových kľúčov...",
-            failedToManage: "Správu prístupových kľúčov sa nepodarilo spustiť. Znova sa prihláste."
+            failedToManage: "Správu prístupových kľúčov sa nepodarilo spustiť. Znova sa prihláste.",
+            reauthenticationRequired: "Ak chcete spravovať prístupové kľúče, znova sa prihláste.",
+            reauthenticate: "Znova sa prihlásiť"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Odhlásenie zlyhalo: {{message}}",

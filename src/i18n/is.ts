@@ -35,7 +35,9 @@ const is = {
             passkey: "Aðgangslykill",
             ownPasskeysOnly: "Þú getur aðeins stjórnað þínum eigin aðgangslyklum.",
             preparingManagement: "Undirbý stjórnun aðgangslykla...",
-            failedToManage: "Ekki tókst að hefja stjórnun aðgangslykla. Skráðu þig inn aftur."
+            failedToManage: "Ekki tókst að hefja stjórnun aðgangslykla. Skráðu þig inn aftur.",
+            reauthenticationRequired: "Skráðu þig inn aftur til að stjórna aðgangslykklum.",
+            reauthenticate: "Skrá inn aftur"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Ekki tókst að skrá út: {{message}}",

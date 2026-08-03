@@ -35,7 +35,9 @@ const it = {
             passkey: "Passkey",
             ownPasskeysOnly: "Puoi gestire solo le tue passkey.",
             preparingManagement: "Preparazione della gestione delle passkey...",
-            failedToManage: "Impossibile avviare la gestione delle passkey. Accedi di nuovo."
+            failedToManage: "Impossibile avviare la gestione delle passkey. Accedi di nuovo.",
+            reauthenticationRequired: "Accedi di nuovo per gestire le passkey.",
+            reauthenticate: "Accedi di nuovo"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Disconnessione non riuscita: {{message}}",

@@ -35,7 +35,9 @@ const zh = {
             passkey: "通行密钥",
             ownPasskeysOnly: "你只能管理自己的通行密钥。",
             preparingManagement: "正在准备通行密钥管理...",
-            failedToManage: "无法开始通行密钥管理。请重新登录。"
+            failedToManage: "无法开始通行密钥管理。请重新登录。",
+            reauthenticationRequired: "请重新登录以管理通行密钥。",
+            reauthenticate: "重新登录"
         },
         logoutButton: {
             failedToLogoutWithMessage: "无法注销：{{message}}",

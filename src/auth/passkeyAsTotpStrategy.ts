@@ -1,9 +1,7 @@
 import type { AuthStrategy } from "payload";
 import type { BetterAuthStrategyOptions } from "@delmaredigital/payload-better-auth";
-import { payloadAuthStrategy } from "./payloadAuthStrategy.js";
-
-const normalizePathname = <T extends string | null>(pathname: T): T extends string ? string : undefined =>
-    pathname?.replace(/^\/+|\/+$/gu, "") as T extends string ? string : undefined;
+import { normalizePathname } from "../utils/normalizePathname";
+import { payloadAuthStrategy } from "./payloadAuthStrategy";
 
 const passkeyAsTotpStrategy = (betterAuthStrategyOptions: BetterAuthStrategyOptions): AuthStrategy => {
     const strategy = payloadAuthStrategy(betterAuthStrategyOptions);

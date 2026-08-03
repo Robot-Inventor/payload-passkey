@@ -35,7 +35,9 @@ const az = {
             passkey: "Keçid açarı",
             ownPasskeysOnly: "Yalnız öz keçid açarlarınızı idarə edə bilərsiniz.",
             preparingManagement: "Keçid açarlarının idarə edilməsi hazırlanır...",
-            failedToManage: "Keçid açarlarının idarə edilməsinə başlamaq mümkün olmadı. Yenidən daxil olun."
+            failedToManage: "Keçid açarlarının idarə edilməsinə başlamaq mümkün olmadı. Yenidən daxil olun.",
+            reauthenticationRequired: "Keçid açarlarını idarə etmək üçün yenidən daxil olun.",
+            reauthenticate: "Yenidən daxil olun"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Çıxış etmək mümkün olmadı: {{message}}",

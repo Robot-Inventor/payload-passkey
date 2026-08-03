@@ -1,7 +1,7 @@
 import { APIError, createAuthEndpoint, freshSessionMiddleware, getSessionFromCtx } from "better-auth/api";
+import { AUTH_ERROR_CODES, PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
-import { PASSKEY_FRESH_AGE_SECONDS } from "../constants.js";
 import { setSessionCookie } from "better-auth/cookies";
 
 type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
@@ -19,6 +19,25 @@ const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
 
     // eslint-disable-next-line no-magic-numbers
     return age >= 0 && age < PASSKEY_FRESH_AGE_SECONDS * 1000;
+};
+
+const getFreshUntil = (createdAt: Date): number =>
+    // eslint-disable-next-line no-magic-numbers
+    createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * 1000;
+
+const isFreshSession = (createdAt: Date): boolean => {
+    const createdAtTime = createdAt.getTime();
+    const freshUntil = getFreshUntil(createdAt);
+    const now = Date.now();
+
+    return now >= createdAtTime && now < freshUntil;
+};
+
+const throwStepUpRequired = (): never => {
+    throw new APIError("FORBIDDEN", {
+        code: AUTH_ERROR_CODES.STEP_UP_REQUIRED,
+        message: "Recent authentication is required"
+    });
 };
 
 // eslint-disable-next-line max-lines-per-function
@@ -88,21 +107,24 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                             });
                         }
 
+                        if (!isFreshSession(existingSession.session.createdAt)) {
+                            throwStepUpRequired();
+                        }
+
+                        const freshUntil = getFreshUntil(existingSession.session.createdAt);
+
                         return ctx.json({
                             success: true,
-                            created: false
+                            created: false,
+                            freshUntil
                         });
                     }
 
                     if (!isFreshPayloadSession(user)) {
-                        throw new APIError("FORBIDDEN", {
-                            code: "STEP_UP_REQUIRED",
-                            message: "Recent authentication is required"
-                        });
+                        throwStepUpRequired();
                     }
 
                     const betterAuthUser = await ctx.context.internalAdapter.findUserById(String(payloadUserID));
-
                     if (!betterAuthUser) {
                         throw new APIError("UNAUTHORIZED", {
                             message: "User was not found"
@@ -110,6 +132,7 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                     }
 
                     const session = await ctx.context.internalAdapter.createSession(String(payloadUserID));
+                    const freshUntil = getFreshUntil(session.createdAt);
 
                     await setSessionCookie(ctx, {
                         session,
@@ -118,7 +141,8 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
 
                     return ctx.json({
                         success: true,
-                        created: true
+                        created: true,
+                        freshUntil
                     });
                 }
             )
@@ -133,4 +157,4 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
         }
     }) as const satisfies BetterAuthPlugin;
 
-export { isFreshPayloadSession, payloadSessionBridge };
+export { payloadSessionBridge };

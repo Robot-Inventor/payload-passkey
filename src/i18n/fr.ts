@@ -35,7 +35,9 @@ const fr = {
             passkey: "Clé d’accès",
             ownPasskeysOnly: "Vous pouvez uniquement gérer vos propres clés d’accès.",
             preparingManagement: "Préparation de la gestion des clés d’accès...",
-            failedToManage: "Impossible de démarrer la gestion des clés d’accès. Veuillez vous reconnecter."
+            failedToManage: "Impossible de démarrer la gestion des clés d’accès. Veuillez vous reconnecter.",
+            reauthenticationRequired: "Veuillez vous reconnecter pour gérer les clés d’accès.",
+            reauthenticate: "Se reconnecter"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Échec de la déconnexion : {{message}}",

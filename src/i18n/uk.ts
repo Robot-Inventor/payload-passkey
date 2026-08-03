@@ -35,7 +35,9 @@ const uk = {
             passkey: "Ключ доступу",
             ownPasskeysOnly: "Ви можете керувати лише власними ключами доступу.",
             preparingManagement: "Підготовка керування ключами доступу...",
-            failedToManage: "Не вдалося почати керування ключами доступу. Увійдіть знову."
+            failedToManage: "Не вдалося почати керування ключами доступу. Увійдіть знову.",
+            reauthenticationRequired: "Увійдіть знову, щоб керувати ключами доступу.",
+            reauthenticate: "Увійти знову"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Не вдалося вийти: {{message}}",

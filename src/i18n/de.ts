@@ -35,7 +35,9 @@ const de = {
             passkey: "Passkey",
             ownPasskeysOnly: "Du kannst nur deine eigenen Passkeys verwalten.",
             preparingManagement: "Passkey-Verwaltung wird vorbereitet...",
-            failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich erneut an."
+            failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich erneut an.",
+            reauthenticationRequired: "Melde dich erneut an, um Passkeys zu verwalten.",
+            reauthenticate: "Erneut anmelden"
         },
         logoutButton: {
             failedToLogoutWithMessage: "Abmeldung fehlgeschlagen: {{message}}",
