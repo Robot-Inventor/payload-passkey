@@ -1,34 +1,34 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const pt = {
     passkeyPlugin: {
         loginButton: {
-            or: "ou",
-            failedToLogin: "Não foi possível iniciar sessão com uma chave de acesso.",
+            or: "Ou",
+            failedToLogin: "Não foi possível fazer login com uma chave de acesso.",
             notAllowed: "A operação da chave de acesso foi cancelada ou não é permitida.",
-            loginWithPasskey: "Iniciar sessão com uma chave de acesso"
+            loginWithPasskey: "Fazer login com uma chave de acesso"
         },
         managementClient: {
             failedToLoad: "Não foi possível carregar as chaves de acesso.",
             failedToRegister: "Não foi possível registar a chave de acesso.",
             successfullyRegistered: "A chave de acesso foi registada com êxito.",
-            notAllowed: "O registo da chave de acesso foi cancelado ou não é permitido.",
+            notAllowed: "A operação da chave de acesso foi cancelada ou não é permitida.",
             alreadyRegistered: "Esta chave de acesso já está registada.",
             confirmDelete: {
-                heading: "Eliminar esta chave de acesso?",
-                body: "Está prestes a eliminar a chave de acesso «{{name}}». Esta ação não pode ser anulada."
+                heading: "Confirmar exclusão",
+                body: "Você está prestes a excluir o/a chave de acesso {{name}}. Tem certeza?"
             },
             failedToDelete: "Não foi possível eliminar a chave de acesso.",
             successfullyDeleted: "A chave de acesso foi eliminada com êxito.",
-            addPasskey: "Adicionar uma chave de acesso",
+            addPasskey: "Adicionar chave de acesso",
             passkeyName: "Nome (opcional)",
             register: "Registar",
             registering: "A registar...",
             cancel: "Cancelar",
             unknownAuthenticator: "Autenticador desconhecido",
-            createdAt: "Criada em: ",
-            delete: "Eliminar",
-            deleting: "A eliminar...",
+            createdAt: "Criado Em:",
+            delete: "Excluir",
+            deleting: "Excluindo...",
             notFound: "Não foram encontradas chaves de acesso registadas."
         },
         managementField: {
@@ -36,7 +36,8 @@ const pt = {
             ownPasskeysOnly: "Só pode gerir as suas próprias chaves de acesso.",
             preparingManagement: "A preparar a gestão das chaves de acesso...",
             failedToManage: "Não foi possível iniciar a gestão das chaves de acesso. Faça login novamente.",
-            reauthenticationRequired: "Faça login novamente para gerir as chaves de acesso.",
+            reauthenticationRequired:
+                "Para a sua própria segurança, faça login novamente para gerir as chaves de acesso.",
             reauthenticate: "Fazer login novamente"
         }
     }

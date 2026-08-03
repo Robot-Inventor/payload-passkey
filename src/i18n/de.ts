@@ -1,4 +1,4 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const de = {
     passkeyPlugin: {
@@ -12,11 +12,11 @@ const de = {
             failedToLoad: "Passkeys konnten nicht geladen werden.",
             failedToRegister: "Der Passkey konnte nicht registriert werden.",
             successfullyRegistered: "Passkey erfolgreich registriert.",
-            notAllowed: "Die Registrierung des Passkeys wurde abgebrochen oder ist nicht zulässig.",
+            notAllowed: "Die Passkey-Operation wurde abgebrochen oder ist nicht zulässig.",
             alreadyRegistered: "Dieser Passkey ist bereits registriert.",
             confirmDelete: {
-                heading: "Diesen Passkey löschen?",
-                body: "Du bist dabei, den Passkey „{{name}}“ zu löschen. Diese Aktion kann nicht rückgängig gemacht werden."
+                heading: "Löschung bestätigen",
+                body: "Du bist dabei, Passkey {{name}} zu löschen. Bist du dir sicher?"
             },
             failedToDelete: "Der Passkey konnte nicht gelöscht werden.",
             successfullyDeleted: "Passkey erfolgreich gelöscht.",
@@ -26,9 +26,9 @@ const de = {
             registering: "Wird registriert...",
             cancel: "Abbrechen",
             unknownAuthenticator: "Unbekannter Authenticator",
-            createdAt: "Erstellt: ",
+            createdAt: "Erstellt am:",
             delete: "Löschen",
-            deleting: "Wird gelöscht...",
+            deleting: "Löschen...",
             notFound: "Keine registrierten Passkeys gefunden."
         },
         managementField: {
@@ -36,7 +36,7 @@ const de = {
             ownPasskeysOnly: "Du kannst nur deine eigenen Passkeys verwalten.",
             preparingManagement: "Passkey-Verwaltung wird vorbereitet...",
             failedToManage: "Die Passkey-Verwaltung konnte nicht gestartet werden. Bitte melde dich wieder an.",
-            reauthenticationRequired: "Melde dich wieder an, um Passkeys zu verwalten.",
+            reauthenticationRequired: "Melde dich zu deiner eigenen Sicherheit wieder an, um Passkeys zu verwalten.",
             reauthenticate: "Wieder anmelden"
         }
     }

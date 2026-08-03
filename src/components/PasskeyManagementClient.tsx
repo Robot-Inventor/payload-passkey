@@ -10,11 +10,7 @@
 
 import { Button, ConfirmationModal, TextInput, toast, useModal, useTranslation } from "@payloadcms/ui";
 import { type ChangeEvent, type ReactNode, useEffect, useState } from "react";
-import type {
-    CustomTFunction,
-    CustomTranslationsKeys,
-    CustomTranslationsObject
-} from "../i18n/passkeyCustomTranslations";
+import type { CustomTFunction, CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type Passkey, getAuthenticatorName } from "@better-auth/passkey";
 import {
     passkeyItemDateStyles,
@@ -208,7 +204,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                         <div key={passkeyItem.id} className={passkeyItemStyles}>
                             <div>{formatPasskeyName(passkeyItem)}</div>
                             <p className={mergeClassNames("field-description", passkeyItemDateStyles)}>
-                                {t("passkeyPlugin:managementClient:createdAt")}
+                                {t("passkeyPlugin:managementClient:createdAt")}{" "}
                                 <time dateTime={passkeyItem.createdAt.toISOString()} suppressHydrationWarning>
                                     {dateFormatter.format(passkeyItem.createdAt)}
                                 </time>

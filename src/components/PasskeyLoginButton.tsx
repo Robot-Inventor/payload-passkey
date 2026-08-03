@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, toast, useAuth, useConfig, useTranslation } from "@payloadcms/ui";
-import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/passkeyCustomTranslations";
+import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LockIcon } from "@payloadcms/ui/icons/Lock";

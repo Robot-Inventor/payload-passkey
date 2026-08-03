@@ -1,4 +1,4 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const ja = {
     passkeyPlugin: {
@@ -12,11 +12,11 @@ const ja = {
             failedToLoad: "パスキーの読み込みに失敗しました。",
             failedToRegister: "パスキーの登録に失敗しました。",
             successfullyRegistered: "パスキーの登録に成功しました。",
-            notAllowed: "パスキーの登録がキャンセルされたか許可されていません。",
+            notAllowed: "パスキーでの認証がキャンセルされたか許可されていません。",
             alreadyRegistered: "このパスキーはすでに登録されています。",
             confirmDelete: {
-                heading: "パスキーを削除しますか？",
-                body: "パスキー「{{name}}」を削除しようとしています。この操作は取り消せません。"
+                heading: "削除の確認",
+                body: "パスキー {{name}} を削除します。よろしいですか？"
             },
             failedToDelete: "パスキーの削除に失敗しました。",
             successfullyDeleted: "パスキーの削除に成功しました。",

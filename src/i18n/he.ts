@@ -1,4 +1,4 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const he = {
     passkeyPlugin: {
@@ -12,23 +12,23 @@ const he = {
             failedToLoad: "טעינת מפתחות הגישה נכשלה.",
             failedToRegister: "רישום מפתח הגישה נכשל.",
             successfullyRegistered: "מפתח הגישה נרשם בהצלחה.",
-            notAllowed: "רישום מפתח הגישה בוטל או אינו מורשה.",
+            notAllowed: "פעולת מפתח הגישה בוטלה או אינה מורשית.",
             alreadyRegistered: "מפתח גישה זה כבר רשום.",
             confirmDelete: {
-                heading: "למחוק את מפתח הגישה הזה?",
-                body: "אתה עומד למחוק את מפתח הגישה „{{name}}“. אי אפשר לבטל פעולה זו."
+                heading: "אישור מחיקה",
+                body: "אתה עומד למחוק את מפתח גישה {{name}}. האם אתה בטוח?"
             },
             failedToDelete: "מחיקת מפתח הגישה נכשלה.",
             successfullyDeleted: "מפתח הגישה נמחק בהצלחה.",
-            addPasskey: "הוספת מפתח גישה",
+            addPasskey: "הוסף מפתח גישה",
             passkeyName: "שם (אופציונלי)",
             register: "רישום",
             registering: "נרשם...",
             cancel: "ביטול",
             unknownAuthenticator: "מאמת לא ידוע",
-            createdAt: "נוצר: ",
+            createdAt: "נוצר בתאריך:",
             delete: "מחיקה",
-            deleting: "נמחק...",
+            deleting: "מוחק...",
             notFound: "לא נמצאו מפתחות גישה רשומים."
         },
         managementField: {
@@ -36,7 +36,7 @@ const he = {
             ownPasskeysOnly: "ניתן לנהל רק את מפתחות הגישה שלך.",
             preparingManagement: "מכין את ניהול מפתחות הגישה...",
             failedToManage: "לא ניתן להתחיל את ניהול מפתחות הגישה. יש להתחבר שוב.",
-            reauthenticationRequired: "יש להתחבר שוב כדי לנהל מפתחות גישה.",
+            reauthenticationRequired: "כדי לשמור על אבטחת חשבונך, יש להתחבר שוב כדי לנהל מפתחות גישה.",
             reauthenticate: "התחברות מחדש"
         }
     }

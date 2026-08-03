@@ -1,9 +1,9 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const sv = {
     passkeyPlugin: {
         loginButton: {
-            or: "eller",
+            or: "Eller",
             failedToLogin: "Det gick inte att logga in med en åtkomstnyckel.",
             notAllowed: "Åtkomstnyckelåtgärden avbröts eller tillåts inte.",
             loginWithPasskey: "Logga in med en åtkomstnyckel"
@@ -12,21 +12,21 @@ const sv = {
             failedToLoad: "Det gick inte att läsa in åtkomstnycklar.",
             failedToRegister: "Det gick inte att registrera åtkomstnyckeln.",
             successfullyRegistered: "Åtkomstnyckeln har registrerats.",
-            notAllowed: "Registreringen av åtkomstnyckeln avbröts eller tillåts inte.",
+            notAllowed: "Åtkomstnyckelåtgärden avbröts eller tillåts inte.",
             alreadyRegistered: "Den här åtkomstnyckeln är redan registrerad.",
             confirmDelete: {
-                heading: "Vill du ta bort den här åtkomstnyckeln?",
-                body: "Du håller på att ta bort åtkomstnyckeln ”{{name}}”. Den här åtgärden kan inte ångras."
+                heading: "Bekräfta radering",
+                body: "Du är på väg att ta bort åtkomstnyckel {{name}}. Är du säker?"
             },
             failedToDelete: "Det gick inte att ta bort åtkomstnyckeln.",
             successfullyDeleted: "Åtkomstnyckeln har tagits bort.",
-            addPasskey: "Lägg till en åtkomstnyckel",
+            addPasskey: "Lägg till åtkomstnyckel",
             passkeyName: "Namn (valfritt)",
             register: "Registrera",
             registering: "Registrerar...",
             cancel: "Avbryt",
             unknownAuthenticator: "Okänd autentiserare",
-            createdAt: "Skapad: ",
+            createdAt: "Skapat:",
             delete: "Ta bort",
             deleting: "Tar bort...",
             notFound: "Inga registrerade åtkomstnycklar hittades."
@@ -36,7 +36,7 @@ const sv = {
             ownPasskeysOnly: "Du kan bara hantera dina egna åtkomstnycklar.",
             preparingManagement: "Förbereder hantering av åtkomstnycklar...",
             failedToManage: "Det gick inte att starta hanteringen av åtkomstnycklar. Logga in igen.",
-            reauthenticationRequired: "Logga in igen för att hantera åtkomstnycklar.",
+            reauthenticationRequired: "För din egen säkerhet, logga in igen för att hantera åtkomstnycklar.",
             reauthenticate: "Logga in igen"
         }
     }

@@ -1,32 +1,32 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const lv = {
     passkeyPlugin: {
         loginButton: {
-            or: "vai",
-            failedToLogin: "Neizdevās pierakstīties, izmantojot piekļuves atslēgu.",
+            or: "Vai",
+            failedToLogin: "Neizdevās pieslēgties, izmantojot piekļuves atslēgu.",
             notAllowed: "Piekļuves atslēgas darbība tika atcelta vai nav atļauta.",
-            loginWithPasskey: "Pierakstīties, izmantojot piekļuves atslēgu"
+            loginWithPasskey: "Pieslēgties, izmantojot piekļuves atslēgu"
         },
         managementClient: {
             failedToLoad: "Neizdevās ielādēt piekļuves atslēgas.",
             failedToRegister: "Neizdevās reģistrēt piekļuves atslēgu.",
             successfullyRegistered: "Piekļuves atslēga ir veiksmīgi reģistrēta.",
-            notAllowed: "Piekļuves atslēgas reģistrācija tika atcelta vai nav atļauta.",
+            notAllowed: "Piekļuves atslēgas darbība tika atcelta vai nav atļauta.",
             alreadyRegistered: "Šī piekļuves atslēga jau ir reģistrēta.",
             confirmDelete: {
-                heading: "Vai dzēst šo piekļuves atslēgu?",
-                body: "Jūs gatavojaties dzēst piekļuves atslēgu „{{name}}“. Šo darbību nevar atsaukt."
+                heading: "Apstiprināt dzēšanu",
+                body: "Jūs grasāties dzēst Piekļuves atslēga {{name}}. Vai esat pārliecināts?"
             },
             failedToDelete: "Neizdevās dzēst piekļuves atslēgu.",
             successfullyDeleted: "Piekļuves atslēga ir veiksmīgi dzēsta.",
-            addPasskey: "Pievienot piekļuves atslēgu",
-            passkeyName: "Nosaukums (neobligāti)",
+            addPasskey: "Pievienot Piekļuves atslēga",
+            passkeyName: "Vārds (neobligāti)",
             register: "Reģistrēt",
             registering: "Reģistrē...",
             cancel: "Atcelt",
             unknownAuthenticator: "Nezināms autentifikators",
-            createdAt: "Izveidots: ",
+            createdAt: "Izveidots:",
             delete: "Dzēst",
             deleting: "Dzēš...",
             notFound: "Reģistrētas piekļuves atslēgas nav atrastas."
@@ -36,7 +36,7 @@ const lv = {
             ownPasskeysOnly: "Varat pārvaldīt tikai savas piekļuves atslēgas.",
             preparingManagement: "Notiek piekļuves atslēgu pārvaldības sagatavošana...",
             failedToManage: "Neizdevās sākt piekļuves atslēgu pārvaldību. Pieslēdzieties atkārtoti.",
-            reauthenticationRequired: "Lai pārvaldītu piekļuves atslēgas, pieslēdzieties atkārtoti.",
+            reauthenticationRequired: "Drošības nolūkos, lai pārvaldītu piekļuves atslēgas, pieslēdzieties atkārtoti.",
             reauthenticate: "Pieslēgties atkārtoti"
         }
     }

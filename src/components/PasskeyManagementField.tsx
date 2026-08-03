@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
-import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/passkeyCustomTranslations";
+import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
 import { AUTH_ERROR_CODES } from "../constants";
 import { PasskeysManagementClient } from "./PasskeyManagementClient";

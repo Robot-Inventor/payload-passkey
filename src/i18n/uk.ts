@@ -1,4 +1,4 @@
-import type { CustomTranslationsObject } from "./passkeyCustomTranslations.js";
+import type { CustomTranslationsObject } from "./customTranslations";
 
 const uk = {
     passkeyPlugin: {
@@ -12,21 +12,21 @@ const uk = {
             failedToLoad: "Не вдалося завантажити ключі доступу.",
             failedToRegister: "Не вдалося зареєструвати ключ доступу.",
             successfullyRegistered: "Ключ доступу успішно зареєстровано.",
-            notAllowed: "Реєстрацію ключа доступу скасовано або не дозволено.",
+            notAllowed: "Операцію з ключем доступу скасовано або не дозволено.",
             alreadyRegistered: "Цей ключ доступу вже зареєстровано.",
             confirmDelete: {
-                heading: "Видалити цей ключ доступу?",
-                body: "Ви збираєтеся видалити ключ доступу «{{name}}». Цю дію не можна скасувати."
+                heading: "Підтвердити видалення",
+                body: "Ви бажаєте видалити ключ доступу {{name}}. Ви впевнені?"
             },
             failedToDelete: "Не вдалося видалити ключ доступу.",
             successfullyDeleted: "Ключ доступу успішно видалено.",
             addPasskey: "Додати ключ доступу",
-            passkeyName: "Ім’я (необов’язково)",
+            passkeyName: "Ім'я (необов’язково)",
             register: "Зареєструвати",
             registering: "Реєстрація...",
             cancel: "Скасувати",
             unknownAuthenticator: "Невідомий автентифікатор",
-            createdAt: "Створено: ",
+            createdAt: "Дата створення:",
             delete: "Видалити",
             deleting: "Видалення...",
             notFound: "Зареєстрованих ключів доступу не знайдено."
@@ -36,7 +36,7 @@ const uk = {
             ownPasskeysOnly: "Ви можете керувати лише власними ключами доступу.",
             preparingManagement: "Підготовка керування ключами доступу...",
             failedToManage: "Не вдалося почати керування ключами доступу. Увійдіть знову.",
-            reauthenticationRequired: "Увійдіть знову, щоб керувати ключами доступу.",
+            reauthenticationRequired: "У цілях вашої безпеки увійдіть знову, щоб керувати ключами доступу.",
             reauthenticate: "Увійти знову"
         }
     }

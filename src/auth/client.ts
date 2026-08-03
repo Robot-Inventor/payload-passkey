@@ -1,6 +1,6 @@
 "use client";
 
-import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants.js";
+import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants";
 import { createAuthClient } from "better-auth/react";
 import { passkeyClient } from "@better-auth/passkey/client";
 
