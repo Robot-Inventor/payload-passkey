@@ -1,6 +1,18 @@
 import type { CollectionConfig, CollectionSlug, Config, Field } from "payload";
 import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants";
 
+/**
+ * Finds fields by name within the current Payload data scope.
+ *
+ * Rows, collapsibles, unnamed groups, and unnamed tabs keep their children in
+ * the parent scope, so they are traversed. Named groups, named tabs, arrays,
+ * and blocks create nested or repeated scopes; their children are intentionally
+ * excluded because a nested field is not the same field as the top-level
+ * Better Auth field being injected or rewritten.
+ * @param fields Fields in the current Payload data scope.
+ * @param name Field name to find.
+ * @returns Matching fields in the current data scope.
+ */
 const findFieldsByName = (fields: Field[], name: string): Field[] => {
     const matchingFields: Field[] = [];
 
