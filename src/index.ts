@@ -33,6 +33,17 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
             sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds
         });
 
+        const configuredTranslations = config.i18n?.translations as Record<string, Record<string, unknown>> | undefined;
+        const translationOverrides = Object.fromEntries(
+            Object.entries(translations).map(([language, translation]) => [
+                language,
+                {
+                    ...configuredTranslations?.[language],
+                    ...translation
+                }
+            ])
+        );
+
         const passkeyPluginConfig = {
             ...config,
 
@@ -131,14 +142,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                 ...config.i18n,
                 translations: {
                     ...config.i18n?.translations,
-                    ja: {
-                        ...config.i18n?.translations?.ja,
-                        ...translations.ja
-                    },
-                    en: {
-                        ...config.i18n?.translations?.en,
-                        ...translations.en
-                    }
+                    ...translationOverrides
                 }
             }
         } as const satisfies Config;
