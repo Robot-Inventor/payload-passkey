@@ -49,7 +49,6 @@ const config = buildConfig({
     ],
     plugins: [
         payloadPasskey({
-            enableTotpCompatibility: true,
             rpID: "your-domain.example.com",
             rpName: "Example App",
             origin: "https://your-domain.example.com",
