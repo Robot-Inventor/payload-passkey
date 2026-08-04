@@ -199,7 +199,7 @@ describe("payloadPasskey validation", () => {
         { sessionSeconds: configuredSessionSeconds, sessionRefreshBufferSeconds: configuredSessionSeconds }
     ])("rejects invalid session duration options %#", async (durationOptions) => {
         await expect(applyPlugin(createConfig(), { ...baseOptions, ...durationOptions })).rejects.toThrow(
-            "sessionSeconds"
+            "sessionRefreshBufferSeconds"
         );
     });
 });
