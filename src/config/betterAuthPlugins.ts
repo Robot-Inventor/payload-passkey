@@ -4,6 +4,7 @@ import { PASSKEY_FRESH_AGE_SECONDS } from "../constants.js";
 import type { Plugin } from "payload";
 import { betterAuth } from "better-auth";
 import { generateBetterAuthOptions } from "../auth/betterAuthOptions";
+import { getAuthBasePath } from "../auth/basePath";
 import { payloadSessionBridge } from "../auth/payloadSessionBridge";
 
 type DeepRequired<T> = T extends Record<string, unknown> ? { [K in keyof T]-?: DeepRequired<T[K]> } : NonNullable<T>;
@@ -43,6 +44,7 @@ type BetterAuthPluginOptions = DeepRequired<
     sessionUpdateSeconds: number;
     passkeyOptions: PasskeyOptions;
     generateId: PayloadPasskeyOptions["generateId"];
+    apiRoute: string;
 };
 
 const betterAuthPlugin = ({
@@ -55,15 +57,20 @@ const betterAuthPlugin = ({
     secret,
     trustedOrigins,
     generateId,
-    enableTotpCompatibility
+    enableTotpCompatibility,
+    apiRoute
+    // eslint-disable-next-line max-lines-per-function
 }: BetterAuthPluginOptions): Plugin => {
     const betterAuthOptions = generateBetterAuthOptions(passkeyOptions);
+    const authBasePath = getAuthBasePath(apiRoute);
 
     return createBetterAuthPlugin({
         autoInjectAdminComponents: false,
         admin: {
             enableManagementUI: false
         },
+        // Payload prefixes endpoint paths with `config.routes.api`, so this must remain relative to the API route.
+        authBasePath: "/auth",
         createAuth: (payload) =>
             betterAuth({
                 ...betterAuthOptions,
@@ -83,6 +90,7 @@ const betterAuthPlugin = ({
                     skipTrailingSlashes: true
                 },
                 baseURL,
+                basePath: authBasePath,
                 secret,
                 trustedOrigins,
                 plugins: [

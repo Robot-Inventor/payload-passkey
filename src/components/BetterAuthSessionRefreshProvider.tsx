@@ -2,10 +2,13 @@
 
 import { useAuth, useConfig } from "@payloadcms/ui";
 import type { ReactNode } from "react";
-import { betterAuthClient } from "../auth/client";
+import { useBetterAuthClient } from "../auth/client";
+import { useStore } from "better-auth/react";
 
 const ActiveBetterAuthSessionRefresh = (): null => {
-    betterAuthClient.useSession();
+    const betterAuthClient = useBetterAuthClient();
+    useStore(betterAuthClient.useSession);
+
     return null;
 };
 

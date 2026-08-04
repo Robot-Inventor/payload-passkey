@@ -6,11 +6,13 @@ import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LockIcon } from "@payloadcms/ui/icons/Lock";
 import type { ReactNode } from "react";
-import { betterAuthClient } from "../auth/client";
 import { getSafeRedirect } from "payload/shared";
+import { useBetterAuthClient } from "../auth/client";
 
+// eslint-disable-next-line max-lines-per-function
 const PasskeyLoginButton = (): ReactNode => {
     const { config } = useConfig();
+    const betterAuthClient = useBetterAuthClient();
     const { fetchFullUser } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
