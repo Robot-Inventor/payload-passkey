@@ -24,7 +24,7 @@ const betterAuthCollectionsPlugin = ({
         },
         skipCollections: ["user"],
         // Hack for `exactOptionalPropertyTypes` behavior in TypeScript 6. Remove in TS 7.
-        firstUserAdmin: firstUserAdmin as NonNullable<typeof firstUserAdmin>
+        firstUserAdmin: !firstUserAdmin
     });
 
 type BetterAuthPluginOptions = DeepRequired<

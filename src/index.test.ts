@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import type { CollectionConfig, Config } from "payload";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { PayloadPasskeyOptions } from "./types";
