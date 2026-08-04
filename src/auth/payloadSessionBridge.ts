@@ -8,6 +8,7 @@ import {
 } from "../constants";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin } from "better-auth";
+import type { PayloadPasskeyOptions } from "../types";
 import { setSessionCookie } from "better-auth/cookies";
 
 type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
@@ -46,8 +47,12 @@ const throwStepUpRequired = (): never => {
     });
 };
 
-// eslint-disable-next-line max-lines-per-function
-const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSlug): BetterAuthPlugin =>
+const payloadSessionBridge = (
+    payload: BasePayload,
+    userCollection: CollectionSlug,
+    enableTotpCompatibility: PayloadPasskeyOptions["enableTotpCompatibility"]
+    // eslint-disable-next-line max-lines-per-function
+): BetterAuthPlugin =>
     ({
         id: "payload-session-bridge",
         rateLimit: [
@@ -104,7 +109,8 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                         // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
                         // Ref: ./passkeyAsTotpStrategy.ts
                         authenticationStrategy === "totp" ||
-                        (hasTotp === false && ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
+                        ((!enableTotpCompatibility || hasTotp === false) &&
+                            ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
                     if (!hasValidAuthenticationStrategy) {
                         throw new APIError("UNAUTHORIZED", {
                             message: "A valid Payload local session is required"

@@ -31,7 +31,13 @@ const betterAuthCollectionsPlugin = ({
 type BetterAuthPluginOptions = DeepRequired<
     Pick<
         PayloadPasskeyOptions,
-        "sessionSeconds" | "modelName" | "userCollection" | "baseURL" | "secret" | "trustedOrigins"
+        | "sessionSeconds"
+        | "modelName"
+        | "userCollection"
+        | "baseURL"
+        | "secret"
+        | "trustedOrigins"
+        | "enableTotpCompatibility"
     >
 > & {
     sessionUpdateSeconds: number;
@@ -48,7 +54,8 @@ const betterAuthPlugin = ({
     baseURL,
     secret,
     trustedOrigins,
-    generateId
+    generateId,
+    enableTotpCompatibility
 }: BetterAuthPluginOptions): Plugin => {
     const betterAuthOptions = generateBetterAuthOptions(passkeyOptions);
 
@@ -78,7 +85,10 @@ const betterAuthPlugin = ({
                 baseURL,
                 secret,
                 trustedOrigins,
-                plugins: [...(betterAuthOptions.plugins ?? []), payloadSessionBridge(payload, userCollection)]
+                plugins: [
+                    ...(betterAuthOptions.plugins ?? []),
+                    payloadSessionBridge(payload, userCollection, enableTotpCompatibility)
+                ]
             })
     });
 };
