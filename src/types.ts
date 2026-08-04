@@ -40,8 +40,7 @@ type PayloadPasskeyOptions<TModelName extends string = string> = {
     /**
      * The amount of time, in seconds, reserved at the end of a session's lifetime for
      * refreshing it. A larger value refreshes sessions earlier. This must be a non-negative
-     * integer smaller than `sessionSeconds`, and the resulting refresh interval must be longer
-     * than 60 seconds.
+     * integer and longer than 60 seconds.
      * @default 120 (2 minutes)
      */
     sessionRefreshBufferSeconds?: number | undefined;
