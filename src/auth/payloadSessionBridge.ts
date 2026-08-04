@@ -47,11 +47,11 @@ const throwStepUpRequired = (): never => {
     });
 };
 
-// eslint-disable-next-line max-lines-per-function
 const payloadSessionBridge = (
     payload: BasePayload,
     userCollection: CollectionSlug,
     enableTotpCompatibility: PayloadPasskeyOptions["enableTotpCompatibility"]
+    // eslint-disable-next-line max-lines-per-function
 ): BetterAuthPlugin =>
     ({
         id: "payload-session-bridge",
