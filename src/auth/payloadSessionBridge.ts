@@ -98,13 +98,13 @@ const payloadSessionBridge = (payload: BasePayload, userCollection: CollectionSl
                     const authenticationStrategy = user._strategy;
                     const payloadUserID = user.id;
 
-                    // Allow TOTP authentication when TOTP is configured, or password authentication when it is not
+                    // Allow TOTP authentication when TOTP is configured, or password authentication when it is not.
                     const hasTotp = user["hasTotp"] as boolean | null | undefined;
                     const hasValidAuthenticationStrategy =
                         // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
                         // Ref: ./passkeyAsTotpStrategy.ts
                         authenticationStrategy === "totp" ||
-                        (!hasTotp && ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
+                        (hasTotp === false && ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
                     if (!hasValidAuthenticationStrategy) {
                         throw new APIError("UNAUTHORIZED", {
                             message: "A valid Payload local session is required"
