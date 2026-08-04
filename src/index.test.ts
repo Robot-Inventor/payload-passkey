@@ -1,6 +1,7 @@
 import type { CollectionConfig, Config } from "payload";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { PayloadPasskeyOptions } from "./types";
+import { RESERVED_COLLECTION_SLUGS } from "./constants";
 
 const pluginMocks = vi.hoisted(() => ({
     collections: vi.fn(),
@@ -187,6 +188,16 @@ describe("payloadPasskey validation", () => {
     });
 });
 
+describe("payloadPasskey reserved slug validation", () => {
+    beforeEach(configurePluginMocks);
+
+    it.each([...RESERVED_COLLECTION_SLUGS])("rejects an existing collection with reserved slug %s", async (slug) => {
+        const config = createConfig();
+        config.collections = [...(config.collections ?? []), { slug, fields: [] }];
+        await expect(applyPlugin(config)).rejects.toThrow("reserved for Better Auth");
+    });
+});
+
 describe("payloadPasskey injected fields", () => {
     beforeEach(configurePluginMocks);
 
@@ -227,7 +238,10 @@ describe("payloadPasskey relationships", () => {
             fields: [{ name: "user", type: "relationship", relationTo: "users" }]
         } as const as CollectionConfig;
         const config = createConfig({ slug: "members", auth: true, fields: [] });
-        config.collections = [...(config.collections ?? []), accounts];
+        pluginMocks.collections.mockImplementation((incoming: Config) => ({
+            ...incoming,
+            collections: [...(incoming.collections ?? []), accounts]
+        }));
 
         const result = await applyPlugin(config, { ...baseOptions, userCollection: "members" });
         const relationship = result.collections?.find(({ slug }) => slug === "accounts")?.fields[0];

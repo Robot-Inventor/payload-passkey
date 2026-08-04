@@ -1,5 +1,5 @@
+import { BETTER_AUTH_COLLECTION_SLUGS, RESERVED_COLLECTION_SLUGS } from "../constants";
 import type { CollectionConfig, CollectionSlug, Config, Field } from "payload";
-import { BETTER_AUTH_COLLECTION_SLUGS } from "../constants";
 
 /**
  * Finds fields by name within the current Payload data scope.
@@ -71,4 +71,16 @@ const rewriteBetterAuthUserRelationships = (config: Config, userCollection: Coll
     }
 };
 
-export { findFieldsByName, rewriteBetterAuthUserRelationships };
+const validateReservedSlugs = (config: Config): void => {
+    const reservedSlugCollision = (config.collections ?? []).find((collection) =>
+        RESERVED_COLLECTION_SLUGS.some((slug) => slug === collection.slug)
+    );
+
+    if (reservedSlugCollision) {
+        throw new Error(
+            `[payload-passkey] The collection slug \`${reservedSlugCollision.slug}\` is reserved for Better Auth authentication records. Remove or rename it to avoid an account takeover risk.`
+        );
+    }
+};
+
+export { findFieldsByName, rewriteBetterAuthUserRelationships, validateReservedSlugs };
