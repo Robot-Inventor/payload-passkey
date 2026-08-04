@@ -8,6 +8,7 @@
  * Ref: https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/src/components/management/PasskeysManagementClient.tsx
  */
 
+import { type BetterAuthClient, useBetterAuthClient } from "../auth/client";
 import { Button, ConfirmationModal, TextInput, toast, useModal, useTranslation } from "@payloadcms/ui";
 import { type ChangeEvent, type ReactNode, useEffect, useState } from "react";
 import type { CustomTFunction, CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
@@ -21,7 +22,6 @@ import {
 } from "./PasskeyManagementClient.css";
 import { AUTH_ERROR_CODES } from "../constants";
 import { PlusIcon } from "@payloadcms/ui/icons/Plus";
-import { betterAuthClient } from "../auth/client";
 import { mergeClassNames } from "../utils/mergeClassNames";
 
 interface PasskeysManagementClientProps {
@@ -36,12 +36,15 @@ const isStepUpRequired = (error: unknown): boolean =>
         error.code as string
     );
 
-const fetchPasskeys = async (
-    onSuccess: (passkeyItems: Passkey[]) => void,
-    onError: (message: string) => void,
-    // eslint-disable-next-line id-length
-    t: CustomTFunction
-): Promise<void> => {
+interface FetchPasskeysOptions {
+    betterAuthClient: BetterAuthClient;
+    onSuccess: (passkeyItems: Passkey[]) => void;
+    onError: (message: string) => void;
+    t: CustomTFunction;
+}
+
+// eslint-disable-next-line id-length
+const fetchPasskeys = async ({ betterAuthClient, onSuccess, onError, t }: FetchPasskeysOptions): Promise<void> => {
     try {
         const result = await betterAuthClient.passkey.listUserPasskeys();
 
@@ -67,6 +70,7 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 // eslint-disable-next-line max-lines-per-function, max-lines-per-function
 const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClientProps): ReactNode => {
     const modalSlug = "confirm-delete-passkey";
+    const betterAuthClient = useBetterAuthClient();
 
     const [passkeys, setPasskeys] = useState<Passkey[]>([]);
     const [registering, setRegistering] = useState(false);
@@ -79,8 +83,9 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     useEffect(() => {
-        void fetchPasskeys(setPasskeys, toast.error, t);
-    }, [t]);
+        // eslint-disable-next-line id-length
+        void fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
+    }, [betterAuthClient, t]);
 
     const handleRegister = async (): Promise<void> => {
         setRegistering(true);
@@ -101,7 +106,8 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                 toast.success(t("passkeyPlugin:managementClient:successfullyRegistered"));
                 setShowRegisterForm(false);
                 setPasskeyName("");
-                await fetchPasskeys(setPasskeys, toast.error, t);
+                // eslint-disable-next-line id-length
+                await fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
             }
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {

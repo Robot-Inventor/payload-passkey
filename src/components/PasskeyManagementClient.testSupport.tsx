@@ -3,14 +3,27 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import type { Passkey } from "@better-auth/passkey";
 import { vi } from "vitest";
 
-const mocks = vi.hoisted(() => ({
-    listUserPasskeys: vi.fn(),
-    addPasskey: vi.fn(),
-    deletePasskey: vi.fn(),
-    toastError: vi.fn(),
-    toastSuccess: vi.fn(),
-    getAuthenticatorName: vi.fn()
-}));
+const mocks = vi.hoisted(() => {
+    const listUserPasskeys = vi.fn();
+    const addPasskey = vi.fn();
+    const deletePasskey = vi.fn();
+
+    return {
+        listUserPasskeys,
+        addPasskey,
+        deletePasskey,
+        toastError: vi.fn(),
+        toastSuccess: vi.fn(),
+        getAuthenticatorName: vi.fn(),
+        client: {
+            passkey: {
+                addPasskey,
+                deletePasskey,
+                listUserPasskeys
+            }
+        }
+    };
+});
 
 const translations: Record<string, string> = {
     "passkeyPlugin:managementClient:addPasskey": "add passkey",
@@ -138,18 +151,13 @@ vi.mock("@payloadcms/ui", () => ({
         success: mocks.toastSuccess
     },
     useModal: useMockModal,
+    useConfig: (): { config: { routes: { api: string } } } => ({ config: { routes: { api: "/backend" } } }),
     // eslint-disable-next-line id-length
     useTranslation: (): { t: typeof translate } => ({ t: translate })
 }));
 
 vi.mock("../auth/client", () => ({
-    betterAuthClient: {
-        passkey: {
-            addPasskey: mocks.addPasskey,
-            deletePasskey: mocks.deletePasskey,
-            listUserPasskeys: mocks.listUserPasskeys
-        }
-    }
+    useBetterAuthClient: vi.fn(() => mocks.client)
 }));
 
 vi.mock("@better-auth/passkey", () => ({

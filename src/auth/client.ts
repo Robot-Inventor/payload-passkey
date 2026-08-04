@@ -1,14 +1,26 @@
 "use client";
 
+import { type AuthClient, createAuthClient } from "better-auth/client";
 import { AUTH_SESSION_POLL_INTERVAL_SECONDS } from "../constants";
-import { createAuthClient } from "better-auth/react";
+import { getAuthBasePath } from "./basePath";
 import { passkeyClient } from "@better-auth/passkey/client";
+import { useConfig } from "@payloadcms/ui";
 
-const betterAuthClient = createAuthClient({
-    plugins: [passkeyClient()],
-    sessionOptions: {
-        refetchInterval: AUTH_SESSION_POLL_INTERVAL_SECONDS
-    }
-});
+type BetterAuthClient = AuthClient<{ plugins: [ReturnType<typeof passkeyClient>] }>;
 
-export { betterAuthClient };
+const useBetterAuthClient = (): BetterAuthClient => {
+    const { config } = useConfig();
+    const basePath = getAuthBasePath(config.routes.api);
+
+    const authClient = createAuthClient({
+        basePath,
+        plugins: [passkeyClient()],
+        sessionOptions: {
+            refetchInterval: AUTH_SESSION_POLL_INTERVAL_SECONDS
+        }
+    });
+
+    return authClient;
+};
+
+export { type BetterAuthClient, useBetterAuthClient };

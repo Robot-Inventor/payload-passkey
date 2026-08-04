@@ -176,7 +176,8 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
             modelName,
             userCollection,
             generateId,
-            enableTotpCompatibility
+            enableTotpCompatibility,
+            apiRoute: config.routes?.api ?? "/api"
         })(configWithAuthCollections);
     }
 });

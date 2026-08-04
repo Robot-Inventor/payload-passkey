@@ -2,15 +2,20 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { ReactNode } from "react";
 
-const mocks = vi.hoisted(() => ({
-    fetch: vi.fn(),
-    logOut: vi.fn(),
-    push: vi.fn(),
-    toastError: vi.fn(),
-    toastSuccess: vi.fn(),
-    user: { id: "user-1" },
-    documentId: "user-1"
-}));
+const mocks = vi.hoisted(() => {
+    const fetch = vi.fn();
+
+    return {
+        fetch,
+        logOut: vi.fn(),
+        push: vi.fn(),
+        toastError: vi.fn(),
+        toastSuccess: vi.fn(),
+        user: { id: "user-1" },
+        documentId: "user-1",
+        client: { $fetch: fetch }
+    };
+});
 
 const translations: Record<string, string> = {
     "passkeyPlugin:managementField:failedToManage": "failed to manage passkeys",
@@ -41,12 +46,12 @@ vi.mock("@payloadcms/ui", () => ({
     useConfig: (): {
         config: {
             admin: { routes: { login: string } };
-            routes: { admin: string };
+            routes: { admin: string; api: string };
         };
     } => ({
         config: {
             admin: { routes: { login: "/login" } },
-            routes: { admin: "/admin" }
+            routes: { admin: "/admin", api: "/backend" }
         }
     }),
     useDocumentInfo: (): { id: string } => ({ id: mocks.documentId }),
@@ -57,9 +62,7 @@ vi.mock("@payloadcms/ui", () => ({
 }));
 
 vi.mock("../auth/client", () => ({
-    betterAuthClient: {
-        $fetch: mocks.fetch
-    }
+    useBetterAuthClient: vi.fn(() => mocks.client)
 }));
 
 vi.mock("./PasskeyManagementClient", () => ({

@@ -24,7 +24,9 @@ vi.mock("@payloadcms/ui", () => ({
         error: mocks.toastError
     },
     useAuth: (): { fetchFullUser: typeof mocks.fetchFullUser } => ({ fetchFullUser: mocks.fetchFullUser }),
-    useConfig: (): { config: { routes: { admin: string } } } => ({ config: { routes: { admin: "/admin" } } }),
+    useConfig: (): { config: { routes: { admin: string; api: string } } } => ({
+        config: { routes: { admin: "/admin", api: "/backend" } }
+    }),
     useTranslation: (): { t: (translationKey: string) => string } => ({
         // eslint-disable-next-line id-length
         t: (translationKey: string): string => translations[translationKey] ?? translationKey
@@ -37,11 +39,11 @@ vi.mock("next/navigation", () => ({
 }));
 
 vi.mock("../auth/client", () => ({
-    betterAuthClient: {
+    useBetterAuthClient: vi.fn(() => ({
         signIn: {
             passkey: mocks.passkey
         }
-    }
+    }))
 }));
 
 vi.mock("./PasskeyLoginButton.css", () => ({

@@ -1,11 +1,11 @@
 "use client";
 
 import { AUTH_ERROR_CODES, PAYLOAD_SESSION_BRIDGE_PATH } from "../constants";
+import { type BetterAuthClient, useBetterAuthClient } from "../auth/client";
 import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
 import { PasskeysManagementClient } from "./PasskeyManagementClient";
-import { betterAuthClient } from "../auth/client";
 import { containerStyles } from "./PasskeyManagementField.css";
 import { formatAdminURL } from "payload/shared";
 import { mergeClassNames } from "../utils/mergeClassNames";
@@ -83,7 +83,7 @@ interface BridgeResponse {
 const isStepUpRequired = (error: unknown): boolean =>
     typeof error === "object" && error !== null && "code" in error && error.code === AUTH_ERROR_CODES.STEP_UP_REQUIRED;
 
-const createBridgeSession = async (): Promise<number | false> => {
+const createBridgeSession = async (betterAuthClient: BetterAuthClient): Promise<number | false> => {
     const { data, error } = await betterAuthClient.$fetch<BridgeResponse>(PAYLOAD_SESSION_BRIDGE_PATH, {
         method: "POST",
         body: {}
@@ -110,6 +110,7 @@ const PasskeyManagementField = (): ReactNode => {
 
     const [status, setStatus] = useState<BridgeStatus>("loading");
     const [freshUntil, setFreshUntil] = useState<number | null>(null);
+    const betterAuthClient = useBetterAuthClient();
 
     const isCurrentUser =
         typeof user?.id !== "undefined" && typeof id !== "undefined" && String(user.id) === String(id);
@@ -125,7 +126,7 @@ const PasskeyManagementField = (): ReactNode => {
             setStatus("loading");
 
             try {
-                const responseFreshUntil = await createBridgeSession();
+                const responseFreshUntil = await createBridgeSession(betterAuthClient);
 
                 if (!cancelled) {
                     if (!responseFreshUntil) {
@@ -151,7 +152,7 @@ const PasskeyManagementField = (): ReactNode => {
         return (): void => {
             cancelled = true;
         };
-    }, [isCurrentUser]);
+    }, [betterAuthClient, isCurrentUser]);
 
     useEffect((): (() => void) => {
         // eslint-disable-next-line no-undefined
