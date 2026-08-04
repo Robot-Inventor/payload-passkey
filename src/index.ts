@@ -4,7 +4,7 @@ import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from
 import { afterChange, afterLogin, afterLogout } from "./config/hooks";
 import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins";
 import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields";
-import { findFieldsByName, rewriteBetterAuthUserRelationships } from "./config/userRelationships";
+import { findFieldsByName, rewriteBetterAuthUserRelationships, validateReservedSlugs } from "./config/userRelationships";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy";
 import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
 import { translations } from "./i18n";
@@ -28,6 +28,8 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         trustedOrigins,
         generateId
     }) => {
+        validateReservedSlugs(config, userCollection);
+
         const { sessionSeconds, sessionUpdateSeconds } = calculateSessionDurations({
             sessionSeconds: $sessionSeconds,
             sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds

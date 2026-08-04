@@ -15,10 +15,16 @@ const BETTER_AUTH_COLLECTION_SLUGS = {
     session: "sessions"
 } as const satisfies Record<"account" | "passkey" | "session", CollectionSlug>;
 
+const RESERVED_COLLECTION_SLUGS = [
+    ...Object.values(BETTER_AUTH_COLLECTION_SLUGS),
+    "verifications"
+] as const satisfies readonly CollectionSlug[];
+
 export {
     AUTH_ERROR_CODES,
     AUTH_SESSION_POLL_INTERVAL_SECONDS,
     BETTER_AUTH_COLLECTION_SLUGS,
+    RESERVED_COLLECTION_SLUGS,
     PASSKEY_FRESH_AGE_SECONDS,
     PAYLOAD_SESSION_BRIDGE_PATH,
     PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_MAX_REQUESTS,
