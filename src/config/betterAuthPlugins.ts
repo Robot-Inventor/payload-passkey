@@ -24,7 +24,8 @@ const betterAuthCollectionsPlugin = ({
         },
         skipCollections: ["user"],
         // Hack for `exactOptionalPropertyTypes` behavior in TypeScript 6. Remove in TS 7.
-        firstUserAdmin: !firstUserAdmin
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        firstUserAdmin: firstUserAdmin!
     });
 
 type BetterAuthPluginOptions = DeepRequired<
