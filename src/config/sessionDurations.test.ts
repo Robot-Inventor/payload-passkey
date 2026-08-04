@@ -23,8 +23,8 @@ describe("calculateSessionDurations", () => {
     });
 
     it("rejects a refresh buffer that leaves no safe polling interval", () => {
-        expect(() => calculateSessionDurations({ sessionRefreshBufferSeconds: 3540, sessionSeconds })).toThrow(
-            "sessionPollIntervalSeconds"
+        expect(() => calculateSessionDurations({ sessionRefreshBufferSeconds: 20, sessionSeconds })).toThrow(
+            "sessionRefreshBufferSeconds"
         );
     });
 });

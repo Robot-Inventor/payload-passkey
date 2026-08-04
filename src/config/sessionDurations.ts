@@ -30,9 +30,9 @@ const calculateSessionDurations = ({
 
     const sessionUpdateSeconds = sessionSeconds - sessionRefreshBufferSeconds;
 
-    if (AUTH_SESSION_POLL_INTERVAL_SECONDS >= sessionUpdateSeconds) {
+    if (sessionRefreshBufferSeconds <= AUTH_SESSION_POLL_INTERVAL_SECONDS) {
         throw new Error(
-            `[payload-passkey] \`sessionPollIntervalSeconds\` must be less than \`sessionSeconds - sessionRefreshBufferSeconds\`.`
+            `[payload-passkey] \`sessionRefreshBufferSeconds\` must be greater than ${String(AUTH_SESSION_POLL_INTERVAL_SECONDS)}.`
         );
     }
 
