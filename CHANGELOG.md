@@ -1,5 +1,19 @@
 # payload-passkey
 
+## 1.1.0
+
+### Minor Changes
+
+- [#58](https://github.com/Robot-Inventor/payload-passkey/pull/58) [`b16bdbb`](https://github.com/Robot-Inventor/payload-passkey/commit/b16bdbb70bd6de3b67043aa6f096cc39fc5828fa) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: make `firstUserAdmin` configurable
+
+- [#54](https://github.com/Robot-Inventor/payload-passkey/pull/54) [`e1810f6`](https://github.com/Robot-Inventor/payload-passkey/commit/e1810f67b3ef081c9b6a4d8b2964df3e1bc99fa2) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: reject reserved slugs during setup
+
+### Patch Changes
+
+- [#57](https://github.com/Robot-Inventor/payload-passkey/pull/57) [`71c8693`](https://github.com/Robot-Inventor/payload-passkey/commit/71c869308f2edbb2714c46360508e0eabea4009c) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: change `PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_MAX_REQUESTS` to 5
+
+- [#56](https://github.com/Robot-Inventor/payload-passkey/pull/56) [`c1ae159`](https://github.com/Robot-Inventor/payload-passkey/commit/c1ae159b5df59301bbf703d6322c893351978712) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: tighten the check for whether users have configured TOTP
+
 ## 1.0.0
 
 ### Major Changes
