@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
+import type { PayloadPasskeyOptions } from "../types";
 
 const bridgeMocks = vi.hoisted(() => ({
     getSessionFromCtx: vi.fn(),
@@ -82,9 +83,12 @@ const makeTestContext = (payloadUser: Record<string, unknown> | null = createPay
     return context;
 };
 
-const getEndpoint = async (payload: unknown = {}): Promise<Endpoint> => {
+const getEndpoint = async (
+    payload: unknown = {},
+    enableTotpCompatibility: PayloadPasskeyOptions["enableTotpCompatibility"] = false
+): Promise<Endpoint> => {
     const { payloadSessionBridge } = await import("./payloadSessionBridge");
-    const plugin = payloadSessionBridge(payload as never, "users");
+    const plugin = payloadSessionBridge(payload as never, "users", enableTotpCompatibility);
 
     return plugin.endpoints?.["createSessionFromPayload"] as unknown as Endpoint;
 };
@@ -135,6 +139,16 @@ describe("payloadSessionBridge session creation", () => {
         expect(response["created"]).toBe(false);
         expectFreshUntil(response["freshUntil"]);
     });
+
+    it("bridges a TOTP-enabled user when TOTP compatibility is disabled", async () => {
+        const requestContext = makeTestContext(createPayloadUser({ hasTotp: true }));
+        const endpoint = await getEndpoint(requestContext.payload, false);
+
+        const response = (await endpoint(requestContext)) as Record<string, unknown>;
+
+        expect(response).toMatchObject({ success: true, created: true });
+        expectFreshUntil(response["freshUntil"]);
+    });
 });
 
 describe("payloadSessionBridge origin validation", () => {
@@ -178,17 +192,20 @@ describe("payloadSessionBridge authorization", () => {
         { authenticationStrategy: "passkey", hasTotp: false },
         { authenticationStrategy: "better-auth", hasTotp: true },
         { authenticationStrategy: "local-jwt", hasTotp: true }
-    ])("rejects an unauthorized Payload authentication strategy %#", async ({ authenticationStrategy, hasTotp }) => {
-        const requestContext = makeTestContext(
-            createPayloadUser({
-                _strategy: authenticationStrategy,
-                hasTotp
-            })
-        );
-        const endpoint = await getEndpoint(requestContext.payload);
+    ])(
+        "rejects an unauthorized Payload authentication strategy with TOTP compatibility enabled %#",
+        async ({ authenticationStrategy, hasTotp }) => {
+            const requestContext = makeTestContext(
+                createPayloadUser({
+                    _strategy: authenticationStrategy,
+                    hasTotp
+                })
+            );
+            const endpoint = await getEndpoint(requestContext.payload, true);
 
-        await expect(endpoint(requestContext)).rejects.toThrow("valid Payload local session");
-    });
+            await expect(endpoint(requestContext)).rejects.toThrow("valid Payload local session");
+        }
+    );
 
     it("requires the Payload and Better Auth sessions to belong to the same user", async () => {
         const requestContext = makeTestContext();
@@ -245,7 +262,7 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
     });
 });
 
-describe("payloadSessionBridge hasTotp strictness", () => {
+describe("payloadSessionBridge hasTotp strictness with TOTP compatibility enabled", () => {
     beforeEach(configureBridgeMocks);
 
     it.each([
@@ -264,7 +281,7 @@ describe("payloadSessionBridge hasTotp strictness", () => {
             }
 
             const requestContext = makeTestContext(user);
-            const endpoint = await getEndpoint(requestContext.payload);
+            const endpoint = await getEndpoint(requestContext.payload, true);
 
             await expect(endpoint(requestContext)).rejects.toThrow("valid Payload local session");
         }

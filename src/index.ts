@@ -21,7 +21,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         config,
         sessionSeconds: $sessionSeconds,
         sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds,
-        enableTotpCompatibility,
+        enableTotpCompatibility = false,
         modelName,
         userCollection,
         rpID,
@@ -175,7 +175,8 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
             trustedOrigins,
             modelName,
             userCollection,
-            generateId
+            generateId,
+            enableTotpCompatibility
         })(configWithAuthCollections);
     }
 });
