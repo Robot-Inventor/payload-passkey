@@ -26,7 +26,8 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         baseURL,
         secret,
         trustedOrigins,
-        generateId
+        generateId,
+        firstUserAdmin = true
     }) => {
         const { sessionSeconds, sessionUpdateSeconds } = calculateSessionDurations({
             sessionSeconds: $sessionSeconds,
@@ -151,9 +152,11 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         } as const satisfies PasskeyOptions;
 
         // Payload CMS finalizes the plugin array before running the plugins, so the dependent plugin's processing must be executed directly
-        const configWithAuthCollections = await betterAuthCollectionsPlugin({ modelName, passkeyOptions })(
-            passkeyPluginConfig
-        );
+        const configWithAuthCollections = await betterAuthCollectionsPlugin({
+            modelName,
+            passkeyOptions,
+            firstUserAdmin
+        })(passkeyPluginConfig);
 
         rewriteBetterAuthUserRelationships(configWithAuthCollections, userCollection);
 

@@ -1,6 +1,7 @@
 import type { CollectionSlug, Plugin } from "payload";
 import type { PasskeyOptions as $PasskeyOptions } from "@better-auth/passkey";
 import type { BetterAuthAdvancedOptions } from "better-auth";
+import type { FirstUserAdminOptions } from "@delmaredigital/payload-better-auth";
 
 type BetterAuthUserCollectionSlug<TModelName extends string> = (TModelName extends `${string}s`
     ? TModelName
@@ -84,6 +85,27 @@ type PayloadPasskeyOptions<TModelName extends string = string> = {
      * such as a separate frontend domain or a local development origin.
      */
     trustedOrigins: string[];
+    /**
+     * Automatically make the first registered user an admin.
+     * Enabled by default. Set to false to disable, or provide options to customize.
+     * @default true
+     * @example
+     * // Disable
+     * betterAuthCollections({
+     *     betterAuthOptions: authOptions,
+     *     firstUserAdmin: false,
+     * })
+     * @example
+     * // Custom roles
+     * betterAuthCollections({
+     *     betterAuthOptions: authOptions,
+     *     firstUserAdmin: {
+     *         adminRole: 'super-admin',
+     *         defaultRole: 'member',
+     *     },
+     * })
+     */
+    firstUserAdmin?: boolean | FirstUserAdminOptions | undefined;
     /**
      * The ID generation strategy for Better Auth records stored through Payload.
      * If you are using PostgreSQL with default ID generation, set this to "serial".
