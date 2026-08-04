@@ -46,7 +46,7 @@ const config = buildConfig({
             auth: true,
             fields: [...],
         },
-    ]
+    ],
     plugins: [
         payloadPasskey({
             enableTotpCompatibility: true,
@@ -90,7 +90,7 @@ const config = buildConfig({
             auth: true,
             fields: [...],
         },
-    ]
+    ],
     plugins: [
         payloadPasskey({
             enableTotpCompatibility: true,
