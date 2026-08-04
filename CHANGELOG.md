@@ -1,5 +1,15 @@
 # payload-passkey
 
+## 1.1.1
+
+### Patch Changes
+
+- [#64](https://github.com/Robot-Inventor/payload-passkey/pull/64) [`acaf964`](https://github.com/Robot-Inventor/payload-passkey/commit/acaf964e94c8dd4d53d0e1abbfed0ff4c5198903) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: correct incorrect validation expression for `sessionRefreshBufferSeconds`
+
+- [#60](https://github.com/Robot-Inventor/payload-passkey/pull/60) [`ac45566`](https://github.com/Robot-Inventor/payload-passkey/commit/ac45566eabd428c2d002044519220c68f8e81019) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: fix a bug where passkeys cannot be managed when `enableTotpCompatibility` is `false`
+
+- [#63](https://github.com/Robot-Inventor/payload-passkey/pull/63) [`362cd2e`](https://github.com/Robot-Inventor/payload-passkey/commit/362cd2e8ba2e3812c76cfb76c8a2075cd562cf3c) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: resolve compatibility issues with custom Payload API routes
+
 ## 1.1.0
 
 ### Minor Changes
