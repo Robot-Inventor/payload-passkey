@@ -71,7 +71,7 @@ const rewriteBetterAuthUserRelationships = (config: Config, userCollection: Coll
     }
 };
 
-const validateReservedSlugs = (config: Config, userCollection: CollectionSlug): void => {
+const validateReservedSlugs = (config: Config): void => {
     const reservedSlugCollision = (config.collections ?? []).find((collection) =>
         RESERVED_COLLECTION_SLUGS.some((slug) => slug === collection.slug)
     );
