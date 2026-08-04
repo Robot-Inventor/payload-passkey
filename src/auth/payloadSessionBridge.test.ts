@@ -244,3 +244,29 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         await expect(endpoint(requestContext)).rejects.toThrow("User was not found");
     });
 });
+
+describe("payloadSessionBridge hasTotp strictness", () => {
+    beforeEach(configureBridgeMocks);
+
+    it.each([
+        { authenticationStrategy: "local-jwt", hasTotpState: "missing" },
+        { authenticationStrategy: "local-jwt", hasTotpState: "null" },
+        { authenticationStrategy: "better-auth", hasTotpState: "missing" },
+        { authenticationStrategy: "better-auth", hasTotpState: "null" }
+    ])(
+        "rejects $authenticationStrategy when hasTotp is $hasTotpState instead of strictly false %#",
+        async ({ authenticationStrategy, hasTotpState }) => {
+            const user = createPayloadUser({ _strategy: authenticationStrategy });
+            if (hasTotpState === "null") {
+                user["hasTotp"] = null;
+            } else {
+                delete user["hasTotp"];
+            }
+
+            const requestContext = makeTestContext(user);
+            const endpoint = await getEndpoint(requestContext.payload);
+
+            await expect(endpoint(requestContext)).rejects.toThrow("valid Payload local session");
+        }
+    );
+});
