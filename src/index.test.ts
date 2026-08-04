@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import type { CollectionConfig, Config } from "payload";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { PayloadPasskeyOptions } from "./types";
@@ -68,6 +69,21 @@ const getUsersCollection = (config: Config): UserCollection => {
     if (!users || typeof users.auth !== "object") throw new Error("The users collection is not configured");
 
     return users as UserCollection;
+};
+
+const firstRegisteredUserRole = async (users: UserCollection, existingUserCount: number): Promise<unknown> => {
+    const hook = (users.hooks?.beforeChange ?? [])[0] as
+        ((args: never) => Promise<Record<string, unknown>>) | undefined;
+    const data =
+        hook &&
+        (await hook({
+            data: {},
+            operation: "create",
+            req: { payload: { count: vi.fn().mockResolvedValue({ totalDocs: existingUserCount }) }, user: null },
+            context: {}
+        } as never));
+
+    return data?.["role"];
 };
 
 describe("payloadPasskey configuration", () => {
@@ -247,5 +263,53 @@ describe("payloadPasskey relationships", () => {
         const relationship = result.collections?.find(({ slug }) => slug === "accounts")?.fields[0];
 
         expect(relationship).toMatchObject({ name: "user", relationTo: "members" });
+    });
+});
+
+describe("payloadPasskey firstUserAdmin", () => {
+    const noExistingUsers = 0;
+    const oneExistingUser = 1;
+    const noInjectedHooks = 0;
+
+    beforeEach(async () => {
+        configurePluginMocks();
+        const real = await vi.importActual<{
+            betterAuthCollectionsPlugin: (options: object) => (config: Config) => Config;
+        }>("./config/betterAuthPlugins");
+        pluginMocks.createCollectionsPlugin.mockImplementation(real.betterAuthCollectionsPlugin);
+    });
+
+    it("bootstraps the first registered user as an admin by default", async () => {
+        const users = getUsersCollection(await applyPlugin(createConfig()));
+
+        expect(await firstRegisteredUserRole(users, noExistingUsers)).toBe("admin");
+    });
+
+    it("honours a custom admin role for the first registered user", async () => {
+        const users = getUsersCollection(
+            await applyPlugin(createConfig(), {
+                ...baseOptions,
+                firstUserAdmin: { adminRole: "super-admin", defaultRole: "member" }
+            })
+        );
+
+        expect(await firstRegisteredUserRole(users, noExistingUsers)).toBe("super-admin");
+    });
+
+    it("assigns the configured default role to subsequent users", async () => {
+        const users = getUsersCollection(
+            await applyPlugin(createConfig(), {
+                ...baseOptions,
+                firstUserAdmin: { adminRole: "super-admin", defaultRole: "member" }
+            })
+        );
+
+        expect(await firstRegisteredUserRole(users, oneExistingUser)).toBe("member");
+    });
+
+    it("does not inject the first-user-admin hook when explicitly disabled", async () => {
+        const users = getUsersCollection(await applyPlugin(createConfig(), { ...baseOptions, firstUserAdmin: false }));
+
+        expect(users.hooks?.beforeChange ?? []).toHaveLength(noInjectedHooks);
     });
 });

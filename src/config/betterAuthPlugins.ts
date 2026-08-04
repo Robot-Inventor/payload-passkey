@@ -10,8 +10,9 @@ type DeepRequired<T> = T extends Record<string, unknown> ? { [K in keyof T]-?: D
 
 const betterAuthCollectionsPlugin = ({
     modelName,
-    passkeyOptions
-}: DeepRequired<Pick<PayloadPasskeyOptions, "modelName">> & {
+    passkeyOptions,
+    firstUserAdmin
+}: Required<Pick<PayloadPasskeyOptions, "modelName" | "firstUserAdmin">> & {
     passkeyOptions: PasskeyOptions;
 }): Plugin =>
     betterAuthCollections({
@@ -21,7 +22,10 @@ const betterAuthCollectionsPlugin = ({
                 modelName
             }
         },
-        skipCollections: ["user"]
+        skipCollections: ["user"],
+        // Hack for `exactOptionalPropertyTypes` behavior in TypeScript 6. Remove in TS 7.
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        firstUserAdmin: firstUserAdmin!
     });
 
 type BetterAuthPluginOptions = DeepRequired<
