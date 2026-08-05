@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 1.1.2
+
+### Patch Changes
+
+- [#66](https://github.com/Robot-Inventor/payload-passkey/pull/66) [`d6763e8`](https://github.com/Robot-Inventor/payload-passkey/commit/d6763e8a377fdd8714fd9f614ba9d042b4b57486) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: limit the period considered a fresh session to `sessionSeconds`
+
 ## 1.1.1
 
 ### Patch Changes
