@@ -1,4 +1,4 @@
-[**payload-passkey v1.1.1**](../README.md)
+[**payload-passkey v1.1.2**](../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **payloadPasskey**: [`PayloadPasskeyPlugin`](../type-aliases/PayloadPasskeyPlugin.md)
 
-Defined in: [index.ts:16](https://github.com/Robot-Inventor/payload-passkey/blob/55516bad213c91f49ce65d70081f2ed62ea3739a/src/index.ts#L16)
+Defined in: [index.ts:16](https://github.com/Robot-Inventor/payload-passkey/blob/d6763e8a377fdd8714fd9f614ba9d042b4b57486/src/index.ts#L16)
