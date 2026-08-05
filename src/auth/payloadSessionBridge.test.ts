@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { PayloadPasskeyOptions } from "../types";
@@ -12,6 +13,8 @@ const bridgeMocks = vi.hoisted(() => ({
 const millisecondsPerSecond = 1000;
 const oneMillisecond = 1;
 const freshnessToleranceSeconds = 1;
+const shortSessionLifetimeSeconds = 10;
+const longSessionLifetimeSeconds = PASSKEY_FRESH_AGE_SECONDS + freshnessToleranceSeconds;
 
 class TestAPIError extends Error {
     public code: string | undefined;
@@ -69,7 +72,10 @@ const makeTestContext = (payloadUser: Record<string, unknown> | null = createPay
         headers: new Headers({ origin: "https://example.com" }),
         context: {
             internalAdapter: {
-                createSession: vi.fn(() => ({ createdAt: new Date() })),
+                createSession: vi.fn(() => ({
+                    createdAt: new Date(),
+                    expiresAt: new Date(Date.now() + longSessionLifetimeSeconds * millisecondsPerSecond)
+                })),
                 findUserById: vi.fn(() => ({ id: "user-1" }))
             },
             isTrustedOrigin: vi.fn(() => true)
@@ -112,32 +118,69 @@ const expectFreshUntil = (freshUntil: unknown): void => {
     );
 };
 
+// eslint-disable-next-line max-lines-per-function
 describe("payloadSessionBridge session creation", () => {
     beforeEach(configureBridgeMocks);
 
     it("reports a newly created session for a fresh Payload session", async () => {
         const requestContext = makeTestContext();
+        const createdAt = new Date();
+        const expiresAt = new Date(createdAt.getTime() + longSessionLifetimeSeconds * millisecondsPerSecond);
+        requestContext.context.internalAdapter.createSession.mockReturnValue({ createdAt, expiresAt });
         const endpoint = await getEndpoint(requestContext.payload);
 
         const response = (await endpoint(requestContext)) as Record<string, unknown>;
 
         expect(response).toMatchObject({ success: true, created: true });
-        expectFreshUntil(response["freshUntil"]);
+        expect(response["freshUntil"]).toBe(createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * millisecondsPerSecond);
+    });
+
+    it("limits a newly created session's freshness to its expiration", async () => {
+        const requestContext = makeTestContext();
+        const expiresAt = new Date(Date.now() + shortSessionLifetimeSeconds * millisecondsPerSecond);
+        requestContext.context.internalAdapter.createSession.mockReturnValue({
+            createdAt: new Date(),
+            expiresAt
+        });
+        const endpoint = await getEndpoint(requestContext.payload);
+
+        const response = (await endpoint(requestContext)) as Record<string, unknown>;
+
+        expect(response["freshUntil"]).toBe(expiresAt.getTime());
     });
 
     it("reports an existing fresh Better Auth session", async () => {
         const requestContext = makeTestContext();
+        const createdAt = new Date(Date.now() - millisecondsPerSecond);
+        const expiresAt = new Date(createdAt.getTime() + longSessionLifetimeSeconds * millisecondsPerSecond);
         const endpoint = await getEndpoint(requestContext.payload);
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
             user: { id: "user-1" },
-            session: { createdAt: new Date(Date.now() - millisecondsPerSecond) }
+            session: { createdAt, expiresAt }
         });
 
         const response = (await endpoint(requestContext)) as Record<string, unknown>;
 
         expect(response["success"]).toBe(true);
         expect(response["created"]).toBe(false);
-        expectFreshUntil(response["freshUntil"]);
+        expect(response["freshUntil"]).toBe(createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * millisecondsPerSecond);
+    });
+
+    it("limits an existing session's freshness to its expiration", async () => {
+        const requestContext = makeTestContext();
+        const expiresAt = new Date(Date.now() + shortSessionLifetimeSeconds * millisecondsPerSecond);
+        const endpoint = await getEndpoint(requestContext.payload);
+        bridgeMocks.getSessionFromCtx.mockResolvedValue({
+            user: { id: "user-1" },
+            session: {
+                createdAt: new Date(Date.now() - millisecondsPerSecond),
+                expiresAt
+            }
+        });
+
+        const response = (await endpoint(requestContext)) as Record<string, unknown>;
+
+        expect(response["freshUntil"]).toBe(expiresAt.getTime());
     });
 
     it("bridges a TOTP-enabled user when TOTP compatibility is disabled", async () => {
@@ -219,6 +262,7 @@ describe("payloadSessionBridge authorization", () => {
     });
 });
 
+// eslint-disable-next-line max-lines-per-function
 describe("payloadSessionBridge freshness and lifecycle", () => {
     beforeEach(configureBridgeMocks);
 
@@ -228,7 +272,23 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
             user: { id: "user-1" },
             session: {
-                createdAt: new Date(Date.now() - (PASSKEY_FRESH_AGE_SECONDS * millisecondsPerSecond + oneMillisecond))
+                createdAt: new Date(Date.now() - (PASSKEY_FRESH_AGE_SECONDS * millisecondsPerSecond + oneMillisecond)),
+                expiresAt: new Date(Date.now() + longSessionLifetimeSeconds * millisecondsPerSecond)
+            }
+        });
+
+        await expect(endpoint(requestContext)).rejects.toMatchObject({ code: "STEP_UP_REQUIRED" });
+    });
+
+    it("requires recent authentication when the existing Better Auth session has expired", async () => {
+        const requestContext = makeTestContext();
+        const endpoint = await getEndpoint(requestContext.payload);
+        const now = Date.now();
+        bridgeMocks.getSessionFromCtx.mockResolvedValue({
+            user: { id: "user-1" },
+            session: {
+                createdAt: new Date(now - millisecondsPerSecond),
+                expiresAt: new Date(now - oneMillisecond)
             }
         });
 

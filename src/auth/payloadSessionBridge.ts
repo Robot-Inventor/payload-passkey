@@ -28,13 +28,13 @@ const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
     return age >= 0 && age < PASSKEY_FRESH_AGE_SECONDS * 1000;
 };
 
-const getFreshUntil = (createdAt: Date): number =>
+const getFreshUntil = (createdAt: Date, expiresAt: Date): number =>
     // eslint-disable-next-line no-magic-numbers
-    createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * 1000;
+    Math.min(createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * 1000, expiresAt.getTime());
 
-const isFreshSession = (createdAt: Date): boolean => {
+const isFreshSession = (createdAt: Date, expiresAt: Date): boolean => {
     const createdAtTime = createdAt.getTime();
-    const freshUntil = getFreshUntil(createdAt);
+    const freshUntil = getFreshUntil(createdAt, expiresAt);
     const now = Date.now();
 
     return now >= createdAtTime && now < freshUntil;
@@ -126,11 +126,14 @@ const payloadSessionBridge = (
                             });
                         }
 
-                        if (!isFreshSession(existingSession.session.createdAt)) {
+                        if (!isFreshSession(existingSession.session.createdAt, existingSession.session.expiresAt)) {
                             throwStepUpRequired();
                         }
 
-                        const freshUntil = getFreshUntil(existingSession.session.createdAt);
+                        const freshUntil = getFreshUntil(
+                            existingSession.session.createdAt,
+                            existingSession.session.expiresAt
+                        );
 
                         return ctx.json({
                             success: true,
@@ -151,7 +154,7 @@ const payloadSessionBridge = (
                     }
 
                     const session = await ctx.context.internalAdapter.createSession(String(payloadUserID));
-                    const freshUntil = getFreshUntil(session.createdAt);
+                    const freshUntil = getFreshUntil(session.createdAt, session.expiresAt);
 
                     await setSessionCookie(ctx, {
                         session,
