@@ -30,12 +30,12 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
         if (!enablePasskeyAutofill) return (): void => {};
 
         const input = document.querySelector<HTMLInputElement>("#field-email");
-        if (input) {
-            input.autocomplete = "email webauthn";
-        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        if (!input) return () => {};
+
+        input.autocomplete = "email webauthn";
 
         const abortController = new AbortController();
-
         void (async (): Promise<void> => {
             try {
                 const result = await betterAuthClient.signIn.passkey({
@@ -59,9 +59,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
 
         const cleanup = (): void => {
             abortController.abort();
-            if (input) {
-                input.autocomplete = "email";
-            }
+            input.autocomplete = "email";
         };
 
         return cleanup;
