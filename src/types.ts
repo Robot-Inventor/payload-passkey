@@ -51,6 +51,15 @@ type PayloadPasskeyOptions<TModelName extends string = string> = {
      */
     enableTotpCompatibility?: boolean | undefined;
     /**
+     * Whether to enable passkey autofill. When enabled, passkeys appear as
+     * autocomplete suggestions alongside passwords saved in the user's password
+     * manager when the Payload email input is focused, without requiring the
+     * "Login with a passkey" button to be pressed.
+     * @default false
+     * @see {@link https://web.dev/articles/passkey-form-autofill|Sign in with a passkey through form autofill | web.dev}
+     */
+    enablePasskeyAutofill?: boolean | undefined;
+    /**
      * The singular Better Auth model name for the user records stored in Payload.
      * The corresponding `userCollection` is normally the plural form of this value,
      * for example, `"user"` with `"users"` or `"member"` with `"members"`.

@@ -9,8 +9,10 @@ import {
     rewriteBetterAuthUserRelationships,
     validateReservedSlugs
 } from "./config/userRelationships";
+import type { PasskeyLoginButtonProps } from "./components/PasskeyLoginButton";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy";
 import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
+// eslint-disable-next-line import-x/max-dependencies
 import { translations } from "./i18n";
 
 const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>({
@@ -31,7 +33,8 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
         secret,
         trustedOrigins,
         generateId,
-        firstUserAdmin = true
+        firstUserAdmin = true,
+        enablePasskeyAutofill = false
     }) => {
         validateReservedSlugs(config);
 
@@ -56,7 +59,12 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                     ],
                     afterLogin: [
                         ...(config.admin?.components?.afterLogin ?? []),
-                        "payload-passkey/components/PasskeyLoginButton#PasskeyLoginButton"
+                        {
+                            path: "payload-passkey/components/PasskeyLoginButton#PasskeyLoginButton",
+                            clientProps: {
+                                enablePasskeyAutofill
+                            } as const satisfies PasskeyLoginButtonProps
+                        }
                     ]
                 }
             },

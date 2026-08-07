@@ -64,7 +64,7 @@ describe("PasskeyLoginButton", () => {
         mocks.passkey.mockResolvedValue({ data: {}, error: null });
         const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
-        render(<PasskeyLoginButton />);
+        render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
         await waitFor(() => {
@@ -76,7 +76,7 @@ describe("PasskeyLoginButton", () => {
         mocks.passkey.mockResolvedValue({ error: { message: "provider rejected the passkey" } });
         const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
-        render(<PasskeyLoginButton />);
+        render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
         await waitFor(() => {
@@ -90,7 +90,7 @@ describe("PasskeyLoginButton", () => {
         mocks.passkey.mockRejectedValue(error);
         const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
-        render(<PasskeyLoginButton />);
+        render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
         await waitFor(() => {
