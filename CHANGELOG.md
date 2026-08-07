@@ -1,5 +1,17 @@
 # payload-passkey
 
+## 1.2.0
+
+### Minor Changes
+
+- [#71](https://github.com/Robot-Inventor/payload-passkey/pull/71) [`324afeb`](https://github.com/Robot-Inventor/payload-passkey/commit/324afeb2429d31a3407781132d41c6404588ae38) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: add support for passkey autofill
+
+### Patch Changes
+
+- [#72](https://github.com/Robot-Inventor/payload-passkey/pull/72) [`65111ef`](https://github.com/Robot-Inventor/payload-passkey/commit/65111eff32cfbd5d3e873b7d45a517397f72b419) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.6.26
+
+- [#70](https://github.com/Robot-Inventor/payload-passkey/pull/70) [`a9f0e6c`](https://github.com/Robot-Inventor/payload-passkey/commit/a9f0e6c970d3d09eb9c9b91acc7e307c0c5cf456) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: enable minification to reduce package size
+
 ## 1.1.2
 
 ### Patch Changes
