@@ -13,7 +13,7 @@ interface PasskeyLoginButtonProps {
     enablePasskeyAutofill: boolean;
 }
 
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-lines-per-function, max-statements
 const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps): ReactNode => {
     const { config } = useConfig();
     const adminRoute = config.routes.admin;
@@ -24,6 +24,16 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
     const redirectTo = searchParams.get("redirect");
     // eslint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+
+    const redirectToAdminPanel = async (): Promise<void> => {
+        await fetchFullUser();
+        router.push(
+            getSafeRedirect({
+                fallbackTo: adminRoute,
+                redirectTo: redirectTo ?? ""
+            })
+        );
+    };
 
     useEffect((): (() => void) => {
         // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -44,14 +54,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
                 });
                 if (result.error) return;
 
-                await fetchFullUser();
-                // eslint-disable-next-line react-doctor/nextjs-no-client-side-redirect
-                router.push(
-                    getSafeRedirect({
-                        fallbackTo: adminRoute,
-                        redirectTo: redirectTo ?? ""
-                    })
-                );
+                await redirectToAdminPanel();
             } catch {
                 // Do nothing if passkey autofill was not used
             }
@@ -72,13 +75,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
                 const errorMessage = result.error.message ?? t("passkeyPlugin:loginButton:failedToLogin");
                 toast.error(errorMessage);
             } else {
-                await fetchFullUser();
-                router.push(
-                    getSafeRedirect({
-                        fallbackTo: adminRoute,
-                        redirectTo: redirectTo ?? ""
-                    })
-                );
+                await redirectToAdminPanel();
             }
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {
