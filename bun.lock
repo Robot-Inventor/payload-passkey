@@ -6,7 +6,7 @@
       "name": "payload-passkey",
       "dependencies": {
         "@better-auth/passkey": "^1.6.26",
-        "@delmaredigital/payload-better-auth": "^0.9.2",
+        "@delmaredigital/payload-better-auth": "^0.10.0",
         "better-auth": "^1.6.26",
       },
       "devDependencies": {
@@ -165,7 +165,7 @@
 
     "@date-fns/tz": ["@date-fns/tz@1.2.0", "", {}, "sha512-LBrd7MiJZ9McsOgxqWX7AaxrDjcFVjWH/tIKJd7pnR7McaslGYOP1QmmiBXdJH/H/yLCT+rcQ7FaPBUxRGUtrg=="],
 
-    "@delmaredigital/payload-better-auth": ["@delmaredigital/payload-better-auth@0.9.2", "", { "dependencies": { "qrcode.react": "^4.2.0" }, "peerDependencies": { "@better-auth/api-key": ">=1.6.0 <2", "@better-auth/passkey": ">=1.6.0 <2", "@payloadcms/next": ">=3.69.0 <4", "@payloadcms/ui": ">=3.69.0 <4", "better-auth": ">=1.6.0 <2", "next": ">=15.5.16 <17", "payload": ">=3.69.0 <4", "react": ">=19.2.1 <20" }, "optionalPeers": ["@better-auth/api-key", "@better-auth/passkey"] }, "sha512-Axvsq//EdMozm12epjGf8loNlsQz2pTt5ksdpvqzagoKF5m3IytzPjKYSDRlnj50WXMIeZBQJKjTklfsUM92sg=="],
+    "@delmaredigital/payload-better-auth": ["@delmaredigital/payload-better-auth@0.10.0", "", { "dependencies": { "qrcode.react": "^4.2.0" }, "peerDependencies": { "@better-auth/api-key": ">=1.6.0 <2", "@better-auth/passkey": ">=1.6.0 <2", "@payloadcms/next": ">=3.69.0 <4", "@payloadcms/ui": ">=3.69.0 <4", "better-auth": ">=1.6.0 <2", "next": ">=15.5.16 <17", "payload": ">=3.69.0 <4", "react": ">=19.2.1 <20" }, "optionalPeers": ["@better-auth/api-key", "@better-auth/passkey"] }, "sha512-25fLgD6rkiaEUJfXvIlbD2jH6YQkbfWW3siYeERcE3fDZNJreFUmEq4o16Ovl7d+yIuGVbz98NOesykcuFRWLA=="],
 
     "@dnd-kit/accessibility": ["@dnd-kit/accessibility@3.1.1", "", { "dependencies": { "tslib": "^2.0.0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw=="],
 
