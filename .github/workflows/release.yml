@@ -35,7 +35,7 @@ jobs:
               id: changesets
               uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d
               with:
-                  version: bun run ci:version
-                  publish: bun run ci:publish
+                  version-script: bun run ci:version
+                  publish-script: bun run ci:publish
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
