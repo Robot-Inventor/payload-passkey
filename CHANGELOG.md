@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 1.2.4
+
+### Patch Changes
+
+- [#90](https://github.com/Robot-Inventor/payload-passkey/pull/90) [`05b5508`](https://github.com/Robot-Inventor/payload-passkey/commit/05b550871d500e8c05797a2c782e977b02c79422) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: fixed a bug where automatic token refresh was not working
+
 ## 1.2.3
 
 ### Patch Changes
