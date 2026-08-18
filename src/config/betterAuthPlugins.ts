@@ -77,7 +77,8 @@ const betterAuthPlugin = ({
                 session: {
                     expiresIn: sessionSeconds,
                     updateAge: sessionUpdateSeconds,
-                    freshAge: PASSKEY_FRESH_AGE_SECONDS
+                    freshAge: PASSKEY_FRESH_AGE_SECONDS,
+                    deferSessionRefresh: true
                 },
                 user: {
                     modelName
