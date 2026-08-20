@@ -1,8 +1,8 @@
-**payload-passkey v1.2.5**
+**payload-passkey v1.2.6**
 
 ***
 
-# payload-passkey v1.2.5
+# payload-passkey v1.2.6
 
 ## Type Aliases
 
