@@ -55,9 +55,9 @@
     "ci:publish": "bun run build && changeset publish"
   },
   "dependencies": {
-    "@better-auth/passkey": "^1.7.0",
+    "@better-auth/passkey": "^1.7.1",
     "@delmaredigital/payload-better-auth": "^0.10.0",
-    "better-auth": "^1.7.0"
+    "better-auth": "^1.7.1"
   },
   "devDependencies": {
     "@babel/core": "^8.0.1",
