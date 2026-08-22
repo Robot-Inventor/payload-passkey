@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@better-auth/passkey": "^1.7.1",
-    "@delmaredigital/payload-better-auth": "^0.10.0",
+    "@delmaredigital/payload-better-auth": "^0.11.0",
     "better-auth": "^1.7.1"
   },
   "devDependencies": {
