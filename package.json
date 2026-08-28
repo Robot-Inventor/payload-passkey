@@ -75,7 +75,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.9.1",
     "jiti": "^2.7.0",
-    "knip": "^6.32.2",
+    "knip": "^6.32.3",
     "linkedom": "^0.18.13",
     "prettier": "^3.9.6",
     "react": "^19.2.8",
