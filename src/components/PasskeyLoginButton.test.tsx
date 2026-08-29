@@ -1,13 +1,23 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { PasskeyLoginButton } from "./PasskeyLoginButton";
 import type { ReactNode } from "react";
 
-const mocks = vi.hoisted(() => ({
-    passkey: vi.fn(),
-    fetchFullUser: vi.fn(),
-    push: vi.fn(),
-    toastError: vi.fn()
-}));
+const mocks = vi.hoisted(() => {
+    const passkey = vi.fn();
+
+    return {
+        passkey,
+        fetchFullUser: vi.fn(),
+        push: vi.fn(),
+        toastError: vi.fn(),
+        client: {
+            signIn: {
+                passkey
+            }
+        }
+    };
+});
 
 const translations: Record<string, string> = {
     "passkeyPlugin:loginButton:failedToLogin": "failed to login",
@@ -38,17 +48,8 @@ vi.mock("next/navigation", () => ({
     useSearchParams: (): URLSearchParams => new URLSearchParams("redirect=/requested")
 }));
 
-vi.mock("../auth/client", () => ({
-    useBetterAuthClient: vi.fn(() => ({
-        signIn: {
-            passkey: mocks.passkey
-        }
-    }))
-}));
-
-vi.mock("./PasskeyLoginButton.css", () => ({
-    buttonStyles: "button-styles",
-    orTextStyles: "or-styles"
+vi.mock("better-auth/client", () => ({
+    createAuthClient: (): typeof mocks.client => mocks.client
 }));
 
 vi.mock("@payloadcms/ui/icons/Lock", () => ({
@@ -62,7 +63,6 @@ describe("PasskeyLoginButton", () => {
 
     it("logs in with a passkey and redirects to the requested admin page", async () => {
         mocks.passkey.mockResolvedValue({ data: {}, error: null });
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
@@ -74,7 +74,6 @@ describe("PasskeyLoginButton", () => {
 
     it("shows the provider error returned by Better Auth", async () => {
         mocks.passkey.mockResolvedValue({ error: { message: "provider rejected the passkey" } });
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
@@ -88,7 +87,6 @@ describe("PasskeyLoginButton", () => {
         const error = new Error("cancelled");
         error.name = "NotAllowedError";
         mocks.passkey.mockRejectedValue(error);
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));

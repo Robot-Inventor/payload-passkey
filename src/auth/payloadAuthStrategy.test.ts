@@ -1,13 +1,14 @@
 import type { AuthStrategyFunctionArgs, AuthStrategyResult } from "payload";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { payloadAuthStrategy } from "./payloadAuthStrategy";
 
 const underlyingAuthenticate = vi.hoisted(() => vi.fn());
 
 vi.mock("@delmaredigital/payload-better-auth", () => ({
-    betterAuthStrategy: vi.fn(() => ({
+    betterAuthStrategy: (): { name: string; authenticate: typeof underlyingAuthenticate } => ({
         name: "better-auth",
         authenticate: underlyingAuthenticate
-    }))
+    })
 }));
 
 type User = NonNullable<AuthStrategyResult["user"]>;
@@ -23,7 +24,6 @@ const authenticate = async (
     collection?: { config: { auth: { verify: boolean } } }
 ): Promise<AuthStrategyResult | undefined> => {
     underlyingAuthenticate.mockResolvedValue({ user: resultUser });
-    const { payloadAuthStrategy } = await import("./payloadAuthStrategy");
     const strategy = payloadAuthStrategy({ usersCollection: "users" });
 
     return strategy.authenticate({

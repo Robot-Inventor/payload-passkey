@@ -5,9 +5,7 @@ import type { PayloadPasskeyOptions } from "../types";
 
 const bridgeMocks = vi.hoisted(() => ({
     getSessionFromCtx: vi.fn(),
-    setSessionCookie: vi.fn(),
-    freshSessionMiddleware: vi.fn(),
-    createAuthEndpoint: vi.fn()
+    setSessionCookie: vi.fn()
 }));
 
 const millisecondsPerSecond = 1000;
@@ -16,21 +14,14 @@ const freshnessToleranceSeconds = 1;
 const shortSessionLifetimeSeconds = 10;
 const longSessionLifetimeSeconds = PASSKEY_FRESH_AGE_SECONDS + freshnessToleranceSeconds;
 
-class TestAPIError extends Error {
-    public code: string | undefined;
+vi.mock("better-auth/api", async () => {
+    const actual = await vi.importActual("better-auth/api");
 
-    public constructor(_name: string, body: { code?: string; message?: string }) {
-        super(body.message);
-        this.code = body.code;
-    }
-}
-
-vi.mock("better-auth/api", () => ({
-    APIError: TestAPIError,
-    createAuthEndpoint: bridgeMocks.createAuthEndpoint,
-    freshSessionMiddleware: bridgeMocks.freshSessionMiddleware,
-    getSessionFromCtx: bridgeMocks.getSessionFromCtx
-}));
+    return {
+        ...actual,
+        getSessionFromCtx: bridgeMocks.getSessionFromCtx
+    };
+});
 
 vi.mock("better-auth/cookies", () => ({
     setSessionCookie: bridgeMocks.setSessionCookie
@@ -101,10 +92,6 @@ const getEndpoint = async (
 
 const configureBridgeMocks = (): void => {
     vi.clearAllMocks();
-    bridgeMocks.createAuthEndpoint.mockImplementation(
-        (_path: string, _options: unknown, handler: (context: unknown) => unknown): ((context: unknown) => unknown) =>
-            handler
-    );
     bridgeMocks.getSessionFromCtx.mockResolvedValue(null);
 };
 
@@ -277,7 +264,7 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
             }
         });
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ code: "STEP_UP_REQUIRED" });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
     });
 
     it("requires recent authentication when the existing Better Auth session has expired", async () => {
@@ -292,7 +279,7 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
             }
         });
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ code: "STEP_UP_REQUIRED" });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
     });
 
     it("requires a fresh Payload session when no Better Auth session exists", async () => {
@@ -310,7 +297,7 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         );
         const endpoint = await getEndpoint(requestContext.payload);
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ code: "STEP_UP_REQUIRED" });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
     });
 
     it("rejects a Payload session when its Better Auth user no longer exists", async () => {

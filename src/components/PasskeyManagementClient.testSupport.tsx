@@ -14,7 +14,6 @@ const mocks = vi.hoisted(() => {
         deletePasskey,
         toastError: vi.fn(),
         toastSuccess: vi.fn(),
-        getAuthenticatorName: vi.fn(),
         client: {
             passkey: {
                 addPasskey,
@@ -119,14 +118,7 @@ const MockTextInput = ({
 }): ReactNode => (
     <label>
         {label}
-        <input
-            aria-label={label}
-            value={value}
-            onChange={onChange}
-            onInput={(event) => {
-                onChange(event as unknown as ChangeEvent<HTMLInputElement>);
-            }}
-        />
+        <input aria-label={label} value={value} onChange={onChange} />
     </label>
 );
 
@@ -156,20 +148,8 @@ vi.mock("@payloadcms/ui", () => ({
     useTranslation: (): { t: typeof translate } => ({ t: translate })
 }));
 
-vi.mock("../auth/client", () => ({
-    useBetterAuthClient: vi.fn(() => mocks.client)
-}));
-
-vi.mock("@better-auth/passkey", () => ({
-    getAuthenticatorName: mocks.getAuthenticatorName
-}));
-
-vi.mock("./PasskeyManagementClient.css", () => ({
-    passkeyItemDateStyles: "date-styles",
-    passkeyItemDeleteButtonStyles: "delete-styles",
-    passkeyItemStyles: "item-styles",
-    registerButtonContainerStyles: "register-buttons",
-    registerFormStyles: "register-form"
+vi.mock("better-auth/client", () => ({
+    createAuthClient: (): typeof mocks.client => mocks.client
 }));
 
 vi.mock("@payloadcms/ui/icons/Plus", () => ({
@@ -190,7 +170,6 @@ const configureManagementClientMocks = (): void => {
     mocks.listUserPasskeys.mockResolvedValue({ data: [], error: null });
     mocks.addPasskey.mockResolvedValue({ data: {}, error: null });
     mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
-    mocks.getAuthenticatorName.mockReturnValue(null);
 };
 
 const renderClient = async (onStepUpRequired: () => void = vi.fn()): Promise<() => void> => {

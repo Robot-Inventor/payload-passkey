@@ -16,15 +16,21 @@ describe("PasskeysManagementClient list and registration", () => {
 
     it("shows passkeys returned by Better Auth and their user-facing names", async () => {
         mocks.listUserPasskeys.mockResolvedValue({
-            data: [createPasskey(), createPasskey({ id: "passkey-2", name: "", aaguid: "unknown" })],
+            data: [
+                createPasskey(),
+                createPasskey({
+                    id: "passkey-2",
+                    name: "",
+                    aaguid: "08987058-cadc-4b81-b6e1-30de50dcbe96"
+                })
+            ],
             error: null
         });
-        mocks.getAuthenticatorName.mockReturnValue("Security key");
 
         await renderClient();
 
         expect(await screen.findByText("Laptop")).toBeTruthy();
-        expect(screen.getByText("Security key")).toBeTruthy();
+        expect(screen.getByText("Windows Hello")).toBeTruthy();
         expect(screen.getAllByRole("button", { name: "delete" })).toHaveLength(expectedPasskeyCount);
     });
 
@@ -52,7 +58,7 @@ describe("PasskeysManagementClient registration", () => {
         await renderClient();
         fireEvent.click(screen.getByRole("button", { name: "add passkey" }));
         const nameInput = screen.getByRole("textbox", { name: "name" });
-        fireEvent.input(nameInput, { target: { value: "Phone" } });
+        fireEvent.change(nameInput, { target: { value: "Phone" } });
         fireEvent.click(screen.getByRole("button", { name: "register" }));
 
         await waitFor(() => {

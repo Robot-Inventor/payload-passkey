@@ -1,19 +1,32 @@
+import type { ChangeEvent, ReactNode } from "react";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { ReactNode } from "react";
 
 const mocks = vi.hoisted(() => {
     const fetch = vi.fn();
+    const listUserPasskeys = vi.fn();
+    const addPasskey = vi.fn();
+    const deletePasskey = vi.fn();
 
     return {
         fetch,
+        listUserPasskeys,
+        addPasskey,
+        deletePasskey,
         logOut: vi.fn(),
         push: vi.fn(),
         toastError: vi.fn(),
         toastSuccess: vi.fn(),
         user: { id: "user-1" },
         documentId: "user-1",
-        client: { $fetch: fetch }
+        client: {
+            $fetch: fetch,
+            passkey: {
+                addPasskey,
+                deletePasskey,
+                listUserPasskeys
+            }
+        }
     };
 });
 
@@ -24,6 +37,14 @@ const translations: Record<string, string> = {
     "passkeyPlugin:managementField:preparingManagement": "preparing passkeys",
     "passkeyPlugin:managementField:reauthenticate": "reauthenticate",
     "passkeyPlugin:managementField:reauthenticationRequired": "reauthentication required",
+    "passkeyPlugin:managementClient:addPasskey": "manage passkeys",
+    "passkeyPlugin:managementClient:cancel": "cancel",
+    "passkeyPlugin:managementClient:failedToLoad": "failed to load",
+    "passkeyPlugin:managementClient:failedToRegister": "failed to register",
+    "passkeyPlugin:managementClient:notFound": "no passkeys",
+    "passkeyPlugin:managementClient:passkeyName": "name",
+    "passkeyPlugin:managementClient:register": "register",
+    "passkeyPlugin:managementClient:registering": "registering",
     "authentication:loggedOutSuccessfully": "logged out successfully",
     "error:logoutFailed": "logout failed"
 } as const;
@@ -31,10 +52,43 @@ const translations: Record<string, string> = {
 const freshnessWindowMilliseconds = 1000;
 const sessionFreshnessMilliseconds = 60_000;
 
+const ignoreModal = (): void => {
+    // Delete confirmation is covered by PasskeyManagementClient tests.
+};
+
+const fieldButton = ({
+    children,
+    disabled,
+    onClick
+}: {
+    children: ReactNode;
+    disabled?: boolean;
+    onClick?: () => void;
+}): ReactNode => (
+    <button type="button" disabled={disabled} onClick={onClick}>
+        {children}
+    </button>
+);
+
+const fieldTextInput = ({
+    label,
+    value,
+    onChange
+}: {
+    label: string;
+    value: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}): ReactNode => (
+    <label>
+        {label}
+        <input aria-label={label} value={value} onChange={onChange} />
+    </label>
+);
+
 vi.mock("@payloadcms/ui", () => ({
-    Button: ({ children, onClick }: { children: ReactNode; onClick?: () => void }): ReactNode => (
-        <button onClick={onClick}>{children}</button>
-    ),
+    Button: fieldButton,
+    ConfirmationModal: (): null => null,
+    TextInput: fieldTextInput,
     toast: {
         error: mocks.toastError,
         success: mocks.toastSuccess
@@ -55,28 +109,23 @@ vi.mock("@payloadcms/ui", () => ({
         }
     }),
     useDocumentInfo: (): { id: string } => ({ id: mocks.documentId }),
+    useModal: (): { openModal: () => void } => ({ openModal: ignoreModal }),
     useTranslation: (): { t: (translationKey: string) => string } => ({
         // eslint-disable-next-line id-length
         t: (translationKey: string): string => translations[translationKey] ?? translationKey
     })
 }));
 
-vi.mock("../auth/client", () => ({
-    useBetterAuthClient: vi.fn(() => mocks.client)
-}));
-
-vi.mock("./PasskeyManagementClient", () => ({
-    PasskeysManagementClient: ({ onStepUpRequired }: { onStepUpRequired: () => void }): ReactNode => (
-        <button onClick={onStepUpRequired}>manage passkeys</button>
-    )
-}));
-
-vi.mock("./PasskeyManagementField.css", () => ({
-    containerStyles: "container-styles"
+vi.mock("better-auth/client", () => ({
+    createAuthClient: (): typeof mocks.client => mocks.client
 }));
 
 vi.mock("next/navigation", () => ({
     useRouter: (): { push: typeof mocks.push } => ({ push: mocks.push })
+}));
+
+vi.mock("@payloadcms/ui/icons/Plus", () => ({
+    PlusIcon: (): null => null
 }));
 
 const configureFieldMocks = (): void => {
@@ -84,6 +133,9 @@ const configureFieldMocks = (): void => {
     mocks.user = { id: "user-1" };
     mocks.documentId = "user-1";
     mocks.logOut.mockResolvedValue(null);
+    mocks.listUserPasskeys.mockResolvedValue({ data: [], error: null });
+    mocks.addPasskey.mockResolvedValue({ data: {}, error: null });
+    mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
     location.pathname = "/admin/account";
     location.search = "?tab=security";
 };
@@ -177,12 +229,15 @@ describe("PasskeyManagementField freshness", () => {
 
     it("moves to reauthentication when management reports a step-up requirement", async () => {
         mocks.fetch.mockResolvedValue({ data: { freshUntil: Date.now() + sessionFreshnessMilliseconds }, error: null });
+        mocks.addPasskey.mockResolvedValue({ error: { code: "STEP_UP_REQUIRED" } });
 
         await renderField();
-        const manageButton = await screen.findByRole("button", { name: "manage passkeys" });
-        fireEvent.click(manageButton);
+        fireEvent.click(await screen.findByRole("button", { name: "manage passkeys" }));
+        fireEvent.click(screen.getByRole("button", { name: "register" }));
 
-        expect(screen.getByText("reauthentication required")).toBeTruthy();
+        await waitFor(() => {
+            expect(screen.getByText("reauthentication required")).toBeTruthy();
+        });
     });
 
     it("moves to reauthentication when the bridge freshness deadline expires", async () => {
