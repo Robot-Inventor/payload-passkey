@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 2.0.2
+
+### Patch Changes
+
+- [#110](https://github.com/Robot-Inventor/payload-passkey/pull/110) [`4affb78`](https://github.com/Robot-Inventor/payload-passkey/commit/4affb78112a484ddc73c3622765baf71ae71656a) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.2
+
 ## 2.0.1
 
 ### Patch Changes
