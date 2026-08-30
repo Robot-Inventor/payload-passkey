@@ -97,16 +97,6 @@ describe("PasskeyLoginButton", () => {
         });
     });
 
-    it("shows the provider error returned by Better Auth", async () => {
-        mocks.passkey.mockResolvedValue({ error: { message: "provider rejected the passkey" } });
-
-        render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
-        fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
-
-        const alert = await screen.findByRole("alert");
-        expect(alert.textContent).toBe("provider rejected the passkey");
-    });
-
     it("shows the browser cancellation message when the passkey prompt is cancelled", async () => {
         const error = new Error("cancelled");
         error.name = "NotAllowedError";

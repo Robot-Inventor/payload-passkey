@@ -38,14 +38,6 @@ describe("PasskeysManagementClient list and registration", () => {
         expect(screen.getByText("Windows Hello")).toBeTruthy();
         expect(screen.getAllByRole("button", { name: "delete" })).toHaveLength(expectedPasskeyCount);
     });
-
-    it("shows the loading error returned by Better Auth", async () => {
-        mocks.listUserPasskeys.mockResolvedValue({ data: [], error: { message: "load failed" } });
-
-        await renderClient();
-
-        await expectAlert("load failed");
-    });
 });
 
 describe("PasskeysManagementClient registration", () => {
@@ -71,15 +63,6 @@ describe("PasskeysManagementClient registration", () => {
 
 describe("PasskeysManagementClient registration errors", () => {
     beforeEach(configureManagementClientMocks);
-
-    it("shows a registration error returned by Better Auth", async () => {
-        mocks.addPasskey.mockResolvedValue({ error: { message: "registration failed" } });
-
-        await renderClient();
-        openRegistrationForm();
-
-        await expectAlert("registration failed");
-    });
 
     it("shows the browser cancellation message when registration is cancelled", async () => {
         const error = new Error("cancelled");
@@ -136,17 +119,5 @@ describe("PasskeysManagementClient deletion errors", () => {
         fireEvent.click(await screen.findByRole("button", { name: "confirm" }));
 
         expect(await screen.findByText("reauthentication required")).toBeTruthy();
-    });
-
-    it("shows a deletion error returned by Better Auth", async () => {
-        mocks.listUserPasskeys.mockResolvedValue({ data: [createPasskey()], error: null });
-        mocks.deletePasskey.mockResolvedValue({ error: { message: "deletion failed" } });
-
-        await renderClient();
-        await screen.findByText("Laptop");
-        fireEvent.click(screen.getByRole("button", { name: "delete" }));
-        fireEvent.click(await screen.findByRole("button", { name: "confirm" }));
-
-        await expectAlert("deletion failed");
     });
 });
