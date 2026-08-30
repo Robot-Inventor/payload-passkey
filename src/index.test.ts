@@ -19,7 +19,7 @@ const invalidSessionSeconds = 0;
 const minimumSessionSeconds = 120;
 const invalidRefreshBufferSeconds = 60;
 const negativeRefreshBufferSeconds = -1;
-const expectedEmailVerifiedFieldCount = 1;
+const expectedFieldOccurrenceCount = 1;
 
 const createConfig = (userCollection: CollectionConfig = { slug: "users", auth: true, fields: [] }): Config =>
     ({
@@ -85,9 +85,11 @@ describe("payloadPasskey configuration", () => {
         const users = getUsersCollection(result);
 
         expect(users.auth.tokenExpiration).toBe(configuredSessionSeconds);
-        expect(users.fields.map((field) => ("name" in field ? field.name : null))).toEqual(
-            expect.arrayContaining(["emailVerified", "image", "payloadPasskeyPluginPasskeyManagement"])
-        );
+        expect(
+            ["emailVerified", "image", "payloadPasskeyPluginPasskeyManagement"].map(
+                (fieldName) => users.fields.filter((field) => "name" in field && field.name === fieldName).length
+            )
+        ).toEqual([expectedFieldOccurrenceCount, expectedFieldOccurrenceCount, expectedFieldOccurrenceCount]);
         expect(result.collections?.find(({ slug }) => slug === "posts")).toMatchObject({ slug: "posts", fields: [] });
         expect(result.i18n?.translations?.en).toMatchObject({ customMessage: "preserved" });
         expect(result.i18n?.translations?.en).toHaveProperty("passkeyPlugin");
@@ -192,7 +194,7 @@ describe("payloadPasskey injected fields", () => {
         const users = getUsersCollection(result);
 
         expect(users.fields.filter((field) => "name" in field && field.name === "emailVerified")).toHaveLength(
-            expectedEmailVerifiedFieldCount
+            expectedFieldOccurrenceCount
         );
     });
 

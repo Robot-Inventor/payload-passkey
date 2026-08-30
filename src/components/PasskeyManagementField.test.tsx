@@ -1,30 +1,70 @@
 import type { ChangeEvent, ReactNode } from "react";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 
+interface FieldResponse {
+    data: unknown;
+    error: unknown;
+}
+
+interface FieldTestState {
+    addPasskeyResponse: FieldResponse;
+    bridge: Error | FieldResponse;
+    logoutError: Error | null;
+    pushedPath: string | null;
+}
+
+// eslint-disable-next-line max-lines-per-function
 const mocks = vi.hoisted(() => {
-    const fetch = vi.fn();
-    const listUserPasskeys = vi.fn();
-    const addPasskey = vi.fn();
-    const deletePasskey = vi.fn();
+    const state: FieldTestState = {
+        addPasskeyResponse: {
+            data: {},
+            error: null
+        },
+        bridge: {
+            data: null,
+            error: null
+        },
+        logoutError: null,
+        pushedPath: null
+    };
+
+    const showToast = (message: string): void => {
+        const notification = document.createElement("div");
+        notification.setAttribute("role", "alert");
+        notification.textContent = message;
+        document.body.append(notification);
+    };
+
+    const clearToasts = (): void => {
+        document.querySelectorAll('[role="alert"]').forEach((notification) => {
+            notification.remove();
+        });
+    };
+
+    const fetch = (): Promise<FieldResponse> =>
+        state.bridge instanceof Error ? Promise.reject(state.bridge) : Promise.resolve(state.bridge);
+    const addPasskey = (): Promise<FieldResponse> => Promise.resolve(state.addPasskeyResponse);
+    const noPasskeys = (): Promise<FieldResponse> =>
+        Promise.resolve({
+            data: [],
+            error: null
+        });
 
     return {
-        fetch,
-        listUserPasskeys,
-        addPasskey,
-        deletePasskey,
-        logOut: vi.fn(),
-        push: vi.fn(),
-        toastError: vi.fn(),
-        toastSuccess: vi.fn(),
-        user: { id: "user-1" },
+        showToast,
+        clearToasts,
+        state,
+        user: {
+            id: "user-1"
+        },
         documentId: "user-1",
         client: {
             $fetch: fetch,
             passkey: {
                 addPasskey,
-                deletePasskey,
-                listUserPasskeys
+                deletePasskey: noPasskeys,
+                listUserPasskeys: noPasskeys
             }
         }
     };
@@ -33,24 +73,30 @@ const mocks = vi.hoisted(() => {
 const translations: Record<string, string> = {
     "passkeyPlugin:managementField:failedToManage": "failed to manage passkeys",
     "passkeyPlugin:managementField:ownPasskeysOnly": "manage your own passkeys only",
-    "passkeyPlugin:managementField:passkey": "Passkeys",
-    "passkeyPlugin:managementField:preparingManagement": "preparing passkeys",
     "passkeyPlugin:managementField:reauthenticate": "reauthenticate",
     "passkeyPlugin:managementField:reauthenticationRequired": "reauthentication required",
     "passkeyPlugin:managementClient:addPasskey": "manage passkeys",
-    "passkeyPlugin:managementClient:cancel": "cancel",
-    "passkeyPlugin:managementClient:failedToLoad": "failed to load",
-    "passkeyPlugin:managementClient:failedToRegister": "failed to register",
-    "passkeyPlugin:managementClient:notFound": "no passkeys",
-    "passkeyPlugin:managementClient:passkeyName": "name",
     "passkeyPlugin:managementClient:register": "register",
-    "passkeyPlugin:managementClient:registering": "registering",
     "authentication:loggedOutSuccessfully": "logged out successfully",
     "error:logoutFailed": "logout failed"
 } as const;
 
-const freshnessWindowMilliseconds = 1000;
 const sessionFreshnessMilliseconds = 60_000;
+const freshnessWindowMilliseconds = 100;
+
+const createFreshBridge = (freshUntil: number): FieldResponse => ({
+    data: {
+        freshUntil
+    },
+    error: null
+});
+
+const staleBridge: FieldResponse = {
+    data: null,
+    error: {
+        code: "STEP_UP_REQUIRED"
+    }
+};
 
 const ignoreModal = (): void => {
     // Delete confirmation is covered by PasskeyManagementClient tests.
@@ -90,11 +136,12 @@ vi.mock("@payloadcms/ui", () => ({
     ConfirmationModal: (): null => null,
     TextInput: fieldTextInput,
     toast: {
-        error: mocks.toastError,
-        success: mocks.toastSuccess
+        error: mocks.showToast,
+        success: mocks.showToast
     },
-    useAuth: (): { logOut: typeof mocks.logOut; user: typeof mocks.user } => ({
-        logOut: mocks.logOut,
+    useAuth: (): { logOut: () => Promise<void>; user: typeof mocks.user } => ({
+        logOut: (): Promise<void> =>
+            mocks.state.logoutError ? Promise.reject(mocks.state.logoutError) : Promise.resolve(),
         user: mocks.user
     }),
     useConfig: (): {
@@ -121,7 +168,11 @@ vi.mock("better-auth/client", () => ({
 }));
 
 vi.mock("next/navigation", () => ({
-    useRouter: (): { push: typeof mocks.push } => ({ push: mocks.push })
+    useRouter: (): { push: (path: string) => void } => ({
+        push: (path: string): void => {
+            mocks.state.pushedPath = path;
+        }
+    })
 }));
 
 vi.mock("@payloadcms/ui/icons/Plus", () => ({
@@ -129,16 +180,23 @@ vi.mock("@payloadcms/ui/icons/Plus", () => ({
 }));
 
 const configureFieldMocks = (): void => {
-    vi.clearAllMocks();
-    mocks.user = { id: "user-1" };
+    mocks.clearToasts();
+    mocks.state.addPasskeyResponse = {
+        data: {},
+        error: null
+    };
+    mocks.state.bridge = {
+        data: null,
+        error: null
+    };
+    mocks.state.logoutError = null;
+    mocks.state.pushedPath = null;
     mocks.documentId = "user-1";
-    mocks.logOut.mockResolvedValue(null);
-    mocks.listUserPasskeys.mockResolvedValue({ data: [], error: null });
-    mocks.addPasskey.mockResolvedValue({ data: {}, error: null });
-    mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
     location.pathname = "/admin/account";
     location.search = "?tab=security";
 };
+
+beforeEach(configureFieldMocks);
 
 const renderField = async (): Promise<void> => {
     const { PasskeyManagementField } = await import("./PasskeyManagementField");
@@ -146,8 +204,6 @@ const renderField = async (): Promise<void> => {
 };
 
 describe("PasskeyManagementField ownership", () => {
-    beforeEach(configureFieldMocks);
-
     it("only shows passkey management for the current user", async () => {
         mocks.documentId = "other-user";
 
@@ -157,111 +213,70 @@ describe("PasskeyManagementField ownership", () => {
     });
 });
 
-describe("PasskeyManagementField bridge", () => {
-    beforeEach(configureFieldMocks);
-
-    it("shows the management client after establishing a fresh bridge session", async () => {
-        mocks.fetch.mockResolvedValue({ data: { freshUntil: Date.now() + sessionFreshnessMilliseconds }, error: null });
-
-        await renderField();
-
-        await waitFor(() => {
-            expect(screen.getByRole("button", { name: "manage passkeys" })).toBeTruthy();
-        });
-    });
-});
-
 describe("PasskeyManagementField reauthentication", () => {
-    beforeEach(configureFieldMocks);
-
     it("asks the user to reauthenticate when the bridge reports a stale session", async () => {
-        mocks.fetch.mockResolvedValue({ data: null, error: { code: "STEP_UP_REQUIRED" } });
+        mocks.state.bridge = staleBridge;
 
         await renderField();
 
-        await waitFor(() => {
-            expect(screen.getByText("reauthentication required")).toBeTruthy();
-        });
+        await screen.findByText("reauthentication required");
         fireEvent.click(screen.getByRole("button", { name: "reauthenticate" }));
 
-        await waitFor(() => {
-            expect(mocks.push).toHaveBeenCalledWith(
-                "/admin/login?redirect=%2Fadmin%2Faccount%3Ftab%3Dsecurity%23payload-passkey-passkey-management"
-            );
-            expect(mocks.toastSuccess).toHaveBeenCalledWith("logged out successfully");
-        });
+        const alert = await screen.findByRole("alert");
+        expect(alert.textContent).toBe("logged out successfully");
+        expect(mocks.state.pushedPath).toBe(
+            "/admin/login?redirect=%2Fadmin%2Faccount%3Ftab%3Dsecurity%23payload-passkey-passkey-management"
+        );
     });
 
     it("shows an error toast when reauthentication logout fails", async () => {
-        mocks.fetch.mockResolvedValue({ data: null, error: { code: "STEP_UP_REQUIRED" } });
-        mocks.logOut.mockRejectedValue(new Error("logout failed"));
+        mocks.state.bridge = staleBridge;
+        mocks.state.logoutError = new Error("logout failed");
 
         await renderField();
 
-        await waitFor(() => {
-            expect(screen.getByText("reauthentication required")).toBeTruthy();
-        });
+        await screen.findByText("reauthentication required");
         fireEvent.click(screen.getByRole("button", { name: "reauthenticate" }));
 
-        await waitFor(() => {
-            expect(mocks.toastError).toHaveBeenCalledWith("logout failed");
-        });
-        expect(mocks.push).not.toHaveBeenCalled();
+        const alert = await screen.findByRole("alert");
+        expect(alert.textContent).toBe("logout failed");
+        expect(mocks.state.pushedPath).toBeNull();
     });
 });
 
 describe("PasskeyManagementField bridge failures", () => {
-    beforeEach(configureFieldMocks);
-
     it("shows a failure message when the session bridge cannot be established", async () => {
-        mocks.fetch.mockRejectedValue(new Error("network unavailable"));
+        mocks.state.bridge = new Error("network unavailable");
 
         await renderField();
 
-        await waitFor(() => {
-            expect(screen.getByText("failed to manage passkeys")).toBeTruthy();
-        });
+        await screen.findByText("failed to manage passkeys");
     });
 });
 
 describe("PasskeyManagementField freshness", () => {
-    beforeEach(configureFieldMocks);
-
     it("moves to reauthentication when management reports a step-up requirement", async () => {
-        mocks.fetch.mockResolvedValue({ data: { freshUntil: Date.now() + sessionFreshnessMilliseconds }, error: null });
-        mocks.addPasskey.mockResolvedValue({ error: { code: "STEP_UP_REQUIRED" } });
+        mocks.state.bridge = createFreshBridge(Date.now() + sessionFreshnessMilliseconds);
+        mocks.state.addPasskeyResponse = {
+            data: null,
+            error: {
+                code: "STEP_UP_REQUIRED"
+            }
+        };
 
         await renderField();
         fireEvent.click(await screen.findByRole("button", { name: "manage passkeys" }));
         fireEvent.click(screen.getByRole("button", { name: "register" }));
 
-        await waitFor(() => {
-            expect(screen.getByText("reauthentication required")).toBeTruthy();
-        });
+        await screen.findByText("reauthentication required");
     });
 
     it("moves to reauthentication when the bridge freshness deadline expires", async () => {
-        vi.useFakeTimers();
+        mocks.state.bridge = createFreshBridge(Date.now() + freshnessWindowMilliseconds);
 
-        try {
-            mocks.fetch.mockResolvedValue({
-                data: { freshUntil: Date.now() + freshnessWindowMilliseconds },
-                error: null
-            });
+        await renderField();
+        await screen.findByRole("button", { name: "manage passkeys" });
 
-            await renderField();
-            await act(async () => {
-                await Promise.resolve();
-            });
-            expect(screen.getByRole("button", { name: "manage passkeys" })).toBeTruthy();
-
-            act(() => {
-                vi.advanceTimersByTime(freshnessWindowMilliseconds);
-            });
-
-            expect(screen.getByText("reauthentication required")).toBeTruthy();
-        } finally {
-            vi.useRealTimers();
-        }
+        expect(await screen.findByText("reauthentication required")).toBeTruthy();
     });
 });

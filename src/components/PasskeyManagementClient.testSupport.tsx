@@ -7,13 +7,24 @@ const mocks = vi.hoisted(() => {
     const listUserPasskeys = vi.fn();
     const addPasskey = vi.fn();
     const deletePasskey = vi.fn();
+    const showToast = (message: string): void => {
+        const notification = document.createElement("div");
+        notification.setAttribute("role", "alert");
+        notification.textContent = message;
+        document.body.append(notification);
+    };
+    const clearToasts = (): void => {
+        document.querySelectorAll('[role="alert"]').forEach((notification) => {
+            notification.remove();
+        });
+    };
 
     return {
         listUserPasskeys,
         addPasskey,
         deletePasskey,
-        toastError: vi.fn(),
-        toastSuccess: vi.fn(),
+        showToast,
+        clearToasts,
         client: {
             passkey: {
                 addPasskey,
@@ -139,8 +150,8 @@ vi.mock("@payloadcms/ui", () => ({
     ConfirmationModal: MockConfirmationModal,
     TextInput: MockTextInput,
     toast: {
-        error: mocks.toastError,
-        success: mocks.toastSuccess
+        error: mocks.showToast,
+        success: mocks.showToast
     },
     useModal: useMockModal,
     useConfig: (): { config: { routes: { api: string } } } => ({ config: { routes: { api: "/backend" } } }),
@@ -166,20 +177,34 @@ const createPasskey = (overrides: Partial<Passkey> = {}): Passkey =>
     }) as Passkey;
 
 const configureManagementClientMocks = (): void => {
-    vi.clearAllMocks();
+    mocks.clearToasts();
     mocks.listUserPasskeys.mockResolvedValue({ data: [], error: null });
     mocks.addPasskey.mockResolvedValue({ data: {}, error: null });
     mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
 };
 
-const renderClient = async (onStepUpRequired: () => void = vi.fn()): Promise<() => void> => {
+const renderClient = async (): Promise<void> => {
     const { PasskeysManagementClient } = await import("./PasskeyManagementClient");
+
+    const StepUpBoundary = (): ReactNode => {
+        const [stepUpRequired, setStepUpRequired] = useState(false);
+
+        if (stepUpRequired) return <p>reauthentication required</p>;
+
+        return (
+            <PasskeysManagementClient
+                onStepUpRequired={() => {
+                    setStepUpRequired(true);
+                }}
+            />
+        );
+    };
+
     render(
         <MockModalProvider>
-            <PasskeysManagementClient onStepUpRequired={onStepUpRequired} />
+            <StepUpBoundary />
         </MockModalProvider>
     );
-    return onStepUpRequired;
 };
 
 const openRegistrationForm = (): void => {

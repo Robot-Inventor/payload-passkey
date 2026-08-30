@@ -4,8 +4,7 @@ import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { PayloadPasskeyOptions } from "../types";
 
 const bridgeMocks = vi.hoisted(() => ({
-    getSessionFromCtx: vi.fn(),
-    setSessionCookie: vi.fn()
+    getSessionFromCtx: vi.fn()
 }));
 
 const millisecondsPerSecond = 1000;
@@ -24,7 +23,7 @@ vi.mock("better-auth/api", async () => {
 });
 
 vi.mock("better-auth/cookies", () => ({
-    setSessionCookie: bridgeMocks.setSessionCookie
+    setSessionCookie: (): Promise<void> => Promise.resolve()
 }));
 
 type Endpoint = (context: unknown) => Promise<unknown>;
