@@ -1,14 +1,6 @@
 import type { AuthStrategyFunctionArgs, AuthStrategyResult } from "payload";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-
-const underlyingAuthenticate = vi.hoisted(() => vi.fn());
-
-vi.mock("@delmaredigital/payload-better-auth", () => ({
-    betterAuthStrategy: vi.fn(() => ({
-        name: "better-auth",
-        authenticate: underlyingAuthenticate
-    }))
-}));
+import { describe, expect, it } from "vitest";
+import { payloadAuthStrategy } from "./payloadAuthStrategy";
 
 type User = NonNullable<AuthStrategyResult["user"]>;
 
@@ -22,22 +14,24 @@ const authenticate = async (
     resultUser: User | null,
     collection?: { config: { auth: { verify: boolean } } }
 ): Promise<AuthStrategyResult | undefined> => {
-    underlyingAuthenticate.mockResolvedValue({ user: resultUser });
-    const { payloadAuthStrategy } = await import("./payloadAuthStrategy");
     const strategy = payloadAuthStrategy({ usersCollection: "users" });
 
     return strategy.authenticate({
+        headers: new Headers(),
         payload: {
-            collections: collection ? { users: collection } : {}
+            betterAuth: {
+                api: {
+                    getSession: (): Promise<{ user: { id: string }; session: Record<string, never> } | null> =>
+                        Promise.resolve(resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null)
+                }
+            },
+            collections: collection ? { users: collection } : {},
+            find: (): Promise<{ docs: User[] }> => Promise.resolve({ docs: resultUser ? [resultUser] : [] })
         }
     } as unknown as AuthStrategyFunctionArgs);
 };
 
 describe("payloadAuthStrategy", () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     it("returns an unauthenticated result when Better Auth found no user", async () => {
         const result = await authenticate(null, { config: { auth: { verify: true } } });
 

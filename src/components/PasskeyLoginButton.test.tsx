@@ -1,13 +1,41 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { PasskeyLoginButton } from "./PasskeyLoginButton";
 import type { ReactNode } from "react";
 
-const mocks = vi.hoisted(() => ({
-    passkey: vi.fn(),
-    fetchFullUser: vi.fn(),
-    push: vi.fn(),
-    toastError: vi.fn()
-}));
+interface LoginTestState {
+    pushedPath: string | null;
+}
+
+const mocks = vi.hoisted(() => {
+    const passkey = vi.fn();
+    const state: LoginTestState = {
+        pushedPath: null
+    };
+    const showToast = (message: string): void => {
+        const notification = document.createElement("div");
+        notification.setAttribute("role", "alert");
+        notification.textContent = message;
+        document.body.append(notification);
+    };
+    const clearToasts = (): void => {
+        document.querySelectorAll('[role="alert"]').forEach((notification) => {
+            notification.remove();
+        });
+    };
+
+    return {
+        passkey,
+        state,
+        showToast,
+        clearToasts,
+        client: {
+            signIn: {
+                passkey
+            }
+        }
+    };
+});
 
 const translations: Record<string, string> = {
     "passkeyPlugin:loginButton:failedToLogin": "failed to login",
@@ -21,9 +49,11 @@ vi.mock("@payloadcms/ui", () => ({
         <button onClick={onClick}>{children}</button>
     ),
     toast: {
-        error: mocks.toastError
+        error: mocks.showToast
     },
-    useAuth: (): { fetchFullUser: typeof mocks.fetchFullUser } => ({ fetchFullUser: mocks.fetchFullUser }),
+    useAuth: (): { fetchFullUser: () => Promise<null> } => ({
+        fetchFullUser: (): Promise<null> => Promise.resolve(null)
+    }),
     useConfig: (): { config: { routes: { admin: string; api: string } } } => ({
         config: { routes: { admin: "/admin", api: "/backend" } }
     }),
@@ -34,21 +64,16 @@ vi.mock("@payloadcms/ui", () => ({
 }));
 
 vi.mock("next/navigation", () => ({
-    useRouter: (): { push: typeof mocks.push } => ({ push: mocks.push }),
+    useRouter: (): { push: (path: string) => void } => ({
+        push: (path: string): void => {
+            mocks.state.pushedPath = path;
+        }
+    }),
     useSearchParams: (): URLSearchParams => new URLSearchParams("redirect=/requested")
 }));
 
-vi.mock("../auth/client", () => ({
-    useBetterAuthClient: vi.fn(() => ({
-        signIn: {
-            passkey: mocks.passkey
-        }
-    }))
-}));
-
-vi.mock("./PasskeyLoginButton.css", () => ({
-    buttonStyles: "button-styles",
-    orTextStyles: "or-styles"
+vi.mock("better-auth/client", () => ({
+    createAuthClient: (): typeof mocks.client => mocks.client
 }));
 
 vi.mock("@payloadcms/ui/icons/Lock", () => ({
@@ -57,44 +82,40 @@ vi.mock("@payloadcms/ui/icons/Lock", () => ({
 
 describe("PasskeyLoginButton", () => {
     beforeEach(() => {
-        vi.clearAllMocks();
+        mocks.clearToasts();
+        mocks.state.pushedPath = null;
     });
 
     it("logs in with a passkey and redirects to the requested admin page", async () => {
         mocks.passkey.mockResolvedValue({ data: {}, error: null });
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
         await waitFor(() => {
-            expect(mocks.push).toHaveBeenCalledWith("/requested");
+            expect(mocks.state.pushedPath).toBe("/requested");
         });
     });
 
     it("shows the provider error returned by Better Auth", async () => {
         mocks.passkey.mockResolvedValue({ error: { message: "provider rejected the passkey" } });
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
-        await waitFor(() => {
-            expect(mocks.toastError).toHaveBeenCalledWith("provider rejected the passkey");
-        });
+        const alert = await screen.findByRole("alert");
+        expect(alert.textContent).toBe("provider rejected the passkey");
     });
 
     it("shows the browser cancellation message when the passkey prompt is cancelled", async () => {
         const error = new Error("cancelled");
         error.name = "NotAllowedError";
         mocks.passkey.mockRejectedValue(error);
-        const { PasskeyLoginButton } = await import("./PasskeyLoginButton");
 
         render(<PasskeyLoginButton enablePasskeyAutofill={false} />);
         fireEvent.click(screen.getByRole("button", { name: "login with passkey" }));
 
-        await waitFor(() => {
-            expect(mocks.toastError).toHaveBeenCalledWith("not allowed");
-        });
+        const alert = await screen.findByRole("alert");
+        expect(alert.textContent).toBe("not allowed");
     });
 });

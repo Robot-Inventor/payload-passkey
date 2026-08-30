@@ -1,18 +1,15 @@
 import type { AuthStrategyFunctionArgs, AuthStrategyResult } from "payload";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-
-const baseAuthenticate = vi.hoisted(() => vi.fn());
-
-vi.mock("./payloadAuthStrategy", () => ({
-    payloadAuthStrategy: vi.fn(() => ({
-        name: "better-auth",
-        authenticate: baseAuthenticate
-    }))
-}));
+import { describe, expect, it } from "vitest";
+import { passkeyAsTotpStrategy } from "./passkeyAsTotpStrategy";
 
 type User = NonNullable<AuthStrategyResult["user"]>;
 
-const createArgs = (pathname: string): AuthStrategyFunctionArgs =>
+const createArgs = (
+    pathname: string,
+    resultUser: User | null = {
+        id: "user-1"
+    } as User
+): AuthStrategyFunctionArgs =>
     ({
         headers: new Headers({ "x-pathname": pathname }),
         payload: {
@@ -20,21 +17,30 @@ const createArgs = (pathname: string): AuthStrategyFunctionArgs =>
                 routes: {
                     api: "/api"
                 }
-            }
+            },
+            collections: {
+                users: {
+                    config: {
+                        auth: {
+                            verify: false
+                        }
+                    }
+                }
+            },
+            betterAuth: {
+                api: {
+                    getSession: (): Promise<{ user: { id: string }; session: Record<string, never> } | null> =>
+                        Promise.resolve(resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null)
+                }
+            },
+            find: (): Promise<{ docs: User[] }> => Promise.resolve({ docs: resultUser ? [resultUser] : [] })
         }
-    }) as AuthStrategyFunctionArgs;
+    }) as unknown as AuthStrategyFunctionArgs;
 
 describe("passkeyAsTotpStrategy", () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     it.each(["/api/setup-totp", "/api/setup-totp/", "/api/verify-totp", "/api/verify-totp/"])(
         "preserves the Better Auth strategy for the internal TOTP route %s",
         async (pathname) => {
-            const user = { id: "user-1" } as User;
-            baseAuthenticate.mockResolvedValue({ user });
-            const { passkeyAsTotpStrategy } = await import("./passkeyAsTotpStrategy");
             const strategy = passkeyAsTotpStrategy({});
 
             const result = await strategy.authenticate(createArgs(pathname));
@@ -44,8 +50,6 @@ describe("passkeyAsTotpStrategy", () => {
     );
 
     it("marks other authenticated requests as TOTP-compatible", async () => {
-        baseAuthenticate.mockResolvedValue({ user: { id: "user-1" } });
-        const { passkeyAsTotpStrategy } = await import("./passkeyAsTotpStrategy");
         const strategy = passkeyAsTotpStrategy({});
 
         const result = await strategy.authenticate(createArgs("/api/login"));
@@ -54,11 +58,9 @@ describe("passkeyAsTotpStrategy", () => {
     });
 
     it("does not decorate an unauthenticated result", async () => {
-        baseAuthenticate.mockResolvedValue({ user: null });
-        const { passkeyAsTotpStrategy } = await import("./passkeyAsTotpStrategy");
         const strategy = passkeyAsTotpStrategy({});
 
-        const result = await strategy.authenticate(createArgs("/api/login"));
+        const result = await strategy.authenticate(createArgs("/api/login", null));
 
         expect(result.user).toBeNull();
     });

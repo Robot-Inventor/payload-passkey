@@ -7,14 +7,24 @@ const mocks = vi.hoisted(() => {
     const listUserPasskeys = vi.fn();
     const addPasskey = vi.fn();
     const deletePasskey = vi.fn();
+    const showToast = (message: string): void => {
+        const notification = document.createElement("div");
+        notification.setAttribute("role", "alert");
+        notification.textContent = message;
+        document.body.append(notification);
+    };
+    const clearToasts = (): void => {
+        document.querySelectorAll('[role="alert"]').forEach((notification) => {
+            notification.remove();
+        });
+    };
 
     return {
         listUserPasskeys,
         addPasskey,
         deletePasskey,
-        toastError: vi.fn(),
-        toastSuccess: vi.fn(),
-        getAuthenticatorName: vi.fn(),
+        showToast,
+        clearToasts,
         client: {
             passkey: {
                 addPasskey,
@@ -119,14 +129,7 @@ const MockTextInput = ({
 }): ReactNode => (
     <label>
         {label}
-        <input
-            aria-label={label}
-            value={value}
-            onChange={onChange}
-            onInput={(event) => {
-                onChange(event as unknown as ChangeEvent<HTMLInputElement>);
-            }}
-        />
+        <input aria-label={label} value={value} onChange={onChange} />
     </label>
 );
 
@@ -147,8 +150,8 @@ vi.mock("@payloadcms/ui", () => ({
     ConfirmationModal: MockConfirmationModal,
     TextInput: MockTextInput,
     toast: {
-        error: mocks.toastError,
-        success: mocks.toastSuccess
+        error: mocks.showToast,
+        success: mocks.showToast
     },
     useModal: useMockModal,
     useConfig: (): { config: { routes: { api: string } } } => ({ config: { routes: { api: "/backend" } } }),
@@ -156,20 +159,8 @@ vi.mock("@payloadcms/ui", () => ({
     useTranslation: (): { t: typeof translate } => ({ t: translate })
 }));
 
-vi.mock("../auth/client", () => ({
-    useBetterAuthClient: vi.fn(() => mocks.client)
-}));
-
-vi.mock("@better-auth/passkey", () => ({
-    getAuthenticatorName: mocks.getAuthenticatorName
-}));
-
-vi.mock("./PasskeyManagementClient.css", () => ({
-    passkeyItemDateStyles: "date-styles",
-    passkeyItemDeleteButtonStyles: "delete-styles",
-    passkeyItemStyles: "item-styles",
-    registerButtonContainerStyles: "register-buttons",
-    registerFormStyles: "register-form"
+vi.mock("better-auth/client", () => ({
+    createAuthClient: (): typeof mocks.client => mocks.client
 }));
 
 vi.mock("@payloadcms/ui/icons/Plus", () => ({
@@ -186,21 +177,34 @@ const createPasskey = (overrides: Partial<Passkey> = {}): Passkey =>
     }) as Passkey;
 
 const configureManagementClientMocks = (): void => {
-    vi.clearAllMocks();
+    mocks.clearToasts();
     mocks.listUserPasskeys.mockResolvedValue({ data: [], error: null });
     mocks.addPasskey.mockResolvedValue({ data: {}, error: null });
     mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
-    mocks.getAuthenticatorName.mockReturnValue(null);
 };
 
-const renderClient = async (onStepUpRequired: () => void = vi.fn()): Promise<() => void> => {
+const renderClient = async (): Promise<void> => {
     const { PasskeysManagementClient } = await import("./PasskeyManagementClient");
+
+    const StepUpBoundary = (): ReactNode => {
+        const [stepUpRequired, setStepUpRequired] = useState(false);
+
+        if (stepUpRequired) return <p>reauthentication required</p>;
+
+        return (
+            <PasskeysManagementClient
+                onStepUpRequired={() => {
+                    setStepUpRequired(true);
+                }}
+            />
+        );
+    };
+
     render(
         <MockModalProvider>
-            <PasskeysManagementClient onStepUpRequired={onStepUpRequired} />
+            <StepUpBoundary />
         </MockModalProvider>
     );
-    return onStepUpRequired;
 };
 
 const openRegistrationForm = (): void => {
