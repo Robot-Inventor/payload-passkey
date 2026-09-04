@@ -1,6 +1,6 @@
 {
   "name": "payload-passkey",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Add passkey support to Payload CMS.",
   "keywords": [
     "payloadcms",
