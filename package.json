@@ -73,7 +73,7 @@
     "@vanilla-extract/rollup-plugin": "^1.5.4",
     "@vitejs/plugin-react": "^6.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "^10.9.1",
+    "eslint": "^10.10.0",
     "jiti": "^2.7.0",
     "knip": "^6.34.0",
     "linkedom": "^0.18.13",
