@@ -1,12 +1,12 @@
 import { type ChangeEvent, type ReactNode, createContext, use, useMemo, useState } from "react";
+import { type Mock, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import type { Passkey } from "@better-auth/passkey";
-import { vi } from "vitest";
 
 const mocks = vi.hoisted(() => {
-    const listUserPasskeys = vi.fn();
-    const addPasskey = vi.fn();
-    const deletePasskey = vi.fn();
+    const listUserPasskeys: Mock = vi.fn();
+    const addPasskey: Mock = vi.fn();
+    const deletePasskey: Mock = vi.fn();
     const showToast = (message: string): void => {
         const notification = document.createElement("div");
         notification.setAttribute("role", "alert");
