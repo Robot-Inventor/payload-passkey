@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 2.0.4
+
+### Patch Changes
+
+- [#125](https://github.com/Robot-Inventor/payload-passkey/pull/125) [`170ed46`](https://github.com/Robot-Inventor/payload-passkey/commit/170ed46348875b84ca873b58a0f9561c6c591954) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @delmaredigital/payload-better-auth to ^0.12.1
+
 ## 2.0.3
 
 ### Patch Changes
