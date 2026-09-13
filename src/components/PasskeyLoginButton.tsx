@@ -66,7 +66,8 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
         };
 
         return cleanup;
-    }, [betterAuthClient, adminRoute, enablePasskeyAutofill, fetchFullUser, router, redirectTo, t]);
+        // eslint-disable-next-line react-doctor/no-effect-with-fresh-deps
+    }, [betterAuthClient.signIn, enablePasskeyAutofill, redirectToAdminPanel]);
 
     const handleClick = async (): Promise<void> => {
         try {

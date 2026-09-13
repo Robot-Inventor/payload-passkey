@@ -186,6 +186,7 @@ const configureManagementClientMocks = (): void => {
 const renderClient = async (): Promise<void> => {
     const { PasskeysManagementClient } = await import("./PasskeyManagementClient");
 
+    // eslint-disable-next-line react-doctor/no-multi-comp
     const StepUpBoundary = (): ReactNode => {
         const [stepUpRequired, setStepUpRequired] = useState(false);
 
