@@ -29,8 +29,14 @@ const createArgs = (
             },
             betterAuth: {
                 api: {
-                    getSession: (): Promise<{ user: { id: string }; session: Record<string, never> } | null> =>
-                        Promise.resolve(resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null)
+                    getSession: (): Promise<{
+                        response: { user: { id: string }; session: Record<string, never> } | null;
+                        headers: Headers;
+                    }> =>
+                        Promise.resolve({
+                            response: resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null,
+                            headers: new Headers()
+                        })
                 }
             },
             find: (): Promise<{ docs: User[] }> => Promise.resolve({ docs: resultUser ? [resultUser] : [] })
