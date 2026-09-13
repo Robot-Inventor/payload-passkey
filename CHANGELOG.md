@@ -1,5 +1,21 @@
 # payload-passkey
 
+## 2.0.4
+
+### Patch Changes
+
+- [#137](https://github.com/Robot-Inventor/payload-passkey/pull/137) [`46df511`](https://github.com/Robot-Inventor/payload-passkey/commit/46df511103feba74603b76de775759f77195d0a6) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: use the Rust-based React Compiler instead of the Babel version
+
+- [#139](https://github.com/Robot-Inventor/payload-passkey/pull/139) [`85d6ff0`](https://github.com/Robot-Inventor/payload-passkey/commit/85d6ff01784dbee93fd7dd516d274497dfd17f5c) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: remove `deferSessionRefresh` option made unnecessary by dependency updates
+
+- [#128](https://github.com/Robot-Inventor/payload-passkey/pull/128) [`9eceab7`](https://github.com/Robot-Inventor/payload-passkey/commit/9eceab7e7965a3e4e72ce297fe2a57ae8b9738e3) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.4
+
+- [#127](https://github.com/Robot-Inventor/payload-passkey/pull/127) [`e2db91b`](https://github.com/Robot-Inventor/payload-passkey/commit/e2db91bb3e778384034690cf09682a63090ea385) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @delmaredigital/payload-better-auth to ^0.13.0
+
+- [#125](https://github.com/Robot-Inventor/payload-passkey/pull/125) [`170ed46`](https://github.com/Robot-Inventor/payload-passkey/commit/170ed46348875b84ca873b58a0f9561c6c591954) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @delmaredigital/payload-better-auth to ^0.12.1
+
+- [#138](https://github.com/Robot-Inventor/payload-passkey/pull/138) [`5e2547b`](https://github.com/Robot-Inventor/payload-passkey/commit/5e2547b50497b975d1d4a32e731393da66a39609) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: correct the `useEffect()` dependency array
+
 ## 2.0.3
 
 ### Patch Changes
