@@ -1,6 +1,5 @@
-import babelPlugin from "@rolldown/plugin-babel";
 import { defineConfig } from "tsdown";
-import { reactCompilerPreset } from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react";
 import { vanillaExtractPlugin } from "@vanilla-extract/rollup-plugin";
 
 export default defineConfig({
@@ -19,8 +18,9 @@ export default defineConfig({
         neverBundle: [/^react(?:\/|$)/]
     },
     plugins: [
-        babelPlugin({
-            presets: [reactCompilerPreset({ target: "19" })]
+        react({
+            compiler: true,
+            exclude: [/node_modules/, /\.d\.ts$/]
         }),
         vanillaExtractPlugin({
             identifiers: "short"
