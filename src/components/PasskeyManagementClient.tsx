@@ -98,6 +98,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
 
             if (result.error) {
                 if (isStepUpRequired(result.error)) {
+                    setRegistering(false);
                     onStepUpRequired();
                     return;
                 }
@@ -133,6 +134,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
 
             if (result.error) {
                 if (isStepUpRequired(result.error)) {
+                    setDeleting(null);
                     onStepUpRequired();
                     return;
                 }
