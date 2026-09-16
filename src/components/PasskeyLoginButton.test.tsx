@@ -46,7 +46,9 @@ const translations: Record<string, string> = {
 
 vi.mock("@payloadcms/ui", () => ({
     Button: ({ children, onClick }: { children: ReactNode; onClick?: () => void }): ReactNode => (
-        <button onClick={onClick}>{children}</button>
+        <button type="button" onClick={onClick}>
+            {children}
+        </button>
     ),
     toast: {
         error: mocks.showToast
