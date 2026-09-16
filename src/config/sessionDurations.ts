@@ -11,15 +11,15 @@ const calculateSessionDurations = ({
     number
 > => {
     const sessionSeconds = $sessionSeconds ?? PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS;
-    // eslint-disable-next-line no-magic-numbers
+    // oxlint-disable-next-line no-magic-numbers
     const sessionRefreshBufferSeconds = $sessionRefreshBufferSeconds ?? AUTH_SESSION_POLL_INTERVAL_SECONDS * 2;
 
     if (
         !Number.isInteger(sessionSeconds) ||
-        // eslint-disable-next-line no-magic-numbers
+        // oxlint-disable-next-line no-magic-numbers
         sessionSeconds <= 0 ||
         !Number.isInteger(sessionRefreshBufferSeconds) ||
-        // eslint-disable-next-line no-magic-numbers
+        // oxlint-disable-next-line no-magic-numbers
         sessionRefreshBufferSeconds < 0 ||
         sessionRefreshBufferSeconds >= sessionSeconds
     ) {

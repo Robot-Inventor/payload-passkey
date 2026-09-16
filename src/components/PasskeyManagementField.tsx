@@ -19,7 +19,7 @@ interface PasskeyManagementContainerProps {
 }
 
 const PasskeyManagementContainer = ({ children }: PasskeyManagementContainerProps): ReactNode => {
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     return (
@@ -44,7 +44,7 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
     const { config } = useConfig();
     const { logOut } = useAuth();
     const router = useRouter();
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const handleReauthenticate = async (): Promise<void> => {
@@ -101,11 +101,11 @@ const createBridgeSession = async (betterAuthClient: BetterAuthClient): Promise<
     return data.freshUntil;
 };
 
-// eslint-disable-next-line max-lines-per-function, max-statements
+// oxlint-disable-next-line max-lines-per-function, max-statements
 const PasskeyManagementField = (): ReactNode => {
     const { user } = useAuth();
     const { id } = useDocumentInfo();
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const [status, setStatus] = useState<BridgeStatus>("loading");
@@ -116,12 +116,12 @@ const PasskeyManagementField = (): ReactNode => {
         typeof user?.id !== "undefined" && typeof id !== "undefined" && String(user.id) === String(id);
 
     useEffect((): (() => void) => {
-        // eslint-disable-next-line no-undefined
+        // oxlint-disable-next-line no-undefined
         if (!isCurrentUser) return (): void => undefined;
 
         let cancelled = false;
 
-        // eslint-disable-next-line max-statements
+        // oxlint-disable-next-line max-statements
         const $createBridgeSession = async (): Promise<void> => {
             setStatus("loading");
 
@@ -138,7 +138,7 @@ const PasskeyManagementField = (): ReactNode => {
                     setStatus("ready");
                 }
             } catch (error) {
-                // eslint-disable-next-line no-console
+                // oxlint-disable-next-line no-console
                 console.error(error);
 
                 if (!cancelled) {
@@ -155,7 +155,7 @@ const PasskeyManagementField = (): ReactNode => {
     }, [betterAuthClient, isCurrentUser]);
 
     useEffect((): (() => void) => {
-        // eslint-disable-next-line no-undefined
+        // oxlint-disable-next-line no-undefined
         if (status !== "ready" || freshUntil === null) return (): void => undefined;
 
         const remainingMilliseconds = freshUntil - Date.now();

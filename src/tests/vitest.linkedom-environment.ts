@@ -59,7 +59,6 @@ const installWindowGlobals = (window: LinkedomWindow): PreviousValues => {
     for (const property of windowProperties) {
         const previousValue: unknown = property in globalThis ? globalThis[property] : missingGlobal;
         previousValues.set(property, previousValue);
-        // eslint-disable-next-line @typescript-eslint/unbound-method
         const value = window[property];
 
         if (typeof value !== "undefined") {
@@ -80,7 +79,7 @@ const restoreWindowGlobals = (previousValues: PreviousValues): void => {
 
         if (previousValue === missingGlobal) {
             // The environment owns these temporary globals and must remove them during teardown.
-            // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+            // oxlint-disable-next-line @typescript-eslint/no-dynamic-delete
             delete globalThis[property];
         } else {
             Object.defineProperty(globalThis, property, {

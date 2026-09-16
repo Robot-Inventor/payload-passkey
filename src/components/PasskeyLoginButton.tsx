@@ -13,7 +13,7 @@ interface PasskeyLoginButtonProps {
     enablePasskeyAutofill: boolean;
 }
 
-// eslint-disable-next-line max-lines-per-function, max-statements
+// oxlint-disable-next-line max-lines-per-function, max-statements
 const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps): ReactNode => {
     const { config } = useConfig();
     const adminRoute = config.routes.admin;
@@ -22,7 +22,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
     const router = useRouter();
     const searchParams = useSearchParams();
     const redirectTo = searchParams.get("redirect");
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const redirectToAdminPanel = async (): Promise<void> => {
@@ -36,11 +36,11 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
     };
 
     useEffect((): (() => void) => {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        // oxlint-disable-next-line @typescript-eslint/no-empty-function
         if (!enablePasskeyAutofill) return (): void => {};
 
         const input = document.querySelector<HTMLInputElement>("#field-email");
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        // oxlint-disable-next-line @typescript-eslint/no-empty-function
         if (!input) return () => {};
 
         input.autocomplete = "email webauthn";
@@ -66,7 +66,6 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
         };
 
         return cleanup;
-        // eslint-disable-next-line react-doctor/no-effect-with-fresh-deps
     }, [betterAuthClient.signIn, enablePasskeyAutofill, redirectToAdminPanel]);
 
     const handleClick = async (): Promise<void> => {
@@ -92,7 +91,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
             <div className={orTextStyles}>{t("passkeyPlugin:loginButton:or")}</div>
             <Button
                 className={buttonStyles}
-                icon={<LockIcon />}
+                icon=<LockIcon />
                 iconPosition="left"
                 onClick={() => {
                     void handleClick();
