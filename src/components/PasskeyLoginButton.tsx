@@ -2,7 +2,7 @@
 
 import { Button, toast, useAuth, useConfig, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode, useCallback, useEffect } from "react";
 import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LockIcon } from "@payloadcms/ui/icons/Lock";
@@ -25,7 +25,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
     // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
-    const redirectToAdminPanel = async (): Promise<void> => {
+    const redirectToAdminPanel = useCallback(async (): Promise<void> => {
         await fetchFullUser();
         router.push(
             getSafeRedirect({
@@ -33,7 +33,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
                 redirectTo: redirectTo ?? ""
             })
         );
-    };
+    }, [fetchFullUser, router, adminRoute, redirectTo]);
 
     useEffect((): (() => void) => {
         // oxlint-disable-next-line @typescript-eslint/no-empty-function

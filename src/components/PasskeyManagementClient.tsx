@@ -110,6 +110,8 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                 // oxlint-disable-next-line id-length
                 await fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
             }
+
+            setRegistering(false);
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {
                 toast.error(t("passkeyPlugin:managementClient:notAllowed"));
@@ -118,7 +120,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
             } else {
                 toast.error(err instanceof Error ? err.message : t("passkeyPlugin:managementClient:failedToRegister"));
             }
-        } finally {
+
             setRegistering(false);
         }
     };
@@ -140,9 +142,10 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                 setPasskeys((prev) => prev.filter((item) => item.id !== passkeyId));
                 toast.success(t("passkeyPlugin:managementClient:successfullyDeleted"));
             }
+
+            setDeleting(null);
         } catch {
             toast.error(t("passkeyPlugin:managementClient:failedToDelete"));
-        } finally {
             setDeleting(null);
         }
     };
