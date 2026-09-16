@@ -12,13 +12,13 @@ import {
 import type { PasskeyLoginButtonProps } from "./components/PasskeyLoginButton";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy";
 import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
-// eslint-disable-next-line import-x/max-dependencies
+// oxlint-disable-next-line import-x/max-dependencies
 import { translations } from "./i18n";
 
 const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>({
     slug: "plugin-payload-passkey",
     order: 10,
-    // eslint-disable-next-line max-lines-per-function
+    // oxlint-disable-next-line max-lines-per-function
     plugin: async ({
         config,
         sessionSeconds: $sessionSeconds,
@@ -69,7 +69,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                 }
             },
 
-            // eslint-disable-next-line max-statements, max-lines-per-function, complexity
+            // oxlint-disable-next-line max-statements, max-lines-per-function, complexity
             collections: (config.collections ?? []).map((collection): CollectionConfig => {
                 if (collection.slug !== userCollection) return collection;
 
@@ -86,7 +86,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                 }
 
                 const configuredTokenExpiration =
-                    // eslint-disable-next-line no-undefined
+                    // oxlint-disable-next-line no-undefined
                     typeof collection.auth === "object" ? collection.auth.tokenExpiration : undefined;
 
                 if (
@@ -140,7 +140,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                     if (existingField) {
                         if (field.name === emailVerifiedField.name) {
                             // Field access functions can depend on request context and cannot be verified during config setup.
-                            // eslint-disable-next-line no-console
+                            // oxlint-disable-next-line no-console
                             console.warn(
                                 `[payload-passkey] The \`${collection.slug}\` collection already defines the \`${field.name}\` field. Its \`access.create\` and \`access.update\` settings must always return \`false\` to protect the email verification state.`
                             );

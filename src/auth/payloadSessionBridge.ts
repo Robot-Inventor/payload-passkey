@@ -16,7 +16,7 @@ type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
 };
 
 const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
-    // eslint-disable-next-line no-underscore-dangle
+    // oxlint-disable-next-line no-underscore-dangle
     const sessionID = user._sid;
     const createdAt = user.sessions?.find(({ id }) => id === sessionID)?.createdAt;
 
@@ -24,12 +24,12 @@ const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
 
     const age = Date.now() - new Date(createdAt).getTime();
 
-    // eslint-disable-next-line no-magic-numbers
+    // oxlint-disable-next-line no-magic-numbers
     return age >= 0 && age < PASSKEY_FRESH_AGE_SECONDS * 1000;
 };
 
 const getFreshUntil = (createdAt: Date, expiresAt: Date): number =>
-    // eslint-disable-next-line no-magic-numbers
+    // oxlint-disable-next-line no-magic-numbers
     Math.min(createdAt.getTime() + PASSKEY_FRESH_AGE_SECONDS * 1000, expiresAt.getTime());
 
 const isFreshSession = (createdAt: Date, expiresAt: Date): boolean => {
@@ -47,11 +47,11 @@ const throwStepUpRequired = (): never => {
     });
 };
 
+// oxlint-disable-next-line max-lines-per-function
 const payloadSessionBridge = (
     payload: BasePayload,
     userCollection: CollectionSlug,
     enableTotpCompatibility: PayloadPasskeyOptions["enableTotpCompatibility"]
-    // eslint-disable-next-line max-lines-per-function
 ): BetterAuthPlugin =>
     ({
         id: "payload-session-bridge",
@@ -69,7 +69,7 @@ const payloadSessionBridge = (
                     method: "POST",
                     requireHeaders: true
                 },
-                // eslint-disable-next-line max-lines-per-function, max-statements
+                // oxlint-disable-next-line max-lines-per-function, max-statements
                 async (ctx) => {
                     const { headers } = ctx;
 
@@ -90,7 +90,7 @@ const payloadSessionBridge = (
                         headers
                     });
 
-                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+                    // oxlint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
                     const user = result.user as PayloadSessionUser | null;
 
                     if (user?.collection !== userCollection) {
@@ -99,7 +99,7 @@ const payloadSessionBridge = (
                         });
                     }
 
-                    // eslint-disable-next-line no-underscore-dangle
+                    // oxlint-disable-next-line no-underscore-dangle
                     const authenticationStrategy = user._strategy;
                     const payloadUserID = user.id;
 

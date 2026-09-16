@@ -67,15 +67,15 @@ interface ModalState {
 
 const ModalContext = createContext<ModalState | null>(null);
 
+// oxlint-disable-next-line react-doctor/only-export-components
 const MockModalProvider = ({ children }: { children: ReactNode }): ReactNode => {
     const [activeModal, setActiveModal] = useState<string | null>(null);
-    // eslint-disable-next-line react-doctor/react-compiler-no-manual-memoization
     const modalValue = useMemo(() => ({ activeModal, openModal: setActiveModal }), [activeModal]);
 
     return <ModalContext value={modalValue}>{children}</ModalContext>;
 };
 
-// eslint-disable-next-line react-doctor/no-multi-comp
+// oxlint-disable-next-line react-doctor/only-export-components
 const MockButton = ({
     children,
     disabled,
@@ -90,7 +90,7 @@ const MockButton = ({
     </button>
 );
 
-// eslint-disable-next-line react-doctor/no-multi-comp
+// oxlint-disable-next-line react-doctor/only-export-components
 const MockConfirmationModal = ({
     body,
     heading,
@@ -117,7 +117,7 @@ const MockConfirmationModal = ({
     );
 };
 
-// eslint-disable-next-line react-doctor/no-multi-comp
+// oxlint-disable-next-line react-doctor/only-export-components
 const MockTextInput = ({
     label,
     value,
@@ -155,7 +155,7 @@ vi.mock("@payloadcms/ui", () => ({
     },
     useModal: useMockModal,
     useConfig: (): { config: { routes: { api: string } } } => ({ config: { routes: { api: "/backend" } } }),
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     useTranslation: (): { t: typeof translate } => ({ t: translate })
 }));
 
@@ -186,7 +186,7 @@ const configureManagementClientMocks = (): void => {
 const renderClient = async (): Promise<void> => {
     const { PasskeysManagementClient } = await import("./PasskeyManagementClient");
 
-    // eslint-disable-next-line react-doctor/no-multi-comp
+    // oxlint-disable-next-line react-doctor/only-export-components
     const StepUpBoundary = (): ReactNode => {
         const [stepUpRequired, setStepUpRequired] = useState(false);
 

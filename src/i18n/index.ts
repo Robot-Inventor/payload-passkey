@@ -1,4 +1,4 @@
-/* eslint-disable import-x/max-dependencies */
+/* oxlint-disable import-x/max-dependencies */
 import { ar } from "./ar";
 import { az } from "./az";
 import { bg } from "./bg";

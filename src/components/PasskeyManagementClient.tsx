@@ -1,4 +1,4 @@
-/* eslint-disable max-statements */
+/* oxlint-disable max-statements */
 "use client";
 
 /**
@@ -40,10 +40,11 @@ interface FetchPasskeysOptions {
     betterAuthClient: BetterAuthClient;
     onSuccess: (passkeyItems: Passkey[]) => void;
     onError: (message: string) => void;
+    // oxlint-disable-next-line id-length
     t: CustomTFunction;
 }
 
-// eslint-disable-next-line id-length
+// oxlint-disable-next-line id-length
 const fetchPasskeys = async ({ betterAuthClient, onSuccess, onError, t }: FetchPasskeysOptions): Promise<void> => {
     try {
         const result = await betterAuthClient.passkey.listUserPasskeys();
@@ -58,7 +59,7 @@ const fetchPasskeys = async ({ betterAuthClient, onSuccess, onError, t }: FetchP
     }
 };
 
-// eslint-disable-next-line no-undefined
+// oxlint-disable-next-line no-undefined
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
     year: "numeric",
     month: "numeric",
@@ -67,7 +68,7 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
     minute: "2-digit"
 });
 
-// eslint-disable-next-line max-lines-per-function, max-lines-per-function
+// oxlint-disable-next-line max-lines-per-function, max-lines-per-function
 const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClientProps): ReactNode => {
     const modalSlug = "confirm-delete-passkey";
     const betterAuthClient = useBetterAuthClient();
@@ -79,11 +80,11 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
     const [passkeyName, setPasskeyName] = useState("");
     const [passkeyToDelete, setPasskeyToDelete] = useState<Passkey | null>(null);
     const { openModal } = useModal();
-    // eslint-disable-next-line id-length
+    // oxlint-disable-next-line id-length
     const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     useEffect(() => {
-        // eslint-disable-next-line id-length
+        // oxlint-disable-next-line id-length
         void fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
     }, [betterAuthClient, t]);
 
@@ -106,7 +107,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                 toast.success(t("passkeyPlugin:managementClient:successfullyRegistered"));
                 setShowRegisterForm(false);
                 setPasskeyName("");
-                // eslint-disable-next-line id-length
+                // oxlint-disable-next-line id-length
                 await fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
             }
         } catch (err) {
@@ -161,7 +162,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                 <Button
                     buttonStyle="secondary"
                     size="small"
-                    icon={<PlusIcon />}
+                    icon=<PlusIcon />
                     onClick={() => {
                         setShowRegisterForm(true);
                     }}

@@ -25,7 +25,7 @@ const betterAuthCollectionsPlugin = ({
         },
         skipCollections: ["user"],
         // Hack for `exactOptionalPropertyTypes` behavior in TypeScript 6. Remove in TS 7.
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        // oxlint-disable-next-line @typescript-eslint/no-non-null-assertion
         firstUserAdmin: firstUserAdmin!
     });
 
@@ -47,6 +47,7 @@ type BetterAuthPluginOptions = DeepRequired<
     apiRoute: string;
 };
 
+// oxlint-disable-next-line max-lines-per-function
 const betterAuthPlugin = ({
     passkeyOptions,
     sessionSeconds,
@@ -59,7 +60,6 @@ const betterAuthPlugin = ({
     generateId,
     enableTotpCompatibility,
     apiRoute
-    // eslint-disable-next-line max-lines-per-function
 }: BetterAuthPluginOptions): Plugin => {
     const betterAuthOptions = generateBetterAuthOptions(passkeyOptions);
     const authBasePath = getAuthBasePath(apiRoute);

@@ -57,8 +57,9 @@ vi.mock("@payloadcms/ui", () => ({
     useConfig: (): { config: { routes: { admin: string; api: string } } } => ({
         config: { routes: { admin: "/admin", api: "/backend" } }
     }),
+    // oxlint-disable-next-line id-length
     useTranslation: (): { t: (translationKey: string) => string } => ({
-        // eslint-disable-next-line id-length
+        // oxlint-disable-next-line id-length
         t: (translationKey: string): string => translations[translationKey] ?? translationKey
     })
 }));

@@ -14,7 +14,7 @@ interface FieldTestState {
     pushedPath: string | null;
 }
 
-// eslint-disable-next-line max-lines-per-function
+// oxlint-disable-next-line max-lines-per-function
 const mocks = vi.hoisted(() => {
     const state: FieldTestState = {
         addPasskeyResponse: {
@@ -157,8 +157,9 @@ vi.mock("@payloadcms/ui", () => ({
     }),
     useDocumentInfo: (): { id: string } => ({ id: mocks.documentId }),
     useModal: (): { openModal: () => void } => ({ openModal: ignoreModal }),
+    // oxlint-disable-next-line id-length
     useTranslation: (): { t: (translationKey: string) => string } => ({
-        // eslint-disable-next-line id-length
+        // oxlint-disable-next-line id-length
         t: (translationKey: string): string => translations[translationKey] ?? translationKey
     })
 }));

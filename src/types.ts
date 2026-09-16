@@ -8,7 +8,7 @@ type BetterAuthUserCollectionSlug<TModelName extends string> = (TModelName exten
     : `${TModelName}s`) &
     CollectionSlug;
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+// oxlint-disable-next-line @typescript-eslint/consistent-type-definitions
 type PayloadPasskeyOptions<TModelName extends string = string> = {
     /**
      * The WebAuthn relying party ID used to scope passkeys to this website.
