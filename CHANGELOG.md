@@ -1,5 +1,13 @@
 # payload-passkey
 
+## 2.0.5
+
+### Patch Changes
+
+- [#143](https://github.com/Robot-Inventor/payload-passkey/pull/143) [`f892ea3`](https://github.com/Robot-Inventor/payload-passkey/commit/f892ea3ba7fb43f45dbad46b73c8648ffd837b74) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: fix a regression where the button entered an incorrect state upon an error
+
+- [#142](https://github.com/Robot-Inventor/payload-passkey/pull/142) [`9f4a17d`](https://github.com/Robot-Inventor/payload-passkey/commit/9f4a17ddc4ef7cc415ded1bbb6e0d60b843d19e9) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - perf: fixed components where React Compiler optimization was being skipped
+
 ## 2.0.4
 
 ### Patch Changes
