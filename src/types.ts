@@ -8,6 +8,7 @@ type BetterAuthUserCollectionSlug<TModelName extends string> = (TModelName exten
     : `${TModelName}s`) &
     CollectionSlug;
 
+// Payload's `definePlugin()` expects a `type` rather than an `interface` as its type argument.
 // oxlint-disable-next-line @typescript-eslint/consistent-type-definitions
 type PayloadPasskeyOptions<TModelName extends string = string> = {
     /**

@@ -21,8 +21,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
     const router = useRouter();
     const searchParams = useSearchParams();
     const redirectTo = searchParams.get("redirect");
-    // oxlint-disable-next-line id-length
-    const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+    const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const redirectToAdminPanel = useCallback(async (): Promise<void> => {
         await fetchFullUser();
@@ -34,13 +33,11 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
         );
     }, [fetchFullUser, router, adminRoute, redirectTo]);
 
-    useEffect((): (() => void) => {
-        // oxlint-disable-next-line @typescript-eslint/no-empty-function
-        if (!enablePasskeyAutofill) return (): void => {};
+    useEffect((): (() => void) | undefined => {
+        if (!enablePasskeyAutofill) return;
 
         const input = document.querySelector<HTMLInputElement>("#field-email");
-        // oxlint-disable-next-line @typescript-eslint/no-empty-function
-        if (!input) return () => {};
+        if (!input) return;
 
         input.autocomplete = "email webauthn";
 
@@ -64,6 +61,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
             input.autocomplete = "email";
         };
 
+        // oxlint-disable-next-line typescript/consistent-return
         return cleanup;
     }, [betterAuthClient.signIn, enablePasskeyAutofill, redirectToAdminPanel]);
 
@@ -71,23 +69,23 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
         try {
             const result = await betterAuthClient.signIn.passkey();
             if (result.error) {
-                const errorMessage = result.error.message ?? t("passkeyPlugin:loginButton:failedToLogin");
+                const errorMessage = result.error.message ?? translate("passkeyPlugin:loginButton:failedToLogin");
                 toast.error(errorMessage);
             } else {
                 await redirectToAdminPanel();
             }
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {
-                toast.error(t("passkeyPlugin:loginButton:notAllowed"));
+                toast.error(translate("passkeyPlugin:loginButton:notAllowed"));
             } else {
-                toast.error(err instanceof Error ? err.message : t("passkeyPlugin:loginButton:failedToLogin"));
+                toast.error(err instanceof Error ? err.message : translate("passkeyPlugin:loginButton:failedToLogin"));
             }
         }
     };
 
     return (
         <>
-            <div className={orTextStyles}>{t("passkeyPlugin:loginButton:or")}</div>
+            <div className={orTextStyles}>{translate("passkeyPlugin:loginButton:or")}</div>
             <Button
                 className={buttonStyles}
                 icon=<LockIcon />
@@ -98,7 +96,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
                 buttonStyle="secondary"
                 size="large"
             >
-                {t("passkeyPlugin:loginButton:loginWithPasskey")}
+                {translate("passkeyPlugin:loginButton:loginWithPasskey")}
             </Button>
         </>
     );

@@ -19,12 +19,11 @@ interface PasskeyManagementContainerProps {
 }
 
 const PasskeyManagementContainer = ({ children }: PasskeyManagementContainerProps): ReactNode => {
-    // oxlint-disable-next-line id-length
-    const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+    const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     return (
         <div className={mergeClassNames("field-type", containerStyles)} id={PASSKEY_MANAGEMENT_ID}>
-            <h3>{t("passkeyPlugin:managementField:passkey")}</h3>
+            <h3>{translate("passkeyPlugin:managementField:passkey")}</h3>
             {children}
         </div>
     );
@@ -44,8 +43,7 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
     const { config } = useConfig();
     const { logOut } = useAuth();
     const router = useRouter();
-    // oxlint-disable-next-line id-length
-    const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+    const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const handleReauthenticate = async (): Promise<void> => {
         try {
@@ -54,15 +52,15 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
             const returnTo = `${location.pathname}${window.location.search}#${PASSKEY_MANAGEMENT_ID}`;
             const loginPath = `${config.admin.routes.login}?redirect=${encodeURIComponent(returnTo)}` as `/${string}`;
             router.push(formatAdminURL({ adminRoute: config.routes.admin, path: loginPath }));
-            toast.success(t("authentication:loggedOutSuccessfully"));
+            toast.success(translate("authentication:loggedOutSuccessfully"));
         } catch {
-            toast.error(t("error:logoutFailed"));
+            toast.error(translate("error:logoutFailed"));
         }
     };
 
     return (
         <PasskeyManagementContainer>
-            <p className="field-description">{t("passkeyPlugin:managementField:reauthenticationRequired")}</p>
+            <p className="field-description">{translate("passkeyPlugin:managementField:reauthenticationRequired")}</p>
             <Button
                 buttonStyle="secondary"
                 size="small"
@@ -70,7 +68,7 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
                     void handleReauthenticate();
                 }}
             >
-                {t("passkeyPlugin:managementField:reauthenticate")}
+                {translate("passkeyPlugin:managementField:reauthenticate")}
             </Button>
         </PasskeyManagementContainer>
     );
@@ -104,8 +102,7 @@ const createBridgeSession = async (betterAuthClient: BetterAuthClient): Promise<
 const PasskeyManagementField = (): ReactNode => {
     const { user } = useAuth();
     const { id } = useDocumentInfo();
-    // oxlint-disable-next-line id-length
-    const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+    const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     const [status, setStatus] = useState<BridgeStatus>("loading");
     const [freshUntil, setFreshUntil] = useState<number | null>(null);
@@ -167,7 +164,7 @@ const PasskeyManagementField = (): ReactNode => {
     }, [freshUntil, status]);
 
     if (!isCurrentUser) {
-        return <PasskeyManagementMessage message={t("passkeyPlugin:managementField:ownPasskeysOnly")} />;
+        return <PasskeyManagementMessage message={translate("passkeyPlugin:managementField:ownPasskeysOnly")} />;
     }
 
     if (status === "reauthentication-required") {
@@ -179,8 +176,8 @@ const PasskeyManagementField = (): ReactNode => {
             <PasskeyManagementMessage
                 message={
                     status === "loading"
-                        ? t("passkeyPlugin:managementField:preparingManagement")
-                        : t("passkeyPlugin:managementField:failedToManage")
+                        ? translate("passkeyPlugin:managementField:preparingManagement")
+                        : translate("passkeyPlugin:managementField:failedToManage")
                 }
             />
         );

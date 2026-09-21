@@ -86,12 +86,11 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                 }
 
                 const configuredTokenExpiration =
-                    // oxlint-disable-next-line no-undefined
-                    typeof collection.auth === "object" ? collection.auth.tokenExpiration : undefined;
+                    typeof collection.auth === "object" ? collection.auth.tokenExpiration : null;
 
                 if (
                     (typeof configuredTokenExpiration === "number" && configuredTokenExpiration !== sessionSeconds) ||
-                    (typeof configuredTokenExpiration === "undefined" &&
+                    (typeof configuredTokenExpiration !== "number" &&
                         sessionSeconds !== PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS)
                 ) {
                     throw new Error(
