@@ -5,7 +5,7 @@ import { type BetterAuthClient, useBetterAuthClient } from "../auth/client";
 import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
-import { PasskeysManagementClient } from "./PasskeyManagementClient";
+import { PasskeyManagementClient } from "./PasskeyManagementClient";
 import { containerStyles } from "./PasskeyManagementField.css";
 import { formatAdminURL } from "payload/shared";
 import { mergeClassNames } from "../utils/mergeClassNames";
@@ -185,7 +185,7 @@ const PasskeyManagementField = (): ReactNode => {
 
     return (
         <PasskeyManagementContainer>
-            <PasskeysManagementClient
+            <PasskeyManagementClient
                 onStepUpRequired={() => {
                     setStatus("reauthentication-required");
                 }}

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * This file is based on the `PasskeysManagementClient.tsx` implementation from the `@delmaredigital/payload-better-auth` package
+ * This file is based on the `PasskeyManagementClient.tsx` implementation from the `@delmaredigital/payload-better-auth` package
  * License: https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/LICENSE
  * Ref: https://github.com/delmaredigital/payload-better-auth/blob/7ba5ae9db806492d514750ad09e07d18c2b86310/src/components/management/PasskeysManagementClient.tsx
  */
@@ -41,11 +41,11 @@ const fetchPasskeys = async ({
     }
 };
 
-interface PasskeysManagementClientProps {
+interface PasskeyManagementClientProps {
     onStepUpRequired: () => void;
 }
 
-const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClientProps): ReactNode => {
+const PasskeyManagementClient = ({ onStepUpRequired }: PasskeyManagementClientProps): ReactNode => {
     const betterAuthClient = useBetterAuthClient();
     const [passkeys, setPasskeys] = useState<Passkey[]>([]);
     const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
@@ -84,4 +84,4 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
     );
 };
 
-export { PasskeysManagementClient };
+export { PasskeyManagementClient };

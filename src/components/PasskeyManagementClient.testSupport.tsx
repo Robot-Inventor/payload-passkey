@@ -184,7 +184,7 @@ const configureManagementClientMocks = (): void => {
 };
 
 const renderClient = async (): Promise<void> => {
-    const { PasskeysManagementClient } = await import("./PasskeyManagementClient");
+    const { PasskeyManagementClient } = await import("./PasskeyManagementClient");
 
     // oxlint-disable-next-line react-doctor/only-export-components
     const StepUpBoundary = (): ReactNode => {
@@ -193,7 +193,7 @@ const renderClient = async (): Promise<void> => {
         if (stepUpRequired) return <p>reauthentication required</p>;
 
         return (
-            <PasskeysManagementClient
+            <PasskeyManagementClient
                 onStepUpRequired={() => {
                     setStepUpRequired(true);
                 }}

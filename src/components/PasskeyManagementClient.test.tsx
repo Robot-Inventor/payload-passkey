@@ -16,7 +16,7 @@ const expectAlert = async (message: string): Promise<void> => {
     expect(alert.textContent).toBe(message);
 };
 
-describe("PasskeysManagementClient list and registration", () => {
+describe("PasskeyManagementClient list and registration", () => {
     beforeEach(configureManagementClientMocks);
 
     it("shows passkeys returned by Better Auth and their user-facing names", async () => {
@@ -40,7 +40,7 @@ describe("PasskeysManagementClient list and registration", () => {
     });
 });
 
-describe("PasskeysManagementClient registration", () => {
+describe("PasskeyManagementClient registration", () => {
     beforeEach(configureManagementClientMocks);
 
     it("shows the newly registered passkey", async () => {
@@ -61,7 +61,7 @@ describe("PasskeysManagementClient registration", () => {
     });
 });
 
-describe("PasskeysManagementClient registration errors", () => {
+describe("PasskeyManagementClient registration errors", () => {
     beforeEach(configureManagementClientMocks);
 
     it("shows the browser cancellation message when registration is cancelled", async () => {
@@ -85,7 +85,7 @@ describe("PasskeysManagementClient registration errors", () => {
     });
 });
 
-describe("PasskeysManagementClient deletion success", () => {
+describe("PasskeyManagementClient deletion success", () => {
     beforeEach(configureManagementClientMocks);
 
     it("removes a passkey after confirmation", async () => {
@@ -106,7 +106,7 @@ describe("PasskeysManagementClient deletion success", () => {
     });
 });
 
-describe("PasskeysManagementClient deletion errors", () => {
+describe("PasskeyManagementClient deletion errors", () => {
     beforeEach(configureManagementClientMocks);
 
     it("asks the parent field to reauthenticate when deletion requires a fresh session", async () => {
