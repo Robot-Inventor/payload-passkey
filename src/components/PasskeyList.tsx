@@ -54,9 +54,11 @@ const PasskeyList = ({ passkeys, onStepUpRequired, onDelete }: PasskeyListProps)
                 }
 
                 toast.error(result.error.message ?? translate("passkeyPlugin:managementClient:failedToDelete"));
-            } else {
+            } else if (result.data.status) {
                 onDelete(passkeyId);
                 toast.success(translate("passkeyPlugin:managementClient:successfullyDeleted"));
+            } else {
+                toast.error(translate("passkeyPlugin:managementClient:failedToDelete"));
             }
 
             setDeleting(null);
