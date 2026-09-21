@@ -47,7 +47,74 @@ const throwStepUpRequired = (): never => {
     });
 };
 
-// oxlint-disable-next-line max-lines-per-function
+interface ValidateUserSessionOptions {
+    context: Parameters<
+        Parameters<
+            typeof createAuthEndpoint<"/payload-session-bridge", { method: "POST"; requireHeaders: true }, unknown>
+            // oxlint-disable-next-line no-magic-numbers
+        >[1]
+        // oxlint-disable-next-line no-magic-numbers
+    >[0];
+    payload: BasePayload;
+    userCollection: CollectionSlug;
+    enableTotpCompatibility: PayloadPasskeyOptions["enableTotpCompatibility"];
+}
+
+const validateUserSession = async ({
+    context,
+    payload,
+    userCollection,
+    enableTotpCompatibility
+}: ValidateUserSessionOptions): Promise<PayloadSessionUser> => {
+    const { headers } = context;
+
+    const origin = headers.get("origin");
+
+    if (
+        !origin ||
+        !context.context.isTrustedOrigin(origin, {
+            allowRelativePaths: false
+        })
+    ) {
+        throw new APIError("FORBIDDEN", {
+            message: "Untrusted origin"
+        });
+    }
+
+    const result = await payload.auth({
+        headers
+    });
+
+    // oxlint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const user = result.user as PayloadSessionUser | null;
+
+    if (user?.collection !== userCollection) {
+        throw new APIError("UNAUTHORIZED", {
+            message: "A valid Payload local session is required"
+        });
+    }
+
+    // oxlint-disable-next-line no-underscore-dangle
+    const authenticationStrategy = user._strategy;
+
+    // Allow TOTP authentication when TOTP is configured, or password authentication when it is not.
+    const hasTotp = user["hasTotp"] as boolean | null | undefined;
+    const hasValidAuthenticationStrategy =
+        // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
+        // Ref: ./passkeyAsTotpStrategy.ts
+        authenticationStrategy === "totp" ||
+        ((!enableTotpCompatibility || hasTotp === false) &&
+            ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
+
+    if (!hasValidAuthenticationStrategy) {
+        throw new APIError("UNAUTHORIZED", {
+            message: "A valid Payload local session is required"
+        });
+    }
+
+    return user;
+};
+
 const payloadSessionBridge = (
     payload: BasePayload,
     userCollection: CollectionSlug,
@@ -69,55 +136,16 @@ const payloadSessionBridge = (
                     method: "POST",
                     requireHeaders: true
                 },
-                // oxlint-disable-next-line max-statements
                 async (ctx) => {
-                    const { headers } = ctx;
-
-                    const origin = headers.get("origin");
-
-                    if (
-                        !origin ||
-                        !ctx.context.isTrustedOrigin(origin, {
-                            allowRelativePaths: false
-                        })
-                    ) {
-                        throw new APIError("FORBIDDEN", {
-                            message: "Untrusted origin"
-                        });
-                    }
-
-                    const result = await payload.auth({
-                        headers
+                    const user = await validateUserSession({
+                        context: ctx,
+                        payload,
+                        userCollection,
+                        enableTotpCompatibility
                     });
 
-                    // oxlint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-                    const user = result.user as PayloadSessionUser | null;
-
-                    if (user?.collection !== userCollection) {
-                        throw new APIError("UNAUTHORIZED", {
-                            message: "A valid Payload local session is required"
-                        });
-                    }
-
-                    // oxlint-disable-next-line no-underscore-dangle
-                    const authenticationStrategy = user._strategy;
-                    const payloadUserID = user.id;
-
-                    // Allow TOTP authentication when TOTP is configured, or password authentication when it is not.
-                    const hasTotp = user["hasTotp"] as boolean | null | undefined;
-                    const hasValidAuthenticationStrategy =
-                        // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
-                        // Ref: ./passkeyAsTotpStrategy.ts
-                        authenticationStrategy === "totp" ||
-                        ((!enableTotpCompatibility || hasTotp === false) &&
-                            ["local-jwt", "better-auth"].includes(authenticationStrategy ?? ""));
-                    if (!hasValidAuthenticationStrategy) {
-                        throw new APIError("UNAUTHORIZED", {
-                            message: "A valid Payload local session is required"
-                        });
-                    }
-
                     const existingSession = await getSessionFromCtx(ctx);
+                    const payloadUserID = user.id;
 
                     if (existingSession) {
                         if (String(payloadUserID) !== existingSession.user.id) {
