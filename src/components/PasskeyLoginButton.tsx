@@ -13,7 +13,6 @@ interface PasskeyLoginButtonProps {
     enablePasskeyAutofill: boolean;
 }
 
-// oxlint-disable-next-line max-lines-per-function, max-statements
 const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps): ReactNode => {
     const { config } = useConfig();
     const adminRoute = config.routes.admin;

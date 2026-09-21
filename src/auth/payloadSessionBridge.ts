@@ -69,7 +69,7 @@ const payloadSessionBridge = (
                     method: "POST",
                     requireHeaders: true
                 },
-                // oxlint-disable-next-line max-lines-per-function, max-statements
+                // oxlint-disable-next-line max-statements
                 async (ctx) => {
                     const { headers } = ctx;
 

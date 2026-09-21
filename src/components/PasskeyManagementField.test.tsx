@@ -14,7 +14,6 @@ interface FieldTestState {
     pushedPath: string | null;
 }
 
-// oxlint-disable-next-line max-lines-per-function
 const mocks = vi.hoisted(() => {
     const state: FieldTestState = {
         addPasskeyResponse: {

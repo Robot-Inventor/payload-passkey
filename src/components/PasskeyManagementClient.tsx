@@ -1,4 +1,3 @@
-/* oxlint-disable max-statements */
 "use client";
 
 /**

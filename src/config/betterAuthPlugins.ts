@@ -47,7 +47,6 @@ type BetterAuthPluginOptions = DeepRequired<
     apiRoute: string;
 };
 
-// oxlint-disable-next-line max-lines-per-function
 const betterAuthPlugin = ({
     passkeyOptions,
     sessionSeconds,

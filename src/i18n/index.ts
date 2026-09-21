@@ -1,4 +1,3 @@
-/* oxlint-disable import-x/max-dependencies */
 import { ar } from "./ar";
 import { az } from "./az";
 import { bg } from "./bg";
@@ -9,6 +8,7 @@ import { cs } from "./cs";
 import { da } from "./da";
 import { de } from "./de";
 import { en } from "./en";
+// oxlint-disable-next-line import/max-dependencies
 import { es } from "./es";
 import { et } from "./et";
 import { fa } from "./fa";
