@@ -1,5 +1,15 @@
 # payload-passkey
 
+## 2.0.7
+
+### Patch Changes
+
+- [#165](https://github.com/Robot-Inventor/payload-passkey/pull/165) [`3aed5bc`](https://github.com/Robot-Inventor/payload-passkey/commit/3aed5bc9c4a2b9b3c6d6a27c08c2f9cd24393370) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: fix unnatural English
+
+- [#164](https://github.com/Robot-Inventor/payload-passkey/pull/164) [`ce6ac7a`](https://github.com/Robot-Inventor/payload-passkey/commit/ce6ac7a7f1f438f83939c79ab444f1c5311ccdd5) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - refactor: split complex components
+
+- [#162](https://github.com/Robot-Inventor/payload-passkey/pull/162) [`c2c66e6`](https://github.com/Robot-Inventor/payload-passkey/commit/c2c66e62777deae6de7568fcba65322da5199547) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - refactor: refactor parts of the code and remove unnecessary `oxlint-disable` comments
+
 ## 2.0.6
 
 ### Patch Changes
