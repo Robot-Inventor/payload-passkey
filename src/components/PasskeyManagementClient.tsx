@@ -8,13 +8,12 @@
  */
 
 import { type BetterAuthClient, useBetterAuthClient } from "../auth/client";
-import { Button, toast, useTranslation } from "@payloadcms/ui";
 import type { CustomTFunction, CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
+import { toast, useTranslation } from "@payloadcms/ui";
 import type { Passkey } from "@better-auth/passkey";
 import { PasskeyList } from "./PasskeyList";
 import { PasskeyRegistrationForm } from "./PasskeyRegistrationForm";
-import { PlusIcon } from "@payloadcms/ui/icons/Plus";
 
 interface FetchPasskeysOptions {
     betterAuthClient: BetterAuthClient;
@@ -49,7 +48,6 @@ interface PasskeysManagementClientProps {
 const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClientProps): ReactNode => {
     const betterAuthClient = useBetterAuthClient();
     const [passkeys, setPasskeys] = useState<Passkey[]>([]);
-    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     useEffect(() => {
@@ -58,37 +56,19 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
 
     return (
         <>
-            {!showRegistrationForm && (
-                <Button
-                    buttonStyle="secondary"
-                    size="small"
-                    icon=<PlusIcon />
-                    onClick={() => {
-                        setShowRegistrationForm(true);
-                    }}
-                >
-                    {translate("passkeyPlugin:managementClient:addPasskey")}
-                </Button>
-            )}
-            {showRegistrationForm && (
-                <PasskeyRegistrationForm
-                    onStepUpRequired={onStepUpRequired}
-                    onRegistrationCancel={() => {
-                        setShowRegistrationForm(false);
-                    }}
-                    onRegistrationSuccess={() => {
-                        void (async (): Promise<void> => {
-                            setShowRegistrationForm(false);
-                            await fetchPasskeys({
-                                betterAuthClient,
-                                onSuccess: setPasskeys,
-                                onError: toast.error,
-                                translate
-                            });
-                        })();
-                    }}
-                />
-            )}
+            <PasskeyRegistrationForm
+                onStepUpRequired={onStepUpRequired}
+                onRegistrationSuccess={() => {
+                    void (async (): Promise<void> => {
+                        await fetchPasskeys({
+                            betterAuthClient,
+                            onSuccess: setPasskeys,
+                            onError: toast.error,
+                            translate
+                        });
+                    })();
+                }}
+            />
             {passkeys.length ? (
                 <PasskeyList
                     passkeys={passkeys}

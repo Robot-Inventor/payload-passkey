@@ -2,21 +2,18 @@ import { Button, TextInput, toast, useTranslation } from "@payloadcms/ui";
 import { type ChangeEvent, type ReactNode, useState } from "react";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { registerButtonContainerStyles, registerFormStyles } from "./PasskeyRegistrationForm.css";
+import { PlusIcon } from "@payloadcms/ui/icons/Plus";
 import { isStepUpRequired } from "../utils/isStepUpRequired";
 import { useBetterAuthClient } from "../auth/client";
 
 interface RegistrationFormProps {
     onStepUpRequired: () => void;
-    onRegistrationCancel: () => void;
     onRegistrationSuccess: () => void;
 }
 
-const PasskeyRegistrationForm = ({
-    onStepUpRequired,
-    onRegistrationCancel,
-    onRegistrationSuccess
-}: RegistrationFormProps): ReactNode => {
+const PasskeyRegistrationForm = ({ onStepUpRequired, onRegistrationSuccess }: RegistrationFormProps): ReactNode => {
     const betterAuthClient = useBetterAuthClient();
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const [registering, setRegistering] = useState(false);
     const [passkeyName, setPasskeyName] = useState("");
     const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
@@ -39,6 +36,7 @@ const PasskeyRegistrationForm = ({
                 toast.error(result.error.message ?? translate("passkeyPlugin:managementClient:failedToRegister"));
             } else {
                 toast.success(translate("passkeyPlugin:managementClient:successfullyRegistered"));
+                setShowRegistrationForm(false);
                 setPasskeyName("");
                 onRegistrationSuccess();
             }
@@ -60,33 +58,55 @@ const PasskeyRegistrationForm = ({
     };
 
     return (
-        <div className={registerFormStyles}>
-            <TextInput
-                label={translate("passkeyPlugin:managementClient:passkeyName")}
-                path="passkeyName"
-                value={passkeyName}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    setPasskeyName(event.target.value);
-                }}
-            />
-            <div className={registerButtonContainerStyles}>
-                <Button buttonStyle="secondary" size="small" onClick={onRegistrationCancel}>
-                    {translate("passkeyPlugin:managementClient:cancel")}
-                </Button>
+        <>
+            {!showRegistrationForm && (
                 <Button
-                    buttonStyle="primary"
+                    buttonStyle="secondary"
                     size="small"
+                    icon=<PlusIcon />
                     onClick={() => {
-                        void handleRegister();
+                        setShowRegistrationForm(true);
                     }}
-                    disabled={registering}
                 >
-                    {registering
-                        ? translate("passkeyPlugin:managementClient:registering")
-                        : translate("passkeyPlugin:managementClient:register")}
+                    {translate("passkeyPlugin:managementClient:addPasskey")}
                 </Button>
-            </div>
-        </div>
+            )}
+            {showRegistrationForm && (
+                <div className={registerFormStyles}>
+                    <TextInput
+                        label={translate("passkeyPlugin:managementClient:passkeyName")}
+                        path="passkeyName"
+                        value={passkeyName}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            setPasskeyName(event.target.value);
+                        }}
+                    />
+                    <div className={registerButtonContainerStyles}>
+                        <Button
+                            buttonStyle="secondary"
+                            size="small"
+                            onClick={() => {
+                                setShowRegistrationForm(false);
+                            }}
+                        >
+                            {translate("passkeyPlugin:managementClient:cancel")}
+                        </Button>
+                        <Button
+                            buttonStyle="primary"
+                            size="small"
+                            onClick={() => {
+                                void handleRegister();
+                            }}
+                            disabled={registering}
+                        >
+                            {registering
+                                ? translate("passkeyPlugin:managementClient:registering")
+                                : translate("passkeyPlugin:managementClient:register")}
+                        </Button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 
