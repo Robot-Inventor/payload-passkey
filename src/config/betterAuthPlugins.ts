@@ -1,4 +1,4 @@
-import type { PasskeyOptions, PayloadPasskeyOptions } from "../types";
+import type { DeepRequired, PasskeyOptions, PayloadPasskeyOptions } from "../types";
 import { betterAuthCollections, createBetterAuthPlugin, payloadAdapter } from "@delmaredigital/payload-better-auth";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants.js";
 import type { Plugin } from "payload";
@@ -6,8 +6,6 @@ import { betterAuth } from "better-auth";
 import { generateBetterAuthOptions } from "../auth/betterAuthOptions";
 import { getAuthBasePath } from "../auth/basePath";
 import { payloadSessionBridge } from "../auth/payloadSessionBridge";
-
-type DeepRequired<T> = T extends Record<string, unknown> ? { [K in keyof T]-?: DeepRequired<T[K]> } : NonNullable<T>;
 
 const betterAuthCollectionsPlugin = ({
     modelName,

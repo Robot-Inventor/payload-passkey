@@ -111,9 +111,8 @@ const PasskeyManagementField = (): ReactNode => {
     const isCurrentUser =
         typeof user?.id !== "undefined" && typeof id !== "undefined" && String(user.id) === String(id);
 
-    useEffect((): (() => void) => {
-        // oxlint-disable-next-line no-undefined
-        if (!isCurrentUser) return (): void => undefined;
+    useEffect((): (() => void) | undefined => {
+        if (!isCurrentUser) return;
 
         let cancelled = false;
 
@@ -144,20 +143,21 @@ const PasskeyManagementField = (): ReactNode => {
 
         void $createBridgeSession();
 
+        // oxlint-disable-next-line typescript/consistent-return
         return (): void => {
             cancelled = true;
         };
     }, [betterAuthClient, isCurrentUser]);
 
-    useEffect((): (() => void) => {
-        // oxlint-disable-next-line no-undefined
-        if (status !== "ready" || freshUntil === null) return (): void => undefined;
+    useEffect((): (() => void) | undefined => {
+        if (status !== "ready" || freshUntil === null) return;
 
         const remainingMilliseconds = freshUntil - Date.now();
         const timeoutID = setTimeout(() => {
             setStatus("reauthentication-required");
         }, remainingMilliseconds);
 
+        // oxlint-disable-next-line typescript/consistent-return
         return () => {
             clearTimeout(timeoutID);
         };

@@ -1,6 +1,6 @@
 import { type CollectionConfig, type Config, deepMergeSimple, definePlugin } from "payload";
+import type { DeepRequired, PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types";
 import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations";
-import type { PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types";
 import { afterChange, afterLogin, afterLogout } from "./config/hooks";
 import { betterAuthCollectionsPlugin, betterAuthPlugin } from "./config/betterAuthPlugins";
 import { emailVerifiedField, imageField, passkeyManagementField } from "./config/userFields";
@@ -15,10 +15,148 @@ import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
 // oxlint-disable-next-line import-x/max-dependencies
 import { translations } from "./i18n";
 
+const normalizeCollectionAuth = (
+    collection: CollectionConfig,
+    sessionSeconds: number,
+    enableTotpCompatibility: boolean
+): void => {
+    if (!collection.auth) {
+        throw new Error(
+            `[payload-passkey] \`auth\` in the \`${collection.slug}\` collection should not be set to \`false\` or \`undefined\`. Please explicitly enable authentication for this collection.`
+        );
+    }
+
+    if (typeof collection.auth === "object" && collection.auth.useSessions === false) {
+        throw new Error(
+            `[payload-passkey] \`auth.useSessions\` must be enabled in the \`${collection.slug}\` collection.`
+        );
+    }
+
+    const configuredTokenExpiration = typeof collection.auth === "object" ? collection.auth.tokenExpiration : null;
+
+    if (
+        (typeof configuredTokenExpiration === "number" && configuredTokenExpiration !== sessionSeconds) ||
+        (typeof configuredTokenExpiration !== "number" && sessionSeconds !== PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS)
+    ) {
+        throw new Error(
+            `[payload-passkey] \`auth.tokenExpiration\` in the \`${collection.slug}\` collection must be the same as the \`sessionSeconds\` option.`
+        );
+    }
+
+    if (collection.auth === true) {
+        collection.auth = {
+            tokenExpiration: sessionSeconds,
+            strategies: [
+                (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
+                    usersCollection: collection.slug
+                })
+            ]
+        };
+    } else {
+        collection.auth.tokenExpiration = sessionSeconds;
+        collection.auth.strategies = [
+            ...(collection.auth.strategies ?? []),
+            ...[
+                (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
+                    usersCollection: collection.slug
+                })
+            ]
+        ];
+    }
+};
+
+type ConfigurePasskeyPluginOptions = DeepRequired<
+    Pick<
+        PayloadPasskeyOptions,
+        "enablePasskeyAutofill" | "userCollection" | "sessionSeconds" | "enableTotpCompatibility"
+    >
+> & {
+    config: Config;
+};
+
+const configurePasskeyPlugin = ({
+    config,
+    enablePasskeyAutofill,
+    userCollection,
+    sessionSeconds,
+    enableTotpCompatibility
+}: ConfigurePasskeyPluginOptions): Config => {
+    const configuredTranslations = config.i18n?.translations as Record<string, Record<string, unknown>> | undefined;
+    const translationOverrides = deepMergeSimple(translations, configuredTranslations ?? {});
+
+    const passkeyPluginConfig = {
+        ...config,
+
+        admin: {
+            ...config.admin,
+            components: {
+                ...config.admin?.components,
+                providers: [
+                    ...(config.admin?.components?.providers ?? []),
+                    "payload-passkey/components/BetterAuthSessionRefreshProvider#BetterAuthSessionRefreshProvider"
+                ],
+                afterLogin: [
+                    ...(config.admin?.components?.afterLogin ?? []),
+                    {
+                        path: "payload-passkey/components/PasskeyLoginButton#PasskeyLoginButton",
+                        clientProps: {
+                            enablePasskeyAutofill
+                        } as const satisfies PasskeyLoginButtonProps
+                    }
+                ]
+            }
+        },
+
+        collections: (config.collections ?? []).map((collection): CollectionConfig => {
+            if (collection.slug !== userCollection) return collection;
+
+            normalizeCollectionAuth(collection, sessionSeconds, enableTotpCompatibility);
+
+            collection.hooks = {
+                ...collection.hooks,
+                afterChange: [...(collection.hooks?.afterChange ?? []), afterChange],
+                afterLogin: [...(collection.hooks?.afterLogin ?? []), afterLogin],
+                afterLogout: [...(collection.hooks?.afterLogout ?? []), afterLogout]
+            };
+
+            const requiredFields = [emailVerifiedField, imageField, passkeyManagementField] as const;
+            for (const field of requiredFields) {
+                const [existingField] = findFieldsByName(collection.fields, field.name);
+
+                if (existingField?.type && existingField.type !== field.type) {
+                    throw new Error(
+                        `[payload-passkey] Field name in the \`${collection.slug}\` collection conflicts with auto-injected field name: \`${field.name}\`.`
+                    );
+                }
+
+                if (existingField) {
+                    if (field.name === emailVerifiedField.name) {
+                        // Field access functions can depend on request context and cannot be verified during config setup.
+                        // oxlint-disable-next-line no-console
+                        console.warn(
+                            `[payload-passkey] The \`${collection.slug}\` collection already defines the \`${field.name}\` field. Its \`access.create\` and \`access.update\` settings must always return \`false\` to protect the email verification state.`
+                        );
+                    }
+                } else {
+                    collection.fields.push(field);
+                }
+            }
+
+            return collection;
+        }),
+
+        i18n: {
+            ...config.i18n,
+            translations: translationOverrides
+        }
+    } as const satisfies Config;
+
+    return passkeyPluginConfig;
+};
+
 const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>({
     slug: "plugin-payload-passkey",
     order: 10,
-    // oxlint-disable-next-line max-lines-per-function
     plugin: async ({
         config,
         sessionSeconds: $sessionSeconds,
@@ -43,120 +181,13 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
             sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds
         });
 
-        const configuredTranslations = config.i18n?.translations as Record<string, Record<string, unknown>> | undefined;
-        const translationOverrides = deepMergeSimple(translations, configuredTranslations ?? {});
-
-        const passkeyPluginConfig = {
-            ...config,
-
-            admin: {
-                ...config.admin,
-                components: {
-                    ...config.admin?.components,
-                    providers: [
-                        ...(config.admin?.components?.providers ?? []),
-                        "payload-passkey/components/BetterAuthSessionRefreshProvider#BetterAuthSessionRefreshProvider"
-                    ],
-                    afterLogin: [
-                        ...(config.admin?.components?.afterLogin ?? []),
-                        {
-                            path: "payload-passkey/components/PasskeyLoginButton#PasskeyLoginButton",
-                            clientProps: {
-                                enablePasskeyAutofill
-                            } as const satisfies PasskeyLoginButtonProps
-                        }
-                    ]
-                }
-            },
-
-            // oxlint-disable-next-line max-statements, complexity
-            collections: (config.collections ?? []).map((collection): CollectionConfig => {
-                if (collection.slug !== userCollection) return collection;
-
-                if (!collection.auth) {
-                    throw new Error(
-                        `[payload-passkey] \`auth\` in the \`${collection.slug}\` collection should not be set to \`false\` or \`undefined\`. Please explicitly enable authentication for this collection.`
-                    );
-                }
-
-                if (typeof collection.auth === "object" && collection.auth.useSessions === false) {
-                    throw new Error(
-                        `[payload-passkey] \`auth.useSessions\` must be enabled in the \`${collection.slug}\` collection.`
-                    );
-                }
-
-                const configuredTokenExpiration =
-                    typeof collection.auth === "object" ? collection.auth.tokenExpiration : null;
-
-                if (
-                    (typeof configuredTokenExpiration === "number" && configuredTokenExpiration !== sessionSeconds) ||
-                    (typeof configuredTokenExpiration !== "number" &&
-                        sessionSeconds !== PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS)
-                ) {
-                    throw new Error(
-                        `[payload-passkey] \`auth.tokenExpiration\` in the \`${collection.slug}\` collection must be the same as the \`sessionSeconds\` option.`
-                    );
-                }
-
-                if (collection.auth === true) {
-                    collection.auth = {
-                        tokenExpiration: sessionSeconds,
-                        strategies: [
-                            (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
-                                usersCollection: collection.slug
-                            })
-                        ]
-                    };
-                } else {
-                    collection.auth.tokenExpiration = sessionSeconds;
-                    collection.auth.strategies = [
-                        ...(collection.auth.strategies ?? []),
-                        ...[
-                            (enableTotpCompatibility ? passkeyAsTotpStrategy : payloadAuthStrategy)({
-                                usersCollection: collection.slug
-                            })
-                        ]
-                    ];
-                }
-
-                collection.hooks = {
-                    ...collection.hooks,
-                    afterChange: [...(collection.hooks?.afterChange ?? []), afterChange],
-                    afterLogin: [...(collection.hooks?.afterLogin ?? []), afterLogin],
-                    afterLogout: [...(collection.hooks?.afterLogout ?? []), afterLogout]
-                };
-
-                const requiredFields = [emailVerifiedField, imageField, passkeyManagementField] as const;
-                for (const field of requiredFields) {
-                    const [existingField] = findFieldsByName(collection.fields, field.name);
-
-                    if (existingField?.type && existingField.type !== field.type) {
-                        throw new Error(
-                            `[payload-passkey] Field name in the \`${collection.slug}\` collection conflicts with auto-injected field name: \`${field.name}\`.`
-                        );
-                    }
-
-                    if (existingField) {
-                        if (field.name === emailVerifiedField.name) {
-                            // Field access functions can depend on request context and cannot be verified during config setup.
-                            // oxlint-disable-next-line no-console
-                            console.warn(
-                                `[payload-passkey] The \`${collection.slug}\` collection already defines the \`${field.name}\` field. Its \`access.create\` and \`access.update\` settings must always return \`false\` to protect the email verification state.`
-                            );
-                        }
-                    } else {
-                        collection.fields.push(field);
-                    }
-                }
-
-                return collection;
-            }),
-
-            i18n: {
-                ...config.i18n,
-                translations: translationOverrides
-            }
-        } as const satisfies Config;
+        const passkeyPluginConfig = configurePasskeyPlugin({
+            config,
+            enablePasskeyAutofill,
+            userCollection,
+            sessionSeconds,
+            enableTotpCompatibility
+        });
 
         const passkeyOptions = {
             rpID,

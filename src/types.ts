@@ -126,4 +126,6 @@ type PasskeyOptions = Pick<PayloadPasskeyOptions, "rpID" | "rpName" | "origin">;
 
 type PayloadPasskeyPlugin = <TModelName extends string>(options: PayloadPasskeyOptions<TModelName>) => Plugin;
 
-export type { PayloadPasskeyOptions, PasskeyOptions, PayloadPasskeyPlugin };
+type DeepRequired<T> = T extends Record<string, unknown> ? { [K in keyof T]-?: DeepRequired<T[K]> } : NonNullable<T>;
+
+export type { PayloadPasskeyOptions, PasskeyOptions, PayloadPasskeyPlugin, DeepRequired };
