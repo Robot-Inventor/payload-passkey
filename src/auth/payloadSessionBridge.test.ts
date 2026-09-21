@@ -351,9 +351,7 @@ describe("payloadSessionBridge fresh session hook", () => {
 
     it("propagates the middleware error for a stale session", async () => {
         const hook = await getBeforeHook();
-        bridgeMocks.freshSessionMiddleware.mockRejectedValue(
-            new APIError("FORBIDDEN", { code: "STEP_UP_REQUIRED" })
-        );
+        bridgeMocks.freshSessionMiddleware.mockRejectedValue(new APIError("FORBIDDEN", { code: "STEP_UP_REQUIRED" }));
 
         await expect(hook.handler({ path: "/passkey/delete-passkey" })).rejects.toMatchObject({
             body: { code: "STEP_UP_REQUIRED" }
