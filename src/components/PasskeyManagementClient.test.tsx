@@ -9,6 +9,7 @@ import {
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 const expectedPasskeyCount = 2;
+const singlePasskeyCount = 1;
 const noPasskeyCount = 0;
 
 const expectAlert = async (message: string): Promise<void> => {
@@ -90,6 +91,7 @@ describe("PasskeyManagementClient deletion success", () => {
 
     it("removes a passkey after confirmation", async () => {
         mocks.listUserPasskeys.mockResolvedValue({ data: [createPasskey()], error: null });
+        mocks.deletePasskey.mockResolvedValue({ data: { status: true }, error: null });
 
         await renderClient();
         await screen.findByText("Laptop");
@@ -119,5 +121,19 @@ describe("PasskeyManagementClient deletion errors", () => {
         fireEvent.click(await screen.findByRole("button", { name: "confirm" }));
 
         expect(await screen.findByText("reauthentication required")).toBeTruthy();
+    });
+
+    it("keeps the passkey and shows a failure message when the deletion response has no status", async () => {
+        mocks.listUserPasskeys.mockResolvedValue({ data: [createPasskey()], error: null });
+        mocks.deletePasskey.mockResolvedValue({ data: {}, error: null });
+
+        await renderClient();
+        await screen.findByText("Laptop");
+        fireEvent.click(screen.getByRole("button", { name: "delete" }));
+        fireEvent.click(await screen.findByRole("button", { name: "confirm" }));
+
+        await expectAlert("failed to delete");
+        expect(await screen.findByText("Laptop")).toBeTruthy();
+        expect(screen.getAllByRole("button", { name: "delete" })).toHaveLength(singlePasskeyCount);
     });
 });

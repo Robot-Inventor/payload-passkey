@@ -7,7 +7,7 @@ import {
     PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_WINDOW_SECONDS
 } from "../constants";
 import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
-import type { BetterAuthPlugin } from "better-auth";
+import type { BetterAuthPlugin, MiddlewareInputContext, MiddlewareOptions } from "better-auth";
 import type { PayloadPasskeyOptions } from "../types";
 import { setSessionCookie } from "better-auth/cookies";
 
@@ -115,6 +115,23 @@ const validateUserSession = async ({
     return user;
 };
 
+interface FreshSessionHookResult {
+    response: {
+        context: Awaited<ReturnType<typeof freshSessionMiddleware>>;
+    };
+}
+
+const freshSessionHook = async (
+    context: MiddlewareInputContext<MiddlewareOptions>
+): Promise<FreshSessionHookResult> => ({
+    response: {
+        context: await freshSessionMiddleware({
+            ...context,
+            returnHeaders: false
+        })
+    }
+});
+
 const payloadSessionBridge = (
     payload: BasePayload,
     userCollection: CollectionSlug,
@@ -201,7 +218,7 @@ const payloadSessionBridge = (
             before: [
                 {
                     matcher: ({ path }) => path === "/passkey/delete-passkey" || path === "/passkey/update-passkey",
-                    handler: freshSessionMiddleware
+                    handler: freshSessionHook
                 }
             ]
         }

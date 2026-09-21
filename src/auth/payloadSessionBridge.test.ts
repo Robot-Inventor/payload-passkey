@@ -1,10 +1,12 @@
 // oxlint-disable max-lines
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { APIError } from "better-auth/api";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { PayloadPasskeyOptions } from "../types";
 
 const bridgeMocks = vi.hoisted(() => ({
-    getSessionFromCtx: vi.fn()
+    getSessionFromCtx: vi.fn(),
+    freshSessionMiddleware: vi.fn()
 }));
 
 const millisecondsPerSecond = 1000;
@@ -18,7 +20,8 @@ vi.mock("better-auth/api", async () => {
 
     return {
         ...actual,
-        getSessionFromCtx: bridgeMocks.getSessionFromCtx
+        getSessionFromCtx: bridgeMocks.getSessionFromCtx,
+        freshSessionMiddleware: bridgeMocks.freshSessionMiddleware
     };
 });
 
@@ -303,6 +306,56 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         const endpoint = await getEndpoint(requestContext.payload);
 
         await expect(endpoint(requestContext)).rejects.toThrow("User was not found");
+    });
+});
+
+interface BeforeHook {
+    matcher: (context: { path: string }) => boolean;
+    handler: (context: unknown) => Promise<unknown>;
+}
+
+const getBeforeHook = async (): Promise<BeforeHook> => {
+    const { payloadSessionBridge } = await import("./payloadSessionBridge");
+    const plugin = payloadSessionBridge({} as never, "users", false);
+
+    return plugin.hooks?.before?.[0] as unknown as BeforeHook;
+};
+
+describe("payloadSessionBridge fresh session hook", () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it.each(["/passkey/delete-passkey", "/passkey/update-passkey"])("matches %s", async (path) => {
+        const hook = await getBeforeHook();
+
+        expect(hook.matcher({ path })).toBe(true);
+    });
+
+    it("does not match other paths", async () => {
+        const hook = await getBeforeHook();
+
+        expect(hook.matcher({ path: "/passkey/list-passkeys" })).toBe(false);
+    });
+
+    it("returns the hook response format so the request reaches the endpoint after the middleware runs", async () => {
+        const hook = await getBeforeHook();
+        const middlewareContext = { fresh: true };
+        bridgeMocks.freshSessionMiddleware.mockResolvedValue(middlewareContext);
+        const hookContext = { path: "/passkey/delete-passkey" };
+
+        const result = (await hook.handler(hookContext)) as Record<string, unknown>;
+
+        expect(result).toEqual({ response: { context: middlewareContext } });
+    });
+
+    it("propagates the middleware error for a stale session", async () => {
+        const hook = await getBeforeHook();
+        bridgeMocks.freshSessionMiddleware.mockRejectedValue(new APIError("FORBIDDEN", { code: "STEP_UP_REQUIRED" }));
+
+        await expect(hook.handler({ path: "/passkey/delete-passkey" })).rejects.toMatchObject({
+            body: { code: "STEP_UP_REQUIRED" }
+        });
     });
 });
 
