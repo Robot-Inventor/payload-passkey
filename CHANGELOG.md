@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 2.0.8
+
+### Patch Changes
+
+- [#166](https://github.com/Robot-Inventor/payload-passkey/pull/166) [`6ba323d`](https://github.com/Robot-Inventor/payload-passkey/commit/6ba323da3728b469c356b29a7ffedf91c8c2c035) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: fixed a bug where passkey deletion would fail silently
+
 ## 2.0.7
 
 ### Patch Changes
