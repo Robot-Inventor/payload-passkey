@@ -13,8 +13,9 @@ const betterAuthCollectionsPlugin = ({
     modelName,
     passkeyOptions,
     firstUserAdmin
-}: Required<Pick<PayloadPasskeyOptions, "modelName" | "firstUserAdmin">> & {
+}: Required<Pick<PayloadPasskeyOptions, "modelName">> & {
     passkeyOptions: PasskeyOptions;
+    firstUserAdmin: NonNullable<PayloadPasskeyOptions["firstUserAdmin"]>;
 }): Plugin =>
     betterAuthCollections({
         betterAuthOptions: {
@@ -24,9 +25,7 @@ const betterAuthCollectionsPlugin = ({
             }
         },
         skipCollections: ["user"],
-        // Hack for `exactOptionalPropertyTypes` behavior in TypeScript 6. Remove in TS 7.
-        // oxlint-disable-next-line @typescript-eslint/no-non-null-assertion
-        firstUserAdmin: firstUserAdmin!
+        firstUserAdmin
     });
 
 type BetterAuthPluginOptions = DeepRequired<

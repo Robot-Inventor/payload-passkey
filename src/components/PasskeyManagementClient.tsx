@@ -39,22 +39,25 @@ interface FetchPasskeysOptions {
     betterAuthClient: BetterAuthClient;
     onSuccess: (passkeyItems: Passkey[]) => void;
     onError: (message: string) => void;
-    // oxlint-disable-next-line id-length
-    t: CustomTFunction;
+    translate: CustomTFunction;
 }
 
-// oxlint-disable-next-line id-length
-const fetchPasskeys = async ({ betterAuthClient, onSuccess, onError, t }: FetchPasskeysOptions): Promise<void> => {
+const fetchPasskeys = async ({
+    betterAuthClient,
+    onSuccess,
+    onError,
+    translate
+}: FetchPasskeysOptions): Promise<void> => {
     try {
         const result = await betterAuthClient.passkey.listUserPasskeys();
 
         if (result.error) {
-            onError(result.error.message ?? t("passkeyPlugin:managementClient:failedToLoad"));
+            onError(result.error.message ?? translate("passkeyPlugin:managementClient:failedToLoad"));
         } else {
             onSuccess(result.data);
         }
     } catch {
-        onError(t("passkeyPlugin:managementClient:failedToLoad"));
+        onError(translate("passkeyPlugin:managementClient:failedToLoad"));
     }
 };
 
@@ -79,13 +82,11 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
     const [passkeyName, setPasskeyName] = useState("");
     const [passkeyToDelete, setPasskeyToDelete] = useState<Passkey | null>(null);
     const { openModal } = useModal();
-    // oxlint-disable-next-line id-length
-    const { t } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
+    const { t: translate } = useTranslation<CustomTranslationsObject, CustomTranslationsKeys>();
 
     useEffect(() => {
-        // oxlint-disable-next-line id-length
-        void fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
-    }, [betterAuthClient, t]);
+        void fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, translate });
+    }, [betterAuthClient, translate]);
 
     const handleRegister = async (): Promise<void> => {
         setRegistering(true);
@@ -102,23 +103,29 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                     return;
                 }
 
-                toast.error(result.error.message ?? t("passkeyPlugin:managementClient:failedToRegister"));
+                toast.error(result.error.message ?? translate("passkeyPlugin:managementClient:failedToRegister"));
             } else {
-                toast.success(t("passkeyPlugin:managementClient:successfullyRegistered"));
+                toast.success(translate("passkeyPlugin:managementClient:successfullyRegistered"));
                 setShowRegisterForm(false);
                 setPasskeyName("");
-                // oxlint-disable-next-line id-length
-                await fetchPasskeys({ betterAuthClient, onSuccess: setPasskeys, onError: toast.error, t });
+                await fetchPasskeys({
+                    betterAuthClient,
+                    onSuccess: setPasskeys,
+                    onError: toast.error,
+                    translate
+                });
             }
 
             setRegistering(false);
         } catch (err) {
             if (err instanceof Error && err.name === "NotAllowedError") {
-                toast.error(t("passkeyPlugin:managementClient:notAllowed"));
+                toast.error(translate("passkeyPlugin:managementClient:notAllowed"));
             } else if (err instanceof Error && err.name === "InvalidStateError") {
-                toast.error(t("passkeyPlugin:managementClient:alreadyRegistered"));
+                toast.error(translate("passkeyPlugin:managementClient:alreadyRegistered"));
             } else {
-                toast.error(err instanceof Error ? err.message : t("passkeyPlugin:managementClient:failedToRegister"));
+                toast.error(
+                    err instanceof Error ? err.message : translate("passkeyPlugin:managementClient:failedToRegister")
+                );
             }
 
             setRegistering(false);
@@ -138,15 +145,15 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                     return;
                 }
 
-                toast.error(result.error.message ?? t("passkeyPlugin:managementClient:failedToDelete"));
+                toast.error(result.error.message ?? translate("passkeyPlugin:managementClient:failedToDelete"));
             } else {
                 setPasskeys((prev) => prev.filter((item) => item.id !== passkeyId));
-                toast.success(t("passkeyPlugin:managementClient:successfullyDeleted"));
+                toast.success(translate("passkeyPlugin:managementClient:successfullyDeleted"));
             }
 
             setDeleting(null);
         } catch {
-            toast.error(t("passkeyPlugin:managementClient:failedToDelete"));
+            toast.error(translate("passkeyPlugin:managementClient:failedToDelete"));
             setDeleting(null);
         }
     };
@@ -155,7 +162,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
         if (passkey?.name) return passkey.name;
 
         const authenticatorName =
-            getAuthenticatorName(passkey?.aaguid) ?? t("passkeyPlugin:managementClient:unknownAuthenticator");
+            getAuthenticatorName(passkey?.aaguid) ?? translate("passkeyPlugin:managementClient:unknownAuthenticator");
 
         return authenticatorName;
     };
@@ -171,13 +178,13 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                         setShowRegisterForm(true);
                     }}
                 >
-                    {t("passkeyPlugin:managementClient:addPasskey")}
+                    {translate("passkeyPlugin:managementClient:addPasskey")}
                 </Button>
             )}
             {showRegisterForm && (
                 <div className={registerFormStyles}>
                     <TextInput
-                        label={t("passkeyPlugin:managementClient:passkeyName")}
+                        label={translate("passkeyPlugin:managementClient:passkeyName")}
                         path="passkeyName"
                         value={passkeyName}
                         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +199,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                                 setShowRegisterForm(false);
                             }}
                         >
-                            {t("passkeyPlugin:managementClient:cancel")}
+                            {translate("passkeyPlugin:managementClient:cancel")}
                         </Button>
                         <Button
                             buttonStyle="primary"
@@ -203,8 +210,8 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                             disabled={registering}
                         >
                             {registering
-                                ? t("passkeyPlugin:managementClient:registering")
-                                : t("passkeyPlugin:managementClient:register")}
+                                ? translate("passkeyPlugin:managementClient:registering")
+                                : translate("passkeyPlugin:managementClient:register")}
                         </Button>
                     </div>
                 </div>
@@ -215,7 +222,7 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                         <div key={passkeyItem.id} className={passkeyItemStyles}>
                             <div>{formatPasskeyName(passkeyItem)}</div>
                             <p className={mergeClassNames("field-description", passkeyItemDateStyles)}>
-                                {t("passkeyPlugin:managementClient:createdAt")}{" "}
+                                {translate("passkeyPlugin:managementClient:createdAt")}{" "}
                                 <time dateTime={passkeyItem.createdAt.toISOString()} suppressHydrationWarning>
                                     {dateFormatter.format(passkeyItem.createdAt)}
                                 </time>
@@ -231,24 +238,24 @@ const PasskeysManagementClient = ({ onStepUpRequired }: PasskeysManagementClient
                                 disabled={deleting === passkeyItem.id}
                             >
                                 {deleting === passkeyItem.id
-                                    ? t("passkeyPlugin:managementClient:deleting")
-                                    : t("passkeyPlugin:managementClient:delete")}
+                                    ? translate("passkeyPlugin:managementClient:deleting")
+                                    : translate("passkeyPlugin:managementClient:delete")}
                             </Button>
                         </div>
                     ))}
                 </>
             ) : (
-                <p className="field-description">{t("passkeyPlugin:managementClient:notFound")}</p>
+                <p className="field-description">{translate("passkeyPlugin:managementClient:notFound")}</p>
             )}
             <ConfirmationModal
                 modalSlug={modalSlug}
-                heading={t("passkeyPlugin:managementClient:confirmDelete:heading")}
-                body={t("passkeyPlugin:managementClient:confirmDelete:body", {
+                heading={translate("passkeyPlugin:managementClient:confirmDelete:heading")}
+                body={translate("passkeyPlugin:managementClient:confirmDelete:body", {
                     name: formatPasskeyName(passkeyToDelete)
                 })}
                 onConfirm={() => {
                     if (!passkeyToDelete) {
-                        toast.error(t("passkeyPlugin:managementClient:failedToDelete"));
+                        toast.error(translate("passkeyPlugin:managementClient:failedToDelete"));
                         return;
                     }
                     void handleDelete(passkeyToDelete.id);
