@@ -69,7 +69,7 @@ const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>
                 }
             },
 
-            // oxlint-disable-next-line max-statements, max-lines-per-function, complexity
+            // oxlint-disable-next-line max-statements, complexity
             collections: (config.collections ?? []).map((collection): CollectionConfig => {
                 if (collection.slug !== userCollection) return collection;
 

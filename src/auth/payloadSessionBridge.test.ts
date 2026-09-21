@@ -1,4 +1,4 @@
-/* oxlint-disable max-lines */
+// oxlint-disable max-lines
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PASSKEY_FRESH_AGE_SECONDS } from "../constants";
 import type { PayloadPasskeyOptions } from "../types";
@@ -104,7 +104,6 @@ const expectFreshUntil = (freshUntil: unknown): void => {
     );
 };
 
-// oxlint-disable-next-line max-lines-per-function
 describe("payloadSessionBridge session creation", () => {
     beforeEach(configureBridgeMocks);
 
@@ -248,7 +247,6 @@ describe("payloadSessionBridge authorization", () => {
     });
 });
 
-// oxlint-disable-next-line max-lines-per-function
 describe("payloadSessionBridge freshness and lifecycle", () => {
     beforeEach(configureBridgeMocks);
 

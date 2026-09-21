@@ -101,7 +101,6 @@ const createBridgeSession = async (betterAuthClient: BetterAuthClient): Promise<
     return data.freshUntil;
 };
 
-// oxlint-disable-next-line max-lines-per-function, max-statements
 const PasskeyManagementField = (): ReactNode => {
     const { user } = useAuth();
     const { id } = useDocumentInfo();
@@ -121,7 +120,6 @@ const PasskeyManagementField = (): ReactNode => {
 
         let cancelled = false;
 
-        // oxlint-disable-next-line max-statements
         const $createBridgeSession = async (): Promise<void> => {
             setStatus("loading");
 
