@@ -73,7 +73,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "knip": "^6.37.0",
     "linkedom": "^0.18.13",
-    "oxc-transform-react": "^0.150.0",
+    "oxc-transform-react": "^0.151.0",
     "oxlint": "^1.83.0",
     "prettier": "^3.9.8",
     "react": "^19.3.0",
