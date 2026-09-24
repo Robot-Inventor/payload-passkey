@@ -61,7 +61,6 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
             input.autocomplete = "email";
         };
 
-        // oxlint-disable-next-line typescript/consistent-return
         return cleanup;
     }, [betterAuthClient.signIn, enablePasskeyAutofill, redirectToAdminPanel]);
 
