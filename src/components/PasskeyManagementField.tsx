@@ -143,7 +143,6 @@ const PasskeyManagementField = (): ReactNode => {
 
         void $createBridgeSession();
 
-        // oxlint-disable-next-line typescript/consistent-return
         return (): void => {
             cancelled = true;
         };
@@ -157,7 +156,6 @@ const PasskeyManagementField = (): ReactNode => {
             setStatus("reauthentication-required");
         }, remainingMilliseconds);
 
-        // oxlint-disable-next-line typescript/consistent-return
         return () => {
             clearTimeout(timeoutID);
         };
