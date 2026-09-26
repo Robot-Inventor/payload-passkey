@@ -5,7 +5,7 @@ import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/c
 import { type ReactNode, useCallback, useEffect } from "react";
 import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
 import { useRouter, useSearchParams } from "next/navigation";
-import { LockIcon } from "@payloadcms/ui/icons/Lock";
+import { PasskeyIcon } from "./PasskeyIcon";
 import { getSafeRedirect } from "payload/shared";
 import { useBetterAuthClient } from "../auth/client";
 
@@ -87,7 +87,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
             <div className={orTextStyles}>{translate("passkeyPlugin:loginButton:or")}</div>
             <Button
                 className={buttonStyles}
-                icon=<LockIcon />
+                icon=<PasskeyIcon />
                 iconPosition="left"
                 onClick={() => {
                     void handleClick();
