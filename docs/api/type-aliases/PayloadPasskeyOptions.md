@@ -1,4 +1,4 @@
-[**payload-passkey v2.0.8**](../README.md)
+[**payload-passkey v2.1.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **PayloadPasskeyOptions**\<`TModelName`\> = `object`
 
-Defined in: [types.ts:13](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L13)
+Defined in: [types.ts:13](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L13)
 
 ## Type Parameters
 
@@ -22,7 +22,7 @@ Defined in: [types.ts:13](https://github.com/Robot-Inventor/payload-passkey/blob
 
 > **baseURL**: `string`
 
-Defined in: [types.ts:84](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L84)
+Defined in: [types.ts:84](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L84)
 
 The canonical URL of the application that hosts Better Auth.
 Do not include a trailing slash. `http://localhost` and
@@ -45,7 +45,7 @@ must use `https://`.
 
 > `optional` **enablePasskeyAutofill?**: `boolean`
 
-Defined in: [types.ts:62](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L62)
+Defined in: [types.ts:62](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L62)
 
 Whether to enable passkey autofill. When enabled, passkeys appear as
 autocomplete suggestions alongside passwords saved in the user's password
@@ -68,7 +68,7 @@ false
 
 > `optional` **enableTotpCompatibility?**: `boolean`
 
-Defined in: [types.ts:53](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L53)
+Defined in: [types.ts:53](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L53)
 
 Whether to enable compatibility with [Payload TOTP](https://github.com/GeorgeHulpoi/payload-totp).
 Set to `true` when using payload-passkey alongside Payload TOTP.
@@ -85,7 +85,7 @@ false
 
 > `optional` **firstUserAdmin?**: `boolean` \| `FirstUserAdminOptions`
 
-Defined in: [types.ts:117](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L117)
 
 Automatically make the first registered user an admin.
 Enabled by default. Set to false to disable, or provide options to customize.
@@ -123,7 +123,7 @@ betterAuthCollections({
 
 > **generateId**: `NonNullable`\<`BetterAuthAdvancedOptions`\[`"database"`\]\>\[`"generateId"`\]
 
-Defined in: [types.ts:122](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L122)
+Defined in: [types.ts:122](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L122)
 
 The ID generation strategy for Better Auth records stored through Payload.
 If you are using PostgreSQL with default ID generation, set this to "serial".
@@ -134,7 +134,7 @@ If you are using PostgreSQL with default ID generation, set this to "serial".
 
 > **modelName**: `TModelName`
 
-Defined in: [types.ts:69](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L69)
+Defined in: [types.ts:69](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L69)
 
 The singular Better Auth model name for the user records stored in Payload.
 The corresponding `userCollection` is normally the plural form of this value,
@@ -147,7 +147,7 @@ If `modelName` ends with `"s"`, the `userCollection` must be the same as `modelN
 
 > `optional` **origin?**: `$PasskeyOptions`\[`"origin"`\]
 
-Defined in: [types.ts:32](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L32)
+Defined in: [types.ts:32](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L32)
 
 The origin where passkey registration and authentication take place.
 Include the scheme, hostname, and optional port, but do not include a trailing slash.
@@ -164,7 +164,7 @@ The request's `Origin` header
 
 > `optional` **rpID?**: `$PasskeyOptions`\[`"rpID"`\]
 
-Defined in: [types.ts:19](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L19)
+Defined in: [types.ts:19](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L19)
 
 The WebAuthn relying party ID used to scope passkeys to this website.
 This is normally the hostname from `baseURL`, without a protocol, port, or path.
@@ -179,7 +179,7 @@ The hostname from `baseURL`
 
 > `optional` **rpName?**: `$PasskeyOptions`\[`"rpName"`\]
 
-Defined in: [types.ts:24](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L24)
+Defined in: [types.ts:24](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L24)
 
 The human-readable name shown by browsers and authenticator devices for this website.
 
@@ -195,7 +195,7 @@ The human-readable name shown by browsers and authenticator devices for this web
 
 > **secret**: `string`
 
-Defined in: [types.ts:89](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L89)
+Defined in: [types.ts:89](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L89)
 
 The secret Better Auth uses to encrypt, sign, and hash authentication data.
 Specify a randomly generated string of 32 characters or more.
@@ -206,7 +206,7 @@ Specify a randomly generated string of 32 characters or more.
 
 > `optional` **sessionRefreshBufferSeconds?**: `number`
 
-Defined in: [types.ts:47](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L47)
+Defined in: [types.ts:47](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L47)
 
 The amount of time, in seconds, reserved at the end of a session's lifetime for
 refreshing it. A larger value refreshes sessions earlier. This must be a non-negative
@@ -224,7 +224,7 @@ integer greater than 60 seconds.
 
 > `optional` **sessionSeconds?**: `number`
 
-Defined in: [types.ts:40](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L40)
+Defined in: [types.ts:40](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L40)
 
 The maximum lifetime of a Payload and Better Auth session, in seconds.
 This value is also used as the Payload user's `auth.tokenExpiration`, so that
@@ -243,7 +243,7 @@ This must be a positive integer.
 
 > **trustedOrigins**: `string`[]
 
-Defined in: [types.ts:96](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L96)
+Defined in: [types.ts:96](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L96)
 
 The origins that are allowed to make browser authentication requests.
 Each origin should include its scheme, hostname, and optional port, but no path.
@@ -256,7 +256,7 @@ such as a separate frontend domain or a local development origin.
 
 > **userCollection**: `BetterAuthUserCollectionSlug`\<`NoInfer`\<`TModelName`\>\>
 
-Defined in: [types.ts:75](https://github.com/Robot-Inventor/payload-passkey/blob/6ba323da3728b469c356b29a7ffedf91c8c2c035/src/types.ts#L75)
+Defined in: [types.ts:75](https://github.com/Robot-Inventor/payload-passkey/blob/193bdc1e284fdfd2fde871a103d7801fbc5dcd97/src/types.ts#L75)
 
 The slug of the Payload collection that stores users and should receive passkey
 authentication. Authentication must be enabled on this collection. Use the

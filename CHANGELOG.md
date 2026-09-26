@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 2.1.0
+
+### Minor Changes
+
+- [#175](https://github.com/Robot-Inventor/payload-passkey/pull/175) [`6c0a401`](https://github.com/Robot-Inventor/payload-passkey/commit/6c0a4016e8f3c80ae39c3e91e3595140b31bfd9d) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: update icon for the [Login with a passkey] button
+
 ## 2.0.8
 
 ### Patch Changes
