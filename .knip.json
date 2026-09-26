@@ -1,10 +1,4 @@
 {
     "$schema": "https://unpkg.com/knip@6/schema.json",
-    "project": ["./src/**"],
-    "ignoreDependencies": [
-        "eslint-plugin-import-x",
-        "eslint-plugin-jsdoc",
-        "oxlint-plugin-react-doctor",
-        "@next/eslint-plugin-next"
-    ]
+    "project": ["./src/**"]
 }
