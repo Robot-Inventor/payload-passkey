@@ -13,6 +13,10 @@ export default defineConfig({
     format: "esm",
     platform: "neutral",
     unbundle: true,
+    checks: {
+        // "use client" directives are preserved because unbundled output keeps each module as its own file, so the conservative rolldown warning is unnecessary
+        moduleLevelDirective: false
+    },
     dts: true,
     deps: {
         neverBundle: [/^react(?:\/|$)/]
