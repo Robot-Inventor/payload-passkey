@@ -42,7 +42,8 @@
     }
   },
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/*.styles.js"
   ],
   "scripts": {
     "format": "prettier --write ./src",
