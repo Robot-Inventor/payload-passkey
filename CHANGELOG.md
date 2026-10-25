@@ -1,5 +1,19 @@
 # payload-passkey
 
+## 2.1.4
+
+### Patch Changes
+
+- [#216](https://github.com/Robot-Inventor/payload-passkey/pull/216) [`3fe83b2`](https://github.com/Robot-Inventor/payload-passkey/commit/3fe83b2e3d32e01d06c72d033e3224f6e0193720) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.12
+
+- [#228](https://github.com/Robot-Inventor/payload-passkey/pull/228) [`59f692d`](https://github.com/Robot-Inventor/payload-passkey/commit/59f692d2c40a3dc9aaeb85341101a281784c8900) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency linkedom to ^0.18.14
+
+- [#229](https://github.com/Robot-Inventor/payload-passkey/pull/229) [`67c6b6b`](https://github.com/Robot-Inventor/payload-passkey/commit/67c6b6bd7532ed23df7716830da1202f004e846b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @delmaredigital/payload-better-auth to ^0.14.0
+
+    If you applied the `accounts.issuer` migration introduced by `@delmaredigital/payload-better-auth` 0.11.0, review your database schema before upgrading. Better Auth 1.7.3 and later no longer populate `issuer`, so a leftover `NOT NULL` constraint can cause account creation and linking to fail. This requirement comes from the earlier Better Auth upgrade, not from this dependency update itself.
+
+    Run `payload migrate:create` in your application and review the generated migration to remove the obsolete `issuer` column and its index. At minimum, remove the `NOT NULL` constraint before or alongside upgrading Better Auth past 1.7.2. No cleanup is needed if your database never had this column or you have already applied the cleanup.
+
 ## 2.1.3
 
 ### Patch Changes
