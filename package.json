@@ -73,7 +73,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "knip": "^6.42.1",
-    "linkedom": "^0.18.13",
+    "linkedom": "^0.18.14",
     "oxc-transform-react": "^0.155.0",
     "oxlint": "^1.89.0",
     "prettier": "^3.9.10",
