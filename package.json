@@ -56,9 +56,9 @@
     "ci:publish": "bun run build && changeset publish"
   },
   "dependencies": {
-    "@better-auth/passkey": "^1.7.10",
+    "@better-auth/passkey": "^1.7.12",
     "@delmaredigital/payload-better-auth": "^0.13.2",
-    "better-auth": "^1.7.10"
+    "better-auth": "^1.7.12"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
