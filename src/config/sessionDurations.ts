@@ -36,7 +36,10 @@ const calculateSessionDurations = ({
         );
     }
 
-    return { sessionSeconds, sessionUpdateSeconds };
+    return {
+        sessionSeconds,
+        sessionUpdateSeconds
+    };
 };
 
 export { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations };

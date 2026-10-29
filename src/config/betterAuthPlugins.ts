@@ -82,7 +82,12 @@ const betterAuthPlugin = ({
                     payloadClient: payload
                 }),
                 advanced: {
-                    database: typeof generateId === "undefined" ? {} : { generateId },
+                    database:
+                        typeof generateId === "undefined"
+                            ? {}
+                            : {
+                                  generateId
+                              },
                     skipTrailingSlashes: true
                 },
                 baseURL,
