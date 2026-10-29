@@ -52,7 +52,8 @@ const getUsersCollection = (config: Config): UserCollection => {
 
 const firstRegisteredUserRole = async (users: UserCollection, existingUserCount: number): Promise<unknown> => {
     const hook = (users.hooks?.beforeChange ?? [])[0] as
-        ((args: never) => Promise<Record<string, unknown>>) | undefined;
+        | ((args: never) => Promise<Record<string, unknown>>)
+        | undefined;
     const data =
         hook &&
         (await hook({
