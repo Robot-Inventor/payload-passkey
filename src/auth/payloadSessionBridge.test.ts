@@ -77,7 +77,7 @@ const makeTestContext = (payloadUser: Record<string, unknown> | null = createPay
         payload: {
             auth: vi.fn(() => ({ user: payloadUser }))
         }
-    };
+    } as const;
 
     return context;
 };
@@ -143,8 +143,13 @@ describe("payloadSessionBridge session creation", () => {
         const expiresAt = new Date(createdAt.getTime() + longSessionLifetimeSeconds * millisecondsPerSecond);
         const endpoint = await getEndpoint(requestContext.payload);
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
-            user: { id: "user-1" },
-            session: { createdAt, expiresAt }
+            user: {
+                id: "user-1"
+            },
+            session: {
+                createdAt,
+                expiresAt
+            }
         });
 
         const response = (await endpoint(requestContext)) as Record<string, unknown>;
@@ -159,7 +164,9 @@ describe("payloadSessionBridge session creation", () => {
         const expiresAt = new Date(Date.now() + shortSessionLifetimeSeconds * millisecondsPerSecond);
         const endpoint = await getEndpoint(requestContext.payload);
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
-            user: { id: "user-1" },
+            user: {
+                id: "user-1"
+            },
             session: {
                 createdAt: new Date(Date.now() - millisecondsPerSecond),
                 expiresAt
@@ -220,9 +227,18 @@ describe("payloadSessionBridge authorization", () => {
     });
 
     it.each([
-        { authenticationStrategy: "passkey", hasTotp: false },
-        { authenticationStrategy: "better-auth", hasTotp: true },
-        { authenticationStrategy: "local-jwt", hasTotp: true }
+        {
+            authenticationStrategy: "passkey",
+            hasTotp: false
+        },
+        {
+            authenticationStrategy: "better-auth",
+            hasTotp: true
+        },
+        {
+            authenticationStrategy: "local-jwt",
+            hasTotp: true
+        }
     ])(
         "rejects an unauthorized Payload authentication strategy with TOTP compatibility enabled %#",
         async ({ authenticationStrategy, hasTotp }) => {
@@ -242,8 +258,12 @@ describe("payloadSessionBridge authorization", () => {
         const requestContext = makeTestContext();
         const endpoint = await getEndpoint(requestContext.payload);
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
-            user: { id: "other-user" },
-            session: { createdAt: new Date() }
+            user: {
+                id: "other-user"
+            },
+            session: {
+                createdAt: new Date()
+            }
         });
 
         await expect(endpoint(requestContext)).rejects.toThrow("different users");
@@ -257,14 +277,20 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         const requestContext = makeTestContext();
         const endpoint = await getEndpoint(requestContext.payload);
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
-            user: { id: "user-1" },
+            user: {
+                id: "user-1"
+            },
             session: {
                 createdAt: new Date(Date.now() - (PASSKEY_FRESH_AGE_SECONDS * millisecondsPerSecond + oneMillisecond)),
                 expiresAt: new Date(Date.now() + longSessionLifetimeSeconds * millisecondsPerSecond)
             }
         });
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({
+            body: {
+                code: "STEP_UP_REQUIRED"
+            }
+        });
     });
 
     it("requires recent authentication when the existing Better Auth session has expired", async () => {
@@ -272,14 +298,20 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         const endpoint = await getEndpoint(requestContext.payload);
         const now = Date.now();
         bridgeMocks.getSessionFromCtx.mockResolvedValue({
-            user: { id: "user-1" },
+            user: {
+                id: "user-1"
+            },
             session: {
                 createdAt: new Date(now - millisecondsPerSecond),
                 expiresAt: new Date(now - oneMillisecond)
             }
         });
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({
+            body: {
+                code: "STEP_UP_REQUIRED"
+            }
+        });
     });
 
     it("requires a fresh Payload session when no Better Auth session exists", async () => {
@@ -297,7 +329,11 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
         );
         const endpoint = await getEndpoint(requestContext.payload);
 
-        await expect(endpoint(requestContext)).rejects.toMatchObject({ body: { code: "STEP_UP_REQUIRED" } });
+        await expect(endpoint(requestContext)).rejects.toMatchObject({
+            body: {
+                code: "STEP_UP_REQUIRED"
+            }
+        });
     });
 
     it("rejects a Payload session when its Better Auth user no longer exists", async () => {
@@ -340,13 +376,21 @@ describe("payloadSessionBridge fresh session hook", () => {
 
     it("returns the hook response format so the request reaches the endpoint after the middleware runs", async () => {
         const hook = await getBeforeHook();
-        const middlewareContext = { fresh: true };
+        const middlewareContext = {
+            fresh: true
+        } as const;
         bridgeMocks.freshSessionMiddleware.mockResolvedValue(middlewareContext);
-        const hookContext = { path: "/passkey/delete-passkey" };
+        const hookContext = {
+            path: "/passkey/delete-passkey"
+        } as const;
 
         const result = (await hook.handler(hookContext)) as Record<string, unknown>;
 
-        expect(result).toEqual({ response: { context: middlewareContext } });
+        expect(result).toEqual({
+            response: {
+                context: middlewareContext
+            }
+        });
     });
 
     it("propagates the middleware error for a stale session", async () => {
@@ -354,7 +398,9 @@ describe("payloadSessionBridge fresh session hook", () => {
         bridgeMocks.freshSessionMiddleware.mockRejectedValue(new APIError("FORBIDDEN", { code: "STEP_UP_REQUIRED" }));
 
         await expect(hook.handler({ path: "/passkey/delete-passkey" })).rejects.toMatchObject({
-            body: { code: "STEP_UP_REQUIRED" }
+            body: {
+                code: "STEP_UP_REQUIRED"
+            }
         });
     });
 });
@@ -363,10 +409,22 @@ describe("payloadSessionBridge hasTotp strictness with TOTP compatibility enable
     beforeEach(configureBridgeMocks);
 
     it.each([
-        { authenticationStrategy: "local-jwt", hasTotpState: "missing" },
-        { authenticationStrategy: "local-jwt", hasTotpState: "null" },
-        { authenticationStrategy: "better-auth", hasTotpState: "missing" },
-        { authenticationStrategy: "better-auth", hasTotpState: "null" }
+        {
+            authenticationStrategy: "local-jwt",
+            hasTotpState: "missing"
+        },
+        {
+            authenticationStrategy: "local-jwt",
+            hasTotpState: "null"
+        },
+        {
+            authenticationStrategy: "better-auth",
+            hasTotpState: "missing"
+        },
+        {
+            authenticationStrategy: "better-auth",
+            hasTotpState: "null"
+        }
     ])(
         "rejects $authenticationStrategy when hasTotp is $hasTotpState instead of strictly false %#",
         async ({ authenticationStrategy, hasTotpState }) => {

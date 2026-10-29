@@ -26,12 +26,23 @@ const authenticate = async (
                         headers: Headers;
                     }> =>
                         Promise.resolve({
-                            response: resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null,
+                            response: resultUser
+                                ? {
+                                      user: {
+                                          id: String(resultUser.id)
+                                      },
+                                      session: {}
+                                  }
+                                : null,
                             headers: new Headers()
                         })
                 }
             },
-            collections: collection ? { users: collection } : {},
+            collections: collection
+                ? {
+                      users: collection
+                  }
+                : {},
             find: (): Promise<{ docs: User[] }> => Promise.resolve({ docs: resultUser ? [resultUser] : [] })
         }
     } as unknown as AuthStrategyFunctionArgs);
@@ -39,7 +50,13 @@ const authenticate = async (
 
 describe("payloadAuthStrategy", () => {
     it("returns an unauthenticated result when Better Auth found no user", async () => {
-        const result = await authenticate(null, { config: { auth: { verify: true } } });
+        const result = await authenticate(null, {
+            config: {
+                auth: {
+                    verify: true
+                }
+            }
+        });
 
         expect(result).toEqual({ user: null });
     });
@@ -51,19 +68,37 @@ describe("payloadAuthStrategy", () => {
     });
 
     it("keeps verified users when Payload verification is disabled", async () => {
-        const result = await authenticate(user(false), { config: { auth: { verify: false } } });
+        const result = await authenticate(user(false), {
+            config: {
+                auth: {
+                    verify: false
+                }
+            }
+        });
 
         expect(result?.user).toMatchObject({ id: "user-1", _verified: false });
     });
 
     it("rejects unverified users when Payload verification is enabled", async () => {
-        const result = await authenticate(user(false), { config: { auth: { verify: true } } });
+        const result = await authenticate(user(false), {
+            config: {
+                auth: {
+                    verify: true
+                }
+            }
+        });
 
         expect(result?.user).toBeNull();
     });
 
     it("keeps verified users when Payload verification is enabled", async () => {
-        const result = await authenticate(user(true), { config: { auth: { verify: true } } });
+        const result = await authenticate(user(true), {
+            config: {
+                auth: {
+                    verify: true
+                }
+            }
+        });
 
         expect(result?.user).toMatchObject({ id: "user-1", _verified: true });
     });

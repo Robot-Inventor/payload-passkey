@@ -46,7 +46,9 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
             try {
                 const result = await betterAuthClient.signIn.passkey({
                     autoFill: true,
-                    fetchOptions: { signal: abortController.signal }
+                    fetchOptions: {
+                        signal: abortController.signal
+                    }
                 });
                 if (result.error) return;
 

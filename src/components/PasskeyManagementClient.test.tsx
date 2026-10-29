@@ -54,7 +54,11 @@ describe("PasskeyManagementClient registration", () => {
         await renderClient();
         fireEvent.click(screen.getByRole("button", { name: "add passkey" }));
         const nameInput = screen.getByRole("textbox", { name: "name" });
-        fireEvent.change(nameInput, { target: { value: "Phone" } });
+        fireEvent.change(nameInput, {
+            target: {
+                value: "Phone"
+            }
+        });
         fireEvent.click(screen.getByRole("button", { name: "register" }));
 
         await expectAlert("registered");
@@ -77,7 +81,11 @@ describe("PasskeyManagementClient registration errors", () => {
     });
 
     it("asks the parent field to reauthenticate when registration requires a fresh session", async () => {
-        mocks.addPasskey.mockResolvedValue({ error: { code: "STEP_UP_REQUIRED" } });
+        mocks.addPasskey.mockResolvedValue({
+            error: {
+                code: "STEP_UP_REQUIRED"
+            }
+        });
 
         await renderClient();
         openRegistrationForm();
@@ -91,7 +99,12 @@ describe("PasskeyManagementClient deletion success", () => {
 
     it("removes a passkey after confirmation", async () => {
         mocks.listUserPasskeys.mockResolvedValue({ data: [createPasskey()], error: null });
-        mocks.deletePasskey.mockResolvedValue({ data: { status: true }, error: null });
+        mocks.deletePasskey.mockResolvedValue({
+            data: {
+                status: true
+            },
+            error: null
+        });
 
         await renderClient();
         await screen.findByText("Laptop");
@@ -113,7 +126,11 @@ describe("PasskeyManagementClient deletion errors", () => {
 
     it("asks the parent field to reauthenticate when deletion requires a fresh session", async () => {
         mocks.listUserPasskeys.mockResolvedValue({ data: [createPasskey()], error: null });
-        mocks.deletePasskey.mockResolvedValue({ error: { code: "SESSION_NOT_FRESH" } });
+        mocks.deletePasskey.mockResolvedValue({
+            error: {
+                code: "SESSION_NOT_FRESH"
+            }
+        });
 
         await renderClient();
         await screen.findByText("Laptop");
