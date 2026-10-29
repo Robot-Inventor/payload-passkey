@@ -1,5 +1,13 @@
 # payload-passkey
 
+## 2.1.5
+
+### Patch Changes
+
+- [#238](https://github.com/Robot-Inventor/payload-passkey/pull/238) [`df74ee2`](https://github.com/Robot-Inventor/payload-passkey/commit/df74ee234f87c4bc30700dcc2c398409582d095b) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: fix Oxlint errors
+
+- [#234](https://github.com/Robot-Inventor/payload-passkey/pull/234) [`3c19f50`](https://github.com/Robot-Inventor/payload-passkey/commit/3c19f509e9310660ec7b6fb9caadad11b58456ab) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.13
+
 ## 2.1.4
 
 ### Patch Changes
