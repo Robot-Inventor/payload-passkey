@@ -12,7 +12,7 @@
       "devDependencies": {
         "@changesets/changelog-github": "^1.0.1",
         "@changesets/cli": "^3.0.3",
-        "@robot-inventor/oxlint-config": "^0.5.2",
+        "@robot-inventor/oxlint-config": "^1.0.0",
         "@robot-inventor/tsconfig-base": "^7.2.0",
         "@testing-library/react": "^16.3.3",
         "@types/react": "^19.3.0",
@@ -578,6 +578,8 @@
 
     "@oxlint/binding-win32-x64-msvc": ["@oxlint/binding-win32-x64-msvc@1.89.0", "", { "os": "win32", "cpu": "x64" }, "sha512-hLFJ/o0f/dTJh/EW0vmcbREYSQO9tYgfiAAlsOkiLFiJuRRWvYtFELUXN5o2ijpSo/tlO1n+YlWN58tZwPG18A=="],
 
+    "@oxlint/plugins": ["@oxlint/plugins@1.89.0", "", {}, "sha512-TJBBNl4KIxbxrSk7gsqlz6iM1kxidfyTizEzfWqXvijF2Ou8/Da58GvjemBVmCmaUamwRij+JwsVc0kpBFuqfg=="],
+
     "@payloadcms/graphql": ["@payloadcms/graphql@3.92.0", "", { "dependencies": { "graphql-scalars": "1.22.2", "pluralize": "8.0.0", "ts-essentials": "10.0.3", "tsx": "4.23.15" }, "peerDependencies": { "graphql": "^16.8.1", "payload": "3.92.0" }, "bin": { "payload-graphql": "bin.js" } }, "sha512-Wh44RPLzY3JilSZHwRlSaoT+UACX+42ER68wHXa0e8YZ0o5Xyma+SvelIhRo7IJTnczfYhKFBjox30ivdzQQjQ=="],
 
     "@payloadcms/next": ["@payloadcms/next@3.92.0", "", { "dependencies": { "@dnd-kit/core": "6.3.1", "@dnd-kit/modifiers": "9.0.0", "@dnd-kit/sortable": "10.0.0", "@payloadcms/graphql": "3.92.0", "@payloadcms/translations": "3.92.0", "@payloadcms/ui": "3.92.0", "busboy": "^1.6.0", "dequal": "2.0.3", "file-type": "21.3.4", "graphql-http": "^1.22.0", "graphql-playground-html": "1.6.30", "http-status": "2.1.0", "path-to-regexp": "6.3.0", "qs-esm": "8.0.1", "sass": "1.77.4", "uuid": "13.0.2" }, "peerDependencies": { "graphql": "^16.8.1", "next": ">=15.2.9 <15.3.0 || >=15.3.9 <15.4.0 || >=15.4.11 <15.5.0 || >=16.3.3 <17.0.0", "payload": "3.92.0" } }, "sha512-5SAS0JIKSzUT1fXGeKn5lzDgjnMTE3Tbo4B0GcIIpVoWHbnbgCtdi631EG4dDn1RlXAnh2Zd4N2ztDTIRDNCSA=="],
@@ -618,7 +620,7 @@
 
     "@quansync/fs": ["@quansync/fs@1.1.0", "", { "dependencies": { "quansync": "^1.0.0" } }, "sha512-qAPG/t3HqML1TlN7sY/pTbEjzFVAKsMjNNMGheyDosro+kT4iw2KCUoHcVdmliwWjorm4elZbgNQyU2eD97eDg=="],
 
-    "@robot-inventor/oxlint-config": ["@robot-inventor/oxlint-config@0.5.2", "", { "dependencies": { "@next/eslint-plugin-next": "^16.4.2", "eslint": "^10.13.0", "eslint-import-resolver-node": "^0.4.0", "eslint-import-resolver-typescript": "^4.4.5", "eslint-plugin-import-x": "^4.17.1", "eslint-plugin-jsdoc": "^65.3.8", "oxlint": "^1.88.0", "oxlint-plugin-react-doctor": "^0.9.18", "oxlint-tsgolint": "^7.0.2004" } }, "sha512-BcYAfD5+FXaN7kw1N9L7i42VClrtF9n3CY0BsYFRaJtTsI2IVH05uJtm5BGR/g/PxtF49jzbyK519H2exKtGOg=="],
+    "@robot-inventor/oxlint-config": ["@robot-inventor/oxlint-config@1.0.0", "", { "dependencies": { "@next/eslint-plugin-next": "^16.4.3", "@oxlint/plugins": "^1.89.0", "eslint": "^10.13.0", "eslint-import-resolver-node": "^0.4.0", "eslint-import-resolver-typescript": "^4.4.5", "eslint-plugin-import-x": "^4.17.1", "eslint-plugin-jsdoc": "^65.4.2", "oxlint": "^1.89.0", "oxlint-plugin-react-doctor": "^0.9.18", "oxlint-tsgolint": "^7.0.2005" } }, "sha512-cBUZNpRVt9DHfENvYWDj5SAEKn1IyubOlK5GXOGVgx5ci0TVQLuolCOe5DbMtcXOhs1INMmg0sb1OSc9JptsGg=="],
 
     "@robot-inventor/tsconfig-base": ["@robot-inventor/tsconfig-base@7.2.0", "", {}, "sha512-M3kXeBVcuS7QDrCva77iIlQ4MRG7Y2EnagnmJUj00cRuzlu0Qq++EZZpA7ySMJyyBZvLWfmwl2zVNh0/ANSabA=="],
 
