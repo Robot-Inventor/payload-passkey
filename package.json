@@ -3,26 +3,30 @@
   "version": "2.1.4",
   "description": "Add passkey support to Payload CMS.",
   "keywords": [
-    "payloadcms",
+    "passkey",
     "payload-plugin",
-    "passkey"
+    "payloadcms"
   ],
   "homepage": "https://github.com/Robot-Inventor/payload-passkey#readme",
   "bugs": {
     "url": "https://github.com/Robot-Inventor/payload-passkey/issues"
   },
+  "license": "MIT",
+  "author": "Robot-Inventor",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Robot-Inventor/payload-passkey.git"
   },
-  "license": "MIT",
-  "author": "Robot-Inventor",
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "./dist"
   ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.styles.js"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -41,13 +45,9 @@
       "types": "./dist/components/PasskeyManagementField.d.ts"
     }
   },
-  "sideEffects": [
-    "**/*.css",
-    "**/*.styles.js"
-  ],
   "scripts": {
-    "format": "prettier --write ./src",
-    "format:check": "prettier --check ./src",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
     "test": "vitest",
     "lint": "tsc --noEmit && knip && oxlint ./src",
     "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs/api --cleanOutputDir --excludePrivate --includeVersion --readme none ./src/index.ts",
@@ -75,8 +75,8 @@
     "knip": "^6.43.0",
     "linkedom": "^0.18.14",
     "oxc-transform-react": "^0.156.0",
+    "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",
-    "prettier": "^3.9.10",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "tsdown": "^0.23.2",
