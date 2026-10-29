@@ -154,9 +154,18 @@ vi.mock("@payloadcms/ui", () => ({
         success: mocks.showToast
     },
     useModal: useMockModal,
-    useConfig: (): { config: { routes: { api: string } } } => ({ config: { routes: { api: "/backend" } } }),
+    useConfig: (): { config: { routes: { api: string } } } => ({
+        config: {
+            routes: {
+                api: "/backend"
+            }
+        }
+    }),
     // oxlint-disable-next-line id-length
-    useTranslation: (): { t: typeof translate } => ({ t: translate })
+    useTranslation: (): { t: typeof translate } => ({
+        // oxlint-disable-next-line id-length
+        t: translate
+    })
 }));
 
 vi.mock("better-auth/client", () => ({

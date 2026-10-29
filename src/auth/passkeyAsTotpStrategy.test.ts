@@ -34,7 +34,14 @@ const createArgs = (
                         headers: Headers;
                     }> =>
                         Promise.resolve({
-                            response: resultUser ? { user: { id: String(resultUser.id) }, session: {} } : null,
+                            response: resultUser
+                                ? {
+                                      user: {
+                                          id: String(resultUser.id)
+                                      },
+                                      session: {}
+                                  }
+                                : null,
                             headers: new Headers()
                         })
                 }

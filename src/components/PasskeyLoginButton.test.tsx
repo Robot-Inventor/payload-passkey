@@ -57,7 +57,12 @@ vi.mock("@payloadcms/ui", () => ({
         fetchFullUser: (): Promise<null> => Promise.resolve(null)
     }),
     useConfig: (): { config: { routes: { admin: string; api: string } } } => ({
-        config: { routes: { admin: "/admin", api: "/backend" } }
+        config: {
+            routes: {
+                admin: "/admin",
+                api: "/backend"
+            }
+        }
     }),
     // oxlint-disable-next-line id-length
     useTranslation: (): { t: (translationKey: string) => string } => ({

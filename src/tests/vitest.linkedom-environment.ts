@@ -34,7 +34,9 @@ const createLinkedomWindow = (): LinkedomWindow => {
     Object.defineProperties(window, {
         getComputedStyle: {
             configurable: true,
-            value: (): { getPropertyValue: () => string } => ({ getPropertyValue: (): string => "" })
+            value: (): { getPropertyValue: () => string } => ({
+                getPropertyValue: (): string => ""
+            })
         },
         location: {
             configurable: true,

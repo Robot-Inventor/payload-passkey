@@ -150,12 +150,23 @@ vi.mock("@payloadcms/ui", () => ({
         };
     } => ({
         config: {
-            admin: { routes: { login: "/login" } },
-            routes: { admin: "/admin", api: "/backend" }
+            admin: {
+                routes: {
+                    login: "/login"
+                }
+            },
+            routes: {
+                admin: "/admin",
+                api: "/backend"
+            }
         }
     }),
-    useDocumentInfo: (): { id: string } => ({ id: mocks.documentId }),
-    useModal: (): { openModal: () => void } => ({ openModal: ignoreModal }),
+    useDocumentInfo: (): { id: string } => ({
+        id: mocks.documentId
+    }),
+    useModal: (): { openModal: () => void } => ({
+        openModal: ignoreModal
+    }),
     // oxlint-disable-next-line id-length
     useTranslation: (): { t: (translationKey: string) => string } => ({
         // oxlint-disable-next-line id-length
