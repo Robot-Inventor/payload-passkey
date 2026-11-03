@@ -1,5 +1,15 @@
 # payload-passkey
 
+## 2.1.6
+
+### Patch Changes
+
+- [#249](https://github.com/Robot-Inventor/payload-passkey/pull/249) [`69e3cb1`](https://github.com/Robot-Inventor/payload-passkey/commit/69e3cb14a0a6817c62d6c5e1aa9ef9579c413cb7) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @delmaredigital/payload-better-auth to ^0.14.1
+
+- [#250](https://github.com/Robot-Inventor/payload-passkey/pull/250) [`c17baa9`](https://github.com/Robot-Inventor/payload-passkey/commit/c17baa9b083b948bf796bc986362d4bb33e513ff) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - refactor: extract complex conditions
+
+- [#248](https://github.com/Robot-Inventor/payload-passkey/pull/248) [`cd2eb4f`](https://github.com/Robot-Inventor/payload-passkey/commit/cd2eb4fcdd64db862341f0bf983c53d6c86c2692) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.15
+
 ## 2.1.5
 
 ### Patch Changes
