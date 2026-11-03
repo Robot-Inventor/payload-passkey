@@ -14,15 +14,16 @@ const calculateSessionDurations = ({
     // oxlint-disable-next-line no-magic-numbers
     const sessionRefreshBufferSeconds = $sessionRefreshBufferSeconds ?? AUTH_SESSION_POLL_INTERVAL_SECONDS * 2;
 
-    if (
-        !Number.isInteger(sessionSeconds) ||
+    const isValidSessionConfiguration =
+        Number.isInteger(sessionSeconds) &&
         // oxlint-disable-next-line no-magic-numbers
-        sessionSeconds <= 0 ||
-        !Number.isInteger(sessionRefreshBufferSeconds) ||
+        sessionSeconds > 0 &&
+        Number.isInteger(sessionRefreshBufferSeconds) &&
         // oxlint-disable-next-line no-magic-numbers
-        sessionRefreshBufferSeconds < 0 ||
-        sessionRefreshBufferSeconds >= sessionSeconds
-    ) {
+        sessionRefreshBufferSeconds >= 0 &&
+        sessionRefreshBufferSeconds < sessionSeconds;
+
+    if (!isValidSessionConfiguration) {
         throw new Error(
             "[payload-passkey] `sessionSeconds` must be a positive integer and `sessionRefreshBufferSeconds` must be a non-negative integer less than `sessionSeconds`."
         );

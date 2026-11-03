@@ -21,7 +21,10 @@ const findFieldsByName = (fields: Field[], name: string): Field[] => {
             matchingFields.push(field);
         }
 
-        if (field.type === "row" || field.type === "collapsible" || (field.type === "group" && !("name" in field))) {
+        const keepsChildrenInParentScope =
+            field.type === "row" || field.type === "collapsible" || (field.type === "group" && !("name" in field));
+
+        if (keepsChildrenInParentScope) {
             matchingFields.push(...findFieldsByName(field.fields, name));
         } else if (field.type === "tabs") {
             for (const tab of field.tabs) {

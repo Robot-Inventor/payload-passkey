@@ -34,10 +34,12 @@ const normalizeCollectionAuth = (
 
     const configuredTokenExpiration = typeof collection.auth === "object" ? collection.auth.tokenExpiration : null;
 
-    if (
-        (typeof configuredTokenExpiration === "number" && configuredTokenExpiration !== sessionSeconds) ||
-        (typeof configuredTokenExpiration !== "number" && sessionSeconds !== PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS)
-    ) {
+    const tokenExpirationMatchesSession =
+        typeof configuredTokenExpiration === "number"
+            ? configuredTokenExpiration === sessionSeconds
+            : sessionSeconds === PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS;
+
+    if (!tokenExpirationMatchesSession) {
         throw new Error(
             `[payload-passkey] \`auth.tokenExpiration\` in the \`${collection.slug}\` collection must be the same as the \`sessionSeconds\` option.`
         );
