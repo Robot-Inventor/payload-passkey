@@ -10,11 +10,14 @@ interface UserWithTotpSecret {
 const afterChange: CollectionAfterChangeHook<UserWithTotpSecret> = async ({ doc, operation, previousDoc, req }) => {
     if (operation !== "update") return doc;
 
-    const hasJustEnabledTotp = !previousDoc.totpSecret && doc.totpSecret;
-    const hasReenabledTotp = previousDoc.totpSecret && doc.totpSecret && previousDoc.totpSecret !== doc.totpSecret;
-    const hasDisabledTotp = previousDoc.totpSecret && !doc.totpSecret;
+    const hasJustEnabledTotp = Boolean(!previousDoc.totpSecret && doc.totpSecret);
+    const hasReenabledTotp = Boolean(
+        previousDoc.totpSecret && doc.totpSecret && previousDoc.totpSecret !== doc.totpSecret
+    );
+    const hasDisabledTotp = Boolean(previousDoc.totpSecret && !doc.totpSecret);
 
-    if (!hasJustEnabledTotp && !hasReenabledTotp && !hasDisabledTotp) return doc;
+    const shouldRevokeSessions = hasJustEnabledTotp || hasReenabledTotp || hasDisabledTotp;
+    if (!shouldRevokeSessions) return doc;
 
     await revokeBetterAuthSessions(req, doc.id);
     return doc;
