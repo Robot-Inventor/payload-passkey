@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 2.1.7
+
+### Patch Changes
+
+- [#253](https://github.com/Robot-Inventor/payload-passkey/pull/253) [`6395e5d`](https://github.com/Robot-Inventor/payload-passkey/commit/6395e5dfabef4c65a6a73225597c82b44e37c0a6) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: update Better Auth to v1.7.16 which includes security fixes
+
 ## 2.1.6
 
 ### Patch Changes
