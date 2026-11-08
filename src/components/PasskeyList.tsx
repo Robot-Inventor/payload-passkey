@@ -50,6 +50,7 @@ const PasskeyList = ({ passkeys, onStepUpRequired, onDelete }: PasskeyListProps)
                 if (isStepUpRequired(result.error)) {
                     setDeleting(null);
                     onStepUpRequired();
+
                     return;
                 }
 
@@ -104,8 +105,10 @@ const PasskeyList = ({ passkeys, onStepUpRequired, onDelete }: PasskeyListProps)
                 onConfirm={() => {
                     if (!passkeyToDelete) {
                         toast.error(translate("passkeyPlugin:managementClient:failedToDelete"));
+
                         return;
                     }
+
                     void handleDelete(passkeyToDelete.id);
                 }}
             />

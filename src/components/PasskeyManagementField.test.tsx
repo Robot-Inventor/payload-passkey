@@ -43,6 +43,7 @@ const mocks = vi.hoisted(() => {
 
     const fetch = (): Promise<FieldResponse> =>
         state.bridge instanceof Error ? Promise.reject(state.bridge) : Promise.resolve(state.bridge);
+
     const addPasskey = (): Promise<FieldResponse> => Promise.resolve(state.addPasskeyResponse);
     const noPasskeys = (): Promise<FieldResponse> =>
         Promise.resolve({
@@ -196,10 +197,12 @@ const configureFieldMocks = (): void => {
         data: {},
         error: null
     };
+
     mocks.state.bridge = {
         data: null,
         error: null
     };
+
     mocks.state.logoutError = null;
     mocks.state.pushedPath = null;
     mocks.documentId = "user-1";

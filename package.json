@@ -49,7 +49,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "test": "vitest",
-    "lint": "tsc --noEmit && knip && oxlint ./src",
+    "lint": "tsc --noEmit && knip && oxlint src",
     "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs/api --cleanOutputDir --excludePrivate --includeVersion --readme none ./src/index.ts",
     "build": "tsdown --minify",
     "ci:version": "changeset version && bun run typedoc && git add .",

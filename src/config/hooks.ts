@@ -14,12 +14,14 @@ const afterChange: CollectionAfterChangeHook<UserWithTotpSecret> = async ({ doc,
     const hasReenabledTotp = Boolean(
         previousDoc.totpSecret && doc.totpSecret && previousDoc.totpSecret !== doc.totpSecret
     );
+
     const hasDisabledTotp = Boolean(previousDoc.totpSecret && !doc.totpSecret);
 
     const shouldRevokeSessions = hasJustEnabledTotp || hasReenabledTotp || hasDisabledTotp;
     if (!shouldRevokeSessions) return doc;
 
     await revokeBetterAuthSessions(req, doc.id);
+
     return doc;
 };
 
@@ -36,6 +38,7 @@ const afterLogout: CollectionAfterLogoutHook<UserWithTotpSecret> = async ({ req 
     if (allSessions) {
         const userId = req.user?.id;
         if (typeof userId === "undefined") return;
+
         await revokeBetterAuthSessions(req, userId);
     } else {
         await (req.payload as PayloadWithAuth).betterAuth.api.signOut({

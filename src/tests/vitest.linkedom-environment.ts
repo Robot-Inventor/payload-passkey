@@ -98,6 +98,7 @@ const environment = {
     viteEnvironment: "client",
     setup(): { teardown: () => void } {
         const previousValues = installWindowGlobals(createLinkedomWindow());
+
         return {
             teardown(): void {
                 restoreWindowGlobals(previousValues);

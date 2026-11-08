@@ -30,6 +30,7 @@ const PasskeyRegistrationForm = ({ onStepUpRequired, onRegistrationSuccess }: Re
                 if (isStepUpRequired(result.error)) {
                     setRegistering(false);
                     onStepUpRequired();
+
                     return;
                 }
 
