@@ -12,12 +12,14 @@ const mocks = vi.hoisted(() => {
     const state: LoginTestState = {
         pushedPath: null
     };
+
     const showToast = (message: string): void => {
         const notification = document.createElement("div");
         notification.setAttribute("role", "alert");
         notification.textContent = message;
         document.body.append(notification);
     };
+
     const clearToasts = (): void => {
         document.querySelectorAll('[role="alert"]').forEach((notification) => {
             notification.remove();

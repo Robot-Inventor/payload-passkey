@@ -59,6 +59,7 @@ describe("PasskeyManagementClient registration", () => {
                 value: "Phone"
             }
         });
+
         fireEvent.click(screen.getByRole("button", { name: "register" }));
 
         await expectAlert("registered");
@@ -113,6 +114,7 @@ describe("PasskeyManagementClient deletion success", () => {
         await waitFor(() => {
             expect(screen.getByRole("dialog")).toBeTruthy();
         });
+
         fireEvent.click(screen.getByRole("button", { name: "confirm" }));
 
         await expectAlert("deleted");

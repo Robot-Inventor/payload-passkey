@@ -130,6 +130,7 @@ describe("payloadSessionBridge session creation", () => {
             createdAt: new Date(),
             expiresAt
         });
+
         const endpoint = await getEndpoint(requestContext.payload);
 
         const response = (await endpoint(requestContext)) as Record<string, unknown>;
@@ -248,6 +249,7 @@ describe("payloadSessionBridge authorization", () => {
                     hasTotp
                 })
             );
+
             const endpoint = await getEndpoint(requestContext.payload, true);
 
             await expect(endpoint(requestContext)).rejects.toThrow("valid Payload local session");
@@ -327,6 +329,7 @@ describe("payloadSessionBridge freshness and lifecycle", () => {
                 ]
             })
         );
+
         const endpoint = await getEndpoint(requestContext.payload);
 
         await expect(endpoint(requestContext)).rejects.toMatchObject({
@@ -379,6 +382,7 @@ describe("payloadSessionBridge fresh session hook", () => {
         const middlewareContext = {
             fresh: true
         } as const;
+
         bridgeMocks.freshSessionMiddleware.mockResolvedValue(middlewareContext);
         const hookContext = {
             path: "/passkey/delete-passkey"

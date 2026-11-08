@@ -50,6 +50,7 @@ const PasskeyLoginButton = ({ enablePasskeyAutofill }: PasskeyLoginButtonProps):
                         signal: abortController.signal
                     }
                 });
+
                 if (result.error) return;
 
                 await redirectToAdminPanel();

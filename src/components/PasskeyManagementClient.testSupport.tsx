@@ -13,6 +13,7 @@ const mocks = vi.hoisted(() => {
         notification.textContent = message;
         document.body.append(notification);
     };
+
     const clearToasts = (): void => {
         document.querySelectorAll('[role="alert"]').forEach((notification) => {
             notification.remove();

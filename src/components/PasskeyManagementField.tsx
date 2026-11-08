@@ -89,6 +89,7 @@ const createBridgeSession = async (betterAuthClient: BetterAuthClient): Promise<
 
     if (error) {
         if (isStepUpRequired(error)) return false;
+
         throw new Error(`Session bridge failed: ${String(error.status)}`);
     }
 
@@ -125,6 +126,7 @@ const PasskeyManagementField = (): ReactNode => {
                 if (!cancelled) {
                     if (!responseFreshUntil) {
                         setStatus("reauthentication-required");
+
                         return;
                     }
 
