@@ -75,7 +75,7 @@
     "knip": "^6.44.1",
     "linkedom": "^0.18.15",
     "oxc-transform-react": "^0.157.0",
-    "oxfmt": "^0.76.0",
+    "oxfmt": "^0.77.0",
     "oxlint": "^1.91.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
