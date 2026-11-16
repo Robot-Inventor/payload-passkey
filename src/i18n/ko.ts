@@ -27,6 +27,7 @@ const ko = {
             cancel: "취소",
             unknownAuthenticator: "알 수 없는 인증자",
             createdAt: "생성 일시:",
+            lastUsedAt: "마지막 사용 일시:",
             delete: "삭제",
             deleting: "삭제 중...",
             notFound: "등록된 패스키를 찾을 수 없습니다."

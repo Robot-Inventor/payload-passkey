@@ -27,6 +27,7 @@ const ru = {
             cancel: "Отмена",
             unknownAuthenticator: "Неизвестный аутентификатор",
             createdAt: "Дата создания:",
+            lastUsedAt: "Последнее использование:",
             delete: "Удалить",
             deleting: "Удаление...",
             notFound: "Зарегистрированные ключи доступа не найдены."

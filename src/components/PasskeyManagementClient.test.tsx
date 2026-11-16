@@ -39,6 +39,42 @@ describe("PasskeyManagementClient list and registration", () => {
         expect(screen.getByText("Windows Hello")).toBeTruthy();
         expect(screen.getAllByRole("button", { name: "delete" })).toHaveLength(expectedPasskeyCount);
     });
+
+    it("shows a passkey's last-used date", async () => {
+        const lastUsedAt = new Date("2026-06-15T12:30:00.000Z");
+        mocks.listUserPasskeys.mockResolvedValue({
+            data: [
+                {
+                    ...createPasskey(),
+                    lastUsedAt
+                }
+            ],
+            error: null
+        });
+
+        await renderClient();
+
+        const lastUsedLabel = await screen.findByText("last used:");
+        expect(lastUsedLabel.parentElement?.querySelector("time")).toBeTruthy();
+        expect(lastUsedLabel.parentElement?.textContent).toContain("2026");
+    });
+
+    it("shows a dash when a passkey has no recorded last-used date", async () => {
+        mocks.listUserPasskeys.mockResolvedValue({
+            data: [
+                {
+                    ...createPasskey(),
+                    lastUsedAt: null
+                }
+            ],
+            error: null
+        });
+
+        await renderClient();
+
+        const passkeyName = await screen.findByText("Laptop");
+        expect(passkeyName.parentElement?.textContent).toContain("last used: —");
+    });
 });
 
 describe("PasskeyManagementClient registration", () => {

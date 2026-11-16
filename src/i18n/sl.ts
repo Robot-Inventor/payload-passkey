@@ -27,6 +27,7 @@ const sl = {
             cancel: "Prekliči",
             unknownAuthenticator: "Neznani preverjevalnik pristnosti",
             createdAt: "Ustvarjeno:",
+            lastUsedAt: "Nazad uporabljeno:",
             delete: "Izbriši",
             deleting: "Brisanje...",
             notFound: "Registrirani ključi za dostop niso bili najdeni."

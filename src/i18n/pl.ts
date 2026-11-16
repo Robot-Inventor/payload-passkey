@@ -27,6 +27,7 @@ const pl = {
             cancel: "Anuluj",
             unknownAuthenticator: "Nieznany uwierzytelniacz",
             createdAt: "Data utworzenia:",
+            lastUsedAt: "Ostatnio użyto:",
             delete: "Usuń",
             deleting: "Usuwanie...",
             notFound: "Nie znaleziono zarejestrowanych kluczy dostępu."

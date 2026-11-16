@@ -27,6 +27,7 @@ const id = {
             cancel: "Batal",
             unknownAuthenticator: "Authenticator tidak dikenal",
             createdAt: "Dibuat Pada:",
+            lastUsedAt: "Terakhir digunakan:",
             delete: "Hapus",
             deleting: "Menghapus...",
             notFound: "Tidak ditemukan kunci sandi yang terdaftar."

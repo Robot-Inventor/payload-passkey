@@ -27,6 +27,7 @@ const he = {
             cancel: "ביטול",
             unknownAuthenticator: "מאמת לא ידוע",
             createdAt: "נוצר בתאריך:",
+            lastUsedAt: "שימוש אחרון:",
             delete: "מחיקה",
             deleting: "מוחק...",
             notFound: "לא נמצאו מפתחות גישה רשומים."

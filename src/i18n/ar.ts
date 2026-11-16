@@ -27,6 +27,7 @@ const ar = {
             cancel: "إلغاء",
             unknownAuthenticator: "موثِّق غير معروف",
             createdAt: "تمّ الإنشاء في:",
+            lastUsedAt: "آخر استخدام:",
             delete: "حذف",
             deleting: "يتمّ الحذف...",
             notFound: "لم يتم العثور على مفاتيح مرور مسجّلة."

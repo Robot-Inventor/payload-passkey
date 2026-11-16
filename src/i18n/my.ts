@@ -27,6 +27,7 @@ const my = {
             cancel: "မလုပ်တော့ပါ။",
             unknownAuthenticator: "မသိသော အထောက်အထားစစ်ဆေးကိရိယာ",
             createdAt: "ဖန်တီးခဲ့သည့်အချိန်:",
+            lastUsedAt: "နောက်ဆုံးအသုံးပြုသည့်အချိန်:",
             delete: "ဖျက်မည်။",
             deleting: "ဖျက်နေဆဲ ...",
             notFound: "မှတ်ပုံတင်ထားသော Passkey မတွေ့ပါ။"

@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 const passkeyItemStyles = style({
     display: "grid",
     gridTemplateColumns: "1fr auto",
-    gridTemplateRows: "auto auto",
+    gridTemplateRows: "auto auto auto",
     marginBottom: "var(--base)",
     alignItems: "center"
 });
@@ -14,7 +14,7 @@ const passkeyItemDateStyles = style({
 
 const passkeyItemDeleteButtonStyles = style({
     gridColumn: 2,
-    gridRow: "1 / 3",
+    gridRow: "1 / 4",
     marginBlock: 0,
     height: "fit-content"
 });

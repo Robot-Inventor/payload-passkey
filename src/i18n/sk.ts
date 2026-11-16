@@ -27,6 +27,7 @@ const sk = {
             cancel: "Zrušiť",
             unknownAuthenticator: "Neznámy autentifikátor",
             createdAt: "Vytvorené v:",
+            lastUsedAt: "Naposledy použité:",
             delete: "Odstrániť",
             deleting: "Odstraňovanie...",
             notFound: "Nenašli sa žiadne zaregistrované prístupové kľúče."

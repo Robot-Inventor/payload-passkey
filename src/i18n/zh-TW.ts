@@ -27,6 +27,7 @@ const zhTw = {
             cancel: "取消",
             unknownAuthenticator: "未知的驗證器",
             createdAt: "建立時間：",
+            lastUsedAt: "最近使用：",
             delete: "刪除",
             deleting: "刪除中…",
             notFound: "找不到已註冊的通行密鑰。"

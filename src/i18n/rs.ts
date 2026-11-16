@@ -27,6 +27,7 @@ const rs = {
             cancel: "Откажи",
             unknownAuthenticator: "Непознати аутентификатор",
             createdAt: "Креирано у:",
+            lastUsedAt: "Последњи пут коришћено:",
             delete: "Обриши",
             deleting: "Брисање...",
             notFound: "Нису пронађени регистровани кључеви за приступ."

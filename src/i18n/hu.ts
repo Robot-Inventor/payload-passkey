@@ -27,6 +27,7 @@ const hu = {
             cancel: "Mégsem",
             unknownAuthenticator: "Ismeretlen hitelesítő",
             createdAt: "Létrehozva:",
+            lastUsedAt: "Utoljára használva:",
             delete: "Törlés",
             deleting: "Törlés...",
             notFound: "Nem találhatók regisztrált hozzáférési kulcsok."

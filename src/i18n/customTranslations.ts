@@ -28,6 +28,7 @@ interface CustomTranslationsObject {
             cancel: string;
             unknownAuthenticator: string;
             createdAt: string;
+            lastUsedAt: string;
             delete: string;
             deleting: string;
             notFound: string;

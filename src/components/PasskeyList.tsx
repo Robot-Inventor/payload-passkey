@@ -16,8 +16,26 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
     minute: "2-digit"
 });
 
+interface PasskeyDateProps {
+    date: Date | null | undefined;
+    label: string;
+}
+
+const PasskeyDate = ({ date, label }: PasskeyDateProps): ReactNode => (
+    <p className={mergeClassNames("field-description", passkeyItemDateStyles)}>
+        {label}{" "}
+        {date ? (
+            <time dateTime={date.toISOString()} suppressHydrationWarning>
+                {dateFormatter.format(date)}
+            </time>
+        ) : (
+            "—"
+        )}
+    </p>
+);
+
 interface PasskeyListProps {
-    passkeys: Passkey[];
+    passkeys: Array<Passkey & { lastUsedAt?: Date | null }>;
     onStepUpRequired: () => void;
     onDelete: (passkeyId: string) => void;
 }
@@ -74,12 +92,14 @@ const PasskeyList = ({ passkeys, onStepUpRequired, onDelete }: PasskeyListProps)
             {passkeys.map((passkeyItem) => (
                 <div key={passkeyItem.id} className={passkeyItemStyles}>
                     <div>{formatPasskeyName(passkeyItem)}</div>
-                    <p className={mergeClassNames("field-description", passkeyItemDateStyles)}>
-                        {translate("passkeyPlugin:managementClient:createdAt")}{" "}
-                        <time dateTime={passkeyItem.createdAt.toISOString()} suppressHydrationWarning>
-                            {dateFormatter.format(passkeyItem.createdAt)}
-                        </time>
-                    </p>
+                    <PasskeyDate
+                        date={passkeyItem.createdAt}
+                        label={translate("passkeyPlugin:managementClient:createdAt")}
+                    />
+                    <PasskeyDate
+                        date={passkeyItem.lastUsedAt}
+                        label={translate("passkeyPlugin:managementClient:lastUsedAt")}
+                    />
                     <Button
                         className={passkeyItemDeleteButtonStyles}
                         buttonStyle="secondary"

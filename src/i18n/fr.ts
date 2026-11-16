@@ -27,6 +27,7 @@ const fr = {
             cancel: "Annuler",
             unknownAuthenticator: "Authentificateur inconnu",
             createdAt: "Créé(e) à:",
+            lastUsedAt: "Dernière utilisation :",
             delete: "Supprimer",
             deleting: "Suppression en cours...",
             notFound: "Aucune clé d’accès enregistrée trouvée."

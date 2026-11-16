@@ -27,6 +27,7 @@ const uk = {
             cancel: "Скасувати",
             unknownAuthenticator: "Невідомий автентифікатор",
             createdAt: "Дата створення:",
+            lastUsedAt: "Востаннє використано:",
             delete: "Видалити",
             deleting: "Видалення...",
             notFound: "Зареєстрованих ключів доступу не знайдено."

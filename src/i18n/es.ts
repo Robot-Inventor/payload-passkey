@@ -27,6 +27,7 @@ const es = {
             cancel: "Cancelar",
             unknownAuthenticator: "Autenticador desconocido",
             createdAt: "Fecha de creación:",
+            lastUsedAt: "Último uso:",
             delete: "Eliminar",
             deleting: "Eliminando...",
             notFound: "No se han encontrado claves de acceso registradas."

@@ -27,6 +27,7 @@ const nl = {
             cancel: "Annuleren",
             unknownAuthenticator: "Onbekende verificator",
             createdAt: "Aangemaakt op:",
+            lastUsedAt: "Laatst gebruikt:",
             delete: "Verwijderen",
             deleting: "Verwijderen...",
             notFound: "Geen geregistreerde passkeys gevonden."

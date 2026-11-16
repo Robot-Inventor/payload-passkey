@@ -27,6 +27,7 @@ const it = {
             cancel: "Cancella",
             unknownAuthenticator: "Autenticatore sconosciuto",
             createdAt: "Creato il:",
+            lastUsedAt: "Ultimo utilizzo:",
             delete: "Elimina",
             deleting: "Sto eliminando...",
             notFound: "Nessuna passkey registrata trovata."

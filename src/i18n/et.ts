@@ -27,6 +27,7 @@ const et = {
             cancel: "Tühista",
             unknownAuthenticator: "Tundmatu autentija",
             createdAt: "Loomisaeg:",
+            lastUsedAt: "Viimati kasutatud:",
             delete: "Kustuta",
             deleting: "Kustutamine...",
             notFound: "Registreeritud pääsuvõtmeid ei leitud."
