@@ -43,6 +43,7 @@ const translations: Record<string, string> = {
     "passkeyPlugin:managementClient:confirmDelete:body": "delete {{name}}?",
     "passkeyPlugin:managementClient:confirmDelete:heading": "confirm deletion",
     "passkeyPlugin:managementClient:createdAt": "created at:",
+    "passkeyPlugin:managementClient:lastUsedAt": "last used:",
     "passkeyPlugin:managementClient:delete": "delete",
     "passkeyPlugin:managementClient:deleting": "deleting",
     "passkeyPlugin:managementClient:failedToDelete": "failed to delete",

@@ -27,6 +27,7 @@ const lt = {
             cancel: "Atšaukti",
             unknownAuthenticator: "Nežinomas autentifikatorius",
             createdAt: "Sukurta:",
+            lastUsedAt: "Paskutinį kartą naudota:",
             delete: "Ištrinti",
             deleting: "Trinama...",
             notFound: "Registruotų prieigos raktų nerasta."

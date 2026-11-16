@@ -27,6 +27,7 @@ const nb = {
             cancel: "Avbryt",
             unknownAuthenticator: "Ukjent godkjenner",
             createdAt: "Opprettet:",
+            lastUsedAt: "Sist brukt:",
             delete: "Slett",
             deleting: "Sletter...",
             notFound: "Fant ingen registrerte passnøkler."

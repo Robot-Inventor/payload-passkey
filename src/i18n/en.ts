@@ -27,6 +27,7 @@ const en = {
             cancel: "Cancel",
             unknownAuthenticator: "Unknown authenticator",
             createdAt: "Created at:",
+            lastUsedAt: "Last used:",
             delete: "Delete",
             deleting: "Deleting...",
             notFound: "No registered passkeys found."

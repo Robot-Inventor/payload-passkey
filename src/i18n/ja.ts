@@ -27,6 +27,7 @@ const ja = {
             cancel: "キャンセル",
             unknownAuthenticator: "不明な認証アプリ",
             createdAt: "作成日：",
+            lastUsedAt: "最終使用日：",
             delete: "削除",
             deleting: "削除中...",
             notFound: "登録されたパスキーが見つかりませんでした。"

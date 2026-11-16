@@ -27,6 +27,7 @@ const az = {
             cancel: "Ləğv et",
             unknownAuthenticator: "Naməlum autentifikator",
             createdAt: "Yaradıldığı tarix:",
+            lastUsedAt: "Son istifadə:",
             delete: "Sil",
             deleting: "Silinir...",
             notFound: "Qeydiyyatdan keçirilmiş keçid açarı tapılmadı."

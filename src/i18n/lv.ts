@@ -27,6 +27,7 @@ const lv = {
             cancel: "Atcelt",
             unknownAuthenticator: "Nezināms autentifikators",
             createdAt: "Izveidots:",
+            lastUsedAt: "Pēdējoreiz izmantota:",
             delete: "Dzēst",
             deleting: "Dzēš...",
             notFound: "Reģistrētas piekļuves atslēgas nav atrastas."

@@ -27,6 +27,7 @@ const rsLatin = {
             cancel: "Otkaži",
             unknownAuthenticator: "Nepoznati autentifikator",
             createdAt: "Kreirano u:",
+            lastUsedAt: "Poslednji put korišćeno:",
             delete: "Obriši",
             deleting: "Brisanje...",
             notFound: "Nisu pronađeni registrovani ključevi za pristup."

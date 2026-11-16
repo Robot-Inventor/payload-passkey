@@ -27,6 +27,7 @@ const hr = {
             cancel: "Otkaži",
             unknownAuthenticator: "Nepoznati autentifikator",
             createdAt: "Izrađeno u:",
+            lastUsedAt: "Zadnja uporaba:",
             delete: "Izbriši",
             deleting: "Brisanje...",
             notFound: "Registrirani pristupni ključevi nisu pronađeni."

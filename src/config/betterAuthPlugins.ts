@@ -95,7 +95,7 @@ const betterAuthPlugin = ({
                 secret,
                 trustedOrigins,
                 plugins: [
-                    ...(betterAuthOptions.plugins ?? []),
+                    ...betterAuthOptions.plugins,
                     payloadSessionBridge(payload, userCollection, enableTotpCompatibility)
                 ]
             })

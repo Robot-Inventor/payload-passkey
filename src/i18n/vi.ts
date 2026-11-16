@@ -27,6 +27,7 @@ const vi = {
             cancel: "Hủy",
             unknownAuthenticator: "Trình xác thực không xác định",
             createdAt: "Ngày tạo:",
+            lastUsedAt: "Lần sử dụng gần nhất:",
             delete: "Xóa",
             deleting: "Đang xóa...",
             notFound: "Không tìm thấy passkey nào đã đăng ký."

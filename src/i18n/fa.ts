@@ -27,6 +27,7 @@ const fa = {
             cancel: "انصراف",
             unknownAuthenticator: "احرازکننده ناشناخته",
             createdAt: "تاریخ ایجاد:",
+            lastUsedAt: "آخرین استفاده:",
             delete: "حذف",
             deleting: "در حال حذف...",
             notFound: "کلید دسترسی ثبت‌شده‌ای پیدا نشد."

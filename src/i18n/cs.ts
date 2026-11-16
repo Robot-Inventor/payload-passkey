@@ -27,6 +27,7 @@ const cs = {
             cancel: "Zrušit",
             unknownAuthenticator: "Neznámý autentizátor",
             createdAt: "Vytvořeno v:",
+            lastUsedAt: "Naposledy použito:",
             delete: "Odstranit",
             deleting: "Odstraňování...",
             notFound: "Nebyly nalezeny žádné registrované přístupové klíče."

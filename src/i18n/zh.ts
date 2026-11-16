@@ -27,6 +27,7 @@ const zh = {
             cancel: "取消",
             unknownAuthenticator: "未知的身份验证器",
             createdAt: "创建于：",
+            lastUsedAt: "最近使用：",
             delete: "删除",
             deleting: "删除中...",
             notFound: "未找到已注册的通行密钥。"

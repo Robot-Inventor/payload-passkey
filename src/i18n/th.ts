@@ -27,6 +27,7 @@ const th = {
             cancel: "ยกเลิก",
             unknownAuthenticator: "ตัวตรวจสอบสิทธิ์ที่ไม่รู้จัก",
             createdAt: "สร้างเมื่อ:",
+            lastUsedAt: "ใช้งานครั้งล่าสุด:",
             delete: "ลบ",
             deleting: "กำลังลบ...",
             notFound: "ไม่พบพาสคีย์ที่ลงทะเบียนไว้"

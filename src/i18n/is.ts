@@ -27,6 +27,7 @@ const is = {
             cancel: "Hætta við",
             unknownAuthenticator: "Óþekkt auðkenningartæki",
             createdAt: "Nýskráð:",
+            lastUsedAt: "Síðast notað:",
             delete: "Eyða",
             deleting: "Eyði...",
             notFound: "Engir skráðir aðgangslyklar fundust."

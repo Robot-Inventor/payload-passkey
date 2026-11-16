@@ -27,6 +27,7 @@ const bnBd = {
             cancel: "বাতিল করুন",
             unknownAuthenticator: "অজানা প্রমাণীকরণকারী",
             createdAt: "তৈরি করার তারিখ:",
+            lastUsedAt: "শেষ ব্যবহার:",
             delete: "মুছুন",
             deleting: "মুছে ফেলা হচ্ছে...",
             notFound: "কোনো নিবন্ধিত পাসকি পাওয়া যায়নি।"

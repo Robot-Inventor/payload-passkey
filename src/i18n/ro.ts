@@ -27,6 +27,7 @@ const ro = {
             cancel: "Anulați",
             unknownAuthenticator: "Autentificator necunoscut",
             createdAt: "Creat la:",
+            lastUsedAt: "Ultima utilizare:",
             delete: "Șterge",
             deleting: "Deleting...",
             notFound: "Nu s-au găsit chei de acces înregistrate."

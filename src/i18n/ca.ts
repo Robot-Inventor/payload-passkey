@@ -27,6 +27,7 @@ const ca = {
             cancel: "Cancel·la",
             unknownAuthenticator: "Autenticador desconegut",
             createdAt: "Creat el:",
+            lastUsedAt: "Últim ús:",
             delete: "Eliminar",
             deleting: "Eliminant...",
             notFound: "No s'han trobat claus d'accés registrades."

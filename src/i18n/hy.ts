@@ -27,6 +27,7 @@ const hy = {
             cancel: "Չեղարկել",
             unknownAuthenticator: "Անհայտ վավերացուցիչ",
             createdAt: "Ստեղծման ժամանակ:",
+            lastUsedAt: "Վերջին օգտագործումը:",
             delete: "Ջնջել",
             deleting: "Ջնջվում է...",
             notFound: "Գրանցված մուտքի բանալիներ չեն գտնվել։"

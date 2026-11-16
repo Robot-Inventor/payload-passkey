@@ -27,6 +27,7 @@ const pt = {
             cancel: "Cancelar",
             unknownAuthenticator: "Autenticador desconhecido",
             createdAt: "Criado Em:",
+            lastUsedAt: "Último uso:",
             delete: "Excluir",
             deleting: "Excluindo...",
             notFound: "Não foram encontradas chaves de acesso registadas."

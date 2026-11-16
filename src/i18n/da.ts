@@ -27,6 +27,7 @@ const da = {
             cancel: "Anuller",
             unknownAuthenticator: "Ukendt godkendelsesapp",
             createdAt: "Oprettet til:",
+            lastUsedAt: "Sidst brugt:",
             delete: "Slet",
             deleting: "Sletter...",
             notFound: "Ingen registrerede adgangsnøgler fundet."

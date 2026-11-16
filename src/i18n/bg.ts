@@ -27,6 +27,7 @@ const bg = {
             cancel: "Отмени",
             unknownAuthenticator: "Неизвестен удостоверител",
             createdAt: "Създаден на:",
+            lastUsedAt: "Последно използван:",
             delete: "Изтрий",
             deleting: "Изтриване...",
             notFound: "Не са намерени регистрирани ключове за достъп."

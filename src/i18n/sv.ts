@@ -27,6 +27,7 @@ const sv = {
             cancel: "Avbryt",
             unknownAuthenticator: "Okänd autentiserare",
             createdAt: "Skapat:",
+            lastUsedAt: "Senast använd:",
             delete: "Ta bort",
             deleting: "Tar bort...",
             notFound: "Inga registrerade åtkomstnycklar hittades."

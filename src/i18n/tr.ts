@@ -27,6 +27,7 @@ const tr = {
             cancel: "İptal",
             unknownAuthenticator: "Bilinmeyen kimlik doğrulayıcı",
             createdAt: "Oluşturma tarihi:",
+            lastUsedAt: "Son kullanım:",
             delete: "Sil",
             deleting: "Siliniyor...",
             notFound: "Kayıtlı geçiş anahtarı bulunamadı."
