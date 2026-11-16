@@ -1,5 +1,19 @@
 # payload-passkey
 
+## 3.0.0
+
+### Major Changes
+
+- [#281](https://github.com/Robot-Inventor/payload-passkey/pull/281) [`f0d3dcb`](https://github.com/Robot-Inventor/payload-passkey/commit/f0d3dcbb07adf793a37e321e87f71dc33cbf03c1) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: display the last-used date for each passkey on the account management page
+
+    This update requires a database migration. Please create and apply the migration using Payload.
+
+### Patch Changes
+
+- [#280](https://github.com/Robot-Inventor/payload-passkey/pull/280) [`7664a64`](https://github.com/Robot-Inventor/payload-passkey/commit/7664a646e154e4119202f95a33365c0ee5d39e65) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.24
+
+- [#275](https://github.com/Robot-Inventor/payload-passkey/pull/275) [`b373426`](https://github.com/Robot-Inventor/payload-passkey/commit/b37342637941ba53664c7c5c97f61e36f6785b2f) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update better-auth monorepo to ^1.7.22
+
 ## 2.1.9
 
 ### Patch Changes
