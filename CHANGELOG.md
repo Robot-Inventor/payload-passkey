@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 3.0.1
+
+### Patch Changes
+
+- [#288](https://github.com/Robot-Inventor/payload-passkey/pull/288) [`d3b8f54`](https://github.com/Robot-Inventor/payload-passkey/commit/d3b8f543a37ad97b5462fb0f5d85c79f19da7511) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - fix: use the medium button size for passkey management actions
+
 ## 3.0.0
 
 ### Major Changes
