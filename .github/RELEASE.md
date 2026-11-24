@@ -16,7 +16,7 @@ Apply Payload v4 fixes only to `payload-4`. Changes that affect both majors shou
 
 1. On `payload-4`, run `bunx changeset pre exit` and `bun run format`, then commit and push. The release workflow opens a Version Packages PR that versions `4.0.0` and removes `pre.json`.
 2. Merge that Version Packages PR on `payload-4`. The release workflow then publishes `4.0.0` under the `latest` tag.
-3. Merge `payload-4` into `main`, resolving the Payload version and dependency differences in favor of Payload v4.
-4. Create a `v3` branch from the last Payload v3 release tag if Payload v3 needs further maintenance.
+3. Merge `payload-4` into `main`, resolving the Payload version and dependency differences in favor of Payload v4. Update the pinned Payload dev dependencies to the stable release and remove the `next` installation note from `README.md`.
+4. Create a `v3` branch from the last Payload v3 release tag if Payload v3 needs further maintenance. The automated release workflow does not run on this branch; publish maintenance releases manually with `bunx changeset version` and `bunx changeset publish --tag v3`.
 
-The release workflow rejects a push to `main` while `.changeset/pre.json` still exists, so `main` cannot accidentally publish prereleases.
+The release workflow rejects `.changeset/pre.json` on `main`, and rejects a missing `.changeset/pre.json` on `payload-4` unless `package.json` already contains a stable `4.x` version. This keeps both release lines on their intended tags.
