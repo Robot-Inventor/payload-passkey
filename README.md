@@ -28,6 +28,8 @@ Depending on the user's setup, they can log in using one of the following method
 pnpm add payload-passkey
 ```
 
+Payload v4 support is available as a prerelease: `pnpm add payload-passkey@next`.
+
 ## Basic Usage
 
 ```env
