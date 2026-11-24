@@ -2,15 +2,13 @@
 
 import { AUTH_ERROR_CODES, PAYLOAD_SESSION_BRIDGE_PATH } from "../constants";
 import { type BetterAuthClient, useBetterAuthClient } from "../auth/client";
-import { Button, toast, useAuth, useConfig, useDocumentInfo, useTranslation } from "@payloadcms/ui";
+import { Button, toast, useAuth, useConfig, useDocumentInfo, useRouter, useTranslation } from "@payloadcms/ui";
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useEffect, useState } from "react";
 import { PasskeyManagementClient } from "./PasskeyManagementClient";
 import { containerStyles } from "./PasskeyManagementField.css";
 import { formatAdminURL } from "payload/shared";
 import { mergeClassNames } from "../utils/mergeClassNames";
-// Payload 3 does not export router hooks from `@payloadcms/ui`, so use Next.js directly until the v4-only release.
-import { useRouter } from "next/navigation";
 
 const PASSKEY_MANAGEMENT_ID = "payload-passkey-passkey-management";
 type BridgeStatus = "loading" | "ready" | "reauthentication-required" | "error";

@@ -1,5 +1,5 @@
 ---
-"payload-passkey": minor
+"payload-passkey": major
 ---
 
-Add compatibility with Payload v4 while keeping Payload v3 support.
+Add support for Payload CMS v4.

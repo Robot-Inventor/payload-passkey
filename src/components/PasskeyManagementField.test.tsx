@@ -168,6 +168,11 @@ vi.mock("@payloadcms/ui", () => ({
     useModal: (): { openModal: () => void } => ({
         openModal: ignoreModal
     }),
+    useRouter: (): { push: (path: string) => void } => ({
+        push: (path: string): void => {
+            mocks.state.pushedPath = path;
+        }
+    }),
     // oxlint-disable-next-line id-length
     useTranslation: (): { t: (translationKey: string) => string } => ({
         // oxlint-disable-next-line id-length
@@ -177,14 +182,6 @@ vi.mock("@payloadcms/ui", () => ({
 
 vi.mock("better-auth/client", () => ({
     createAuthClient: (): typeof mocks.client => mocks.client
-}));
-
-vi.mock("next/navigation", () => ({
-    useRouter: (): { push: (path: string) => void } => ({
-        push: (path: string): void => {
-            mocks.state.pushedPath = path;
-        }
-    })
 }));
 
 vi.mock("@payloadcms/ui/icons/Plus", () => ({

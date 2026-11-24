@@ -3,14 +3,14 @@ import { style } from "@vanilla-extract/css";
 const orTextStyles = style({
     textAlign: "center",
     margin: "0 auto",
-    color: "var(--theme-elevation-500)",
+    color: "var(--color-text-secondary)",
     fontSize: "0.8em",
     position: "relative",
 
     ":before": {
         content: '""',
         display: "inline-block",
-        background: "var(--theme-elevation-150)",
+        background: "var(--color-border)",
         height: "1px",
         width: "calc(50% - 2em)",
         position: "absolute",
@@ -21,7 +21,7 @@ const orTextStyles = style({
     ":after": {
         content: '""',
         display: "inline-block",
-        background: "var(--theme-elevation-150)",
+        background: "var(--color-border)",
         height: "1px",
         width: "calc(50% - 2em)",
         position: "absolute",

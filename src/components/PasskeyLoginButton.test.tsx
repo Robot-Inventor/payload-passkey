@@ -66,20 +66,17 @@ vi.mock("@payloadcms/ui", () => ({
             }
         }
     }),
-    // oxlint-disable-next-line id-length
-    useTranslation: (): { t: (translationKey: string) => string } => ({
-        // oxlint-disable-next-line id-length
-        t: (translationKey: string): string => translations[translationKey] ?? translationKey
-    })
-}));
-
-vi.mock("next/navigation", () => ({
     useRouter: (): { push: (path: string) => void } => ({
         push: (path: string): void => {
             mocks.state.pushedPath = path;
         }
     }),
-    useSearchParams: (): URLSearchParams => new URLSearchParams("redirect=/requested")
+    useSearchParams: (): URLSearchParams => new URLSearchParams("redirect=/requested"),
+    // oxlint-disable-next-line id-length
+    useTranslation: (): { t: (translationKey: string) => string } => ({
+        // oxlint-disable-next-line id-length
+        t: (translationKey: string): string => translations[translationKey] ?? translationKey
+    })
 }));
 
 vi.mock("better-auth/client", () => ({
