@@ -1,4 +1,4 @@
-import { type CollectionConfig, type Config, deepMergeSimple, definePlugin } from "payload";
+import { type CollectionConfig, type Config, definePlugin } from "payload";
 import type { DeepRequired, PasskeyOptions, PayloadPasskeyOptions, PayloadPasskeyPlugin } from "./types";
 import { PAYLOAD_DEFAULT_TOKEN_EXPIRATION_SECONDS, calculateSessionDurations } from "./config/sessionDurations";
 import { afterChange, afterLogin, afterLogout } from "./config/hooks";
@@ -10,9 +10,10 @@ import {
     validateReservedSlugs
 } from "./config/userRelationships";
 import type { PasskeyLoginButtonProps } from "./components/PasskeyLoginButton";
+import { deepMergeSimple } from "payload/shared";
 import { passkeyAsTotpStrategy } from "./auth/passkeyAsTotpStrategy";
-import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
 // oxlint-disable-next-line import-x/max-dependencies
+import { payloadAuthStrategy } from "./auth/payloadAuthStrategy";
 import { translations } from "./i18n";
 
 const normalizeCollectionAuth = (
@@ -75,6 +76,9 @@ type ConfigurePasskeyPluginOptions = DeepRequired<
 > & {
     config: Config;
 };
+
+// Payload 4 passes plugin options under `options`, while Payload 3 spreads them into the arguments.
+type PasskeyPluginArgs = { config: Config } & (PayloadPasskeyOptions | { options: PayloadPasskeyOptions });
 
 const configurePasskeyPlugin = ({
     config,
@@ -159,23 +163,26 @@ const configurePasskeyPlugin = ({
 const payloadPasskey: PayloadPasskeyPlugin = definePlugin<PayloadPasskeyOptions>({
     slug: "plugin-payload-passkey",
     order: 10,
-    plugin: async ({
-        config,
-        sessionSeconds: $sessionSeconds,
-        sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds,
-        enableTotpCompatibility = false,
-        modelName,
-        userCollection,
-        rpID,
-        rpName,
-        origin,
-        baseURL,
-        secret,
-        trustedOrigins,
-        generateId,
-        firstUserAdmin = true,
-        enablePasskeyAutofill = false
-    }) => {
+    plugin: async (args: PasskeyPluginArgs) => {
+        const {
+            sessionSeconds: $sessionSeconds,
+            sessionRefreshBufferSeconds: $sessionRefreshBufferSeconds,
+            enableTotpCompatibility = false,
+            modelName,
+            userCollection,
+            rpID,
+            rpName,
+            origin,
+            baseURL,
+            secret,
+            trustedOrigins,
+            generateId,
+            firstUserAdmin = true,
+            enablePasskeyAutofill = false
+        } = "options" in args ? args.options : args;
+
+        const { config } = args;
+
         validateReservedSlugs(config);
 
         const { sessionSeconds, sessionUpdateSeconds } = calculateSessionDurations({

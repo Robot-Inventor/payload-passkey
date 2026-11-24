@@ -2,7 +2,7 @@ name: Release
 
 on:
     push:
-        branches: [main]
+        branches: [main, payload-4]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -39,3 +39,4 @@ jobs:
                   publish-script: bun run ci:publish
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

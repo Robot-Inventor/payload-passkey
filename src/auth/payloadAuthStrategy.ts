@@ -1,5 +1,6 @@
 import { type BetterAuthStrategyOptions, betterAuthStrategy } from "@delmaredigital/payload-better-auth";
 import type { AuthStrategy } from "payload";
+import type { PasskeyUser } from "./passkeyUser";
 
 const payloadAuthStrategy = (options: BetterAuthStrategyOptions): AuthStrategy => {
     const strategy = betterAuthStrategy(options);
@@ -13,6 +14,8 @@ const payloadAuthStrategy = (options: BetterAuthStrategyOptions): AuthStrategy =
 
             if (!result.user) return result;
 
+            const user: PasskeyUser = result.user;
+
             if (!collection) {
                 return {
                     ...result,
@@ -22,7 +25,8 @@ const payloadAuthStrategy = (options: BetterAuthStrategyOptions): AuthStrategy =
 
             if (!collection.config.auth.verify) return result;
 
-            if (result.user["_verified"] !== true) {
+            // oxlint-disable-next-line no-underscore-dangle
+            if (user._verified !== true) {
                 return {
                     ...result,
                     user: null

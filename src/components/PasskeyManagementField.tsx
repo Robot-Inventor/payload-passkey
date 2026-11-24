@@ -9,6 +9,7 @@ import { PasskeyManagementClient } from "./PasskeyManagementClient";
 import { containerStyles } from "./PasskeyManagementField.css";
 import { formatAdminURL } from "payload/shared";
 import { mergeClassNames } from "../utils/mergeClassNames";
+// Payload 3 does not export router hooks from `@payloadcms/ui`, so use Next.js directly until the v4-only release.
 import { useRouter } from "next/navigation";
 
 const PASSKEY_MANAGEMENT_ID = "payload-passkey-passkey-management";
@@ -63,7 +64,7 @@ const PasskeyManagementReauthenticationMessage = (): ReactNode => {
             <p className="field-description">{translate("passkeyPlugin:managementField:reauthenticationRequired")}</p>
             <Button
                 buttonStyle="secondary"
-                size="small"
+                size="medium"
                 onClick={() => {
                     void handleReauthenticate();
                 }}
