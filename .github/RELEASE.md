@@ -14,9 +14,18 @@ Apply Payload v4 fixes only to `payload-4`. Changes that affect both majors shou
 
 ## Making Payload v4 the stable release
 
-1. On `payload-4`, run `bunx changeset pre exit` and `bun run format`, then commit and push. The release workflow opens a Version Packages PR that versions `4.0.0` and removes `pre.json`.
-2. Merge that Version Packages PR on `payload-4`. The release workflow then publishes `4.0.0` under the `latest` tag.
-3. Merge `payload-4` into `main`, resolving the Payload version and dependency differences in favor of Payload v4. Update the pinned Payload dev dependencies to the stable release and remove the `next` installation note from `README.md`.
-4. Create a `v3` branch from the last Payload v3 release tag if Payload v3 needs further maintenance. The automated release workflow does not run on this branch; publish maintenance releases manually with `bunx changeset version` and `bunx changeset publish --tag v3`.
+1. On `payload-4`, run `bunx changeset pre exit` and `bun run format`, then commit and push. This is the only supported use of `pre exit`; the workflow cannot distinguish it from an accidental exit, so require a review before merging the resulting Version Packages PR.
+2. Merge the Version Packages PR that versions `4.0.0` on `payload-4`. The release workflow publishes `4.0.0` under the `latest` tag and removes `pre.json` from the branch.
+3. Merge `payload-4` into `main` before releasing anything else from `main`, resolving the Payload version and dependency differences in favor of Payload v4. Update the pinned Payload dev dependencies to the stable release and remove the `next` installation note from `README.md`.
+4. Make future stable releases from `main`. Create a `v3` branch from the last Payload v3 release tag if Payload v3 needs further maintenance.
 
-The release workflow rejects `.changeset/pre.json` on `main`, and rejects a missing `.changeset/pre.json` on `payload-4` unless `package.json` already contains a stable `4.x` version. This keeps both release lines on their intended tags.
+Do not release Payload v3 from `main` between steps 2 and 3; that would move the `latest` tag back to 3.x.
+
+## Payload v3 maintenance
+
+The automated release workflow does not run on a `v3` branch. Publish maintenance releases manually:
+
+1. Add a changeset and run `bunx changeset version` on the `v3` branch, then commit the version and changelog changes.
+2. Run `bun run build && bunx changeset publish --tag v3`.
+
+The release workflow rejects `.changeset/pre.json` on `main` and rejects a prerelease version there. On `payload-4`, it rejects a missing `.changeset/pre.json` unless `package.json` already contains a stable `4.x` version. This keeps both release lines on their intended tags.
