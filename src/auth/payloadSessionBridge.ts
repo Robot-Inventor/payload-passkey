@@ -6,16 +6,13 @@ import {
     PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_MAX_REQUESTS,
     PAYLOAD_SESSION_BRIDGE_RATE_LIMIT_WINDOW_SECONDS
 } from "../constants";
-import type { AuthStrategyResult, BasePayload, CollectionSlug } from "payload";
+import type { BasePayload, CollectionSlug } from "payload";
 import type { BetterAuthPlugin, MiddlewareInputContext, MiddlewareOptions } from "better-auth";
+import type { PasskeyUser } from "./passkeyUser";
 import type { PayloadPasskeyOptions } from "../types";
 import { setSessionCookie } from "better-auth/cookies";
 
-type PayloadSessionUser = NonNullable<AuthStrategyResult["user"]> & {
-    _sid?: string;
-};
-
-const isFreshPayloadSession = (user: PayloadSessionUser): boolean => {
+const isFreshPayloadSession = (user: PasskeyUser): boolean => {
     // oxlint-disable-next-line no-underscore-dangle
     const sessionID = user._sid;
     const createdAt = user.sessions?.find(({ id }) => id === sessionID)?.createdAt;
@@ -65,7 +62,7 @@ const validateUserSession = async ({
     payload,
     userCollection,
     enableTotpCompatibility
-}: ValidateUserSessionOptions): Promise<PayloadSessionUser> => {
+}: ValidateUserSessionOptions): Promise<PasskeyUser> => {
     const { headers } = context;
 
     const origin = headers.get("origin");
@@ -85,8 +82,7 @@ const validateUserSession = async ({
         headers
     });
 
-    // oxlint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const user = result.user as PayloadSessionUser | null;
+    const user: PasskeyUser | null = result.user;
 
     if (user?.collection !== userCollection) {
         throw new APIError("UNAUTHORIZED", {
@@ -98,7 +94,7 @@ const validateUserSession = async ({
     const authenticationStrategy = user._strategy;
 
     // Allow TOTP authentication when TOTP is configured, or password authentication when it is not.
-    const hasTotp = user["hasTotp"] as boolean | null | undefined;
+    const { hasTotp } = user;
     const hasValidAuthenticationStrategy =
         // With `enableTotpCompatibility: true`, passkey login results in `totp` even when TOTP is not configured
         // Ref: ./passkeyAsTotpStrategy.ts

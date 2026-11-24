@@ -2,7 +2,7 @@ name: Release
 
 on:
     push:
-        branches: [main]
+        branches: [main, payload-4]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -30,6 +30,29 @@ jobs:
             - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
 
             - run: bun install --frozen-lockfile
+
+            - name: Check release branch state
+              run: |
+                  if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+                      if [ -f .changeset/pre.json ]; then
+                          echo "::error::Run 'changeset pre exit' before merging payload-4 into main."
+                          exit 1
+                      fi
+
+                      version="$(node -p "require('./package.json').version")"
+                      if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+                          echo "::error::main must not publish a prerelease version."
+                          exit 1
+                      fi
+                  fi
+
+                  if [ "${{ github.ref }}" = "refs/heads/payload-4" ] && [ ! -f .changeset/pre.json ]; then
+                      version="$(node -p "require('./package.json').version")"
+                      if ! printf '%s' "$version" | grep -Eq '^4\.[0-9]+\.[0-9]+$'; then
+                          echo "::error::payload-4 must stay in changesets prerelease mode until a stable 4.x version is promoted."
+                          exit 1
+                      fi
+                  fi
 
             - name: Create Release Pull Request or Publish to npm
               id: changesets

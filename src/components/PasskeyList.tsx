@@ -103,7 +103,7 @@ const PasskeyList = ({ passkeys, onStepUpRequired, onDelete }: PasskeyListProps)
                     <Button
                         className={passkeyItemDeleteButtonStyles}
                         buttonStyle="secondary"
-                        size="small"
+                        size="medium"
                         onClick={() => {
                             setPasskeyToDelete(passkeyItem);
                             openModal(modalSlug);

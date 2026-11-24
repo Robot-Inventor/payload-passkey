@@ -4,6 +4,7 @@ import { Button, toast, useAuth, useConfig, useTranslation } from "@payloadcms/u
 import type { CustomTranslationsKeys, CustomTranslationsObject } from "../i18n/customTranslations";
 import { type ReactNode, useCallback, useEffect } from "react";
 import { buttonStyles, orTextStyles } from "./PasskeyLoginButton.css";
+// Payload 3 does not export router hooks from `@payloadcms/ui`, so use Next.js directly until the v4-only release.
 import { useRouter, useSearchParams } from "next/navigation";
 import { PasskeyIcon } from "./PasskeyIcon";
 import { getSafeRedirect } from "payload/shared";

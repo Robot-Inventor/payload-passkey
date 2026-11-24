@@ -63,7 +63,7 @@ const PasskeyRegistrationForm = ({ onStepUpRequired, onRegistrationSuccess }: Re
             {!showRegistrationForm && (
                 <Button
                     buttonStyle="secondary"
-                    size="small"
+                    size="medium"
                     icon=<PlusIcon />
                     onClick={() => {
                         setShowRegistrationForm(true);
@@ -85,7 +85,7 @@ const PasskeyRegistrationForm = ({ onStepUpRequired, onRegistrationSuccess }: Re
                     <div className={registerButtonContainerStyles}>
                         <Button
                             buttonStyle="secondary"
-                            size="small"
+                            size="medium"
                             onClick={() => {
                                 setShowRegistrationForm(false);
                             }}
@@ -94,7 +94,7 @@ const PasskeyRegistrationForm = ({ onStepUpRequired, onRegistrationSuccess }: Re
                         </Button>
                         <Button
                             buttonStyle="primary"
-                            size="small"
+                            size="medium"
                             onClick={() => {
                                 void handleRegister();
                             }}
