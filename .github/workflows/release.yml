@@ -31,12 +31,19 @@ jobs:
 
             - run: bun install --frozen-lockfile
 
-            - name: Reject prerelease mode on main
-              if: github.ref == 'refs/heads/main'
+            - name: Check release branch state
               run: |
-                  if [ -f .changeset/pre.json ]; then
+                  if [ "${{ github.ref }}" = "refs/heads/main" ] && [ -f .changeset/pre.json ]; then
                       echo "::error::Run 'changeset pre exit' before merging payload-4 into main."
                       exit 1
+                  fi
+
+                  if [ "${{ github.ref }}" = "refs/heads/payload-4" ] && [ ! -f .changeset/pre.json ]; then
+                      version="$(node -p "require('./package.json').version")"
+                      if ! printf '%s' "$version" | grep -Eq '^4\.[0-9]+\.[0-9]+$'; then
+                          echo "::error::payload-4 must stay in changesets prerelease mode until a stable 4.x version is promoted."
+                          exit 1
+                      fi
                   fi
 
             - name: Create Release Pull Request or Publish to npm
