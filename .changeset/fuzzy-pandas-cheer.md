@@ -2,4 +2,4 @@
 "payload-passkey": patch
 ---
 
-Adjust passkey management button sizes for Payload v4 compatibility.
+fix: use the medium button size for passkey management actions
