@@ -2,4 +2,4 @@
 "payload-passkey": major
 ---
 
-Add support for Payload CMS v4.
+feat: add support for Payload CMS v4
