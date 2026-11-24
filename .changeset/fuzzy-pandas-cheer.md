@@ -1,5 +1,5 @@
 ---
-"payload-passkey": minor
+"payload-passkey": patch
 ---
 
-Prepare the plugin internals for Payload v4.
+Adjust passkey management button sizes for Payload v4 compatibility.
