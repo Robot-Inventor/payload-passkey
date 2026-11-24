@@ -38,9 +38,9 @@
         "vitest": "^5.1.1",
       },
       "peerDependencies": {
-        "@payloadcms/translations": ">=4.0.0-beta.0 <5",
-        "@payloadcms/ui": ">=4.0.0-beta.0 <5",
-        "payload": ">=4.0.0-beta.0 <5",
+        "@payloadcms/translations": ">=4.0.0-beta.0 <4.0.0-canary.0 || >=4.0.0-canary.37 <5",
+        "@payloadcms/ui": ">=4.0.0-beta.0 <4.0.0-canary.0 || >=4.0.0-canary.37 <5",
+        "payload": ">=4.0.0-beta.0 <4.0.0-canary.0 || >=4.0.0-canary.37 <5",
         "react": ">=19",
       },
     },
