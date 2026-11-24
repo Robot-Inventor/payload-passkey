@@ -1,5 +1,11 @@
 # payload-passkey
 
+## 4.0.0-next.0
+
+### Major Changes
+
+- [#288](https://github.com/Robot-Inventor/payload-passkey/pull/288) [`d6e84db`](https://github.com/Robot-Inventor/payload-passkey/commit/d6e84db90a0c88066191916ec40a9702949892f4) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: add support for Payload CMS v4
+
 ## 3.0.0
 
 ### Major Changes
