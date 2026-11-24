@@ -11,6 +11,12 @@
             "description": "Keep peer dependency ranges broad",
             "matchDepTypes": ["peerDependencies"],
             "rangeStrategy": "widen"
+        },
+        {
+            "description": "Track Payload v4 beta, RC, and stable releases instead of internal or canary builds",
+            "matchBaseBranches": ["payload-4"],
+            "matchPackageNames": ["payload", "@payloadcms/**"],
+            "allowedVersions": "/^4\\.(?:0\\.0-(?:beta|rc)\\.\\d+|\\d+\\.\\d+)$/"
         }
     ],
     "minimumReleaseAge": "2 days",
