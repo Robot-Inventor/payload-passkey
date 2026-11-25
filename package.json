@@ -74,7 +74,7 @@
     "@vanilla-extract/rollup-plugin": "^1.5.4",
     "@vitejs/plugin-react": "^6.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "knip": "^6.47.0",
+    "knip": "^6.48.0",
     "linkedom": "^0.18.15",
     "oxc-transform-react": "^0.158.0",
     "oxfmt": "^0.79.0",
