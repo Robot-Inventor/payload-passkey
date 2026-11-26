@@ -57,9 +57,9 @@
     "ci:use-payload-4": "bun add --dev --exact payload@4.0.0-beta.11 @payloadcms/ui@4.0.0-beta.11 @payloadcms/translations@4.0.0-beta.11 && bun add --exact @delmaredigital/payload-better-auth@0.40.0-next.2"
   },
   "dependencies": {
-    "@better-auth/passkey": "^1.7.24",
+    "@better-auth/passkey": "^1.7.28",
     "@delmaredigital/payload-better-auth": "^0.14.2",
-    "better-auth": "^1.7.24"
+    "better-auth": "^1.7.28"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
