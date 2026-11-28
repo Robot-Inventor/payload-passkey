@@ -78,7 +78,7 @@
     "linkedom": "^0.18.15",
     "oxc-transform-react": "^0.158.0",
     "oxfmt": "^0.79.0",
-    "oxlint": "^1.94.0",
+    "oxlint": "^1.95.0",
     "payload": "4.0.0-beta.11",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
